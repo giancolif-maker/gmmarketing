@@ -1,0 +1,10 @@
+.env
+credentials/*.json
+logs/*.log
+sent_log.csv
+prospects.csv
+prospects_with_emails.csv
+__pycache__/
+*.pyc
+venv/
+.venv/

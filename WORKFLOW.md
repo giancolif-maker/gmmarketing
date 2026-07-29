@@ -54,6 +54,17 @@ it, instead of a static center crop. Falls back to a static center crop if no
 face is found. Works best on a single clear subject; for multi-person shots,
 review the result and consider a manual crop instead.
 
+**Color grading**
+> "Run tools/color_grade.py on interview.mp4 with --preset cinematic, preview a frame first before doing the full video"
+
+Presets: `vintage`, `cross-process`, `faded`, `cinematic` (teal/orange),
+`warm`, `cool`, `bw`, `vibrant`, `punchy` — or skip the preset and dial in
+`--brightness` / `--contrast` / `--saturation` / `--gamma` /
+`--temperature` (Kelvin, 6500=neutral, lower=warmer, higher=cooler)
+manually. Presets and manual adjustments can be combined. Use `--preview`
+to render one frame first instead of the whole video, so you can check the
+look before committing to a full re-encode.
+
 **Transitions**
 > "I have intro.mp4 and main.mp4 in this folder. Combine them with a 1 second crossfade transition between them."
 
@@ -81,6 +92,7 @@ Three standalone Python scripts, meant to be run directly or via Claude Code:
 - `tools/remove_filler_words.py` — cut filler words using Whisper word timestamps
 - `tools/remove_repeated_takes.py` — cut repeated/bad takes using Whisper + text similarity
 - `tools/auto_reframe.py` — face-tracking crop to reframe horizontal → vertical/square
+- `tools/color_grade.py` — presets or manual brightness/contrast/saturation/gamma/temperature grading
 
 All three support `--dry-run` or print what they're about to do before writing
 output — read that before trusting the result on anything you care about.

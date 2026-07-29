@@ -77,7 +77,15 @@ else
   log "opencv-python already installed."
 fi
 
-# 7. Node.js (needed for Claude Code)
+# 7. Flask (powers the optional local web UI in webapp/)
+if ! python3 -c "import flask" &>/dev/null; then
+  log "Installing Flask..."
+  python3 -m pip install --user --upgrade flask
+else
+  log "Flask already installed."
+fi
+
+# 8. Node.js (needed for Claude Code)
 if ! command -v node &>/dev/null; then
   log "Installing Node.js..."
   brew install node
@@ -85,7 +93,7 @@ else
   log "Node.js already installed ($(node --version))."
 fi
 
-# 8. Claude Code
+# 9. Claude Code
 if ! command -v claude &>/dev/null; then
   log "Installing Claude Code..."
   npm install -g @anthropic-ai/claude-code
@@ -106,7 +114,8 @@ Next steps:
      "Remove filler words from interview.mp4 using tools/remove_filler_words.py"
      "Cut repeated takes out of interview.mp4 using tools/remove_repeated_takes.py"
      "Reframe interview.mp4 to vertical using tools/auto_reframe.py"
-  See WORKFLOW.md for the full list of examples.
+  See WORKFLOW.md for the full list of examples, including the optional
+  chat + timeline web UI: cd webapp && python3 server.py
 
 If a command above needed 'sudo' or failed due to permissions, re-run this
 script and follow the on-screen instructions from Homebrew/npm.

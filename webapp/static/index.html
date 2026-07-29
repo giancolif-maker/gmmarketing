@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Video Editor</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div id="dropzone" class="dropzone">
+  <div class="dropzone-inner">
+    <div class="dropzone-icon">&#8593;</div>
+    <p>Drop a video here, or click to upload</p>
+    <p class="hint">Processed entirely on your machine - nothing is uploaded anywhere else.</p>
+    <input type="file" id="file-input" accept="video/*" hidden>
+  </div>
+</div>
+
+<div id="editor" class="editor hidden">
+
+  <div class="preview-panel">
+    <video id="preview-video" controls></video>
+    <div class="preview-toggle">
+      <button id="btn-original" class="active">Original</button>
+      <button id="btn-edited" disabled>Edited</button>
+      <a id="download-link" class="hidden" download>Download edited.mp4</a>
+    </div>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="track-headers" id="track-headers"></div>
+    <div class="timeline-scroll">
+      <canvas id="timeline-canvas"></canvas>
+    </div>
+  </div>
+
+  <div id="status-bar" class="status-bar hidden"></div>
+
+  <div class="chat-bar">
+    <div class="chat-avatar">&#10022;</div>
+    <input id="chat-input" type="text" placeholder="Message Claude...">
+    <button id="chat-send" title="Send">&#8593;</button>
+  </div>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

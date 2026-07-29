@@ -1,0 +1,187 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #121417;
+  color: #e6e8eb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* Dropzone */
+.dropzone {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed #333;
+  margin: 24px;
+  border-radius: 12px;
+  transition: border-color .15s, background .15s;
+}
+.dropzone.drag { border-color: #4f8cff; background: #1a2230; }
+.dropzone.uploading { opacity: .5; pointer-events: none; }
+.dropzone-inner { text-align: center; color: #9aa0a8; }
+.dropzone-icon {
+  width: 56px; height: 56px; line-height: 56px; margin: 0 auto 12px;
+  border-radius: 50%; background: #1e2126; font-size: 24px; color: #4f8cff;
+}
+.dropzone-inner p { margin: 4px 0; }
+.dropzone-inner .hint { font-size: 12px; color: #666; }
+
+/* Editor layout */
+.editor {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0b0c0e;
+  padding: 12px;
+  gap: 8px;
+}
+#preview-video {
+  max-width: 100%;
+  max-height: 100%;
+  background: #000;
+  border-radius: 6px;
+}
+.preview-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.preview-toggle button {
+  background: #1e2126;
+  color: #ccc;
+  border: 1px solid #2c2f36;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.preview-toggle button.active {
+  background: #2f5fd6;
+  border-color: #2f5fd6;
+  color: #fff;
+}
+.preview-toggle button:disabled { opacity: .4; cursor: not-allowed; }
+.preview-toggle a {
+  color: #7fd8e8;
+  font-size: 12px;
+  text-decoration: none;
+  margin-left: 8px;
+}
+.preview-toggle a:hover { text-decoration: underline; }
+
+/* Timeline */
+.timeline-wrap {
+  flex: 0 0 auto;
+  display: flex;
+  height: 320px;
+  border-top: 1px solid #23262c;
+  position: relative;
+}
+
+.track-headers {
+  flex: 0 0 150px;
+  background: #16181d;
+  border-right: 1px solid #23262c;
+  overflow: hidden;
+}
+.track-header {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border-bottom: 1px solid #1e2126;
+  font-size: 12px;
+  color: #8b909a;
+}
+.track-header .tnum {
+  width: 22px; height: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 3px;
+  background: #23262c;
+  font-size: 11px;
+  font-weight: 600;
+  color: #aab0ba;
+}
+.track-header.selected .tnum {
+  background: #2f5fd6;
+  color: #fff;
+}
+.track-header .icons {
+  margin-left: auto;
+  font-size: 11px;
+  color: #555b66;
+  letter-spacing: 2px;
+}
+.track-header.mix { color: #7fd8e8; font-size: 11px; justify-content: space-between; }
+
+.timeline-scroll {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #121417;
+}
+#timeline-canvas { display: block; }
+
+/* Status bar */
+.status-bar {
+  flex: 0 0 auto;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: #9aa0a8;
+  background: #16181d;
+  border-top: 1px solid #23262c;
+}
+
+/* Chat bar */
+.chat-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 16px 16px;
+  padding: 6px 10px 6px 6px;
+  background: #1c1f26;
+  border: 1px solid #2c2f36;
+  border-radius: 999px;
+}
+.chat-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #ff8a4c, #d65fe0);
+  color: #fff; font-size: 14px; flex: 0 0 auto;
+}
+.chat-bar input {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6e8eb;
+  font-size: 14px;
+}
+.chat-bar input::placeholder { color: #6a6f78; }
+#chat-send {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #ff7a2f;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+#chat-send:hover { background: #ff8f4d; }

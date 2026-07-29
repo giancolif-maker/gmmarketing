@@ -85,6 +85,29 @@ Claude Code will write the ffmpeg/auto-editor commands (or run the `tools/`
 scripts), run them, and tell you what it did. If something looks wrong, just
 say so — "that transition is too long, make it 0.5 seconds" — and it'll redo it.
 
+## Optional: chat + timeline web UI
+
+If you'd rather drag a video into a browser window than use the terminal,
+there's a local web app in `webapp/`:
+
+```
+cd webapp
+python3 server.py
+```
+
+Then open `http://127.0.0.1:5057`. Drop a video in, type an instruction in
+the chat bar at the bottom (e.g. "cut all silences and filler words"), and
+watch the timeline update live as each cut is found - red markers appear on
+the clip and waveform in real time, then the edited video renders and you
+can preview/download it. It's a single-track timeline (one video + one audio
+clip), styled like a multi-track NLE, not a full editor - see
+`webapp/server.py` for what it can route to (silence, filler words, repeated
+takes, reframe, color grade).
+
+This is its own process from Claude Code - run it whenever you want the
+visual/live version instead of chatting with `claude` directly. Everything
+still runs locally; nothing leaves your machine.
+
 ## The `tools/` scripts
 
 Three standalone Python scripts, meant to be run directly or via Claude Code:

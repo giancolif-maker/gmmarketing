@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # One-time setup for chat-driven video editing with Claude Code.
 # Installs (all free, permanent, no subscriptions beyond your existing Claude Pro plan):
-#   - ffmpeg       (video cutting, transitions, overlays, caption burn-in)
-#   - auto-editor  (auto-detects and removes silence/dead air)
-#   - Claude Code  (the chat interface that writes/runs the ffmpeg/auto-editor commands)
+#   - ffmpeg          (video cutting, transitions, overlays, caption burn-in)
+#   - auto-editor     (auto-detects and removes silence/dead air)
+#   - openai-whisper  (speech transcription - filler-word cutting, bad-take detection, captions)
+#   - opencv-python   (face detection for auto-reframe to vertical/square)
+#   - Claude Code     (the chat interface that writes/runs all of the above)
 #
 # Usage:
 #   bash setup-ai-video-editor.sh
@@ -56,7 +58,26 @@ else
   log "auto-editor already installed ($(auto-editor --version))."
 fi
 
-# 5. Node.js (needed for Claude Code)
+# 5. openai-whisper (word/segment-level transcription for filler-word and
+#    bad-take removal, and for burning in captions)
+if ! python3 -c "import whisper" &>/dev/null; then
+  log "Installing openai-whisper..."
+  python3 -m pip install --user --upgrade openai-whisper
+else
+  log "openai-whisper already installed."
+fi
+
+# 6. opencv-python (face detection for auto-reframe). Pinned below 5.0:
+#    opencv-python 5.0 dropped the CascadeClassifier Python binding that
+#    the bundled Haar-cascade face detector needs.
+if ! python3 -c "import cv2; cv2.CascadeClassifier" &>/dev/null; then
+  log "Installing opencv-python..."
+  python3 -m pip install --user --upgrade "opencv-python<5"
+else
+  log "opencv-python already installed."
+fi
+
+# 7. Node.js (needed for Claude Code)
 if ! command -v node &>/dev/null; then
   log "Installing Node.js..."
   brew install node
@@ -64,7 +85,7 @@ else
   log "Node.js already installed ($(node --version))."
 fi
 
-# 6. Claude Code
+# 8. Claude Code
 if ! command -v claude &>/dev/null; then
   log "Installing Claude Code..."
   npm install -g @anthropic-ai/claude-code
@@ -82,6 +103,10 @@ Next steps:
   4. Run: claude
   5. Tell it what edit you want, e.g.:
      "Use auto-editor to cut the dead air out of interview.mp4, output as interview_cut.mp4"
+     "Remove filler words from interview.mp4 using tools/remove_filler_words.py"
+     "Cut repeated takes out of interview.mp4 using tools/remove_repeated_takes.py"
+     "Reframe interview.mp4 to vertical using tools/auto_reframe.py"
+  See WORKFLOW.md for the full list of examples.
 
 If a command above needed 'sudo' or failed due to permissions, re-run this
 script and follow the on-screen instructions from Homebrew/npm.

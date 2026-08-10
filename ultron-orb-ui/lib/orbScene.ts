@@ -13,6 +13,8 @@ export interface OrbSceneApi {
   zoomIn(): void;
   zoomOut(): void;
   resetView(): void;
+  /** Drive the orb's glow/pulse intensity (0 = idle, 1 = fully active). Eases toward the target. */
+  setActivity(level: number): void;
   dispose(): void;
 }
 
@@ -697,6 +699,8 @@ export function createOrbScene(container: HTMLElement): OrbSceneApi {
   let flickerTimer = 0;
   let rafId = 0;
   let disposed = false;
+  let activity = 0;
+  let activityTarget = 0;
 
   function animate() {
     if (disposed) return;
@@ -802,8 +806,11 @@ export function createOrbScene(container: HTMLElement): OrbSceneApi {
       });
     }
 
+    // Voice/agent activity — eases toward whatever setActivity() last requested.
+    activity += (activityTarget - activity) * 0.08;
+
     // Bloom pulse
-    bloom.strength = 1.6 + Math.sin(t * 0.8) * 0.3;
+    bloom.strength = 1.6 + Math.sin(t * 0.8) * 0.3 + activity * 1.4;
 
     // Update chromatic aberration time
     chromaticPass.uniforms.uTime.value = t;
@@ -853,6 +860,9 @@ export function createOrbScene(container: HTMLElement): OrbSceneApi {
     zoomIn: () => zoomBy(0.65),
     zoomOut: () => zoomBy(1.55),
     resetView,
+    setActivity: (level: number) => {
+      activityTarget = Math.min(1, Math.max(0, level));
+    },
     dispose,
   };
 }

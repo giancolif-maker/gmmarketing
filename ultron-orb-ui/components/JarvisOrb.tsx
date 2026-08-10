@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { createOrbScene, type OrbSceneApi } from "@/lib/orbScene";
 import { HandTracker, type TrackerStatus } from "@/lib/handTracker";
 
@@ -12,7 +12,12 @@ const MODE_LABEL: Record<TrackerStatus["mode"], string> = {
   zoom: "ZOOM",
 };
 
-export default function JarvisOrb() {
+export interface JarvisOrbHandle {
+  /** Drive the orb's glow/pulse intensity (0 = idle, 1 = fully active). */
+  setActivity(level: number): void;
+}
+
+const JarvisOrb = forwardRef<JarvisOrbHandle>(function JarvisOrb(_props, ref) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLCanvasElement>(null);
@@ -22,6 +27,14 @@ export default function JarvisOrb() {
   const [camera, setCamera] = useState<CameraState>("off");
   const [status, setStatus] = useState<TrackerStatus>({ hands: 0, mode: "idle" });
   const [error, setError] = useState<string | null>(null);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      setActivity: (level: number) => sceneRef.current?.setActivity(level),
+    }),
+    [],
+  );
 
   useEffect(() => {
     const container = containerRef.current;
@@ -173,4 +186,6 @@ export default function JarvisOrb() {
       </div>
     </>
   );
-}
+});
+
+export default JarvisOrb;

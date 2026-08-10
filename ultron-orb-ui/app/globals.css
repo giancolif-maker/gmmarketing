@@ -228,8 +228,109 @@ body {
   text-shadow: 0 0 6px rgba(255, 170, 48, 0.8);
 }
 
+/* ——— Voice / agent panel ——— */
+.ultron-panel {
+  top: 24px;
+  right: 24px;
+  width: 320px;
+  max-width: calc(100vw - 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ultron-log {
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  background: rgba(10, 5, 0, 0.55);
+  border: 1px solid rgba(255, 170, 48, 0.35);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  backdrop-filter: blur(2px);
+}
+
+.ultron-log-row {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 2px;
+}
+
+.ultron-log-user {
+  color: #ffe0a8;
+}
+
+.ultron-log-ultron {
+  color: #ffaa30;
+  text-shadow: 0 0 6px rgba(255, 170, 48, 0.6);
+}
+
+.ultron-log-action {
+  color: #ff9955;
+  opacity: 0.65;
+  font-size: 11px;
+}
+
+.ultron-log-error {
+  color: #ff5533;
+}
+
+.ultron-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 10px;
+  background: rgba(20, 10, 0, 0.55);
+  border: 1px solid rgba(255, 170, 48, 0.45);
+  border-radius: 4px;
+  color: #ffe0a8;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+
+.ultron-input:focus {
+  outline: none;
+  border-color: rgba(255, 200, 100, 0.9);
+}
+
+.ultron-view {
+  margin-top: 6px;
+  border: 1px solid rgba(255, 170, 48, 0.45);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #0a0500;
+  aspect-ratio: 16 / 10;
+}
+
+.ultron-view img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.ultron-view-empty {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  font-size: 11px;
+  text-align: center;
+  color: #ffaa30;
+  opacity: 0.6;
+}
+
 @media (max-width: 600px) {
   .hud-hint {
     display: none;
+  }
+
+  .ultron-panel {
+    top: auto;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    width: auto;
   }
 }

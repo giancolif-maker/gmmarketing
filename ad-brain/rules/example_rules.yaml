@@ -1,0 +1,24 @@
+# Example optimization/monitoring rules for ad-brain.
+# Each rule defines a condition evaluated against campaign/ad-set/ad metrics
+# pulled from the Meta Marketing API, and an action to take when it triggers.
+
+rules:
+  - name: pause_high_cpa
+    scope: adset
+    condition: "cpa > 50 and spend > 20"
+    action: pause
+    notify: true
+
+  - name: alert_low_ctr
+    scope: ad
+    condition: "ctr < 0.8 and impressions > 1000"
+    action: notify
+    notify: true
+
+  - name: budget_scale_winner
+    scope: adset
+    condition: "roas > 3 and spend > 50"
+    action: increase_budget
+    params:
+      increase_pct: 20
+    notify: true

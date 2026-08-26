@@ -1,0 +1,8 @@
+facebook-business==20.0.0
+requests==2.32.3
+python-dotenv==1.0.1
+pandas==2.2.2
+PyYAML==6.0.2
+SQLAlchemy==2.0.31
+APScheduler==3.10.4
+loguru==0.7.2

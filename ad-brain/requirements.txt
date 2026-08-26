@@ -1,4 +1,6 @@
 facebook-business==20.0.0
+Flask==3.0.3
+anthropic==1.0.0
 requests==2.32.3
 python-dotenv==1.0.1
 pandas==2.2.2

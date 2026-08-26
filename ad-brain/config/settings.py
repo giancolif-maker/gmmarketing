@@ -28,3 +28,9 @@ RULES_DIR = BASE_DIR / "rules"
 # Notifications
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 ALERT_EMAIL_TO = os.getenv("ALERT_EMAIL_TO", "")
+
+# Chat panel (falls back to a grounded, non-AI responder when unset)
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+
+# Flask
+FLASK_SECRET_KEY = os.getenv("FLASK_SECRET_KEY", "dev-only-not-for-production")

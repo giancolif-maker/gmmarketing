@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Mission Control · Ad-Brain{% endblock %}
+{% block page_title %}Mission Control{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-6xl space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="flex items-center gap-2 text-xl font-semibold text-white">
+        <span class="pulse-dot"></span>
+        Mission Control
+      </h2>
+      <p class="mt-1 text-sm text-slate-500">Live view of active campaigns — refreshes automatically every {{ (tick_interval_ms / 1000)|round|int }}s.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-4">
+      <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-500">Active campaigns</h3>
+      <div id="mc-campaigns" class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h3 class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Pending your review</h3>
+        <div id="mc-pending" class="space-y-3"></div>
+      </div>
+      <div>
+        <h3 class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Recent AI decisions</h3>
+        <div id="mc-feed" class="ab-scroll max-h-[28rem] space-y-3 overflow-y-auto pr-1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.__MC_INITIAL_DATA__ = {{ initial_data|tojson }};
+  window.__MC_POLL_INTERVAL_MS__ = {{ tick_interval_ms }};
+</script>
+<script src="{{ url_for('static', filename='js/mission_control.js') }}"></script>
+{% endblock %}

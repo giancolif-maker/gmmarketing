@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Settings · Ad-Brain{% endblock %}
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-2xl space-y-6">
+
+  <div>
+    <h2 class="text-xl font-semibold text-white">Settings</h2>
+    <p class="mt-1 text-sm text-slate-500">Everything here is running on mock data. This is where a real Meta connection plugs in.</p>
+  </div>
+
+  <div class="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-white">Meta Marketing API</h3>
+      <span class="status-badge {{ 'status-healthy' if meta_connected else 'status-calibrating' }}">
+        {{ 'Connected' if meta_connected else 'Not connected' }}
+      </span>
+    </div>
+    <p class="mt-2 text-sm text-slate-500">
+      Ad-Brain talks to <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">api/mock_client.py</code>
+      right now. <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">api/meta_client.py</code>
+      already implements the same interface against the real Meta SDK — fill in
+      <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">config/.env</code> and swap the
+      import to go live. See the README for the exact steps.
+    </p>
+    <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div>
+        <label class="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">App ID</label>
+        <input disabled value="{{ meta_app_id or 'not set' }}" class="w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-500" />
+      </div>
+      <div>
+        <label class="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">Ad account ID</label>
+        <input disabled value="{{ meta_ad_account_id or 'not set' }}" class="w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-500" />
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-semibold text-white">Chat panel (Claude)</h3>
+      <span class="status-badge {{ 'status-healthy' if chat_configured else 'status-calibrating' }}">
+        {{ 'Configured' if chat_configured else 'Fallback mode' }}
+      </span>
+    </div>
+    <p class="mt-2 text-sm text-slate-500">
+      {% if chat_configured %}
+        <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">ANTHROPIC_API_KEY</code> is set — chat
+        answers come from Claude, grounded in your campaign and decision data.
+      {% else %}
+        No <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">ANTHROPIC_API_KEY</code> set — chat
+        is answering from the database directly (still real data, just simpler matching). Add a key to
+        <code class="rounded bg-slate-800 px-1 py-0.5 text-xs text-teal-300">config/.env</code> to enable full Claude responses.
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="rounded-xl border border-slate-800 bg-slate-900/50 p-5">
+    <h3 class="text-sm font-semibold text-white">Simulation</h3>
+    <p class="mt-2 text-sm text-slate-500">
+      Wipe all mock campaigns, snapshots, and decisions, and reseed two fresh demo campaigns.
+      Credit balance resets too. Useful for demoing from a clean slate.
+    </p>
+    <button id="reset-btn" class="mt-4 rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-2 text-sm font-medium text-rose-300 hover:bg-rose-500/20">
+      Reset simulation
+    </button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("reset-btn").addEventListener("click", async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.textContent = "Resetting…";
+    const res = await fetch("/api/settings/reset", { method: "POST" });
+    const data = await res.json();
+    if (data.redirect) window.location.href = data.redirect;
+  });
+</script>
+{% endblock %}

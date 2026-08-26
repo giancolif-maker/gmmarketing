@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Ad-Brain{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 rx=%226%22 fill=%22%230f172a%22/><path d=%22M6 13l3-6 3 6 2-3 4 3%22 stroke=%22%232dd4bf%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+  <!-- Tailwind is compiled ahead of time into app.css (see tailwind.config.js /
+       README "Rebuilding the stylesheet") - no CDN script, so the UI renders
+       the same with or without internet access, fitting for a self-hosted tool. -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="h-full bg-[color:var(--ab-bg)] text-slate-200 antialiased">
+  <div class="flex h-full min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="hidden md:flex md:w-60 md:flex-col border-r border-slate-800 bg-slate-950/60 shrink-0">
+      <a href="{{ url_for('dashboard') }}" class="flex items-center gap-2.5 px-5 py-5">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-teal-400 to-violet-500 shadow-lg shadow-teal-500/10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14l3.5-7 3.5 7 2.5-4 4.5 4"/></svg>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-[15px] font-semibold tracking-tight text-white">Ad-Brain</span>
+          <span class="text-[11px] text-slate-500">Campaign command center</span>
+        </span>
+      </a>
+
+      <nav class="flex-1 px-3 py-2 space-y-1">
+        {% set nav_items = [
+          ('launch', 'Launch', 'M13 2L3 14h7l-1 8 11-14h-7l1-6z'),
+          ('dashboard', 'Dashboard', 'M3 3h8v8H3V3zm10 0h8v5h-8V3zM3 13h8v8H3v-8zm10 3h8v5h-8v-5z'),
+          ('mission_control', 'Mission Control', 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 4v6l4 2'),
+          ('decisions', 'Decisions', 'M9 12l2 2 4-4M5 5h14v14H5z'),
+          ('settings', 'Settings', 'M12 15a3 3 0 100-6 3 3 0 000 6zM19.4 13a7.97 7.97 0 000-2l2-1.6-2-3.4-2.4 1a8 8 0 00-1.7-1L15 3h-4l-.3 2.6a8 8 0 00-1.7 1l-2.4-1-2 3.4L6.6 11a7.97 7.97 0 000 2l-2 1.6 2 3.4 2.4-1a8 8 0 001.7 1L11 21h4l.3-2.6a8 8 0 001.7-1l2.4 1 2-3.4L19.4 13z'),
+        ] %}
+        {% for endpoint, label, icon in nav_items %}
+        <a href="{{ url_for(endpoint) }}"
+           class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition
+                  {{ 'bg-teal-400/10 text-teal-300' if request.endpoint == endpoint else 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ icon }}"/></svg>
+          {{ label }}
+        </a>
+        {% endfor %}
+      </nav>
+
+      <div class="px-3 pb-4 pt-2">
+        <div class="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 text-xs text-slate-400">
+          <span class="pulse-dot"></span>
+          Simulation live
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main column -->
+    <div class="flex min-h-screen flex-1 flex-col">
+      <header class="flex items-center justify-between border-b border-slate-800 bg-slate-950/40 px-4 py-3 md:px-8">
+        <div class="flex items-center gap-2 md:hidden">
+          <span class="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-teal-400 to-violet-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14l3.5-7 3.5 7 2.5-4 4.5 4"/></svg>
+          </span>
+          <span class="font-semibold text-white">Ad-Brain</span>
+        </div>
+        <h1 class="hidden text-sm font-medium text-slate-400 md:block">{% block page_title %}{% endblock %}</h1>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-300">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 11-14h-7l1-6z"/></svg>
+            <span id="credit-balance" class="font-mono-metric">{{ credit_balance }}</span>
+            <span class="text-slate-500">credits</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile nav -->
+      <nav class="flex md:hidden gap-1 overflow-x-auto border-b border-slate-800 bg-slate-950/40 px-3 py-2">
+        {% for endpoint, label, _ in nav_items %}
+        <a href="{{ url_for(endpoint) }}"
+           class="whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium
+                  {{ 'bg-teal-400/10 text-teal-300' if request.endpoint == endpoint else 'text-slate-400' }}">
+          {{ label }}
+        </a>
+        {% endfor %}
+      </nav>
+
+      <main class="flex-1 px-4 py-6 md:px-8 md:py-8">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  {% include "partials/chat_panel.html" %}
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

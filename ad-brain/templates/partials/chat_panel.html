@@ -1,0 +1,37 @@
+<!-- Persistent chat panel, available on every page. Vanilla JS in static/js/chat.js. -->
+<button id="chat-toggle"
+        class="fixed bottom-5 right-5 z-40 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-teal-400 to-violet-500 text-white shadow-lg shadow-teal-500/20 transition hover:scale-105">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+  </svg>
+</button>
+
+<div id="chat-panel" data-open="false"
+     class="fixed bottom-20 right-5 z-40 flex h-[32rem] w-[22rem] max-w-[92vw] flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-2xl">
+  <div class="flex items-center justify-between border-b border-slate-800 bg-slate-900/60 px-4 py-3">
+    <div class="flex items-center gap-2">
+      <span class="pulse-dot"></span>
+      <span class="text-sm font-semibold text-white">Ask Ad-Brain</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="chat-clear" title="Clear conversation" class="text-slate-500 hover:text-slate-300">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+      </button>
+      <button id="chat-close" class="text-slate-500 hover:text-slate-300">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="chat-messages" class="ab-scroll flex-1 space-y-3 overflow-y-auto px-4 py-4 text-sm"></div>
+
+  <div class="border-t border-slate-800 p-3">
+    <form id="chat-form" class="flex items-center gap-2">
+      <input id="chat-input" type="text" autocomplete="off" placeholder="How's my streetwear campaign doing?"
+             class="flex-1 rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 outline-none focus:border-teal-500/60" />
+      <button type="submit" class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-400/90 text-slate-950 transition hover:bg-teal-300">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+</div>

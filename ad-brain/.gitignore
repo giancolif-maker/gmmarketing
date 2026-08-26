@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.env
+node_modules/
+config/*.local.yaml
+data/*.db
+data/*.csv
+data/*.json
+logs/*.log
+!logs/.gitkeep
+!data/.gitkeep

@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ad-Brain — small custom layer on top of Tailwind's utility classes.
+   Anything expressible as a utility class lives in the templates instead;
+   this file is only for things Tailwind utilities can't do cleanly.
+   No web fonts — system font stacks only, so the UI renders identically
+   whether or not this machine has internet access (see tailwind.config.js). */
+
+:root {
+  --ab-bg: #020617;
+  --ab-surface: #0f172a;
+  --ab-border: #1e293b;
+}
+
+body {
+  background-color: var(--ab-bg);
+}
+
+.font-mono-metric {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Live pulse dot used in Mission Control / nav */
+.pulse-dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #2dd4bf;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: #2dd4bf;
+  animation: ab-pulse 1.8s ease-out infinite;
+}
+@keyframes ab-pulse {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.6); }
+}
+
+/* Chat panel slide-in */
+#chat-panel {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+#chat-panel[data-open="false"] {
+  transform: translateY(1rem);
+  opacity: 0;
+  pointer-events: none;
+}
+#chat-panel[data-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.status-healthy          { background: rgba(52, 211, 153, 0.12); color: #34d399; border-color: rgba(52, 211, 153, 0.35); }
+.status-watch             { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border-color: rgba(251, 191, 36, 0.35); }
+.status-underperforming  { background: rgba(251, 146, 60, 0.14); color: #fb923c; border-color: rgba(251, 146, 60, 0.35); }
+.status-pause_candidate  { background: rgba(244, 63, 94, 0.14); color: #fb7185; border-color: rgba(244, 63, 94, 0.35); }
+.status-scale_candidate  { background: rgba(56, 189, 248, 0.14); color: #38bdf8; border-color: rgba(56, 189, 248, 0.35); }
+.status-calibrating       { background: rgba(167, 139, 250, 0.14); color: #a78bfa; border-color: rgba(167, 139, 250, 0.35); }
+
+/* Simple scrollbar so long feeds don't look default-ugly on a dark UI */
+.ab-scroll::-webkit-scrollbar { width: 8px; }
+.ab-scroll::-webkit-scrollbar-track { background: transparent; }
+.ab-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }

@@ -1,8 +1,9 @@
 """
 Fake Meta Marketing API client for local development.
 
-Mirrors the interface `api.meta_client.MetaClient` will eventually expose,
-so the rules engine and anything else built against it can develop against
+Mirrors the interface `api.meta_client.MetaClient` exposes — same method
+signatures, same return-dict keys/types, enforced by api/contract.py — so
+the rules engine and anything else built against it can develop against
 realistic-looking data before real ad-account credentials are wired up.
 Swap `MockMetaClient()` for `MetaClient()` once that's ready — same shape.
 
@@ -32,6 +33,8 @@ var for a single instance (handy in tests).
 import os
 import random
 from datetime import date, timedelta
+
+from api.contract import CAMPAIGN_FIELDS, INSIGHTS_FIELDS, validate_shape
 
 # Baseline daily performance each campaign fluctuates around, at 1x/"healthy".
 _CAMPAIGNS = {
@@ -131,23 +134,42 @@ class MockMetaClient:
         return _resolve_scenario(self._scenario_override)
 
     def get_campaigns(self):
-        """List campaigns on the (fake) ad account."""
+        """List campaigns on the (fake) ad account.
+
+        Shape matches api.meta_client.MetaClient.get_campaigns() exactly
+        (see api/contract.py) — one is a drop-in swap for the other.
+
+        Note on learning_phase: on the real API this isn't a Campaign-node
+        field at all — it's derived by checking whether any ad set under
+        the campaign has learning_stage_info.status == "LEARNING" (see
+        MetaClient._is_learning). The mock just keys it off the active
+        scenario instead of simulating ad sets.
+        """
         scenario = self.scenario
-        return [
-            {
+        campaigns = []
+        for campaign_id, data in _CAMPAIGNS.items():
+            campaign = {
                 "id": campaign_id,
                 "name": data["name"],
                 "status": data["status"],
+                "effective_status": data["status"],
                 "objective": data["objective"],
                 "daily_budget": data["daily_budget"],
                 "created_time": data["created_time"],
                 "learning_phase": scenario == "calibrating",
             }
-            for campaign_id, data in _CAMPAIGNS.items()
-        ]
+            validate_shape(campaign, CAMPAIGN_FIELDS)
+            campaigns.append(campaign)
+        return campaigns
 
     def get_campaign_insights(self, campaign_id, date_preset="yesterday"):
-        """Fake insights for one campaign: spend, reach, and performance ratios."""
+        """Fake insights for one campaign: spend, reach, and performance ratios.
+
+        Shape matches api.meta_client.MetaClient.get_campaign_insights()
+        exactly (see api/contract.py), plus one mock-only extra key,
+        "scenario", for debugging — don't build rules logic against that
+        key, it won't exist on the real client.
+        """
         campaign = _CAMPAIGNS.get(campaign_id)
         if campaign is None:
             raise ValueError(f"Unknown campaign_id: {campaign_id!r}")
@@ -168,7 +190,7 @@ class MockMetaClient:
         cpm = round(spend / impressions * 1000, 2) if impressions else 0.0
         cost_per_result = round(spend / results, 2) if results else 0.0
 
-        return {
+        insights = {
             "campaign_id": campaign_id,
             "campaign_name": campaign["name"],
             "scenario": scenario,
@@ -183,6 +205,8 @@ class MockMetaClient:
             "results": results,
             "cost_per_result": cost_per_result,
         }
+        validate_shape(insights, INSIGHTS_FIELDS, extra_allowed=("scenario",))
+        return insights
 
 
 if __name__ == "__main__":

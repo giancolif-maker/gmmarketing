@@ -4,6 +4,9 @@ fetches insights for each, and prints a summary table.
 
 Run from the ad-brain/ directory:
     python test_mock_client.py
+    MOCK_SCENARIO=healthy python test_mock_client.py
+    MOCK_SCENARIO=underperforming python test_mock_client.py
+    MOCK_SCENARIO=calibrating python test_mock_client.py
 """
 
 from api.mock_client import MockMetaClient
@@ -45,6 +48,8 @@ def print_table(rows):
 
 def main():
     client = MockMetaClient()
+    print(f"scenario: {client.scenario}")
+
     campaigns = client.get_campaigns()
     print(f"Fetched {len(campaigns)} campaign(s)\n")
 

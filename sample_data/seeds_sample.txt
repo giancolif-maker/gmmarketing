@@ -1,0 +1,10 @@
+// Seed hashtags and accounts for lead_finder.py
+// Lines starting with # are hashtags to discover candidates from.
+// Anything else (with or without a leading @) is a seed account checked directly.
+
+#streetwearbrand
+#indiestreetwear
+#hypebeaststore
+
+@bricksnwood
+@ghost_account_404

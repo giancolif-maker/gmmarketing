@@ -32,3 +32,12 @@ GOOGLE_SHEET_COLUMNS = [
     "status",
     "timestamp",
 ]
+
+# --- Streetwear/e-commerce IG lead finder (research only, never sends anything) ---
+LEAD_MIN_FOLLOWERS = 2000
+LEAD_MAX_FOLLOWERS = 200000
+LEAD_MAX_DAYS_INACTIVE = 14
+LEAD_LIMIT_PER_HASHTAG = 25
+DEFAULT_SEEDS_PATH = "sample_data/seeds_sample.txt"
+DEFAULT_LEADS_OUTPUT = "leads.csv"
+MOCK_IG_PROFILES_PATH = "sample_data/mock_ig_profiles.json"

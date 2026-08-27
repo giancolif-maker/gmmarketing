@@ -4,6 +4,7 @@ logs/*.log
 sent_log.csv
 prospects.csv
 prospects_with_emails.csv
+leads.csv
 __pycache__/
 *.pyc
 venv/

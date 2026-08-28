@@ -24,7 +24,8 @@ Pipeline:
        usable specific detail -> draft left blank, flagged for manual
        review rather than shipping something generic.
     6. Write leads.csv (handle, followers, last post date, website, email,
-       draft DM, draft status) and print the same as a terminal table.
+       draft DM, draft status, date found) and print the same as a
+       terminal table.
 
 Every rejection at every stage is logged with a reason code, e.g.
 "rejected: spam_bio_pattern".
@@ -40,6 +41,11 @@ Usage:
 
     Add --no-drafts to skip DM draft generation (filter-only run, no Groq
     calls).
+
+    Add --daily for scheduled runs (see cron_daily.example): rotates seeds
+    from config.SEED_ROTATION, skips handles already in --output from a
+    previous run, appends instead of overwriting, stamps a Date Found
+    column, and sends an ntfy summary (needs NTFY_TOPIC in .env).
 """
 import argparse
 import csv
@@ -47,12 +53,13 @@ import os
 import random
 import re
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 from dotenv import load_dotenv
 
 import config
 import dm_draft
+import notify
 from email_finder import find_email_for_site, normalize_url
 from instagram_client import GraphAPIInstagramClient, InstagramAPIError, MockInstagramClient
 
@@ -81,6 +88,55 @@ def load_seeds(path):
             else:
                 accounts.append(line.lstrip("@"))
     return hashtags, accounts
+
+
+def load_daily_seeds():
+    """Picks today's seed group from config.SEED_ROTATION, deterministically
+    by calendar day -- so a --daily run doesn't hit the same discovery pool
+    every day, with no state file needed to track rotation position."""
+    rotation_idx = date.today().toordinal() % len(config.SEED_ROTATION)
+    todays_group = config.SEED_ROTATION[rotation_idx]
+    hashtags = list(todays_group.get("hashtags", []))
+    accounts = list(todays_group.get("accounts", [])) + list(config.DAILY_SEED_ACCOUNTS)
+    print(f"--daily: rotation day {rotation_idx}/{len(config.SEED_ROTATION)} -> {hashtags}")
+    return hashtags, accounts
+
+
+def load_existing_handles(path):
+    """Handles (lowercased, no leading @) already present in an existing
+    leads CSV from a previous run -- used by --daily to skip duplicates."""
+    seen = set()
+    if not os.path.exists(path):
+        return seen
+    with open(path, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            handle = (row.get("Handle") or "").strip().lstrip("@").lower()
+            if handle:
+                seen.add(handle)
+    return seen
+
+
+def append_rows_to_csv(path, rows, fieldnames):
+    """Appends rows to an existing leads CSV instead of overwriting it, so
+    daily runs accumulate rather than replace previous days' leads. Writes
+    the header only if the file is new. Refuses to touch a file whose
+    existing header doesn't match, rather than risk corrupting it."""
+    file_exists = os.path.exists(path)
+    if file_exists:
+        with open(path, newline="", encoding="utf-8") as f:
+            existing_header = next(csv.reader(f), [])
+        if existing_header and existing_header != fieldnames:
+            raise SystemExit(
+                f"ERROR: {path} has a different column layout than expected.\n"
+                f"  existing: {existing_header}\n"
+                f"  expected: {fieldnames}\n"
+                f"Rename or archive the old file before running --daily again."
+            )
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerows(rows)
 
 
 def find_website(profile):
@@ -192,6 +248,16 @@ def main():
         action="store_true",
         help="Skip DM draft generation (filter-only run, no Groq calls)",
     )
+    parser.add_argument(
+        "--daily",
+        action="store_true",
+        help=(
+            "Scheduled-run mode: use today's rotation from config.SEED_ROTATION "
+            "instead of --seeds, skip handles already in --output from a previous "
+            "run, append new leads instead of overwriting, stamp a Date Found "
+            "column, and send an ntfy summary (needs NTFY_TOPIC in .env)."
+        ),
+    )
     args = parser.parse_args()
 
     load_dotenv()
@@ -216,8 +282,15 @@ def main():
             "console.groq.com/keys, or pass --no-drafts to silence this.\n"
         )
 
-    hashtags, seed_accounts = load_seeds(args.seeds)
+    if args.daily:
+        hashtags, seed_accounts = load_daily_seeds()
+    else:
+        hashtags, seed_accounts = load_seeds(args.seeds)
     print(f"Seeds: {len(hashtags)} hashtag(s), {len(seed_accounts)} account(s)")
+
+    already_seen = load_existing_handles(args.output) if args.daily else set()
+    if args.daily:
+        print(f"{len(already_seen)} handle(s) already in {args.output} from previous runs -- will be skipped")
 
     candidates = set(seed_accounts)
     for tag in hashtags:
@@ -237,6 +310,11 @@ def main():
     rows = []
     for idx, handle in enumerate(sorted(candidates), start=1):
         print(f"[{idx}/{len(candidates)}] @{handle}")
+
+        if args.daily and handle.lower() in already_seen:
+            print("    skipped: already_in_leads_csv")
+            continue
+
         try:
             profile = client.get_profile(handle)
         except InstagramAPIError as exc:
@@ -278,6 +356,7 @@ def main():
             "Email": email,
             "Draft DM": draft,
             "Draft Status": draft_status,
+            "Date Found": date.today().isoformat(),
         }
         rows.append(row)
         print(
@@ -285,14 +364,28 @@ def main():
             f"website={website or '-'}  email={email or '-'}  draft={draft_status}"
         )
 
-    fieldnames = ["Handle", "Followers", "Last Post", "Website", "Email", "Draft DM", "Draft Status"]
-    with open(args.output, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
+    fieldnames = ["Handle", "Followers", "Last Post", "Website", "Email", "Draft DM", "Draft Status", "Date Found"]
+    if args.daily:
+        append_rows_to_csv(args.output, rows, fieldnames)
+        print(f"\n{len(rows)} new candidate(s) qualified today. Appended to {args.output}\n")
+    else:
+        with open(args.output, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"\n{len(rows)}/{len(candidates)} candidate(s) qualified. Wrote {args.output}\n")
 
-    print(f"\n{len(rows)}/{len(candidates)} candidate(s) qualified. Wrote {args.output}\n")
     print_table(rows)
+
+    if args.daily:
+        ok_drafts = sum(1 for r in rows if r["Draft Status"] == "ok")
+        needs_review = len(rows) - ok_drafts
+        notify.send_daily_summary(
+            new_count=len(rows),
+            ok_drafts=ok_drafts,
+            needs_review=needs_review,
+            topic=os.environ.get("NTFY_TOPIC"),
+        )
 
 
 if __name__ == "__main__":

@@ -42,6 +42,29 @@ DEFAULT_SEEDS_PATH = "sample_data/seeds_sample.txt"
 DEFAULT_LEADS_OUTPUT = "leads.csv"
 MOCK_IG_PROFILES_PATH = "sample_data/mock_ig_profiles.json"
 
+# --- Daily scheduled run (lead_finder.py --daily) ---
+# One entry per rotation day; --daily picks one deterministically by
+# calendar day (date.today().toordinal() % len(SEED_ROTATION)) so a
+# scheduled run doesn't hit the same discovery pool every day, and no
+# state file is needed to track "which day we're on". Edit/reorder/add
+# groups freely -- length doesn't need to divide evenly into anything.
+SEED_ROTATION = [
+    {"hashtags": ["#streetwearbrand", "#hypebeaststore"]},
+    {"hashtags": ["#indiestreetwear", "#skatewear"]},
+    {"hashtags": ["#y2kstreetwear", "#streetweardrop"]},
+    {"hashtags": ["#thriftedstreetwear", "#smallstreetwearbrand"]},
+    {"hashtags": ["#streetwearstartup", "#underratedstreetwear"]},
+]
+# Accounts checked directly on every --daily run, regardless of rotation day.
+DAILY_SEED_ACCOUNTS = []
+
+# --- Daily summary notification (lead_finder.py --daily, via ntfy) ---
+# Just a push notification to your own phone/desktop summarizing the run --
+# not a messaging channel to leads. Topic goes in .env as NTFY_TOPIC (a
+# blank topic skips the notification without failing the run).
+NTFY_SERVER = "https://ntfy.sh"
+NTFY_REQUEST_TIMEOUT = 10
+
 # --- Spam/junk bio filter (lead_finder.py) ---
 # Simple keyword/pattern blocklist -- edit this list freely, no code changes
 # needed. Matched case-insensitively against the account's bio text.

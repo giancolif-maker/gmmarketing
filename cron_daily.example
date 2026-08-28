@@ -1,0 +1,21 @@
+# Runs the streetwear/e-commerce lead finder once a day at 7am, wherever
+# you actually host this repo (this sandbox container is not that host --
+# it's reclaimed when the session ends, so a cron entry here wouldn't
+# persist). Install with `crontab -e` on your own machine/server, pasting
+# the line below with the path adjusted.
+#
+# Research only: --daily runs the exact same discover -> filter -> spam
+# check -> email lookup -> draft pipeline as a manual run. It never sends
+# a DM, comment, follow, or email -- it only appends new leads to
+# leads.csv and pings your phone/desktop via ntfy that they're ready to
+# review. Nothing about this cron entry changes that.
+#
+# Adjust:
+#   - the path after `cd` to wherever you've cloned this repo
+#   - the python3 path if `which python3` gives something different
+#
+# 0 7 * * * = every day at 7:00 (server-local time, i.e. whatever
+# timezone cron itself is configured with -- check `timedatectl` or
+# `crontab -l` on your box if unsure).
+
+0 7 * * * cd /path/to/gmmarketing && /usr/bin/python3 lead_finder.py --daily >> logs/daily_run.log 2>&1

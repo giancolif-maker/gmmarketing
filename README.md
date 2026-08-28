@@ -198,13 +198,53 @@ instead of shipping a bad draft:
 | `needs_manual_review_ungrounded` | Draft didn't reference any word from the source detail — rejected as a safety net against invented specifics |
 | `needs_manual_review_api_error` | Groq call failed (network/rate limit/etc.) |
 
+### Scheduled daily runs (`--daily`)
+
+There's no scheduler already in this codebase to reuse (no APScheduler, no
+cron entry, nothing), so this is new: `--daily` is still just
+`lead_finder.py`, run with different defaults — the pipeline itself
+(discover → filter → spam check → enrich → draft) is identical to a manual
+run. It:
+
+- Picks today's hashtag group from `config.SEED_ROTATION` instead of
+  reading `--seeds` — a deterministic day-of-calendar rotation (no state
+  file needed), so a scheduled run doesn't hit the same discovery pool
+  every day. Edit the list in `config.py` to change what it rotates
+  through, or add always-on accounts via `DAILY_SEED_ACCOUNTS`.
+- Skips any handle already present in `--output` from a previous run
+  (checked before the profile fetch, so it never wastes an API call or a
+  Groq call on a repeat) and **appends** new leads instead of overwriting
+  — so `leads.csv` accumulates across days rather than resetting.
+- Stamps a `Date Found` column on every row (including manual runs, for a
+  consistent schema) so you can see what's new since yesterday.
+- Sends a short push summary via **ntfy** (`NTFY_TOPIC` in `.env`) — new
+  lead count, how many got a ready draft vs. `needs_manual_review`. No
+  topic set → the run still completes normally, it just skips the ping.
+
+Actually scheduling it needs a persistent host — this sandbox container
+gets reclaimed when the session ends, so a cron entry set up *here*
+wouldn't survive. See `cron_daily.example` for the crontab line to add
+wherever you actually run this (your own machine, a small VPS, etc.).
+APScheduler (a long-running Python process instead of relying on system
+cron) would work too if that fits your hosting better, but plain cron
+needs no new dependency and no daemon to keep alive, so that's what's
+documented here.
+
+**Still research-only, unchanged**: `--daily` runs the exact same
+read-only pipeline as a manual run, plus one new outbound call — a POST
+to ntfy with a plain-text summary for *you*, not a lead. Nothing in this
+tool calls an Instagram write endpoint, sends an email, or messages a
+prospect, scheduled or not.
+
 ### Files (lead finder)
 
 | File | Purpose |
 |---|---|
-| `lead_finder.py` | Main script: discover → filter → spam check → enrich → draft → CSV/table |
+| `lead_finder.py` | Main script: discover → filter → spam check → enrich → draft → CSV/table; `--daily` for scheduled runs |
 | `instagram_client.py` | Graph API client + offline mock client, same interface |
 | `dm_draft.py` | Grounded DM draft generation via Groq — draft-only, never sends |
+| `notify.py` | Daily-run summary push via ntfy — status ping only, never sends to a lead |
+| `cron_daily.example` | Crontab line for `--daily` — install wherever you host this repo |
 | `sample_data/seeds_sample.txt` | Example seed hashtags/accounts |
 | `sample_data/mock_ig_profiles.json` | Fake profile data for `--mock` testing |
-| `leads.csv` | Output (gitignored, your own run's results) |
+| `leads.csv` | Output (gitignored, your own run's results) — accumulates across `--daily` runs |

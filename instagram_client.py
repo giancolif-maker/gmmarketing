@@ -95,7 +95,7 @@ class GraphAPIInstagramClient:
         fields = (
             "business_discovery.username({username})"
             "{{username,followers_count,biography,website,media_count,"
-            "media.limit(5){{timestamp}}}}"
+            "media.limit(5){{timestamp,caption}}}}"
         ).format(username=username)
         data = self._get(self.business_account_id, {"fields": fields})
         return data.get("business_discovery")

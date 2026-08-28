@@ -5,7 +5,7 @@
     "biography": "Streetwear since 2003. New drops weekly.",
     "website": "https://thehundreds.com",
     "seed_hashtags": ["streetwearbrand"],
-    "media": {"data": [{"timestamp": "2026-08-24T15:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-24T15:00:00+00:00", "caption": "Bar Logo tee back in stock in olive and cream — sold out in under an hour last time, restocked 200 units this round."}]}
   },
   {
     "username": "noah_ny_shop",
@@ -13,7 +13,7 @@
     "biography": "NYC. Made-to-last basics and outerwear.",
     "website": "https://www.noahny.com",
     "seed_hashtags": ["streetwearbrand", "indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-22T12:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-22T12:00:00+00:00", "caption": "New waxed cotton chore coat just landed, made in Portugal, only 40 pieces made."}]}
   },
   {
     "username": "awake_ny_store",
@@ -21,7 +21,7 @@
     "biography": "AWAKE NY — downtown since 2015.",
     "website": "https://awakeny.com",
     "seed_hashtags": ["indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-20T09:30:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-20T09:30:00+00:00", "caption": "Fall outerwear lookbook is up — the shearling collar bomber has been the one everyone's DMing us about."}]}
   },
   {
     "username": "bricksnwood",
@@ -29,7 +29,7 @@
     "biography": "South Central LA. Independent streetwear.",
     "website": "https://www.bricksandwood.com",
     "seed_hashtags": ["indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-25T18:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-25T18:00:00+00:00", "caption": "New corduroy 5-panel dropping in three colorways Friday, South Central represent."}]}
   },
   {
     "username": "market_studios",
@@ -37,7 +37,7 @@
     "biography": "MARKET. Smiley co-signed.",
     "website": "https://chinatownmarket.com",
     "seed_hashtags": ["streetwearbrand", "hypebeaststore"],
-    "media": {"data": [{"timestamp": "2026-08-18T14:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-18T14:00:00+00:00", "caption": "Smiley collab hoodie restock happens Friday 10am PT — no cart holds this time, learned our lesson."}]}
   },
   {
     "username": "akomplice_wear",
@@ -45,7 +45,7 @@
     "biography": "LA streetwear est. 2003.",
     "website": "https://www.akomplice.com",
     "seed_hashtags": ["indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-21T10:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-21T10:00:00+00:00", "caption": "Our tie-dye reissue tees pulled from the 2003 archive are back for one week only."}]}
   },
   {
     "username": "rowing_blazers_co",
@@ -53,7 +53,7 @@
     "biography": "Preppy, but make it streetwear.",
     "website": "https://rowingblazers.com",
     "seed_hashtags": ["hypebeaststore"],
-    "media": {"data": [{"timestamp": "2026-08-19T08:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-19T08:00:00+00:00", "caption": "New rugby-stripe crest sweater just dropped, hand-numbered edition of 200."}]}
   },
   {
     "username": "alltimers_skate",
@@ -61,7 +61,7 @@
     "biography": "Alltimers. NYC.",
     "website": "https://alltimers.com",
     "seed_hashtags": ["streetwearbrand"],
-    "media": {"data": [{"timestamp": "2026-08-23T11:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-23T11:00:00+00:00", "caption": "New 'Boyz Club' graphic tee just dropped, screen printed in-house in our NYC studio."}]}
   },
   {
     "username": "dollskill_store",
@@ -69,7 +69,7 @@
     "biography": "Rebel with a cause. Shop the drop.",
     "website": "https://www.dollskill.com",
     "seed_hashtags": ["hypebeaststore"],
-    "media": {"data": [{"timestamp": "2026-08-26T20:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-26T20:00:00+00:00", "caption": "Y2K platform boot collab just launched — sold out on the site in the first wave, restock incoming."}]}
   },
   {
     "username": "palace_uk_shop",
@@ -77,7 +77,15 @@
     "biography": "Palace Skateboards. London.",
     "website": "https://www.palaceskateboards.com",
     "seed_hashtags": ["streetwearbrand"],
-    "media": {"data": [{"timestamp": "2026-08-17T13:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-17T13:00:00+00:00", "caption": "Tri-Ferg pattern is back, this time on a winter puffer jacket."}]}
+  },
+  {
+    "username": "understated_supply_co",
+    "followers_count": 18000,
+    "biography": "",
+    "website": "https://www.example-brandsite.com",
+    "seed_hashtags": ["streetwearbrand"],
+    "media": {"data": [{"timestamp": "2026-08-25T10:00:00+00:00", "caption": ""}]}
   },
   {
     "username": "stussy_global",
@@ -85,7 +93,7 @@
     "biography": "Est. 1980. World Tour.",
     "website": "https://www.stussy.com",
     "seed_hashtags": ["streetwearbrand"],
-    "media": {"data": [{"timestamp": "2026-08-25T16:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-25T16:00:00+00:00", "caption": "World Tour capsule restocked."}]}
   },
   {
     "username": "tiny_thrift_closet",
@@ -93,7 +101,7 @@
     "biography": "personal closet clean out, DM to buy",
     "website": "",
     "seed_hashtags": ["indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-24T10:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-24T10:00:00+00:00", "caption": "bundle deal on old listings"}]}
   },
   {
     "username": "dormant_dropshop",
@@ -101,7 +109,7 @@
     "biography": "streetwear dropshop (on hiatus)",
     "website": "https://example-shop.com",
     "seed_hashtags": ["hypebeaststore"],
-    "media": {"data": [{"timestamp": "2026-06-01T10:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-06-01T10:00:00+00:00", "caption": "back soon"}]}
   },
   {
     "username": "old_hype_store",
@@ -109,7 +117,7 @@
     "biography": "we'll be back soon",
     "website": "",
     "seed_hashtags": ["streetwearbrand"],
-    "media": {"data": [{"timestamp": "2026-05-15T10:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-05-15T10:00:00+00:00", "caption": ""}]}
   },
   {
     "username": "hype_reseller_247",
@@ -117,7 +125,7 @@
     "biography": "🔥🔥 DM FOR PROMO 🔥🔥 follow4follow giveaway everyday",
     "website": "",
     "seed_hashtags": ["hypebeaststore"],
-    "media": {"data": [{"timestamp": "2026-08-24T09:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-24T09:00:00+00:00", "caption": "giveaway giveaway giveaway 🔥🔥🔥"}]}
   },
   {
     "username": "linkbio_dropshipper",
@@ -125,6 +133,6 @@
     "biography": "shop via link below ⬇️",
     "website": "https://linktr.ee/randomdropshipco",
     "seed_hashtags": ["indiestreetwear"],
-    "media": {"data": [{"timestamp": "2026-08-22T09:00:00+00:00"}]}
+    "media": {"data": [{"timestamp": "2026-08-22T09:00:00+00:00", "caption": "new drop up now"}]}
   }
 ]

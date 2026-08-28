@@ -103,13 +103,25 @@ it only reads public data and writes a CSV.** It shares no code path with
    Hashtag Search) and/or seed accounts you list directly.
 2. **Filter** on basic activity signals: posted within the last X days
    (default 14) and follower count within a min/max you set.
-3. **Enrich**: for qualifying accounts with a bio link, run it through
+3. **Reject spam bios**: obvious low-quality patterns — "DM for promo",
+   follow4follow/f4f, shoutout-for-shoutout, emoji-spam bios, or a bio
+   that's just a thin linktree with no real brand description. Blocklist
+   lives in `config.py` (`SPAM_BIO_PATTERNS` and friends) — plain
+   keywords/regex, edit freely, no code changes needed.
+4. **Enrich**: for qualifying accounts with a bio link, run it through
    `find_website()` / `find_email_on_website()` — adapted from
    `email_finder.py`'s site-crawling logic (same homepage/contact/about
    page-check pattern and junk-address filtering, reused rather than
    rebuilt) — to grab a public business email if one's listed.
-4. **Output**: `leads.csv` (handle, followers, last post date, website,
-   email) plus the same as a terminal table.
+5. **Draft a DM**: one personalized opener per qualifying lead, grounded in
+   a real detail from that account's most recent post caption (or bio, if
+   no caption is usable) — see "DM draft generation" below.
+6. **Output**: `leads.csv` (handle, followers, last post date, website,
+   email, draft DM, draft status) plus the same as a terminal table.
+
+Every rejection at every stage — inactive, out of follower range, spam
+bio, profile not found — is logged with a reason code, e.g.
+`rejected: spam_bio_pattern (\bdm for promo\b)`.
 
 ### Why this needs API setup (and why it isn't a scraper)
 
@@ -159,12 +171,40 @@ per line — `#hashtag` lines get discovered via Hashtag Search, everything
 else (`@account` or bare `account`) is checked directly as a candidate.
 Lines starting with `//` are comments.
 
+### DM draft generation
+
+For every lead that clears all filters, `dm_draft.py` drafts one casual,
+low-pressure, curiosity-based DM opener — **never sent, just written into
+the `Draft DM` column for you to review and send yourself.** Uses Groq's
+free-tier API (OpenAI-compatible chat completions), needs `GROQ_API_KEY`
+in `.env` (get one at console.groq.com/keys). No key → every lead is
+flagged `needs_manual_review_no_api_key`, draft left blank, rest of the
+pipeline still runs fine. Pass `--no-drafts` to skip this stage entirely.
+
+Every draft must be grounded in something *specific and real* about that
+account — a detail from their most recent post caption (preferred) or
+their bio — never a generic compliment like "clean pieces" or "cool vibe"
+that could apply to any streetwear brand. Three safeguards enforce this,
+each of which leaves `Draft DM` blank and sets a `Draft Status` reason
+instead of shipping a bad draft:
+
+| Draft Status | Meaning |
+|---|---|
+| `ok` | Draft generated and grounded — ready to review |
+| `needs_manual_review_no_signal` | No usable caption or bio text found (empty/private/thin) |
+| `needs_manual_review_no_api_key` | `GROQ_API_KEY` not set |
+| `needs_manual_review_model_declined` | Model itself judged the source detail too thin to write a grounded line |
+| `needs_manual_review_generic_output` | Draft matched a generic-phrase pattern (`config.DM_DRAFT_GENERIC_PHRASE_BLOCKLIST`) — rejected before it ever reached the CSV |
+| `needs_manual_review_ungrounded` | Draft didn't reference any word from the source detail — rejected as a safety net against invented specifics |
+| `needs_manual_review_api_error` | Groq API call failed (network/rate limit/etc.) |
+
 ### Files (lead finder)
 
 | File | Purpose |
 |---|---|
-| `lead_finder.py` | Main script: discover → filter → enrich → CSV/table |
+| `lead_finder.py` | Main script: discover → filter → spam check → enrich → draft → CSV/table |
 | `instagram_client.py` | Graph API client + offline mock client, same interface |
+| `dm_draft.py` | Grounded DM draft generation via Groq — draft-only, never sends |
 | `sample_data/seeds_sample.txt` | Example seed hashtags/accounts |
 | `sample_data/mock_ig_profiles.json` | Fake profile data for `--mock` testing |
 | `leads.csv` | Output (gitignored, your own run's results) |

@@ -85,9 +85,15 @@ SPAM_LINK_AGGREGATOR_DOMAINS = [
 # DM_DRAFT_API_BASE + DM_DRAFT_MODEL to point at any other OpenAI-compatible
 # provider without touching dm_draft.py.
 DM_DRAFT_API_BASE = "https://api.groq.com/openai/v1"
-DM_DRAFT_MODEL = "llama-3.3-70b-versatile"
+DM_DRAFT_MODEL = "openai/gpt-oss-120b"
 DM_DRAFT_TEMPERATURE = 0.85  # some variation per lead so drafts don't read like a mail-merge
-DM_DRAFT_MAX_TOKENS = 150
+# gpt-oss is a reasoning model -- it spends completion tokens on an internal
+# "reasoning" pass before writing the actual reply, so max_tokens needs
+# headroom for both, and reasoning_effort trims how much it spends there.
+# Set DM_DRAFT_REASONING_EFFORT = None if you swap in a non-reasoning model
+# that doesn't support (or errors on) the reasoning_effort field.
+DM_DRAFT_REASONING_EFFORT = "low"
+DM_DRAFT_MAX_TOKENS = 300
 DM_DRAFT_REQUEST_TIMEOUT = 20
 # A bio needs at least this many real words to count as a usable signal on
 # its own (a caption is preferred when one exists -- it's more specific).

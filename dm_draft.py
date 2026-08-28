@@ -27,18 +27,26 @@ STOPWORDS = {
     "here", "now", "get", "out", "top", "via", "more", "than",
 }
 
-STYLE_EXAMPLE = (
+STYLE_EXAMPLES = [
     "hey! came across [Brand] while looking at streetwear brands — the "
     "[SPECIFIC DETAIL] looks really clean. you running any paid ads right "
-    "now, or mostly organic/social?"
-)
+    "now, or mostly organic/social?",
+    "hey! saw [Brand]'s [SPECIFIC DETAIL] — wasn't expecting that. are you "
+    "doing anything with paid ads yet or has it all been organic so far?",
+    "hey! [SPECIFIC DETAIL] caught my eye on your page. are you guys "
+    "running any ads at all right now?",
+]
 
 SYSTEM_PROMPT = f"""You draft short, casual Instagram DM openers for someone \
 doing manual outreach to streetwear/e-commerce brands about ad help. They \
 copy-paste and send these themselves -- you are only drafting, never sending.
 
-Voice/structure reference (match the tone, don't reuse the wording):
-"{STYLE_EXAMPLE}"
+Voice/structure reference -- three DIFFERENT ways to hit the same tone.
+Write your own line in this spirit; don't reuse any of this wording, and
+don't default to the same closing question every time:
+1. "{STYLE_EXAMPLES[0]}"
+2. "{STYLE_EXAMPLES[1]}"
+3. "{STYLE_EXAMPLES[2]}"
 
 Rules:
 - Casual, low-pressure, curiosity-based. NOT a pitch, NOT salesy.
@@ -46,6 +54,12 @@ Rules:
 - Must reference the specific detail given to you about THIS account --
   never a generic compliment like "clean pieces", "cool vibe", "love your
   feed", or anything that could apply to literally any streetwear brand.
+- Vary your phrasing and structure. Do not reuse the reference examples'
+  exact wording, and don't let every draft end the same way -- e.g. avoid
+  always closing with "or keeping it all organic?" or "or mostly
+  organic/social?" verbatim. Find a fresh way to ask each time, or
+  sometimes skip the paid-ads question entirely and just make an
+  observation.
 - If the detail given isn't specific enough to write a grounded line,
   respond with exactly: NOT_SPECIFIC_ENOUGH
 - Output only the DM text (or NOT_SPECIFIC_ENOUGH), nothing else -- no
@@ -113,19 +127,23 @@ def generate_dm_draft(handle, profile, api_key):
         "Write one DM opener grounded in that specific detail."
     )
 
+    payload = {
+        "model": config.DM_DRAFT_MODEL,
+        "temperature": config.DM_DRAFT_TEMPERATURE,
+        "max_tokens": config.DM_DRAFT_MAX_TOKENS,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+    }
+    if getattr(config, "DM_DRAFT_REASONING_EFFORT", None):
+        payload["reasoning_effort"] = config.DM_DRAFT_REASONING_EFFORT
+
     try:
         resp = requests.post(
             f"{config.DM_DRAFT_API_BASE}/chat/completions",
             headers={"Authorization": f"Bearer {api_key}"},
-            json={
-                "model": config.DM_DRAFT_MODEL,
-                "temperature": config.DM_DRAFT_TEMPERATURE,
-                "max_tokens": config.DM_DRAFT_MAX_TOKENS,
-                "messages": [
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt},
-                ],
-            },
+            json=payload,
             timeout=config.DM_DRAFT_REQUEST_TIMEOUT,
         )
         resp.raise_for_status()

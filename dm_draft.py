@@ -10,7 +10,9 @@ tied back to that detail, no draft is generated -- the lead is flagged
 "needs_manual_review" instead. A bad fake-personalized DM is worse than
 none, per the brief.
 
-Uses Groq's OpenAI-compatible chat completions API (needs GROQ_API_KEY).
+Uses an OpenAI-compatible chat completions API -- currently AI/ML API
+(needs AIML_API_KEY in .env). See config.DM_DRAFT_API_BASE / DM_DRAFT_MODEL
+to point this at a different OpenAI-compatible provider.
 """
 import re
 
@@ -113,7 +115,7 @@ def generate_dm_draft(handle, profile, api_key):
 
     try:
         resp = requests.post(
-            f"{config.GROQ_API_BASE}/chat/completions",
+            f"{config.DM_DRAFT_API_BASE}/chat/completions",
             headers={"Authorization": f"Bearer {api_key}"},
             json={
                 "model": config.DM_DRAFT_MODEL,
@@ -128,7 +130,8 @@ def generate_dm_draft(handle, profile, api_key):
         )
         resp.raise_for_status()
         draft = resp.json()["choices"][0]["message"]["content"].strip().strip('"')
-    except (requests.RequestException, KeyError, IndexError, ValueError):
+    except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+        print(f"    ! draft generation API error for @{handle}: {exc}")
         return None, "needs_manual_review_api_error"
 
     if draft == "NOT_SPECIFIC_ENOUGH":

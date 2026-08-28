@@ -80,12 +80,12 @@ SPAM_LINK_AGGREGATOR_DOMAINS = [
 
 # --- DM draft generation (lead_finder.py) ---
 # Drafts only -- never sent automatically. Uses an OpenAI-compatible chat
-# completions API -- currently AI/ML API (aimlapi.com). Get a key at
-# aimlapi.com and put it in .env as AIML_API_KEY. Swap DM_DRAFT_API_BASE +
-# DM_DRAFT_MODEL to point at any other OpenAI-compatible provider without
-# touching dm_draft.py.
-DM_DRAFT_API_BASE = "https://api.aimlapi.com/v1"
-DM_DRAFT_MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
+# completions API -- currently Cerebras (cloud.cerebras.ai). Get a key at
+# cloud.cerebras.ai and put it in .env as CEREBRAS_API_KEY. Swap
+# DM_DRAFT_API_BASE + DM_DRAFT_MODEL to point at any other OpenAI-compatible
+# provider without touching dm_draft.py.
+DM_DRAFT_API_BASE = "https://api.cerebras.ai/v1"
+DM_DRAFT_MODEL = "gpt-oss-120b"
 DM_DRAFT_TEMPERATURE = 0.85  # some variation per lead so drafts don't read like a mail-merge
 DM_DRAFT_MAX_TOKENS = 150
 DM_DRAFT_REQUEST_TIMEOUT = 20

@@ -176,8 +176,8 @@ Lines starting with `//` are comments.
 For every lead that clears all filters, `dm_draft.py` drafts one casual,
 low-pressure, curiosity-based DM opener — **never sent, just written into
 the `Draft DM` column for you to review and send yourself.** Uses AI/ML
-API (OpenAI-compatible chat completions), needs `AIML_API_KEY` in `.env`
-(get one at aimlapi.com). No key → every lead is flagged
+API (OpenAI-compatible chat completions), needs `CEREBRAS_API_KEY` in `.env`
+(get one at cloud.cerebras.ai). No key → every lead is flagged
 `needs_manual_review_no_api_key`, draft left blank, rest of the pipeline
 still runs fine. Pass `--no-drafts` to skip this stage entirely.
 
@@ -192,11 +192,11 @@ instead of shipping a bad draft:
 |---|---|
 | `ok` | Draft generated and grounded — ready to review |
 | `needs_manual_review_no_signal` | No usable caption or bio text found (empty/private/thin) |
-| `needs_manual_review_no_api_key` | `AIML_API_KEY` not set |
+| `needs_manual_review_no_api_key` | `CEREBRAS_API_KEY` not set |
 | `needs_manual_review_model_declined` | Model itself judged the source detail too thin to write a grounded line |
 | `needs_manual_review_generic_output` | Draft matched a generic-phrase pattern (`config.DM_DRAFT_GENERIC_PHRASE_BLOCKLIST`) — rejected before it ever reached the CSV |
 | `needs_manual_review_ungrounded` | Draft didn't reference any word from the source detail — rejected as a safety net against invented specifics |
-| `needs_manual_review_api_error` | AI/ML API call failed (network/rate limit/etc.) |
+| `needs_manual_review_api_error` | Cerebras call failed (network/rate limit/etc.) |
 
 ### Files (lead finder)
 
@@ -204,7 +204,7 @@ instead of shipping a bad draft:
 |---|---|
 | `lead_finder.py` | Main script: discover → filter → spam check → enrich → draft → CSV/table |
 | `instagram_client.py` | Graph API client + offline mock client, same interface |
-| `dm_draft.py` | Grounded DM draft generation via AI/ML API — draft-only, never sends |
+| `dm_draft.py` | Grounded DM draft generation via Cerebras — draft-only, never sends |
 | `sample_data/seeds_sample.txt` | Example seed hashtags/accounts |
 | `sample_data/mock_ig_profiles.json` | Fake profile data for `--mock` testing |
 | `leads.csv` | Output (gitignored, your own run's results) |

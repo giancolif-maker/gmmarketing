@@ -20,7 +20,7 @@ Pipeline:
        find_website() / find_email_on_website() -- adapted from the
        home-services pipeline's email_finder.py -- to grab a public email.
     5. Draft one personalized DM opener grounded in a real detail from that
-       account's recent post caption or bio (dm_draft.py, via Cerebras). No
+       account's recent post caption or bio (dm_draft.py, via Groq). No
        usable specific detail -> draft left blank, flagged for manual
        review rather than shipping something generic.
     6. Write leads.csv (handle, followers, last post date, website, email,
@@ -38,7 +38,7 @@ Usage:
     website/email lookup in that mode still makes real HTTP requests to
     whatever websites the fixture lists).
 
-    Add --no-drafts to skip DM draft generation (filter-only run, no Cerebras
+    Add --no-drafts to skip DM draft generation (filter-only run, no Groq
     calls).
 """
 import argparse
@@ -190,7 +190,7 @@ def main():
     parser.add_argument(
         "--no-drafts",
         action="store_true",
-        help="Skip DM draft generation (filter-only run, no Cerebras calls)",
+        help="Skip DM draft generation (filter-only run, no Groq calls)",
     )
     args = parser.parse_args()
 
@@ -208,12 +208,12 @@ def main():
             print(f"ERROR: {exc}")
             return
 
-    cerebras_api_key = os.environ.get("CEREBRAS_API_KEY")
-    if not args.no_drafts and not cerebras_api_key:
+    groq_api_key = os.environ.get("GROQ_API_KEY")
+    if not args.no_drafts and not groq_api_key:
         print(
-            "WARNING: CEREBRAS_API_KEY not set in .env -- DM drafts will be skipped for every "
+            "WARNING: GROQ_API_KEY not set in .env -- DM drafts will be skipped for every "
             "lead (flagged needs_manual_review_no_api_key). Get a free key at "
-            "cloud.cerebras.ai, or pass --no-drafts to silence this.\n"
+            "console.groq.com/keys, or pass --no-drafts to silence this.\n"
         )
 
     hashtags, seed_accounts = load_seeds(args.seeds)
@@ -266,7 +266,7 @@ def main():
         if args.no_drafts:
             draft, draft_status = "", "skipped"
         else:
-            draft, draft_status = dm_draft.generate_dm_draft(handle, profile, cerebras_api_key)
+            draft, draft_status = dm_draft.generate_dm_draft(handle, profile, groq_api_key)
             draft = draft or ""
 
         posted = last_post_date(profile)

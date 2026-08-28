@@ -10,8 +10,8 @@ tied back to that detail, no draft is generated -- the lead is flagged
 "needs_manual_review" instead. A bad fake-personalized DM is worse than
 none, per the brief.
 
-Uses an OpenAI-compatible chat completions API -- currently Cerebras
-(needs CEREBRAS_API_KEY in .env). See config.DM_DRAFT_API_BASE / DM_DRAFT_MODEL
+Uses an OpenAI-compatible chat completions API -- currently Groq
+(needs GROQ_API_KEY in .env). See config.DM_DRAFT_API_BASE / DM_DRAFT_MODEL
 to point this at a different OpenAI-compatible provider.
 """
 import re

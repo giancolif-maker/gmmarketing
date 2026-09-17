@@ -1,4 +1,5 @@
 import { getModelById, getVideoModelById, getI2IModelById, getI2VModelById, getV2VModelById, getLipSyncModelById } from './models.js';
+import * as freeBackend from './selfHosted.js';
 
 const BASE_URL = 'https://api.muapi.ai';
 
@@ -78,6 +79,7 @@ export async function generateI2I(apiKey, params) {
 
 export async function generateVideo(apiKey, params) {
     const modelInfo = getVideoModelById(params.model);
+    if (modelInfo?.provider === 'free') return freeBackend.generateVideo(params);
     const endpoint = modelInfo?.endpoint || params.model;
     const payload = {};
     if (params.prompt) payload.prompt = params.prompt;
@@ -92,6 +94,7 @@ export async function generateVideo(apiKey, params) {
 
 export async function generateI2V(apiKey, params) {
     const modelInfo = getI2VModelById(params.model);
+    if (modelInfo?.provider === 'free') return freeBackend.generateI2V(params);
     const endpoint = modelInfo?.endpoint || params.model;
     const payload = {};
     if (params.prompt) payload.prompt = params.prompt;
@@ -121,7 +124,8 @@ export async function processLipSync(apiKey, params) {
     return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 900);
 }
 
-export function uploadFile(apiKey, file, onProgress) {
+export function uploadFile(apiKey, file, onProgress, useFreeServer) {
+    if (useFreeServer) return freeBackend.uploadFile(file, onProgress);
     return new Promise((resolve, reject) => {
         const url = `${BASE_URL}/api/v1/upload_file`;
         const formData = new FormData();

@@ -2111,6 +2111,28 @@ export const getAspectRatiosForModel = (modelId) => {
 // ==========================================
 export const t2vModels = [
   {
+    "id": "free-ltx-video-t2v",
+    "name": "LTX Video (Free, Self-Hosted)",
+    "provider": "free",
+    "inputs": {
+      "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "The prompt to generate the video" },
+      "aspect_ratio": { "enum": ["16:9", "9:16", "1:1"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "Aspect ratio of the output video.", "default": "16:9" },
+      "duration": { "enum": [3, 5, 7], "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video in seconds", "default": 5 },
+      "resolution": { "enum": ["512p", "768p"], "title": "Resolution", "name": "resolution", "type": "string", "description": "The resolution of the generated video.", "default": "512p" }
+    }
+  },
+  {
+    "id": "free-wan2.2-t2v",
+    "name": "Wan 2.2 (Free, Self-Hosted)",
+    "provider": "free",
+    "inputs": {
+      "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "The prompt to generate the video" },
+      "aspect_ratio": { "enum": ["16:9", "9:16", "1:1"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "Aspect ratio of the output video.", "default": "16:9" },
+      "duration": { "enum": [5], "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video in seconds", "default": 5 },
+      "resolution": { "enum": ["480p", "720p"], "title": "Resolution", "name": "resolution", "type": "string", "description": "The resolution of the generated video.", "default": "480p" }
+    }
+  },
+  {
     "id": "seedance-lite-t2v",
     "name": "Seedance Lite",
     "inputs": {
@@ -2507,6 +2529,8 @@ export const t2vModels = [
 ];
 
 export const getVideoModelById = (id) => t2vModels.find(m => m.id === id);
+export const freeT2vModels = t2vModels.filter(m => m.provider === 'free');
+export const paidT2vModels = t2vModels.filter(m => m.provider !== 'free');
 
 export const getAspectRatiosForVideoModel = (modelId) => {
   const model = getVideoModelById(modelId);
@@ -4793,6 +4817,30 @@ export const i2iModels = [
 
 // Auto-generated from schema_data.json — Image to Video models
 export const i2vModels = [
+  {
+    "id": "free-ltx-video-i2v",
+    "name": "LTX Video (Free, Self-Hosted)",
+    "provider": "free",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "Optional prompt describing the motion" },
+      "aspect_ratio": { "enum": ["16:9", "9:16", "1:1"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "Aspect ratio of the output video.", "default": "16:9" },
+      "duration": { "enum": [3, 5, 7], "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video in seconds", "default": 5 },
+      "resolution": { "enum": ["512p", "768p"], "title": "Resolution", "name": "resolution", "type": "string", "description": "The resolution of the generated video.", "default": "512p" }
+    }
+  },
+  {
+    "id": "free-wan2.2-i2v",
+    "name": "Wan 2.2 (Free, Self-Hosted)",
+    "provider": "free",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": { "type": "string", "title": "Prompt", "name": "prompt", "description": "Optional prompt describing the motion" },
+      "aspect_ratio": { "enum": ["16:9", "9:16", "1:1"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "Aspect ratio of the output video.", "default": "16:9" },
+      "duration": { "enum": [5], "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video in seconds", "default": 5 },
+      "resolution": { "enum": ["480p", "720p"], "title": "Resolution", "name": "resolution", "type": "string", "description": "The resolution of the generated video.", "default": "480p" }
+    }
+  },
   {
     "id": "ai-video-effects",
     "name": "AI Video Effects",
@@ -7923,6 +7971,8 @@ export const i2vModels = [
 
 export const getI2IModelById = (id) => i2iModels.find(m => m.id === id);
 export const getI2VModelById = (id) => i2vModels.find(m => m.id === id);
+export const freeI2vModels = i2vModels.filter(m => m.provider === 'free');
+export const paidI2vModels = i2vModels.filter(m => m.provider !== 'free');
 
 export const getAspectRatiosForI2IModel = (modelId) => {
     const model = getI2IModelById(modelId);

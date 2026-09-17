@@ -102,6 +102,12 @@ npm install
 npm run dev
 ```
 
+Video Studio defaults to a **Free Mode** (unlimited, self-hosted, no API
+key) instead of Muapi's paid models — see `studio/self-hosted-server/README.md`
+to run the backend it needs. It won't match Seedance/Higgsfield-level
+closed-model quality, but there's no per-generation cost or usage cap.
+Image/Lip Sync/Cinema studios still require a Muapi key.
+
 **License note:** the upstream repo does not include a LICENSE file or a
 `license` field in `package.json`, so its terms of reuse are unclear. Check
 with the upstream project before distributing or relying on this

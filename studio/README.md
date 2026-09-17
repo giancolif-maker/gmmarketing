@@ -2,6 +2,21 @@
 
 > **The free, open-source alternative to Higgsfield AI.** Generate AI images and videos using 200+ state-of-the-art models — without the closed ecosystem or subscription fees.
 
+## ⚡ Free Mode (this fork's addition)
+
+Video Studio has a **Free Mode** toggle (on by default) that routes
+generation to an open-source model you self-host, instead of Muapi's paid
+API — no API key, no per-generation billing, no usage cap. Skip the Muapi
+key prompt entirely with "Skip — use Free Mode" on first launch.
+
+It needs a small backend running somewhere with a GPU — see
+[`self-hosted-server/README.md`](self-hosted-server/README.md) for setup,
+hardware requirements, and the honest tradeoffs (it won't match Seedance/
+Higgsfield's closed-model quality, but it's genuinely unlimited and free of
+per-generation cost). Toggle back to "💳 Muapi (paid models)" any time for
+paid, higher-end models — Image/Lip Sync/Cinema studios still require a
+Muapi key.
+
 ## 🌐 Try it Online — No Install Required
 
 **Hosted version:** [muapi.ai/open-higgsfield-ai](https://muapi.ai/open-higgsfield-ai)

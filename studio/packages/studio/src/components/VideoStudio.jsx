@@ -2,10 +2,15 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { generateVideo, generateI2V, uploadFile } from '../muapi.js';
+import { configureFreeServer, checkFreeServerHealth } from '../selfHosted.js';
 import {
     t2vModels,
     i2vModels,
     v2vModels,
+    freeT2vModels,
+    freeI2vModels,
+    paidT2vModels,
+    paidI2vModels,
     getAspectRatiosForVideoModel,
     getDurationsForModel,
     getResolutionsForVideoModel,
@@ -76,21 +81,22 @@ function DropdownItem({ label, selected, onClick }) {
     );
 }
 
-function ModelDropdown({ imageMode, selectedModel, onSelect, onClose }) {
+function ModelDropdown({ imageMode, selectedModel, onSelect, onClose, models, v2vModelsList }) {
     const [search, setSearch] = useState('');
 
-    const generationModels = imageMode ? i2vModels : t2vModels;
+    const generationModels = models;
 
     const lf = search.toLowerCase();
     const filteredMain = generationModels.filter(
         m => m.name.toLowerCase().includes(lf) || m.id.toLowerCase().includes(lf)
     );
-    const filteredV2V = v2vModels.filter(
+    const filteredV2V = (v2vModelsList || []).filter(
         m => m.name.toLowerCase().includes(lf) || m.id.toLowerCase().includes(lf)
     );
 
     const getIconColor = (m, isV2V) => {
         if (isV2V) return 'bg-orange-500/10 text-orange-400';
+        if (m.provider === 'free') return 'bg-emerald-500/10 text-emerald-400';
         if (m.id.includes('kling')) return 'bg-blue-500/10 text-blue-400';
         if (m.id.includes('veo')) return 'bg-purple-500/10 text-purple-400';
         if (m.id.includes('sora')) return 'bg-rose-500/10 text-rose-400';
@@ -110,6 +116,7 @@ function ModelDropdown({ imageMode, selectedModel, onSelect, onClose }) {
                 <div className="flex flex-col gap-0.5">
                     <span className="text-xs font-bold text-white tracking-tight">{m.name}</span>
                     {isV2V && <span className="text-[9px] text-orange-400/70">Upload a video to use</span>}
+                    {m.provider === 'free' && <span className="text-[9px] text-emerald-400/70">Free · self-hosted · unlimited</span>}
                 </div>
             </div>
             {selectedModel === m.id && <CheckSvg />}
@@ -177,13 +184,26 @@ function ControlBtn({ icon, label, onClick, style }) {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function VideoStudio({ apiKey, onGenerationComplete, historyItems }) {
+const FREE_MODE_STORAGE_KEY = 'video_free_mode';
+const DEFAULT_FREE_SERVER_URL = 'http://localhost:8000';
+
+export default function VideoStudio({ apiKey, onGenerationComplete, historyItems, freeServerUrl }) {
     // ── mode state ──
     const [imageMode, setImageMode] = useState(false);   // i2v
     const [v2vMode, setV2vMode] = useState(false);
 
+    // ── free (self-hosted, unlimited) backend ──
+    // Defaults to ON: this is the free-forever tier, no API key required.
+    const [freeMode, setFreeMode] = useState(true);
+    const [freeServerOnline, setFreeServerOnline] = useState(null); // null = unknown yet
+    const resolvedFreeServerUrl = freeServerUrl || DEFAULT_FREE_SERVER_URL;
+
+    const activeT2vModels = freeMode ? freeT2vModels : paidT2vModels;
+    const activeI2vModels = freeMode ? freeI2vModels : paidI2vModels;
+    const activeV2vModels = freeMode ? [] : v2vModels;
+
     // ── model / params ──
-    const defaultModel = t2vModels[0];
+    const defaultModel = (freeMode ? freeT2vModels[0] : paidT2vModels[0]) || t2vModels[0];
     const [selectedModel, setSelectedModel] = useState(defaultModel.id);
     const [selectedModelName, setSelectedModelName] = useState(defaultModel.name);
     const [selectedAr, setSelectedAr] = useState(defaultModel.inputs?.aspect_ratio?.default || '16:9');
@@ -242,9 +262,9 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
     const history = historyItems ?? localHistory;
 
     const getCurrentModels = useCallback(() => {
-        if (v2vMode) return v2vModels;
-        return imageMode ? i2vModels : t2vModels;
-    }, [imageMode, v2vMode]);
+        if (v2vMode) return activeV2vModels;
+        return imageMode ? activeI2vModels : activeT2vModels;
+    }, [imageMode, v2vMode, activeV2vModels, activeI2vModels, activeT2vModels]);
 
     const getCurrentAspectRatios = useCallback((id) =>
         imageMode ? getAspectRatiosForI2VModel(id) : getAspectRatiosForVideoModel(id),
@@ -301,6 +321,40 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // ── load saved free-mode preference, point the free client at the configured server ──
+    useEffect(() => {
+        try {
+            const saved = localStorage.getItem(FREE_MODE_STORAGE_KEY);
+            if (saved !== null) setFreeMode(saved === '1');
+        } catch { /* localStorage unavailable */ }
+    }, []);
+
+    useEffect(() => {
+        configureFreeServer(resolvedFreeServerUrl);
+        checkFreeServerHealth().then(res => setFreeServerOnline(res.online));
+    }, [resolvedFreeServerUrl, freeMode]);
+
+    const toggleFreeMode = useCallback(() => {
+        setFreeMode(prev => {
+            const next = !prev;
+            try { localStorage.setItem(FREE_MODE_STORAGE_KEY, next ? '1' : '0'); } catch { /* ignore */ }
+            const list = next ? freeT2vModels : paidT2vModels;
+            const first = list[0];
+            if (first) {
+                setImageMode(false);
+                setV2vMode(false);
+                setUploadedImageUrl(null);
+                setUploadedVideoUrl(null);
+                setUploadedVideoName(null);
+                setPromptDisabled(false);
+                setSelectedModel(first.id);
+                setSelectedModelName(first.name);
+                applyControlsForModel(first.id, false, false);
+            }
+            return next;
+        });
+    }, [applyControlsForModel]);
+
     // ── close dropdown on outside click ─────────────────────────────────────
     useEffect(() => {
         if (!openDropdown) return;
@@ -336,7 +390,7 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
         try {
             const url = await uploadFile(apiKey, file, (pct) => {
                 setImageProgress(pct);
-            });
+            }, freeMode);
             setUploadedImageUrl(url);
 
             // Clear v2v if active
@@ -345,11 +399,13 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
             setV2vMode(false);
 
             if (!imageMode) {
-                const firstI2V = i2vModels[0];
+                const firstI2V = activeI2vModels[0];
                 setImageMode(true);
-                setSelectedModel(firstI2V.id);
-                setSelectedModelName(firstI2V.name);
-                applyControlsForModel(firstI2V.id, true, false);
+                if (firstI2V) {
+                    setSelectedModel(firstI2V.id);
+                    setSelectedModelName(firstI2V.name);
+                    applyControlsForModel(firstI2V.id, true, false);
+                }
             }
             setPromptDisabled(false);
         } catch (err) {
@@ -365,17 +421,21 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
     const clearImageUpload = () => {
         setUploadedImageUrl(null);
         setImageMode(false);
-        const first = t2vModels[0];
+        const first = activeT2vModels[0];
         setSelectedModel(first.id);
         setSelectedModelName(first.name);
         applyControlsForModel(first.id, false, false);
         setPromptDisabled(false);
     };
 
-    // ── video upload ─────────────────────────────────────────────────────────
+    // ── video upload (video-to-video tools; Muapi only) ───────────────────────
     const handleVideoFileChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
+        if (freeMode) {
+            alert('Video-to-video tools (watermark removal, etc.) run on Muapi\'s paid models — switch off Free Mode to use them.');
+            return;
+        }
         if (file.size > 50 * 1024 * 1024) {
           alert("Video exceeds 50MB limit.");
           return;
@@ -415,7 +475,7 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
         setUploadedVideoUrl(null);
         setUploadedVideoName(null);
         setV2vMode(false);
-        const first = t2vModels[0];
+        const first = activeT2vModels[0];
         setSelectedModel(first.id);
         setSelectedModelName(first.name);
         applyControlsForModel(first.id, false, false);
@@ -428,7 +488,6 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
             setV2vMode(true);
             setImageMode(false);
             setUploadedImageUrl(null);
-            setUploadedImagePreview(null);
             setSelectedModel(m.id);
             setSelectedModelName(m.name);
             applyControlsForModel(m.id, false, true);
@@ -584,25 +643,23 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
         resetToPromptBar();
         setPrompt('');
         setUploadedImageUrl(null);
-        setUploadedImagePreview(null);
         setImageMode(false);
         setUploadedVideoUrl(null);
         setUploadedVideoName(null);
         setV2vMode(false);
-        const first = t2vModels[0];
+        const first = activeT2vModels[0];
         setSelectedModel(first.id);
         setSelectedModelName(first.name);
         applyControlsForModel(first.id, false, false);
         setPromptDisabled(false);
         setTimeout(() => textareaRef.current?.focus(), 50);
-    }, [resetToPromptBar, applyControlsForModel]);
+    }, [resetToPromptBar, applyControlsForModel, activeT2vModels]);
 
     const handleExtend = useCallback(() => {
         if (!lastGenerationId) return;
         resetToPromptBar();
         setPrompt('');
         setUploadedImageUrl(null);
-        setUploadedImagePreview(null);
         setImageMode(false);
         setSelectedModel('seedance-v2.0-extend');
         setSelectedModelName('Seedance 2.0 Extend');
@@ -635,6 +692,28 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
             ref={containerRef}
             className="w-full h-full flex flex-col items-center justify-center bg-app-bg relative p-4 md:p-6 overflow-y-auto custom-scrollbar overflow-x-hidden"
         >
+            {/* ── Free / Muapi backend toggle ── */}
+            <div className="fixed left-4 top-20 z-50 flex flex-col items-start gap-2">
+                <button
+                    type="button"
+                    onClick={toggleFreeMode}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold border transition-all backdrop-blur-lg ${
+                        freeMode
+                            ? 'bg-emerald-500/15 border-emerald-400/30 text-emerald-300'
+                            : 'bg-white/5 border-white/10 text-white/70 hover:text-white'
+                    }`}
+                    title="Switch between the free, self-hosted, unlimited backend and Muapi's paid models"
+                >
+                    <span>{freeMode ? '⚡ Free Mode — unlimited' : '💳 Muapi (paid models)'}</span>
+                </button>
+                {freeMode && freeServerOnline === false && (
+                    <div className="max-w-xs px-3.5 py-2 rounded-xl text-[11px] leading-snug bg-red-500/10 border border-red-400/30 text-red-300 backdrop-blur-lg">
+                        Free server unreachable at {resolvedFreeServerUrl}. Start it — see{' '}
+                        <code className="text-red-200">studio/self-hosted-server/README.md</code>.
+                    </div>
+                )}
+            </div>
+
             {/* ── History Sidebar ── */}
             {history.length > 0 && (
                 <div className="fixed right-0 top-0 h-full w-20 md:w-24 bg-black/60 backdrop-blur-xl border-l border-white/5 z-50 flex flex-col items-center py-4 gap-3 overflow-y-auto transition-all duration-500">
@@ -870,6 +949,8 @@ export default function VideoStudio({ apiKey, onGenerationComplete, historyItems
                                                     selectedModel={selectedModel}
                                                     onSelect={handleModelSelect}
                                                     onClose={() => setOpenDropdown(null)}
+                                                    models={imageMode ? activeI2vModels : activeT2vModels}
+                                                    v2vModelsList={activeV2vModels}
                                                 />
                                             </div>
                                         )}

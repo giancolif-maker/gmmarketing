@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function ApiKeyModal({ onSave }) {
+export default function ApiKeyModal({ onSave, onFreeMode }) {
   const [key, setKey] = useState('');
   const [error, setError] = useState('');
 
@@ -61,6 +61,27 @@ export default function ApiKeyModal({ onSave }) {
             </a>
           </p>
         </form>
+
+        {onFreeMode && (
+          <>
+            <div className="flex items-center gap-3 my-6">
+              <div className="flex-1 h-px bg-white/10" />
+              <span className="text-[10px] uppercase tracking-widest text-white/30">or</span>
+              <div className="flex-1 h-px bg-white/10" />
+            </div>
+            <button
+              type="button"
+              onClick={() => onFreeMode()}
+              className="w-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 font-bold py-3 rounded-xl hover:bg-emerald-500/20 transition-colors text-sm"
+            >
+              ⚡ Skip — use Free Mode (unlimited, self-hosted, no key)
+            </button>
+            <p className="mt-2 text-center text-[11px] text-white/30">
+              Runs open video models on your own machine/GPU. See{' '}
+              <code className="text-white/50">studio/self-hosted-server/README.md</code> for setup.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

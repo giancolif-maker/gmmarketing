@@ -8,3 +8,15 @@ __pycache__/
 *.pyc
 venv/
 .venv/
+
+# studio/ (Open Higgsfield AI subproject)
+studio/node_modules
+studio/packages/*/node_modules
+studio/dist
+studio/dist-ssr
+studio/packages/*/dist
+studio/*.local
+studio/.vscode/*
+!studio/.vscode/extensions.json
+studio/.idea
+studio/.DS_Store

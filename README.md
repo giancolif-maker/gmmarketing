@@ -86,3 +86,23 @@ Behavior:
 | `sent_log.csv` | Auto-created dedup ledger (gitignored) |
 | `logs/send_attempts.log` | Auto-created attempt log (gitignored) |
 | `.env` | Your real credentials (gitignored, never commit) |
+| `studio/` | Open Higgsfield AI studio (see below) |
+
+## Studio (AI image/video generation)
+
+`studio/` vendors [Open Higgsfield AI](https://github.com/Autom8AI/Open-Higgsfield-AI),
+a standalone React/Vite/Electron app for AI image, video, lip-sync, and
+cinema generation (powered by Muapi.ai, 200+ models). It's a separate app
+with its own dependencies and is not wired into the Python outreach
+pipeline — see `studio/README.md` for setup and usage.
+
+```bash
+cd studio
+npm install
+npm run dev
+```
+
+**License note:** the upstream repo does not include a LICENSE file or a
+`license` field in `package.json`, so its terms of reuse are unclear. Check
+with the upstream project before distributing or relying on this
+subdirectory beyond local/internal use.

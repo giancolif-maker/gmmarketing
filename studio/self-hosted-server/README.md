@@ -36,9 +36,8 @@ Read this before you turn it on:
 | CPU-only | Works, but expect minutes-to-hours per clip | — |
 | Disk | ~20-40GB for model weights | — |
 
-No NVIDIA GPU available? You can still run this against a free-tier cloud
-GPU notebook (Google Colab, Kaggle) — just make sure the studio app (running
-in your browser) can reach whatever URL/port you expose it on.
+No NVIDIA GPU available? See **[Free GPU hosting](#free-gpu-hosting-no-hardware-needed)**
+below — you can run this on Kaggle/Colab's free GPUs instead.
 
 ## Setup
 
@@ -85,3 +84,34 @@ you have set up.
 No auth on any of these. If you expose this server beyond `localhost`, put
 it behind your own auth/reverse proxy — as written, anyone who can reach the
 port can queue generations and read uploaded files.
+
+## Free GPU hosting (no hardware needed)
+
+Don't own a GPU? **[`free_gpu_notebook.ipynb`](free_gpu_notebook.ipynb)** runs
+this exact server on a free Kaggle or Colab GPU and exposes it to your
+browser with a free Cloudflare quick tunnel (no ngrok account needed).
+
+Quick version:
+
+1. Upload `free_gpu_notebook.ipynb` to [kaggle.com/code](https://www.kaggle.com/code)
+   (New Notebook → File → Import Notebook) or [colab.research.google.com](https://colab.research.google.com).
+2. **Kaggle:** in the notebook's Settings panel, set Accelerator → **GPU T4 x2**
+   and Internet → **On**.
+   **Colab:** Runtime → Change runtime type → **T4 GPU**.
+3. Run every cell top to bottom. The last cell prints a `https://*.trycloudflare.com`
+   URL.
+4. Paste that URL into the studio app's **Settings → Free / Self-Hosted
+   Server URL**.
+
+Why Kaggle over the alternatives: it's the only free tier with a fixed,
+no-card, resets-every-week allowance (30 GPU-hours/week) rather than a
+shrinking promo credit (Modal, Lightning AI) or a quota too small for real
+use (Hugging Face Spaces ZeroGPU is ~5 min/day free). It's still not
+*unlimited* — treat it as "run a session, generate a batch, close it" rather
+than an always-on server, and expect a **new URL every time you restart**
+the notebook (update Settings again when that happens).
+
+This pattern (notebook + web server + tunnel) is a widely-used community
+workaround, not an officially documented supported use case on Kaggle/Colab
+— fine for personal, occasional use; don't expect it to hold up under
+heavy, continuous, or commercial traffic.

@@ -1,5 +1,8 @@
 # Cold Email Outreach Tool
 
+> Also in this repo: [`locklyrics/`](locklyrics/), a free macOS app that shows
+> word-synced lyrics on the lock screen. See its README.
+
 B2B outreach tool for home services agency prospecting (HVAC, roofing, garage
 doors, plumbing, electrical, pest control). Two stages: find public contact
 emails on prospect websites, then send templated outreach through rotating

@@ -125,6 +125,12 @@ public enum EmojiMap {
         "lover": "💑", "boyfriend": "💑", "girlfriend": "💑", "stranger": "🕵️", "hero": "🦸",
         "cowboy": "🤠", "robot": "🤖", "alien": "👽", "clown": "🤡",
 
+        // Time
+        "wait": "⏳", "waiting": "⏳", "minute": "🕐", "minutes": "🕐", "hour": "⌛", "hours": "⌛",
+        "second": "⏱️", "seconds": "⏱️", "moment": "⏱️", "today": "📅", "tomorrow": "📅",
+        "yesterday": "📅", "week": "📅", "year": "📅", "years": "📅", "late": "⏰", "early": "🌄",
+        "always": "♾️", "again": "🔁", "back": "↩️", "last": "🔚", "first": "🥇", "end": "🔚",
+
         // Misc
         "yes": "✅", "no": "❌", "never": "🚫", "okay": "👌", "ok": "👌", "one": "1️⃣", "two": "2️⃣",
         "three": "3️⃣", "hundred": "💯", "million": "💰", "zero": "0️⃣", "number": "🔢",

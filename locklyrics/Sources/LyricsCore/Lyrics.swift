@@ -43,6 +43,13 @@ public struct LyricLine: Sendable, Equatable {
     }
 }
 
+public enum Emphasis: Sendable, Equatable {
+    /// A colored box behind the word.
+    case highlight
+    /// An underline drawn across as the word is sung.
+    case underline
+}
+
 public struct Lyrics: Sendable, Equatable {
     public let lines: [LyricLine]
     /// True when the source had real per-word timestamps (enhanced LRC);
@@ -55,6 +62,10 @@ public struct Lyrics: Sendable, Equatable {
     public let rows: [Range<Int>]
     /// For each index in `words`, the index of its row in `rows`.
     public let rowOfWord: [Int]
+
+    /// Words picked for visual emphasis (a highlight box or an underline), one
+    /// per row at most; nil for ordinary words. Indexed like `words`.
+    public let emphasis: [Emphasis?]
 
     public static let maxWordsPerRow = 3
 
@@ -79,7 +90,39 @@ public struct Lyrics: Sendable, Equatable {
         }
         self.rows = rows
         self.rowOfWord = rowOfWord
+        self.emphasis = Self.pickEmphasis(words: words, rows: rows)
     }
+
+    /// In two rows out of three, emphasize the longest meaningful word
+    /// (alternating box / underline) so emphasis feels deliberate, not constant.
+    static func pickEmphasis(words: [LyricWord], rows: [Range<Int>]) -> [Emphasis?] {
+        var result = [Emphasis?](repeating: nil, count: words.count)
+        for (rowNumber, row) in rows.enumerated() {
+            let kind: Emphasis
+            switch rowNumber % 3 {
+            case 0: kind = .highlight
+            case 1: kind = .underline
+            default: continue
+            }
+            let candidates = row.compactMap { index -> (index: Int, length: Int)? in
+                let letters = words[index].text.lowercased().filter(\.isLetter)
+                guard letters.count >= 4, !stopWords.contains(letters) else { return nil }
+                return (index, letters.count)
+            }
+            if let best = candidates.max(by: { $0.length < $1.length }) {
+                result[best.index] = kind
+            }
+        }
+        return result
+    }
+
+    static let stopWords: Set<String> = [
+        "that", "this", "with", "from", "have", "what", "when", "your", "youre", "just", "they",
+        "them", "then", "than", "been", "were", "there", "their", "where", "would", "could",
+        "should", "about", "into", "because", "cause", "cuz", "gonna", "wanna", "gotta", "yeah",
+        "dont", "cant", "wont", "aint", "only", "some", "like", "know", "said", "these", "those",
+        "while", "which", "does", "will", "even", "every", "much", "very", "still", "also",
+    ]
 
     /// True during long pauses (intros, solos) when no word is being sung
     /// and the next one isn't imminent.

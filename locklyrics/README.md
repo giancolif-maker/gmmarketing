@@ -8,7 +8,9 @@ to [Verci](https://www.verci.xyz).
 - **Lyrics:** [LRCLIB](https://lrclib.net), a free, open lyrics database that needs no API key
 - **Styles:**
   - **Fisheye** (default): three words per line, with the line being sung large
-    in the middle and the lines around it shrinking, blurring and curving away
+    in the middle and the lines around it shrinking, blurring and curving away.
+    Small emoji sit beside matching words (wait ⏳, minute 🕐), and one key word
+    in most lines gets a highlight box or an underline drawn across as it's sung
   - **Words:** one huge word at a time, with the words just sung
     shrinking away above it and the next word waiting below in a highlight chip
   - **Words + emoji:** the same, with an emoji beside matching words (about 400 words mapped)

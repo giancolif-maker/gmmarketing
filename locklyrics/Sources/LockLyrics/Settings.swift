@@ -54,6 +54,8 @@ final class Settings: ObservableObject {
     @Published var offset: Double { didSet { defaults.set(offset, forKey: "offset") } }
     /// Opacity of the black backdrop behind the lyrics (0 = wallpaper shows through).
     @Published var backgroundOpacity: Double { didSet { defaults.set(backgroundOpacity, forKey: "backgroundOpacity") } }
+    /// Small emoji beside matching words in the Fisheye style.
+    @Published var showEmoji: Bool { didSet { defaults.set(showEmoji, forKey: "showEmoji") } }
     @Published var keepDisplayAwake: Bool { didSet { defaults.set(keepDisplayAwake, forKey: "keepDisplayAwake") } }
 
     private init() {
@@ -67,6 +69,7 @@ final class Settings: ObservableObject {
         verticalPosition = defaults.object(forKey: "verticalPosition") as? Double ?? 0.56
         offset = defaults.object(forKey: "offset") as? Double ?? 0.2
         backgroundOpacity = defaults.object(forKey: "backgroundOpacity") as? Double ?? 1
+        showEmoji = defaults.object(forKey: "showEmoji") as? Bool ?? true
         keepDisplayAwake = defaults.object(forKey: "keepDisplayAwake") as? Bool ?? true
     }
 

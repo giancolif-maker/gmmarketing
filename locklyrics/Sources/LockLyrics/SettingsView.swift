@@ -27,6 +27,7 @@ struct SettingsView: View {
                 LabeledContent("Vertical position") {
                     Slider(value: $settings.verticalPosition, in: 0.2...0.9)
                 }
+                Toggle("Emoji beside words (Fisheye)", isOn: $settings.showEmoji)
                 Toggle("Keep display awake while playing on the lock screen", isOn: $settings.keepDisplayAwake)
             }
 

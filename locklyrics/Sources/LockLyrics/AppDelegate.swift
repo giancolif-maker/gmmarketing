@@ -71,6 +71,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         menu.addItem(submenu("Show", showMenu))
 
+        let emoji = action("Show Emoji", #selector(toggleEmoji))
+        emoji.state = settings.showEmoji ? .on : .off
+        menu.addItem(emoji)
+
         let autoColors = action("Auto Sync Colors", #selector(toggleAutoColors))
         autoColors.state = settings.autoColors ? .on : .off
         menu.addItem(autoColors)
@@ -129,6 +133,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let raw = sender.representedObject as? String, let mode = DisplayMode(rawValue: raw) {
             settings.displayMode = mode
         }
+    }
+
+    @objc private func toggleEmoji() {
+        settings.showEmoji.toggle()
     }
 
     @objc private func toggleAutoColors() {

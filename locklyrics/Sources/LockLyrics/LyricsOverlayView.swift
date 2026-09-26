@@ -34,7 +34,8 @@ struct LyricsOverlayView: View {
             let index = lyrics.lineIndex(at: time)
             switch settings.style {
             case .fisheye:
-                FisheyeStyle(lyrics: lyrics, time: time, screen: size, palette: palette, scale: settings.textScale)
+                FisheyeStyle(lyrics: lyrics, time: time, screen: size, palette: palette,
+                             scale: settings.textScale, showEmoji: settings.showEmoji)
             case .words, .visual:
                 WordsStyle(lyrics: lyrics, time: time, screen: size, palette: palette,
                            scale: settings.textScale, showEmoji: settings.style == .visual)
@@ -318,6 +319,7 @@ struct FisheyeStyle: View {
     let screen: CGSize
     let palette: Palette
     let scale: Double
+    let showEmoji: Bool
 
     private var bigFont: Double { screen.height * 0.12 * scale }
     private let reach = 3
@@ -361,36 +363,113 @@ struct FisheyeStyle: View {
     private func rowView(_ row: Int, distance: Int, currentWord: Int?) -> some View {
         let isCurrent = distance == 0
         let magnitude = Double(abs(distance))
+        let indices = Array(lyrics.rows[row])
+        let emojis = indices.map { showEmoji ? EmojiMap.emoji(for: lyrics.words[$0].text) : nil }
 
-        var text = Text("")
-        for index in lyrics.rows[row] {
-            let word = lyrics.words[index]
-            let color: NSColor
-            if !isCurrent {
-                color = distance < 0 ? palette.lyric.withAlphaComponent(0.8) : palette.secondary
-            } else if let currentWord, index < currentWord {
-                color = palette.lyric
-            } else if index == currentWord {
-                color = palette.highlight
-            } else {
-                color = palette.lyric.withAlphaComponent(0.35)
+        // Shrink long rows to fit the screen (black-weight glyphs average ~0.62 em).
+        let characters = indices.reduce(0) { $0 + lyrics.words[$1].text.count + 1 }
+        let emojiCount = emojis.compactMap { $0 }.count
+        let fitted = (screen.width * 0.86) / (0.62 * Double(characters) + 0.8 * Double(emojiCount))
+        let fontSize = min(bigFont, fitted)
+
+        return HStack(spacing: fontSize * 0.28) {
+            ForEach(Array(indices.enumerated()), id: \.element) { position, index in
+                FisheyeWord(
+                    text: lyrics.words[index].text,
+                    color: wordColor(index, isCurrent: isCurrent, distance: distance, currentWord: currentWord),
+                    emoji: emojis[position],
+                    emphasis: lyrics.emphasis[index],
+                    emphasisProgress: emphasisProgress(index, distance: distance, currentWord: currentWord),
+                    palette: palette,
+                    fontSize: fontSize
+                )
             }
-            let spacer = index == lyrics.rows[row].lowerBound ? "" : " "
-            text = text + Text(spacer + word.text).foregroundColor(Color(nsColor: color))
         }
+        .fixedSize()
+        .shadow(color: Color(nsColor: palette.highlight).opacity(isCurrent ? 0.45 : 0), radius: bigFont * 0.25)
+        .scaleEffect(lensScale(distance))
+        .rotation3DEffect(.degrees(Double(distance) * -9), axis: (x: 1, y: 0, z: 0), perspective: 0.5)
+        .blur(radius: magnitude * 1.8)
+        .opacity(1 - magnitude * 0.22)
+        .offset(y: lensOffset(distance))
+        .transition(.opacity)
+    }
 
-        return text
-            .font(.system(size: bigFont, weight: .black))
-            .lineLimit(1)
-            .minimumScaleFactor(0.35)
-            .frame(maxWidth: screen.width * 0.9)
-            .shadow(color: Color(nsColor: palette.highlight).opacity(isCurrent ? 0.55 : 0), radius: bigFont * 0.25)
-            .scaleEffect(lensScale(distance))
-            .rotation3DEffect(.degrees(Double(distance) * -9), axis: (x: 1, y: 0, z: 0), perspective: 0.5)
-            .blur(radius: magnitude * 1.8)
-            .opacity(1 - magnitude * 0.22)
-            .offset(y: lensOffset(distance))
-            .transition(.opacity)
+    private func wordColor(_ index: Int, isCurrent: Bool, distance: Int, currentWord: Int?) -> NSColor {
+        if !isCurrent {
+            return distance < 0 ? palette.lyric.withAlphaComponent(0.8) : palette.secondary
+        }
+        guard let currentWord else { return palette.lyric.withAlphaComponent(0.35) }
+        if index < currentWord { return palette.lyric }
+        if index == currentWord { return palette.highlight }
+        return palette.lyric.withAlphaComponent(0.35)
+    }
+
+    /// 0 until the word is sung, then grows to 1 across the word — drives the
+    /// box fading in and the underline drawing across.
+    private func emphasisProgress(_ index: Int, distance: Int, currentWord: Int?) -> Double {
+        if distance < 0 { return 1 }
+        if distance > 0 { return 0 }
+        guard let currentWord, index <= currentWord else { return 0 }
+        let word = lyrics.words[index]
+        return min(1, (time - word.start) / max(min(word.end - word.start, 0.6), 0.15))
+    }
+}
+
+/// One word in a Fisheye row, with its optional emoji and emphasis.
+private struct FisheyeWord: View {
+    let text: String
+    let color: NSColor
+    let emoji: String?
+    let emphasis: Emphasis?
+    let emphasisProgress: Double
+    let palette: Palette
+    let fontSize: Double
+
+    var body: some View {
+        let boxed = emphasis == .highlight
+        let underlined = emphasis == .underline
+        let progress = min(max(emphasisProgress, 0), 1)
+
+        HStack(spacing: fontSize * 0.12) {
+            Text(text)
+                .font(.system(size: fontSize, weight: .black))
+                .foregroundStyle(Color(nsColor: boxed && progress > 0.4 ? chipTextColor : color))
+                .padding(.horizontal, boxed ? fontSize * 0.14 : 0)
+                .background(
+                    RoundedRectangle(cornerRadius: fontSize * 0.14, style: .continuous)
+                        .fill(Color(nsColor: palette.highlight))
+                        .scaleEffect(x: 0.85 + 0.15 * progress, y: 1)
+                        .opacity(boxed ? progress : 0)
+                )
+                .overlay(alignment: .bottomLeading) {
+                    if underlined {
+                        GeometryReader { geometry in
+                            Capsule()
+                                .fill(Color(nsColor: palette.highlight))
+                                .frame(width: geometry.size.width * progress, height: fontSize * 0.09)
+                                .frame(maxHeight: .infinity, alignment: .bottom)
+                                .offset(y: fontSize * 0.1)
+                        }
+                    }
+                }
+            if let emoji {
+                Text(emoji)
+                    .font(.system(size: fontSize * 0.5))
+                    .opacity(emojiOpacity)
+            }
+        }
+    }
+
+    /// Emoji are "slight": faint until their word is reached.
+    private var emojiOpacity: Double {
+        color.alphaComponent < 0.5 ? 0.35 : 0.9
+    }
+
+    private var chipTextColor: NSColor {
+        let c = palette.highlight.usingColorSpace(.sRGB) ?? palette.highlight
+        let luminance = 0.2126 * c.redComponent + 0.7152 * c.greenComponent + 0.0722 * c.blueComponent
+        return luminance > 0.6 ? NSColor(white: 0.08, alpha: 1) : .white
     }
 }
 #endif

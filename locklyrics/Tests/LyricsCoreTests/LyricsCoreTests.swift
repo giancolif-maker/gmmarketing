@@ -103,6 +103,18 @@ final class LRCParserTests: XCTestCase {
         XCTAssertEqual(lyrics.rowOfWord, [0, 0, 0, 1, 1, 2, 2, 3, 3])
     }
 
+    func testEmphasisPicksLongestMeaningfulWordPerRow() throws {
+        let lyrics = try XCTUnwrap(LRCParser.parse("""
+        [00:01.00]wait another minute
+        [00:04.00]I'm stunning tonight
+        [00:07.00]with you
+        [00:09.00]dancing forever alone
+        """))
+        let marked = lyrics.words.indices.compactMap { i in lyrics.emphasis[i].map { (lyrics.words[i].text, $0) } }
+        XCTAssertEqual(marked.map(\.0), ["another", "stunning", "dancing"])
+        XCTAssertEqual(marked.map(\.1), [.highlight, .underline, .highlight])
+    }
+
     func testInstrumentalGap() throws {
         let lyrics = try XCTUnwrap(LRCParser.parse("[00:10.00]hello there\n[00:40.00]back again"))
         XCTAssertTrue(lyrics.isInstrumentalGap(at: 2))     // long intro
@@ -151,6 +163,8 @@ final class EmojiMapTests: XCTestCase {
         XCTAssertEqual(EmojiMap.emoji(for: "cried"), "😢")
         XCTAssertEqual(EmojiMap.emoji(for: "stars"), "✨")
         XCTAssertEqual(EmojiMap.emoji(for: "moon’s"), "🌙")
+        XCTAssertEqual(EmojiMap.emoji(for: "wait"), "⏳")
+        XCTAssertEqual(EmojiMap.emoji(for: "minute"), "🕐")
         XCTAssertNil(EmojiMap.emoji(for: "the"))
         XCTAssertNil(EmojiMap.emoji(for: "..."))
     }

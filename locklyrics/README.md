@@ -17,8 +17,11 @@ to [Verci](https://www.verci.xyz).
   - **Lines:** previous, current and next line
   - **Drift:** a receding 3D wall
   - **Lens:** fisheye-style magnify and blur
-- **Colors:** red on black by default. Pick lyric, highlight and secondary colors
-  yourself, or turn on **Auto Sync** to take them from the album artwork
+- **Colorways:** ten presets in the menu bar under **Colors**: Red Noir (default),
+  Ice Blue (blue text, white highlights), Midnight, Classic, Neon, Lime, Sunset,
+  Purple Haze, Gold and Mint. You can also set any of the four colors
+  (background, lyric, highlight, secondary) yourself in Settings, or turn on
+  **Auto Sync** to take them from the album artwork
 - **Background:** a black backdrop behind the lyrics, adjustable from solid black
   to see-through (**Background darkness** in Settings)
 - **Show on:** lock screen only, or always (as a click-through desktop overlay)

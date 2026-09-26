@@ -28,6 +28,29 @@ enum DisplayMode: String, CaseIterable, Identifiable {
     }
 }
 
+/// A preset color scheme: background, lyric text, highlight and dim text.
+struct Colorway: Identifiable, Equatable {
+    let name: String
+    let background: String
+    let lyric: String
+    let highlight: String
+    let secondary: String
+    var id: String { name }
+
+    static let all: [Colorway] = [
+        Colorway(name: "Red Noir", background: "#000000", lyric: "#D93A32", highlight: "#FF3B30", secondary: "#7A1F1B"),
+        Colorway(name: "Ice Blue", background: "#000000", lyric: "#3D8BFF", highlight: "#FFFFFF", secondary: "#1E4A8C"),
+        Colorway(name: "Midnight", background: "#050A1F", lyric: "#7FA7FF", highlight: "#FFFFFF", secondary: "#34457A"),
+        Colorway(name: "Classic", background: "#000000", lyric: "#E6E6E6", highlight: "#FFD60A", secondary: "#6E6E6E"),
+        Colorway(name: "Neon", background: "#000000", lyric: "#FF4FD8", highlight: "#00F0FF", secondary: "#7A2466"),
+        Colorway(name: "Lime", background: "#000000", lyric: "#9DFF3C", highlight: "#FFFFFF", secondary: "#3F6B18"),
+        Colorway(name: "Sunset", background: "#140504", lyric: "#FF8A3D", highlight: "#FFE14D", secondary: "#7A3A1A"),
+        Colorway(name: "Purple Haze", background: "#0A0012", lyric: "#B388FF", highlight: "#FF6EC7", secondary: "#4B2A7A"),
+        Colorway(name: "Gold", background: "#000000", lyric: "#D4AF37", highlight: "#FFFFFF", secondary: "#6B5A1E"),
+        Colorway(name: "Mint", background: "#001410", lyric: "#3DFFC5", highlight: "#FFFFFF", secondary: "#1B6B55"),
+    ]
+}
+
 struct Palette: Equatable {
     var lyric: NSColor
     var highlight: NSColor
@@ -53,6 +76,7 @@ final class Settings: ObservableObject {
     /// Seconds added to the player position (positive = lyrics earlier).
     @Published var offset: Double { didSet { defaults.set(offset, forKey: "offset") } }
     /// Opacity of the black backdrop behind the lyrics (0 = wallpaper shows through).
+    @Published var backgroundHex: String { didSet { defaults.set(backgroundHex, forKey: "backgroundHex") } }
     @Published var backgroundOpacity: Double { didSet { defaults.set(backgroundOpacity, forKey: "backgroundOpacity") } }
     /// Small emoji beside matching words in the Fisheye style.
     @Published var showEmoji: Bool { didSet { defaults.set(showEmoji, forKey: "showEmoji") } }
@@ -68,10 +92,29 @@ final class Settings: ObservableObject {
         textScale = defaults.object(forKey: "textScale") as? Double ?? 1
         verticalPosition = defaults.object(forKey: "verticalPosition") as? Double ?? 0.56
         offset = defaults.object(forKey: "offset") as? Double ?? 0.2
+        backgroundHex = defaults.string(forKey: "backgroundHex") ?? "#000000"
         backgroundOpacity = defaults.object(forKey: "backgroundOpacity") as? Double ?? 1
         showEmoji = defaults.object(forKey: "showEmoji") as? Bool ?? true
         keepDisplayAwake = defaults.object(forKey: "keepDisplayAwake") as? Bool ?? true
     }
+
+    /// The preset matching the current colors, or nil if they've been customized.
+    var colorway: Colorway? {
+        Colorway.all.first {
+            $0.background == backgroundHex && $0.lyric == lyricHex
+                && $0.highlight == highlightHex && $0.secondary == secondaryHex
+        }
+    }
+
+    func apply(_ colorway: Colorway) {
+        backgroundHex = colorway.background
+        lyricHex = colorway.lyric
+        highlightHex = colorway.highlight
+        secondaryHex = colorway.secondary
+        autoColors = false
+    }
+
+    var backgroundColor: NSColor { NSColor(hex: backgroundHex) ?? .black }
 
     var manualPalette: Palette {
         Palette(

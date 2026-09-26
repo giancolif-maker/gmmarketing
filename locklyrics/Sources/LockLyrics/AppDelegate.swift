@@ -75,9 +75,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         emoji.state = settings.showEmoji ? .on : .off
         menu.addItem(emoji)
 
-        let autoColors = action("Auto Sync Colors", #selector(toggleAutoColors))
+        let colorMenu = NSMenu()
+        for colorway in Colorway.all {
+            let item = action(colorway.name, #selector(chooseColorway(_:)))
+            item.representedObject = colorway.name
+            item.state = !settings.autoColors && settings.colorway == colorway ? .on : .off
+            item.image = swatch(colorway)
+            colorMenu.addItem(item)
+        }
+        colorMenu.addItem(.separator())
+        let autoColors = action("Auto Sync from Album Art", #selector(toggleAutoColors))
         autoColors.state = settings.autoColors ? .on : .off
-        menu.addItem(autoColors)
+        colorMenu.addItem(autoColors)
+        colorMenu.addItem(action("Custom Colors…", #selector(openSettings)))
+        menu.addItem(submenu("Colors", colorMenu))
 
         menu.addItem(.separator())
         menu.addItem(action("Hide Lyrics (Esc)", #selector(hideLyrics)))
@@ -138,6 +149,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func toggleEmoji() {
         settings.showEmoji.toggle()
+    }
+
+    @objc private func chooseColorway(_ sender: NSMenuItem) {
+        if let name = sender.representedObject as? String,
+           let colorway = Colorway.all.first(where: { $0.name == name }) {
+            settings.apply(colorway)
+        }
+    }
+
+    /// A little preview of a colorway: background with lyric and highlight dots.
+    private func swatch(_ colorway: Colorway) -> NSImage {
+        NSImage(size: NSSize(width: 28, height: 14), flipped: false) { rect in
+            (NSColor(hex: colorway.background) ?? .black).setFill()
+            NSBezierPath(roundedRect: rect, xRadius: 3, yRadius: 3).fill()
+            NSColor(white: 0.5, alpha: 0.6).setStroke()
+            NSBezierPath(roundedRect: rect.insetBy(dx: 0.5, dy: 0.5), xRadius: 3, yRadius: 3).stroke()
+            (NSColor(hex: colorway.lyric) ?? .white).setFill()
+            NSBezierPath(ovalIn: NSRect(x: 4, y: 3, width: 8, height: 8)).fill()
+            (NSColor(hex: colorway.highlight) ?? .white).setFill()
+            NSBezierPath(ovalIn: NSRect(x: 16, y: 3, width: 8, height: 8)).fill()
+            return true
+        }
     }
 
     @objc private func toggleAutoColors() {

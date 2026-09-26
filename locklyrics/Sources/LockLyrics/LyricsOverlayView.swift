@@ -15,7 +15,7 @@ struct LyricsOverlayView: View {
         GeometryReader { geometry in
             ZStack {
                 // Black backdrop so the lyrics hit hard instead of fighting the wallpaper.
-                Color.black.opacity(settings.backgroundOpacity)
+                Color(nsColor: settings.backgroundColor).opacity(settings.backgroundOpacity)
                 TimelineView(.animation(minimumInterval: 1.0 / 30)) { timeline in
                     let time = state.position(at: timeline.date) + settings.offset
                     content(time: time, size: geometry.size)

@@ -32,7 +32,12 @@ struct SettingsView: View {
             }
 
             Section("Colors") {
+                Picker("Colorway", selection: colorwayBinding) {
+                    ForEach(Colorway.all) { Text($0.name).tag($0.name) }
+                    Text("Custom").tag("")
+                }
                 Toggle("Auto Sync colors from album artwork", isOn: $settings.autoColors)
+                ColorPicker("Background", selection: color(\.backgroundHex), supportsOpacity: false)
                 Group {
                     ColorPicker("Lyric", selection: color(\.lyricHex), supportsOpacity: false)
                     ColorPicker("Highlight", selection: color(\.highlightHex), supportsOpacity: false)
@@ -65,6 +70,15 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: 460)
         .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var colorwayBinding: Binding<String> {
+        Binding(
+            get: { settings.autoColors ? "" : settings.colorway?.name ?? "" },
+            set: { name in
+                if let colorway = Colorway.all.first(where: { $0.name == name }) { settings.apply(colorway) }
+            }
+        )
     }
 
     private func color(_ keyPath: ReferenceWritableKeyPath<Settings, String>) -> Binding<Color> {

@@ -50,11 +50,44 @@ public struct Lyrics: Sendable, Equatable {
     public let isWordSynced: Bool
     /// Every word of every line, in order — for word-at-a-time display.
     public let words: [LyricWord]
+    /// Lines re-broken into short rows (ranges into `words`) of at most
+    /// `maxWordsPerRow` words, never spanning two lyric lines.
+    public let rows: [Range<Int>]
+    /// For each index in `words`, the index of its row in `rows`.
+    public let rowOfWord: [Int]
+
+    public static let maxWordsPerRow = 3
 
     public init(lines: [LyricLine], isWordSynced: Bool) {
         self.lines = lines
         self.isWordSynced = isWordSynced
         self.words = lines.flatMap(\.words)
+
+        var rows: [Range<Int>] = []
+        var rowOfWord: [Int] = []
+        var cursor = 0
+        for line in lines where !line.words.isEmpty {
+            // Balance the rows: 7 words -> 3/2/2 rather than 3/3/1.
+            let count = line.words.count
+            let rowCount = (count + Self.maxWordsPerRow - 1) / Self.maxWordsPerRow
+            for row in 0..<rowCount {
+                let size = count / rowCount + (row < count % rowCount ? 1 : 0)
+                rowOfWord += Array(repeating: rows.count, count: size)
+                rows.append(cursor..<(cursor + size))
+                cursor += size
+            }
+        }
+        self.rows = rows
+        self.rowOfWord = rowOfWord
+    }
+
+    /// True during long pauses (intros, solos) when no word is being sung
+    /// and the next one isn't imminent.
+    public func isInstrumentalGap(at time: Double) -> Bool {
+        guard !words.isEmpty else { return true }
+        guard let current = wordIndex(at: time) else { return words[0].start - time > 4 }
+        let nextStart = current + 1 < words.count ? words[current + 1].start : .infinity
+        return time > words[current].end + 2 && nextStart - time > 1
     }
 
     /// Index into `words` of the last word that has started at `time`.

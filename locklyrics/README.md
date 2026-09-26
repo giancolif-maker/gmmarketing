@@ -7,14 +7,18 @@ to [Verci](https://www.verci.xyz).
 - **Players:** Spotify and Apple Music (read via AppleScript, only while they're running)
 - **Lyrics:** [LRCLIB](https://lrclib.net), a free, open lyrics database that needs no API key
 - **Styles:**
-  - **Words** (default): one huge word at a time, with the words just sung
+  - **Fisheye** (default): three words per line, with the line being sung large
+    in the middle and the lines around it shrinking, blurring and curving away
+  - **Words:** one huge word at a time, with the words just sung
     shrinking away above it and the next word waiting below in a highlight chip
   - **Words + emoji:** the same, with an emoji beside matching words (about 400 words mapped)
   - **Lines:** previous, current and next line
   - **Drift:** a receding 3D wall
   - **Lens:** fisheye-style magnify and blur
-- **Colors:** pick lyric, highlight and secondary colors yourself, or turn on
-  **Auto Sync** to take them from the album artwork
+- **Colors:** red on black by default. Pick lyric, highlight and secondary colors
+  yourself, or turn on **Auto Sync** to take them from the album artwork
+- **Background:** a black backdrop behind the lyrics, adjustable from solid black
+  to see-through (**Background darkness** in Settings)
 - **Show on:** lock screen only, or always (as a click-through desktop overlay)
 - **Stays lit:** keeps the display awake while lyrics play on the lock screen
 - Lyrics offset, text size, position, launch at login, and a 10-second desktop preview

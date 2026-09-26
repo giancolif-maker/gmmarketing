@@ -3,10 +3,11 @@ import AppKit
 import SwiftUI
 
 enum LyricStyle: String, CaseIterable, Identifiable {
-    case words, visual, stack, drift, lens
+    case fisheye, words, visual, stack, drift, lens
     var id: String { rawValue }
     var title: String {
         switch self {
+        case .fisheye: "Fisheye (3 words per line)"
         case .words: "Words (big, one at a time)"
         case .visual: "Words + emoji"
         case .stack: "Lines"
@@ -51,18 +52,21 @@ final class Settings: ObservableObject {
     @Published var verticalPosition: Double { didSet { defaults.set(verticalPosition, forKey: "verticalPosition") } }
     /// Seconds added to the player position (positive = lyrics earlier).
     @Published var offset: Double { didSet { defaults.set(offset, forKey: "offset") } }
+    /// Opacity of the black backdrop behind the lyrics (0 = wallpaper shows through).
+    @Published var backgroundOpacity: Double { didSet { defaults.set(backgroundOpacity, forKey: "backgroundOpacity") } }
     @Published var keepDisplayAwake: Bool { didSet { defaults.set(keepDisplayAwake, forKey: "keepDisplayAwake") } }
 
     private init() {
-        style = LyricStyle(rawValue: defaults.string(forKey: "style") ?? "") ?? .words
+        style = LyricStyle(rawValue: defaults.string(forKey: "style") ?? "") ?? .fisheye
         displayMode = DisplayMode(rawValue: defaults.string(forKey: "displayMode") ?? "") ?? .lockScreenOnly
-        autoColors = defaults.object(forKey: "autoColors") as? Bool ?? true
-        lyricHex = defaults.string(forKey: "lyricHex") ?? "#FFFFFF"
-        highlightHex = defaults.string(forKey: "highlightHex") ?? "#FF4F79"
-        secondaryHex = defaults.string(forKey: "secondaryHex") ?? "#B8B8C0"
+        autoColors = defaults.object(forKey: "autoColors") as? Bool ?? false
+        lyricHex = defaults.string(forKey: "lyricHex") ?? "#D93A32"
+        highlightHex = defaults.string(forKey: "highlightHex") ?? "#FF3B30"
+        secondaryHex = defaults.string(forKey: "secondaryHex") ?? "#7A1F1B"
         textScale = defaults.object(forKey: "textScale") as? Double ?? 1
         verticalPosition = defaults.object(forKey: "verticalPosition") as? Double ?? 0.56
         offset = defaults.object(forKey: "offset") as? Double ?? 0.2
+        backgroundOpacity = defaults.object(forKey: "backgroundOpacity") as? Double ?? 1
         keepDisplayAwake = defaults.object(forKey: "keepDisplayAwake") as? Bool ?? true
     }
 

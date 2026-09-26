@@ -21,6 +21,9 @@ struct SettingsView: View {
                 LabeledContent("Text size") {
                     Slider(value: $settings.textScale, in: 0.5...1.6)
                 }
+                LabeledContent("Background darkness") {
+                    Slider(value: $settings.backgroundOpacity, in: 0...1)
+                }
                 LabeledContent("Vertical position") {
                     Slider(value: $settings.verticalPosition, in: 0.2...0.9)
                 }

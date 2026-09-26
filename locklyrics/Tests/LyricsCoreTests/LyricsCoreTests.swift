@@ -93,6 +93,25 @@ final class LRCParserTests: XCTestCase {
         XCTAssertEqual(lyrics.wordIndex(at: 100), 3)
     }
 
+    func testRowsBalanceAndStayWithinLines() throws {
+        let lyrics = try XCTUnwrap(LRCParser.parse("""
+        [00:01.00]one two three four five six seven
+        [00:05.00]
+        [00:08.00]eight nine
+        """))
+        XCTAssertEqual(lyrics.rows, [0..<3, 3..<5, 5..<7, 7..<9])
+        XCTAssertEqual(lyrics.rowOfWord, [0, 0, 0, 1, 1, 2, 2, 3, 3])
+    }
+
+    func testInstrumentalGap() throws {
+        let lyrics = try XCTUnwrap(LRCParser.parse("[00:10.00]hello there\n[00:40.00]back again"))
+        XCTAssertTrue(lyrics.isInstrumentalGap(at: 2))     // long intro
+        XCTAssertFalse(lyrics.isInstrumentalGap(at: 7))    // first word imminent
+        XCTAssertFalse(lyrics.isInstrumentalGap(at: 10.5)) // singing
+        XCTAssertTrue(lyrics.isInstrumentalGap(at: 25))    // mid-song break
+        XCTAssertFalse(lyrics.isInstrumentalGap(at: 39.5)) // about to resume
+    }
+
     func testGarbageReturnsNil() {
         XCTAssertNil(LRCParser.parse("just some plain lyrics\nwith no timestamps"))
     }

@@ -13,11 +13,15 @@ struct LyricsOverlayView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            TimelineView(.animation(minimumInterval: 1.0 / 30)) { timeline in
-                let time = state.position(at: timeline.date) + settings.offset
-                content(time: time, size: geometry.size)
-                    .frame(maxWidth: geometry.size.width * 0.9)
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * settings.verticalPosition)
+            ZStack {
+                // Black backdrop so the lyrics hit hard instead of fighting the wallpaper.
+                Color.black.opacity(settings.backgroundOpacity)
+                TimelineView(.animation(minimumInterval: 1.0 / 30)) { timeline in
+                    let time = state.position(at: timeline.date) + settings.offset
+                    content(time: time, size: geometry.size)
+                        .frame(maxWidth: geometry.size.width * 0.9)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height * settings.verticalPosition)
+                }
             }
         }
         .ignoresSafeArea()
@@ -29,6 +33,8 @@ struct LyricsOverlayView: View {
         if let lyrics = state.lyrics {
             let index = lyrics.lineIndex(at: time)
             switch settings.style {
+            case .fisheye:
+                FisheyeStyle(lyrics: lyrics, time: time, screen: size, palette: palette, scale: settings.textScale)
             case .words, .visual:
                 WordsStyle(lyrics: lyrics, time: time, screen: size, palette: palette,
                            scale: settings.textScale, showEmoji: settings.style == .visual)
@@ -243,7 +249,7 @@ struct WordsStyle: View {
 
     var body: some View {
         let current = lyrics.wordIndex(at: time)
-        let showNotes = isInstrumentalGap(current)
+        let showNotes = lyrics.isInstrumentalGap(at: time)
         ZStack {
             if showNotes {
                 notes
@@ -257,14 +263,6 @@ struct WordsStyle: View {
         .frame(width: screen.width * 0.9)
         .animation(.spring(response: 0.42, dampingFraction: 0.78), value: current)
         .animation(.easeInOut(duration: 0.4), value: showNotes)
-    }
-
-    /// Long pauses (intros, solos) show pulsing notes instead of a stale word.
-    private func isInstrumentalGap(_ current: Int?) -> Bool {
-        guard !lyrics.words.isEmpty else { return true }
-        guard let current else { return lyrics.words[0].start - time > 4 }
-        let nextStart = current + 1 < lyrics.words.count ? lyrics.words[current + 1].start : .infinity
-        return time > lyrics.words[current].end + 2 && nextStart - time > 1
     }
 
     private func word(_ index: Int, relative: Int) -> some View {
@@ -310,6 +308,89 @@ struct WordsStyle: View {
             .foregroundStyle(Color(nsColor: palette.lyric))
             .opacity(0.45 + 0.4 * sin(time * 3))
             .legibleShadow()
+    }
+}
+/// Lyrics broken into rows of up to three words. The row being sung is large in
+/// the middle; rows above and below shrink, blur and curve away like a fisheye lens.
+struct FisheyeStyle: View {
+    let lyrics: Lyrics
+    let time: Double
+    let screen: CGSize
+    let palette: Palette
+    let scale: Double
+
+    private var bigFont: Double { screen.height * 0.12 * scale }
+    private let reach = 3
+
+    private func lensScale(_ distance: Int) -> Double { 1 / (1 + 0.6 * Double(abs(distance))) }
+
+    /// Vertical center of a row `distance` rows away, stacking the shrunken rows edge to edge.
+    private func lensOffset(_ distance: Int) -> Double {
+        let rowHeight = bigFont * 1.2
+        var y = 0.0
+        for step in stride(from: 1, through: abs(distance), by: 1) {
+            y += rowHeight * (lensScale(step - 1) + lensScale(step)) / 2 + bigFont * 0.08
+        }
+        return distance < 0 ? -y : y
+    }
+
+    var body: some View {
+        let currentWord = lyrics.wordIndex(at: time)
+        let center = currentWord.map { lyrics.rowOfWord[$0] } ?? -1
+        let showNotes = lyrics.isInstrumentalGap(at: time)
+        let low = max(0, center - reach)
+        let high = min(lyrics.rows.count - 1, center + reach)
+
+        ZStack {
+            if showNotes || lyrics.rows.isEmpty {
+                Text("♪  ♪  ♪")
+                    .font(.system(size: bigFont * 0.6, weight: .bold))
+                    .foregroundStyle(Color(nsColor: palette.highlight))
+                    .opacity(0.45 + 0.4 * sin(time * 3))
+            } else if low <= high {
+                ForEach(Array(low...high), id: \.self) { row in
+                    rowView(row, distance: row - center, currentWord: currentWord)
+                }
+            }
+        }
+        .frame(width: screen.width * 0.9)
+        .animation(.spring(response: 0.5, dampingFraction: 0.82), value: center)
+        .animation(.easeInOut(duration: 0.4), value: showNotes)
+    }
+
+    private func rowView(_ row: Int, distance: Int, currentWord: Int?) -> some View {
+        let isCurrent = distance == 0
+        let magnitude = Double(abs(distance))
+
+        var text = Text("")
+        for index in lyrics.rows[row] {
+            let word = lyrics.words[index]
+            let color: NSColor
+            if !isCurrent {
+                color = distance < 0 ? palette.lyric.withAlphaComponent(0.8) : palette.secondary
+            } else if let currentWord, index < currentWord {
+                color = palette.lyric
+            } else if index == currentWord {
+                color = palette.highlight
+            } else {
+                color = palette.lyric.withAlphaComponent(0.35)
+            }
+            let spacer = index == lyrics.rows[row].lowerBound ? "" : " "
+            text = text + Text(spacer + word.text).foregroundColor(Color(nsColor: color))
+        }
+
+        return text
+            .font(.system(size: bigFont, weight: .black))
+            .lineLimit(1)
+            .minimumScaleFactor(0.35)
+            .frame(maxWidth: screen.width * 0.9)
+            .shadow(color: Color(nsColor: palette.highlight).opacity(isCurrent ? 0.55 : 0), radius: bigFont * 0.25)
+            .scaleEffect(lensScale(distance))
+            .rotation3DEffect(.degrees(Double(distance) * -9), axis: (x: 1, y: 0, z: 0), perspective: 0.5)
+            .blur(radius: magnitude * 1.8)
+            .opacity(1 - magnitude * 0.22)
+            .offset(y: lensOffset(distance))
+            .transition(.opacity)
     }
 }
 #endif

@@ -15,8 +15,8 @@ struct LyricsOverlayView: View {
         GeometryReader { geometry in
             TimelineView(.animation(minimumInterval: 1.0 / 30)) { timeline in
                 let time = state.position(at: timeline.date) + settings.offset
-                content(time: time)
-                    .frame(maxWidth: geometry.size.width * 0.8)
+                content(time: time, size: geometry.size)
+                    .frame(maxWidth: geometry.size.width * 0.9)
                     .position(x: geometry.size.width / 2, y: geometry.size.height * settings.verticalPosition)
             }
         }
@@ -24,20 +24,23 @@ struct LyricsOverlayView: View {
     }
 
     @ViewBuilder
-    private func content(time: Double) -> some View {
+    private func content(time: Double, size: CGSize) -> some View {
+        let renderer = LineRenderer(palette: palette, fontSize: size.height * 0.07 * settings.textScale)
         if let lyrics = state.lyrics {
             let index = lyrics.lineIndex(at: time)
             switch settings.style {
+            case .words, .visual:
+                WordsStyle(lyrics: lyrics, time: time, screen: size, palette: palette,
+                           scale: settings.textScale, showEmoji: settings.style == .visual)
             case .stack: StackStyle(lyrics: lyrics, index: index, time: time, renderer: renderer)
             case .drift: DriftStyle(lyrics: lyrics, index: index, time: time, renderer: renderer)
             case .lens: LensStyle(lyrics: lyrics, index: index, time: time, renderer: renderer)
-            case .visual: VisualStyle(lyrics: lyrics, index: index, time: time, renderer: renderer)
             }
         } else {
             Text(placeholder)
-                .font(.system(size: settings.fontSize * 0.6, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color(nsColor: palette.secondary))
-                .shadow(color: .black.opacity(0.4), radius: 8)
+                .font(renderer.font(scale: 0.6))
+                .foregroundStyle(Color(nsColor: palette.lyric))
+                .legibleShadow()
                 .multilineTextAlignment(.center)
         }
     }
@@ -50,9 +53,13 @@ struct LyricsOverlayView: View {
         case .idle, .found: return track.title
         }
     }
+}
 
-    private var renderer: LineRenderer {
-        LineRenderer(palette: palette, fontSize: settings.fontSize)
+extension View {
+    /// Soft dark halo plus a tight shadow so text reads on bright wallpapers.
+    func legibleShadow(_ strength: Double = 1) -> some View {
+        shadow(color: .black.opacity(0.55 * strength), radius: 18)
+            .shadow(color: .black.opacity(0.35 * strength), radius: 3, y: 1)
     }
 }
 
@@ -88,7 +95,7 @@ struct LineRenderer {
             .multilineTextAlignment(.center)
             .lineLimit(3)
             .minimumScaleFactor(0.5)
-            .shadow(color: .black.opacity(0.45), radius: 10, y: 2)
+            .legibleShadow()
             .fixedSize(horizontal: false, vertical: true)
     }
 
@@ -212,42 +219,97 @@ struct LensStyle: View {
     }
 }
 
-/// Stack style plus an emoji that pops in beside the words it matches.
-struct VisualStyle: View {
+/// One big word at a time: the word being sung fills the screen, the words just
+/// sung shrink away above it, and the next word waits below in a highlight chip.
+struct WordsStyle: View {
     let lyrics: Lyrics
-    let index: Int?
     let time: Double
-    let renderer: LineRenderer
+    let screen: CGSize
+    let palette: Palette
+    let scale: Double
+    let showEmoji: Bool
 
-    /// The most recent word in the current line (up to now) that has an emoji.
-    private var currentEmoji: (key: String, emoji: String)? {
-        guard let index else { return nil }
-        let line = lyrics.lines[index]
-        guard let wordIndex = line.wordIndex(at: time) else { return nil }
-        for i in stride(from: wordIndex, through: 0, by: -1) {
-            if let emoji = EmojiMap.emoji(for: line.words[i].text) {
-                return ("\(index)-\(i)", emoji)
-            }
+    private var bigFont: Double { screen.height * 0.16 * scale }
+
+    /// Where a word sits relative to the current one (y is a fraction of screen height).
+    private func slot(_ relative: Int) -> (y: Double, scale: Double, opacity: Double) {
+        switch relative {
+        case ...(-2): (-0.24, 0.28, 0.35)
+        case -1: (-0.155, 0.42, 0.75)
+        case 0: (0, 1, 1)
+        default: (0.155, 0.4, 0.95)
         }
-        return nil
     }
 
     var body: some View {
-        let emoji = currentEmoji
-        HStack(spacing: renderer.fontSize * 0.5) {
-            StackStyle(lyrics: lyrics, index: index, time: time, renderer: renderer)
-            ZStack {
-                if let emoji {
-                    Text(emoji.emoji)
-                        .font(.system(size: renderer.fontSize * 1.6))
-                        .shadow(color: .black.opacity(0.3), radius: 8)
-                        .id(emoji.key)
-                        .transition(.scale(scale: 0.2).combined(with: .opacity))
+        let current = lyrics.wordIndex(at: time)
+        let showNotes = isInstrumentalGap(current)
+        ZStack {
+            if showNotes {
+                notes
+            } else {
+                let center = current ?? -1
+                ForEach(Array(max(0, center - 2)...min(lyrics.words.count - 1, center + 1)), id: \.self) { index in
+                    word(index, relative: index - center)
                 }
             }
-            .frame(width: renderer.fontSize * 2)
-            .animation(.spring(response: 0.35, dampingFraction: 0.6), value: emoji?.key)
         }
+        .frame(width: screen.width * 0.9)
+        .animation(.spring(response: 0.42, dampingFraction: 0.78), value: current)
+        .animation(.easeInOut(duration: 0.4), value: showNotes)
+    }
+
+    /// Long pauses (intros, solos) show pulsing notes instead of a stale word.
+    private func isInstrumentalGap(_ current: Int?) -> Bool {
+        guard !lyrics.words.isEmpty else { return true }
+        guard let current else { return lyrics.words[0].start - time > 4 }
+        let nextStart = current + 1 < lyrics.words.count ? lyrics.words[current + 1].start : .infinity
+        return time > lyrics.words[current].end + 2 && nextStart - time > 1
+    }
+
+    private func word(_ index: Int, relative: Int) -> some View {
+        let word = lyrics.words[index]
+        let place = slot(relative)
+        let isNext = relative >= 1
+        let textColor: NSColor = relative == 0 ? palette.highlight : isNext ? chipTextColor : palette.lyric
+
+        return HStack(spacing: bigFont * 0.12) {
+            Text(word.text)
+                .foregroundStyle(Color(nsColor: textColor))
+            if showEmoji, let emoji = EmojiMap.emoji(for: word.text) {
+                Text(emoji).font(.system(size: bigFont * 0.55))
+            }
+        }
+        .font(.system(size: bigFont, weight: .black))
+        .lineLimit(1)
+        .minimumScaleFactor(0.3)
+        .padding(.horizontal, bigFont * 0.16)
+        .background(
+            RoundedRectangle(cornerRadius: bigFont * 0.14, style: .continuous)
+                .fill(Color(nsColor: palette.highlight))
+                .opacity(isNext ? 1 : 0)
+        )
+        .frame(maxWidth: screen.width * 0.9)
+        .legibleShadow(isNext ? 0.4 : 1)
+        .scaleEffect(place.scale)
+        .opacity(place.opacity)
+        .offset(y: place.y * screen.height * scale)
+        .transition(.opacity)
+    }
+
+    /// Dark text on light highlight colors, white on dark ones.
+    private var chipTextColor: NSColor {
+        let c = palette.highlight.usingColorSpace(.sRGB) ?? palette.highlight
+        let luminance = 0.2126 * c.redComponent + 0.7152 * c.greenComponent + 0.0722 * c.blueComponent
+        return luminance > 0.6 ? NSColor(white: 0.08, alpha: 1) : .white
+    }
+
+    private var notes: some View {
+        Text("♪  ♪  ♪")
+            .font(.system(size: bigFont * 0.45, weight: .bold))
+            .foregroundStyle(Color(nsColor: palette.lyric))
+            .opacity(0.45 + 0.4 * sin(time * 3))
+            .legibleShadow()
     }
 }
 #endif

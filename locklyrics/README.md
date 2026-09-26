@@ -7,10 +7,12 @@ to [Verci](https://www.verci.xyz).
 - **Players:** Spotify and Apple Music (read via AppleScript, only while they're running)
 - **Lyrics:** [LRCLIB](https://lrclib.net), a free, open lyrics database that needs no API key
 - **Styles:**
-  - **Stack:** previous, current and next line
+  - **Words** (default): one huge word at a time, with the words just sung
+    shrinking away above it and the next word waiting below in a highlight chip
+  - **Words + emoji:** the same, with an emoji beside matching words (about 400 words mapped)
+  - **Lines:** previous, current and next line
   - **Drift:** a receding 3D wall
   - **Lens:** fisheye-style magnify and blur
-  - **Visual:** an emoji pops in beside matching words (about 400 words mapped)
 - **Colors:** pick lyric, highlight and secondary colors yourself, or turn on
   **Auto Sync** to take them from the album artwork
 - **Show on:** lock screen only, or always (as a click-through desktop overlay)
@@ -50,7 +52,7 @@ System Settings → Privacy & Security.
 | LRCLIB lookup (exact match, then fuzzy search with cleaned titles) | `Sources/LyricsCore/LRCLibClient.swift` |
 | Lock-screen window (private SkyLight API) | `Sources/LockLyrics/SkyLight.swift` |
 | Overlay window, visibility, display-awake assertion | `Sources/LockLyrics/OverlayController.swift` |
-| The four display styles | `Sources/LockLyrics/LyricsOverlayView.swift` |
+| The display styles | `Sources/LockLyrics/LyricsOverlayView.swift` |
 | Album-art palette | `Sources/LockLyrics/PaletteExtractor.swift` |
 
 **Word timing.** When LRCLIB has word-level tags (enhanced LRC), those are used
@@ -81,4 +83,4 @@ LOCKLYRICS_NETWORK_TESTS=1 swift test   # also hits the real LRCLIB API
 - Lyrics come from the community LRCLIB database, so word-level timing is
   usually estimated rather than exact, and some tracks have no synced lyrics.
 - The Lens style uses SwiftUI scale and blur, not a Metal shader.
-- The Visual style uses emoji only, not SF Symbols.
+- The Words + emoji style uses emoji only, not SF Symbols.

@@ -19,7 +19,7 @@ struct SettingsView: View {
                     ForEach(DisplayMode.allCases) { Text($0.title).tag($0) }
                 }
                 LabeledContent("Text size") {
-                    Slider(value: $settings.fontSize, in: 24...96)
+                    Slider(value: $settings.textScale, in: 0.5...1.6)
                 }
                 LabeledContent("Vertical position") {
                     Slider(value: $settings.verticalPosition, in: 0.2...0.9)

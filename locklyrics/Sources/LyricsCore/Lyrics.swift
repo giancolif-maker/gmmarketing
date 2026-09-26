@@ -48,10 +48,30 @@ public struct Lyrics: Sendable, Equatable {
     /// True when the source had real per-word timestamps (enhanced LRC);
     /// false when word timing was estimated from line timestamps.
     public let isWordSynced: Bool
+    /// Every word of every line, in order — for word-at-a-time display.
+    public let words: [LyricWord]
 
     public init(lines: [LyricLine], isWordSynced: Bool) {
         self.lines = lines
         self.isWordSynced = isWordSynced
+        self.words = lines.flatMap(\.words)
+    }
+
+    /// Index into `words` of the last word that has started at `time`.
+    public func wordIndex(at time: Double) -> Int? {
+        var low = 0
+        var high = words.count - 1
+        var found: Int?
+        while low <= high {
+            let mid = (low + high) / 2
+            if words[mid].start <= time {
+                found = mid
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return found
     }
 
     /// Index of the line being sung at `time` (last line whose start <= time).

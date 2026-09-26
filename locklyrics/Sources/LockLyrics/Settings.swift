@@ -3,14 +3,15 @@ import AppKit
 import SwiftUI
 
 enum LyricStyle: String, CaseIterable, Identifiable {
-    case stack, drift, lens, visual
+    case words, visual, stack, drift, lens
     var id: String { rawValue }
     var title: String {
         switch self {
-        case .stack: "Stack"
+        case .words: "Words (big, one at a time)"
+        case .visual: "Words + emoji"
+        case .stack: "Lines"
         case .drift: "Drift (3D wall)"
         case .lens: "Lens"
-        case .visual: "Visual (emoji)"
         }
     }
 }
@@ -44,7 +45,8 @@ final class Settings: ObservableObject {
     @Published var lyricHex: String { didSet { defaults.set(lyricHex, forKey: "lyricHex") } }
     @Published var highlightHex: String { didSet { defaults.set(highlightHex, forKey: "highlightHex") } }
     @Published var secondaryHex: String { didSet { defaults.set(secondaryHex, forKey: "secondaryHex") } }
-    @Published var fontSize: Double { didSet { defaults.set(fontSize, forKey: "fontSize") } }
+    /// Multiplier on the screen-relative text size.
+    @Published var textScale: Double { didSet { defaults.set(textScale, forKey: "textScale") } }
     /// 0 = top of screen, 1 = bottom.
     @Published var verticalPosition: Double { didSet { defaults.set(verticalPosition, forKey: "verticalPosition") } }
     /// Seconds added to the player position (positive = lyrics earlier).
@@ -52,14 +54,14 @@ final class Settings: ObservableObject {
     @Published var keepDisplayAwake: Bool { didSet { defaults.set(keepDisplayAwake, forKey: "keepDisplayAwake") } }
 
     private init() {
-        style = LyricStyle(rawValue: defaults.string(forKey: "style") ?? "") ?? .stack
+        style = LyricStyle(rawValue: defaults.string(forKey: "style") ?? "") ?? .words
         displayMode = DisplayMode(rawValue: defaults.string(forKey: "displayMode") ?? "") ?? .lockScreenOnly
         autoColors = defaults.object(forKey: "autoColors") as? Bool ?? true
         lyricHex = defaults.string(forKey: "lyricHex") ?? "#FFFFFF"
-        highlightHex = defaults.string(forKey: "highlightHex") ?? "#FFD60A"
+        highlightHex = defaults.string(forKey: "highlightHex") ?? "#FF4F79"
         secondaryHex = defaults.string(forKey: "secondaryHex") ?? "#B8B8C0"
-        fontSize = defaults.object(forKey: "fontSize") as? Double ?? 44
-        verticalPosition = defaults.object(forKey: "verticalPosition") as? Double ?? 0.62
+        textScale = defaults.object(forKey: "textScale") as? Double ?? 1
+        verticalPosition = defaults.object(forKey: "verticalPosition") as? Double ?? 0.56
         offset = defaults.object(forKey: "offset") as? Double ?? 0.2
         keepDisplayAwake = defaults.object(forKey: "keepDisplayAwake") as? Bool ?? true
     }

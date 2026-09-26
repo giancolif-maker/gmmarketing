@@ -85,6 +85,12 @@ final class LRCParserTests: XCTestCase {
         XCTAssertEqual(lyrics.lines[0].wordIndex(at: 1.01), 0)
         XCTAssertEqual(lyrics.lines[0].wordIndex(at: 4.9), 1)
         XCTAssertNil(lyrics.lines[0].wordIndex(at: 0.9))
+
+        XCTAssertEqual(lyrics.words.map(\.text), ["one", "two", "three", "four"])
+        XCTAssertNil(lyrics.wordIndex(at: 0.5))
+        XCTAssertEqual(lyrics.wordIndex(at: 1.01), 0)
+        XCTAssertEqual(lyrics.wordIndex(at: 5.5), 2)
+        XCTAssertEqual(lyrics.wordIndex(at: 100), 3)
     }
 
     func testGarbageReturnsNil() {

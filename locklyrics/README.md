@@ -23,6 +23,8 @@ to [Verci](https://www.verci.xyz).
   to see-through (**Background darkness** in Settings)
 - **Show on:** lock screen only, or always (as a click-through desktop overlay)
 - **Stays lit:** keeps the display awake while lyrics play on the lock screen
+- **Esc hides the lyrics** until the next song starts or you lock again (also
+  **Hide Lyrics** in the menu). Esc is only captured while lyrics are on screen
 - Lyrics offset, text size, position, launch at login, and a 10-second desktop preview
 
 Requires macOS 14 (Sonoma) or later.

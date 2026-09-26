@@ -31,6 +31,7 @@ final class OverlayController {
     private var cancellables: Set<AnyCancellable> = []
     private var displayAssertion: IOPMAssertionID = 0
     private var isShown = false
+    private var escapeHotKey: EscapeHotKey?
 
     /// False if the lock-screen private API is unavailable on this macOS version.
     private(set) var lockScreenSupported = false
@@ -46,6 +47,7 @@ final class OverlayController {
         window.alphaValue = 0
         window.orderFrontRegardless()
         lockScreenSupported = SkyLight.moveToLockScreen(window)
+        escapeHotKey = EscapeHotKey { [weak state] in state?.dismiss() }
 
         Publishers.Merge(state.objectWillChange, settings.objectWillChange)
             .receive(on: DispatchQueue.main)  // objectWillChange fires before the new value is set
@@ -64,7 +66,8 @@ final class OverlayController {
     private func update() {
         let hasSomethingToShow = state.lyrics != nil && state.isPlaying
         let placeAllowed = settings.displayMode == .always || state.isLocked
-        let shouldShow = state.isPreviewing || (hasSomethingToShow && placeAllowed)
+        let shouldShow = !state.isDismissed && (state.isPreviewing || (hasSomethingToShow && placeAllowed))
+        escapeHotKey?.isEnabled = shouldShow
 
         if shouldShow != isShown {
             isShown = shouldShow

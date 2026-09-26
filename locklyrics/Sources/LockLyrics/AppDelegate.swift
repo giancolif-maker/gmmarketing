@@ -80,6 +80,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(autoColors)
 
         menu.addItem(.separator())
+        menu.addItem(action("Hide Lyrics (Esc)", #selector(hideLyrics)))
         menu.addItem(action("Preview on Desktop", #selector(preview)))
         menu.addItem(action("Settings…", #selector(openSettings), key: ","))
         menu.addItem(.separator())
@@ -141,6 +142,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func toggleAutoColors() {
         settings.autoColors.toggle()
+    }
+
+    @objc private func hideLyrics() {
+        state.dismiss()
     }
 
     @objc private func preview() {

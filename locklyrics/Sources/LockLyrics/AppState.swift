@@ -16,6 +16,8 @@ final class AppState: ObservableObject {
     @Published private(set) var artworkPalette: Palette?
     @Published private(set) var isLocked = false
     @Published private(set) var isPreviewing = false
+    /// Set by Esc / "Hide Lyrics"; cleared by the next track or the next lock.
+    @Published private(set) var isDismissed = false
     @Published private(set) var permissionProblem: PlayerApp?
 
     private let reader = PlayerReader()
@@ -46,6 +48,7 @@ final class AppState: ObservableObject {
         tasks.append(Task { [weak self] in
             for await _ in center.notifications(named: .init("com.apple.screenIsLocked")) {
                 self?.isLocked = true
+                self?.isDismissed = false
             }
         })
         tasks.append(Task { [weak self] in
@@ -58,12 +61,20 @@ final class AppState: ObservableObject {
     /// Show the overlay on the desktop for a few seconds so settings can be tried out.
     func preview(seconds: Double = 10) {
         previewTask?.cancel()
+        isDismissed = false
         isPreviewing = true
         previewTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(seconds))
             guard !Task.isCancelled else { return }
             self?.isPreviewing = false
         }
+    }
+
+    /// Hide the lyrics until the next song starts or the screen is locked again.
+    func dismiss() {
+        previewTask?.cancel()
+        isPreviewing = false
+        isDismissed = true
     }
 
     private func poll() {
@@ -102,6 +113,7 @@ final class AppState: ObservableObject {
 
     private func trackChanged(to snapshot: PlayerSnapshot) {
         trackTask?.cancel()
+        isDismissed = false
         lyrics = nil
         lyricsStatus = .loading
         artworkPalette = nil

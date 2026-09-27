@@ -16,7 +16,7 @@ import {
   MODEL,
   type Attempt,
 } from "../src/lib/pantry/ai-pipeline.server";
-import { parseTypedIngredients } from "../src/lib/pantry/ingredients";
+import { parseTypedIngredients, sameIngredient } from "../src/lib/pantry/ingredients";
 import {
   recipesRequestSchema,
   type Ingredient,
@@ -206,6 +206,18 @@ async function runCase(dir: string, id: string): Promise<CaseResult> {
         );
       } else if (!ingredients.length) problems.push("zero ingredients detected");
       if (d.attempts > 1) problems.push(`detection needed ${d.attempts} attempts`);
+      // absent.txt: items the tester confirmed are NOT in the kitchen but a model might "see"
+      const absentText = readIf(dir, "absent.txt");
+      const absent = absentText === null ? null : parseExpected(absentText);
+      if (absentText !== null && absent === null)
+        problems.push("absent.txt still contains PLACEHOLDER text");
+      const seenAbsent = (absent ?? [])
+        .filter((a) => ingredients.some((i) => sameIngredient(i.name, a.name)))
+        .map((a) => a.name);
+      if (seenAbsent.length)
+        problems.push(
+          `detected ${seenAbsent.length} item(s) listed in absent.txt as NOT present: ${seenAbsent.join(", ")}`,
+        );
       // Worst case on purpose: the tester taps "Confirm all" without fixing anything, so
       // every detected item (right or wrong) counts as confirmed.
       if (ingredients.length)

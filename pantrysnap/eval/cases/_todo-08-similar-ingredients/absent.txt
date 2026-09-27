@@ -1,0 +1,5 @@
+PLACEHOLDER — replace this whole file, or delete it if you have nothing to list.
+# Optional. Items you have checked are NOT in the kitchen but that a model might plausibly
+# "see" here (e.g. "milk" when there is only oat milk, "chicken" when it is tofu, "butter"
+# next to a yellow tub of margarine). One per line. Written BEFORE running the evaluation.
+# If PantrySnap detects any of these, the report flags it.

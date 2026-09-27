@@ -42,6 +42,8 @@ npm run build
 
 ## Real testing setup
 
+Deployment (Vercel), live database status and the phone test checklist: see [`DEPLOY.md`](DEPLOY.md).
+
 ### 1. Environment variables
 
 | Variable                                             | Where                                  | Secret? | Used for                                                                 |

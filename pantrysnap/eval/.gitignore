@@ -1,4 +1,9 @@
+# Real photos and results stay on your machine (privacy). Templates are tracked.
+results/
+cases/**/*.jpg
+cases/**/*.jpeg
+cases/**/*.png
+cases/**/*.webp
+cases/**/*.heic
+cases/**/*.heif
 report.md
-*.jpg
-*.jpeg
-!cases/.gitkeep

@@ -115,9 +115,37 @@ const DETECT_PROMPT = [
   'If no food is visible, respond with {"ingredients":[]}.',
 ].join(" ");
 
+/** One model call. Recorded so evaluations can see every retry, never just the final outcome. */
+export type Attempt = {
+  ms: number;
+  outcome: "ok" | ErrorCode;
+  detail?: string;
+  /** Recipes only: how many parsed, and which failed verification (with reason). */
+  parsed?: number;
+  rejected?: Array<{ name: string; reason: RejectReason }>;
+};
+
 export type DetectOutcome =
-  | { ok: true; ingredients: Ingredient[]; attempts: number; ms: number }
-  | { ok: false; code: ErrorCode; attempts: number; ms: number };
+  | { ok: true; ingredients: Ingredient[]; attempts: number; ms: number; trace: Attempt[] }
+  | { ok: false; code: ErrorCode; attempts: number; ms: number; trace: Attempt[] };
+
+/** Minimal authenticated call to confirm the key and gateway work (used by the evaluation). */
+export async function checkGateway(): Promise<
+  { ok: true; ms: number } | { ok: false; code: ErrorCode; detail: string }
+> {
+  const started = Date.now();
+  try {
+    await callModel(
+      [{ type: "text", text: 'Respond with JSON only: {"ok":true}' }],
+      undefined,
+      20_000,
+    );
+    return { ok: true, ms: Date.now() - started };
+  } catch (error) {
+    const e = error instanceof AiError ? error : new AiError("UNKNOWN", false, String(error));
+    return { ok: false, code: e.code, detail: e.detail };
+  }
+}
 
 /** Images must already be validated/sanitized JPEG data URLs. */
 export async function detectFromImages(
@@ -132,21 +160,30 @@ export async function detectFromImages(
   let lastCode: ErrorCode = "AI_BAD_RESPONSE";
   let imageRejected = false;
   let attempts = 0;
+  const trace: Attempt[] = [];
   while (attempts < 2) {
     const remaining = DETECT_BUDGET_MS - (Date.now() - started);
     if (attempts > 0 && remaining < MIN_RETRY_MS) break;
     attempts++;
+    const attemptStart = Date.now();
     try {
       const text = await callModel(content, signal, Math.min(DETECT_ATTEMPT_MS, remaining));
       const parsed = parseDetection(text);
       if (parsed.ok) {
         const ingredients = normalizeIngredients(parsed.value);
-        return { ok: true, ingredients, attempts, ms: Date.now() - started };
+        trace.push({ ms: Date.now() - attemptStart, outcome: "ok" });
+        return { ok: true, ingredients, attempts, ms: Date.now() - started, trace };
       }
       lastCode = "AI_BAD_RESPONSE";
+      trace.push({
+        ms: Date.now() - attemptStart,
+        outcome: lastCode,
+        detail: "unparseable output",
+      });
     } catch (error) {
       const e = error instanceof AiError ? error : new AiError("UNKNOWN");
       lastCode = e.code;
+      trace.push({ ms: Date.now() - attemptStart, outcome: e.code, detail: e.detail });
       // A 400 from the gateway on a vision call almost always means an unreadable image.
       imageRejected = e.detail === "status 400";
       log("ai.detect_attempt_failed", { attempt: attempts, code: e.code, detail: e.detail });
@@ -158,6 +195,7 @@ export async function detectFromImages(
     code: imageRejected ? "INVALID_IMAGE" : lastCode,
     attempts,
     ms: Date.now() - started,
+    trace,
   };
 }
 
@@ -231,8 +269,16 @@ export type RecipesOutcome =
       attempts: number;
       rejected: RejectReason[];
       ms: number;
+      trace: Attempt[];
     }
-  | { ok: false; code: ErrorCode; attempts: number; rejected: RejectReason[]; ms: number };
+  | {
+      ok: false;
+      code: ErrorCode;
+      attempts: number;
+      rejected: RejectReason[];
+      ms: number;
+      trace: Attempt[];
+    };
 
 /** Generates recipes and keeps only those that pass independent verification. */
 export async function generateVerifiedRecipes(
@@ -258,10 +304,12 @@ export async function generateVerifiedRecipes(
   let lastCode: ErrorCode = "NO_RECIPES";
   let attempts = 0;
   const rejectedAll: RejectReason[] = [];
+  const trace: Attempt[] = [];
   while (attempts < 2) {
     const remaining = RECIPES_BUDGET_MS - (Date.now() - started);
     if (attempts > 0 && remaining < MIN_RETRY_MS) break;
     attempts++;
+    const attemptStart = Date.now();
     let raw: RawRecipe[];
     try {
       const text = await callModel(
@@ -272,12 +320,18 @@ export async function generateVerifiedRecipes(
       const parsed = parseRecipes(text);
       if (!parsed.ok) {
         lastCode = "AI_BAD_RESPONSE";
+        trace.push({
+          ms: Date.now() - attemptStart,
+          outcome: lastCode,
+          detail: "unparseable output",
+        });
         continue;
       }
       raw = parsed.value;
     } catch (error) {
       const e = error instanceof AiError ? error : new AiError("UNKNOWN");
       lastCode = e.code;
+      trace.push({ ms: Date.now() - attemptStart, outcome: e.code, detail: e.detail });
       log("ai.recipes_attempt_failed", { attempt: attempts, code: e.code, detail: e.detail });
       if (!e.retriable) break;
       continue;
@@ -285,8 +339,15 @@ export async function generateVerifiedRecipes(
 
     const { recipes, rejected } = validateRecipes(raw, constraints);
     rejectedAll.push(...rejected.map((r) => r.reason));
+    trace.push({
+      ms: Date.now() - attemptStart,
+      outcome: recipes.length > 0 ? "ok" : "NO_RECIPES",
+      parsed: raw.length,
+      rejected,
+    });
     if (recipes.length > 0) {
       return {
+        trace,
         ok: true,
         recipes,
         excluded: exclusions.map((e) => e.label),
@@ -301,5 +362,12 @@ export async function generateVerifiedRecipes(
       ? `Your previous suggestions were rejected because they ${reasons.join(" or ")}. Follow every constraint strictly.`
       : "";
   }
-  return { ok: false, code: lastCode, attempts, rejected: rejectedAll, ms: Date.now() - started };
+  return {
+    ok: false,
+    code: lastCode,
+    attempts,
+    rejected: rejectedAll,
+    ms: Date.now() - started,
+    trace,
+  };
 }

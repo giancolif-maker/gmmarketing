@@ -1,0 +1,11 @@
+{
+  "servings": 2,
+  "maxMinutes": "30",
+  "mealType": "Dinner",
+  "diet": "None",
+  "highProtein": true,
+  "spicy": false,
+  "kidFriendly": false,
+  "cuisine": "Any",
+  "note": "no mushrooms"
+}

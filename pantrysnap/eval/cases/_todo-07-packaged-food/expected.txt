@@ -1,0 +1,5 @@
+PLACEHOLDER — replace this whole file with the ingredients that are ACTUALLY in your photo.
+# One ingredient per line, generic names (e.g. "eggs", "cheddar cheese", "greek yogurt").
+# List everything a person could reasonably cook with, even if hard to see.
+# Mark hard-to-see items with [hard] — they still count toward recall.
+# Lines starting with # are ignored.

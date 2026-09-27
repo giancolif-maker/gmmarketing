@@ -5,5 +5,5 @@ import { defineConfig } from "vitest/config";
 // which unit tests of pure modules don't need.
 export default defineConfig({
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
-  test: { include: ["src/**/*.test.ts"], environment: "node" },
+  test: { include: ["src/**/*.test.ts", "eval/**/*.test.ts"], environment: "node" },
 });

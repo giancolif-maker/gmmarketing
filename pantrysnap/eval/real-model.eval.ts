@@ -206,8 +206,17 @@ async function runCase(dir: string, id: string): Promise<CaseResult> {
         );
       } else if (!ingredients.length) problems.push("zero ingredients detected");
       if (d.attempts > 1) problems.push(`detection needed ${d.attempts} attempts`);
+      // Worst case on purpose: the tester taps "Confirm all" without fixing anything, so
+      // every detected item (right or wrong) counts as confirmed.
       if (ingredients.length)
-        result.runs.push(await runRecipes("scan", ingredients, request, truth));
+        result.runs.push(
+          await runRecipes(
+            "scan",
+            ingredients.map((i) => ({ ...i, confirmed: true })),
+            request,
+            truth,
+          ),
+        );
     }
   }
   if (typedText !== null) {
@@ -250,8 +259,9 @@ const list = (items: string[]) => (items.length ? items.map(esc).join(", ") : "â
 const csv = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 
 function claimText(r: Recipe) {
-  if (r.everythingOnHand) return "Everything on hand";
+  if (r.everythingOnHand) return "Everything on your confirmed list";
   if (r.missing.length) return `Need: ${r.missing.join(", ")}`;
+  if (r.unconfirmed.length) return `Check you have: ${r.unconfirmed.join(", ")}`;
   return "Check amounts";
 }
 
@@ -330,7 +340,7 @@ function renderReport(
     `| Items shown as "need" that were actually there | ${finalRecipes.reduce((a, x) => a + x.audit.wronglyMissing.length, 0)} |`,
   );
   L.push(
-    `\nScan runs use the *uncorrected* detected list, i.e. what happens if the user does not fix mistakes. Ground truth is expected.txt. The check is limited to ingredients the recipe lists or that the step scanner recognises; a human must still read the steps.`,
+    `\nScan runs use the *uncorrected* detected list with every item treated as confirmed, i.e. a user who taps "Confirm all" without fixing mistakes (the worst case; in the app, unconfirmed scanned items never count as on hand). Ground truth is expected.txt. The check is limited to ingredients the recipe lists or that the step scanner recognises; a human must still read the steps.`,
   );
 
   L.push(`\n## Pipeline`);

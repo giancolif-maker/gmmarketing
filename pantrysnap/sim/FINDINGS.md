@@ -1,5 +1,19 @@
 # Adversarial simulation — findings
 
+> **Status after the trust fixes (commit after `ef5c005`):** sections 1–10 below describe the
+> code *as it was* when the simulation first ran. Re-running `npm run sim` on the fixed code:
+>
+> - Scanned items now arrive **unconfirmed**; a recipe relying on one is never shown as complete
+>   ("Check you have: …"). False claims with scanned items left unconfirmed: **0** in every
+>   class. If the user taps "Confirm all" without fixing mistakes, the old worst case still
+>   applies (D 51, E 50, L 17, M 51, N 20, O 30 false claims) — the claim is now worded
+>   "Everything on your confirmed list", which is what it actually verifies.
+> - Matcher: dangerous must-not matches **10 → 0**; must-match misses 2 → 1 (salad leaves).
+> - Attacks handled safely: verification 13 → 17/20, constraints 12 → 20/20, hostile 6 → 14/15.
+>   Still failing (deliberately not fixed in this phase): V05 serving capacity (8 eggs for 2),
+>   V12 amount "4 eggs, beaten", V14 "family of four", H01 vague item "sauce".
+> - Latency L18/L21 (charged, then lost when the usage read fails) now return the result.
+
 Synthetic data only. The simulation shows how the **current code** behaves under controlled
 failure conditions. It does not measure real vision accuracy, recipe desirability, or human
 behaviour. Raw tables: `results/SIMULATION_DATA.md`.

@@ -31,9 +31,9 @@ describe("parseDetection", () => {
     expect(r).toEqual({
       ok: true,
       value: [
-        { name: "Eggs", quantity: "6" },
-        { name: "spinach", quantity: "" },
-        { name: "b milk /b", quantity: "" },
+        { name: "Eggs", quantity: "6", confirmed: false },
+        { name: "spinach", quantity: "", confirmed: false },
+        { name: "b milk /b", quantity: "", confirmed: false },
       ],
     });
   });

@@ -87,7 +87,15 @@ function trustExperiment() {
     edits: number[];
     examples: string[];
   };
-  const policies = ["uncorrected", "fully corrected"] as const;
+  // "left unconfirmed": user fixes nothing and confirms nothing (scanned items stay unconfirmed);
+  // "confirmed unchecked": user taps "Confirm all" without fixing anything (worst case);
+  // "fully corrected": user fixes the list to ground truth.
+  const policies = ["left unconfirmed", "confirmed unchecked", "fully corrected"] as const;
+  const POLICY_LABEL: Record<(typeof policies)[number], string> = {
+    "left unconfirmed": "(unconfirmed)",
+    "confirmed unchecked": "(confirm all)",
+    "fully corrected": "(fixed)",
+  };
   const table: Record<string, Record<string, Row>> = {};
   for (const cls of Object.keys(ERROR_CLASSES) as ErrorClass[]) {
     table[cls] = {};
@@ -119,7 +127,7 @@ function trustExperiment() {
         row.runs++;
         const detected = normalizeIngredients(det.detected);
         const truth = truthList(k);
-        if (pol === "uncorrected")
+        if (pol === "confirmed unchecked")
           row.edits.push(
             (() => {
               const s = scoreDetection(
@@ -129,11 +137,16 @@ function trustExperiment() {
               return s.falsePositives.length + s.falseNegatives.length;
             })(),
           );
-        if (pol === "uncorrected" && detected.length === 0) {
+        if (pol !== "fully corrected" && detected.length === 0) {
           row.fallback++;
           continue;
         } // app forces the typed fallback
-        const confirmed = pol === "uncorrected" ? detected : truth;
+        const confirmed =
+          pol === "fully corrected"
+            ? truth
+            : pol === "left unconfirmed"
+              ? detected.map((i) => ({ ...i, confirmed: false }))
+              : detected;
         const focus =
           det.injected
             .find((i) => i.detected)
@@ -177,7 +190,7 @@ function trustExperiment() {
   data["trust"] = table;
   L.push(`## 1. Trust experiment — vision error class × correction`);
   L.push(
-    `52 synthetic kitchens × 15 injected error classes. The simulated recipe model only uses the confirmed list (like the real prompt). "Uncorrected" = user confirms the detected list as-is; "fully corrected" = user fixes it to ground truth. These are bounds, not predictions of real user behaviour.\n`,
+    `52 synthetic kitchens × 15 injected error classes. The simulated recipe model only uses the list it is given (like the real prompt). Three review policies: "unconfirmed" = user fixes and confirms nothing (scanned items stay marked unconfirmed); "confirm all" = user taps "Confirm all" without fixing anything (worst case); "fixed" = user fixes the list to ground truth. These are bounds, not predictions of real user behaviour.\n`,
   );
   L.push(
     `Recipe 1 of each run deliberately uses the injected item (worst case), so the absolute counts reflect the design. The meaningful figure is the **conditional** one: of the recipes that used an item that isn't really there, how many were still shown as "Everything on hand".\n`,
@@ -193,13 +206,19 @@ function trustExperiment() {
         ? [...r.edits].sort((a, b) => a - b)[Math.floor(r.edits.length / 2)]
         : "";
       L.push(
-        `| ${cls} ${pol === "fully corrected" ? "(fixed)" : ""} | ${pol === "uncorrected" ? label : "…after full correction"} | ${r.runs}/${r.runs + r.na} | ${r.shown} | ${r.eoh} | **${r.falseEoh}** | ${r.usingWrong ? `${r.usingWrongEoh}/${r.usingWrong}` : "—"} | ${r.onlyWrong ? `**${r.onlyWrongEoh}/${r.onlyWrong}**` : "—"} | ${r.wronglyMissing} | ${r.noRecipes} | ${r.fallback} | ${med} |`,
+        `| ${cls} ${POLICY_LABEL[pol]} | ${pol === "left unconfirmed" ? label : "…same error"} | ${r.runs}/${r.runs + r.na} | ${r.shown} | ${r.eoh} | **${r.falseEoh}** | ${r.usingWrong ? `${r.usingWrongEoh}/${r.usingWrong}` : "—"} | ${r.onlyWrong ? `**${r.onlyWrongEoh}/${r.onlyWrong}**` : "—"} | ${r.wronglyMissing} | ${r.noRecipes} | ${r.fallback} | ${med} |`,
       );
     }
   }
-  L.push(`\n**False-claim examples (uncorrected):**`);
+  const total = (pol: (typeof policies)[number]) =>
+    Object.values(table).reduce((a, r) => a + r[pol]!.falseEoh, 0);
+  L.push(
+    `\nFalse "Everything on your confirmed list" when scanned items are left unconfirmed: **${total("left unconfirmed")}**`,
+  );
+  L.push(`\n**False-claim examples (confirm all without checking):**`);
   for (const [cls] of Object.entries(ERROR_CLASSES))
-    for (const ex of table[cls]!["uncorrected"]!.examples.slice(0, 2)) L.push(`- ${cls}: ${ex}`);
+    for (const ex of table[cls]!["confirmed unchecked"]!.examples.slice(0, 2))
+      L.push(`- ${cls}: ${ex}`);
   const fixed = Object.values(table).reduce((a, r) => a + r["fully corrected"]!.falseEoh, 0);
   L.push(
     `\nFalse "Everything on hand" after full correction (verifier/matcher self-consistency): **${fixed}**`,
@@ -245,7 +264,7 @@ function runAttack(a: Attack) {
         problems.push(`"${m}" not reported missing`);
   }
   const outcome = r.ok
-    ? `accepted · ${r.recipe.everythingOnHand ? "Everything on hand" : `need: ${r.recipe.missing.join(", ") || "(amount check)"}`} · ${r.recipe.totalMinutes}${r.recipe.totalMinutesUpper ? `–${r.recipe.totalMinutesUpper}` : ""} min`
+    ? `accepted · ${r.recipe.everythingOnHand ? "Everything on your confirmed list" : `need: ${r.recipe.missing.join(", ") || "(amount check)"}`} · ${r.recipe.totalMinutes}${r.recipe.totalMinutesUpper ? `–${r.recipe.totalMinutesUpper}` : ""} min`
     : `rejected: ${r.reason}`;
   return { a, outcome, problems, exclusions: c.exclusions.map((e) => e.label) };
 }
@@ -371,6 +390,8 @@ function personas() {
     const detected = normalizeIngredients(det.detected);
     const truth = truthList(k);
     const s = scoreDetection(detected, parseExpected(k.truth.map((t) => t.name).join("\n"))!);
+    // careful: fixes the list; skims: removes salient wrong proteins, then "Confirm all";
+    // none: moves on without touching the list (scanned items stay unconfirmed).
     const confirmed =
       pa.review === "careful"
         ? truth
@@ -380,7 +401,7 @@ function personas() {
                 !s.falsePositives.includes(d.name) ||
                 !/chicken|beef|salmon|bacon|shrimp|pork|tofu/.test(d.name),
             )
-          : detected;
+          : detected.map((d) => ({ ...d, confirmed: false }));
     const { note, ...prefs } = pa.prefs;
     const c = (inv: Ingredient[]) =>
       constraints(inv, { ...prefs, exclusions: parseExclusions(note ?? "") });

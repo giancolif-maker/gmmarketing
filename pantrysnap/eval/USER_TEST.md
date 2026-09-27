@@ -37,7 +37,7 @@ normally decide dinner. 30–40 minutes each.
 - Input mode chosen first, and why (their words).
 - Taps/time: start → ingredient list shown → recipes shown → recipe chosen (stopwatch).
 - Ingredient corrections made (count) and **errors they did not notice** (check the kitchen).
-- Whether any "Everything on hand" claim was wrong for them.
+- Whether any "Everything on your confirmed list" claim was wrong for them, and whether they noticed and confirmed (✓) or fixed the scanned items marked "from your photo".
 - Moments of confusion or hesitation (quote them).
 - Recipe chosen, and whether they'd cook it (YES/MAYBE/NO).
 - Did they cook it (next-day follow-up).

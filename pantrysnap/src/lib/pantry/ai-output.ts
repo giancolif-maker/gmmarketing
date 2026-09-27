@@ -59,7 +59,8 @@ export function parseDetection(raw: string): ParseResult<Ingredient[]> {
     const key = parsed.data.name.toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
-    ingredients.push(parsed.data);
+    // Everything the model reports is a guess until the user confirms it.
+    ingredients.push({ ...parsed.data, confirmed: false });
     if (ingredients.length >= LIMITS.maxIngredients) break;
   }
   return { ok: true, value: ingredients };

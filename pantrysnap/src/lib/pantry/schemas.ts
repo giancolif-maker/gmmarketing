@@ -70,6 +70,11 @@ export const ingredientSchema = z
       .transform(cleanText)
       .pipe(z.string().max(LIMITS.maxQuantityChars))
       .default(""),
+    /**
+     * False for items that came from a photo and the user hasn't confirmed yet. Only
+     * confirmed items can support "everything on hand". Defaults to true (typed/edited).
+     */
+    confirmed: z.boolean().default(true),
   })
   .strict();
 
@@ -140,6 +145,8 @@ export const clientEventSchema = z.discriminatedUnion("name", [
       added: count,
       removed: count,
       renamed: count,
+      /** Scanned items still unconfirmed when the user moved on. */
+      unconfirmed: count.optional(),
     })
     .strict(),
   z
@@ -179,8 +186,11 @@ export type Usage = {
 export type RecipeIngredient = {
   name: string;
   measurement: string;
-  /** Computed on the server against the confirmed ingredient list — never taken from the AI. */
-  status: "have" | "staple" | "missing";
+  /**
+   * Computed on the server against the user's list — never taken from the AI.
+   * "unconfirmed": only a scanned item the user hasn't confirmed matches it.
+   */
+  status: "have" | "staple" | "missing" | "unconfirmed";
   /** Mentioned only in the steps, not in the AI's ingredient list. */
   fromSteps: boolean;
   /** Both amounts are plain counts and the recipe needs more than the user listed. */
@@ -202,11 +212,16 @@ export type Recipe = {
   servings: number;
   /** True when the AI stated the serving count and nothing in the text contradicts it. */
   servingsStated: boolean;
-  /** Share of non-staple ingredients the user already has (0–100), computed on the server. */
+  /** Share of non-staple ingredients on the user's confirmed list (0–100), computed on the server. */
   matchPercent: number;
-  /** True only when nothing is missing and no amount is known to be short. */
+  /**
+   * True only when every ingredient is on the user's CONFIRMED list, nothing is missing and
+   * no amount is known to be short. Shown as "Everything on your confirmed list".
+   */
   everythingOnHand: boolean;
   missing: string[];
+  /** Ingredients matched only by scanned items the user hasn't confirmed. */
+  unconfirmed: string[];
   ingredients: RecipeIngredient[];
   steps: string[];
   substitutes: Array<{ from: string; to: string }>;
@@ -215,7 +230,14 @@ export type Recipe = {
 };
 
 export type SessionResult =
-  { ok: true; scanId: string; ingredients: Ingredient[]; usage: Usage } | Failure;
+  | {
+      ok: true;
+      scanId: string;
+      ingredients: Ingredient[];
+      /** Null if the usage summary couldn't be read; the session itself still succeeded. */
+      usage: Usage | null;
+    }
+  | Failure;
 export type DetectResult = SessionResult;
 export type RecipesResult = { ok: true; recipes: Recipe[]; excluded: string[] } | Failure;
 export type AccountResult = { ok: true; usage: Usage } | Failure;

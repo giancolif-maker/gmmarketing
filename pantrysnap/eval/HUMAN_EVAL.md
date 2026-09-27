@@ -24,7 +24,7 @@ automated or filled in by an AI.
 | `anything_wrong`               | Did you notice anything wrong? (wrong times, missing steps, ingredient only in the steps, odd amounts, unsafe) | free text             |
 | `vs_chatgpt`                   | Compared with what ChatGPT gave you for the same photo and request (see CHATGPT_COMPARISON.md)                 | BETTER / SAME / WORSE |
 
-`code_false_claim = YES` means the evaluation already found this "Everything on hand" claim
+`code_false_claim = YES` means the evaluation already found this "Everything on your confirmed list" (formerly "Everything on hand") claim
 to be false. Answer the questions anyway.
 
 ## Summarising (by hand)

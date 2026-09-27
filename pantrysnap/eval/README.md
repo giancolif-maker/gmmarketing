@@ -104,8 +104,10 @@ Photos and results are git-ignored so they stay on your machine.
 
 **Core promise** — every recipe shown as **"Everything on hand"** is re-checked against
 `expected.txt`. If any ingredient isn't really in the kitchen, it is a **false claim** and is
-listed at the top. Scan runs deliberately use the _uncorrected_ detected list (a user who
-doesn't fix mistakes). Also reported: items shown as "need" that were actually there.
+listed at the top. Scan runs deliberately use the _uncorrected_ detected list with every item
+treated as confirmed (a user who taps "Confirm all" without fixing mistakes — the worst case;
+in the app, scanned items the user hasn't confirmed never count as on hand). The app now shows
+this claim as "Everything on your confirmed list". Also reported: items shown as "need" that were actually there.
 
 **Pipeline** — detection, recipe and whole-case latency (median / p90 / max, including
 retries); every attempt with its outcome and time; every recipe rejected by code with its

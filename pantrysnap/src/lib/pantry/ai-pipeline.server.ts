@@ -170,6 +170,7 @@ export async function detectFromImages(
       const text = await callModel(content, signal, Math.min(DETECT_ATTEMPT_MS, remaining));
       const parsed = parseDetection(text);
       if (parsed.ok) {
+        // parseDetection marks every item unconfirmed until the user confirms it
         const ingredients = normalizeIngredients(parsed.value);
         trace.push({ ms: Date.now() - attemptStart, outcome: "ok" });
         return { ok: true, ingredients, attempts, ms: Date.now() - started, trace };

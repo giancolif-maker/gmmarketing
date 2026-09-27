@@ -7,11 +7,14 @@
 // doesn't get that claim.
 import type { RawRecipe } from "./ai-output";
 import {
+  ALCOHOL,
   canonicalText,
   covers,
   DAIRY,
+  expandCompounds,
   GLUTEN,
   GLUTEN_EXEMPT,
+  groupTokens,
   isStaple,
   MEAT,
   mentionedIngredients,
@@ -19,6 +22,7 @@ import {
   PLANT_EXEMPT,
   PORK,
   PROTEIN,
+  refersTo,
   sameIngredient,
   SEAFOOD,
   SPICY,
@@ -41,13 +45,25 @@ export const MAX_RECIPES = 4;
 
 // ---------------------------------------------------------------------------- diet & evidence
 
+/** Stock, broth or bouillon that doesn't say it's plant-based is assumed to be meat-based. */
+const PLANT_STOCK = new Set(
+  "vegetable veggie vegetarian vegan mushroom miso kombu dashi".split(" "),
+);
+function isUnqualifiedStock(t: string[]): boolean {
+  return (
+    t.some((w) => w === "stock" || w === "broth" || w === "bouillon") &&
+    !t.some((w) => PLANT_STOCK.has(w))
+  );
+}
+
 export function violatesDiet(ingredientName: string, diet: Diet): boolean {
   if (diet === "None") return false;
-  const t = tokens(ingredientName);
+  // compound products are checked through their parts ("egg noodles" → egg, noodle)
+  const t = groupTokens(ingredientName);
   const has = (group: Set<string>) => t.some((w) => group.has(w));
   if (
     (diet === "Vegetarian" || diet === "Vegan") &&
-    (has(MEAT) || has(SEAFOOD) || t.includes("gelatin"))
+    (has(MEAT) || has(SEAFOOD) || t.includes("gelatin") || isUnqualifiedStock(t))
   ) {
     return true;
   }
@@ -98,7 +114,18 @@ const EXCLUSION_GROUPS: Record<string, (t: string[]) => boolean> = {
   spice: (t) => t.some((w) => SPICY.has(w)),
   heat: (t) => t.some((w) => SPICY.has(w)),
   hot: (t) => t.some((w) => SPICY.has(w)) || (t.includes("hot") && t.includes("sauce")),
+  alcohol: (t) => t.some((w) => ALCOHOL.has(w)) && !t.includes("vinegar"),
+  alcoholic: (t) => t.some((w) => ALCOHOL.has(w)) && !t.includes("vinegar"),
+  booze: (t) => t.some((w) => ALCOHOL.has(w)) && !t.includes("vinegar"),
 };
+
+/** Generic nouns that say nothing about which ingredient ("no spicy food" = "no spicy"). */
+const GENERIC_NOUNS = new Set(
+  (
+    "food stuff thing dish meal flavor flavour ingredient item kind type style product " +
+    "option recipe cooking cuisine"
+  ).split(" "),
+);
 
 /** Words that mean the phrase isn't about an ingredient ("no more than", "not too long"). */
 const NOT_FOOD = new Set(
@@ -106,7 +133,7 @@ const NOT_FOOD = new Set(
     "more less than too much many very fuss hassle time long hard complicated expensive " +
     "idea problem preference restriction thank thanks please need want heavy light fancy " +
     "boring weird picky something anything crispy crunchy filling healthy quick easy simple " +
-    "cheap comforting tasty good nice different new like"
+    "cheap comforting tasty good nice different new like fried greasy oily processed junk"
   ).split(" "),
 );
 
@@ -142,7 +169,10 @@ export function parseExclusions(note: string): Exclusion[] {
       const clause = rest.split(/\bbut\b|\bplease\b|\bi want\b|\bwith\b/)[0] ?? "";
       for (const part of clause.split(/\s+(?:or|and|nor)\s+|\s*,\s*/)) {
         const t = tokens(part).filter(
-          (w) => !["any", "anything", "too", "t"].includes(w) && !TRIGGER_WORDS.has(w),
+          (w) =>
+            !["any", "anything", "too", "t"].includes(w) &&
+            !TRIGGER_WORDS.has(w) &&
+            !GENERIC_NOUNS.has(w),
         );
         if (t.length === 0 || t.length > 3 || t.some((w) => NOT_FOOD.has(w))) continue;
         labels.add(t.join(" "));
@@ -160,38 +190,94 @@ export function parseExclusions(note: string): Exclusion[] {
 
 // ---------------------------------------------------------------------------- time
 
-const NUMBER_WORDS: Record<string, number> = {
-  a: 1,
-  an: 1,
+const UNITS: Record<string, number> = {
   one: 1,
   two: 2,
   three: 3,
   four: 4,
   five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
   ten: 10,
+  eleven: 11,
+  twelve: 12,
+  thirteen: 13,
+  fourteen: 14,
   fifteen: 15,
+  sixteen: 16,
+  seventeen: 17,
+  eighteen: 18,
+  nineteen: 19,
+};
+const TENS: Record<string, number> = {
   twenty: 20,
   thirty: 30,
+  forty: 40,
+  fifty: 50,
+  sixty: 60,
+  seventy: 70,
+  eighty: 80,
+  ninety: 90,
 };
+const NUMBER_WORD = new RegExp(
+  `\\b(?:(${Object.keys(TENS).join("|")})(?:[\\s-]+(${Object.keys(UNITS).slice(0, 9).join("|")}))?|(${Object.keys(UNITS).join("|")}))\\b`,
+  "g",
+);
+
+/** "twenty-five" → "25", "eleven" → "11"; other text unchanged. */
+function numberWordsToDigits(text: string): string {
+  return text.replace(NUMBER_WORD, (_, tens?: string, unit?: string, single?: string) =>
+    String(tens ? TENS[tens]! + (unit ? UNITS[unit]! : 0) : UNITS[single!]!),
+  );
+}
 
 /** Durations (in minutes, lower bound of any range) explicitly mentioned in one step. */
 export function stepDurations(step: string): number[] {
-  const s = step
-    .toLowerCase()
+  const s = numberWordsToDigits(step.toLowerCase())
     .replace(/(\d+)\s+(\d)\/(\d)/g, (_, w, n, d) => String(Number(w) + Number(n) / Number(d)))
     .replace(/(\d)\/(\d)/g, (_, n, d) => String(Number(n) / Number(d)))
     .replace(/half an hour/g, "30 minutes");
   const out: number[] = [];
   const re =
-    /(\d+(?:\.\d+)?|a|an|one|two|three|four|five|ten|fifteen|twenty|thirty)(?:\s*(?:-|–|to)\s*\d+(?:\.\d+)?)?\s*(hours?|hrs?|minutes?|mins?)\b/g;
+    /(\d+(?:\.\d+)?|\ba|\ban)(?:\s*(?:-|–|to)\s*\d+(?:\.\d+)?)?\s*(hours?|hrs?|minutes?|mins?)\b/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(s))) {
     const raw = m[1]!;
-    const n = /\d/.test(raw) ? Number(raw) : (NUMBER_WORDS[raw] ?? 0);
+    const n = /\d/.test(raw) ? Number(raw) : 1;
     out.push(/^h/.test(m[2]!) ? n * 60 : n);
   }
   if (/\bovernight\b/.test(s)) out.push(8 * 60);
   return out.filter((n) => Number.isFinite(n) && n > 0);
+}
+
+/** Words that say steps run in parallel, so their durations must not be added up. */
+const OVERLAP = /\b(?:meanwhile|while|at the same time|in the meantime)\b/i;
+
+/**
+ * Time check against a limit in minutes. Total = max(stated prep+cook, longest step).
+ * Rejects when that exceeds the limit, or when sequential step durations clearly do
+ * (sum > limit + max(5, 25%)). Smaller or ambiguous overruns are shown as a range instead.
+ */
+export function checkTime(
+  r: Pick<RawRecipe, "prepMinutes" | "cookMinutes" | "steps">,
+  limit: number,
+):
+  | { ok: true; total: number; upper: number | null }
+  | { ok: false; reason: "time" | "time_contradiction" } {
+  const stated = r.prepMinutes + r.cookMinutes;
+  if (stated < 1) return { ok: false, reason: "time" };
+  const durations = r.steps.flatMap(stepDurations);
+  const longest = Math.max(0, ...durations);
+  const sum = durations.reduce((a, b) => a + b, 0);
+  const total = Math.max(stated, longest);
+  if (total > limit) return { ok: false, reason: longest > stated ? "time_contradiction" : "time" };
+  const parallel = r.steps.some((s) => OVERLAP.test(s));
+  if (!parallel && sum > limit + Math.max(5, limit * 0.25)) {
+    return { ok: false, reason: "time_contradiction" };
+  }
+  return { ok: true, total, upper: sum > total + 10 || sum > limit ? sum : null };
 }
 
 // ---------------------------------------------------------------------------- servings & amounts
@@ -219,7 +305,8 @@ export function plainCount(quantity: string): number | null {
 // ---------------------------------------------------------------------------- verification
 
 export type Constraints = {
-  inventory: Ingredient[];
+  /** Items without `confirmed` are treated as confirmed (typed or edited by the user). */
+  inventory: Array<Omit<Ingredient, "confirmed"> & { confirmed?: boolean }>;
   servings: number;
   maxMinutes: TimeOption;
   diet: Diet;
@@ -247,15 +334,21 @@ const OPTIONAL_SENTENCE =
 const NEGATED_MENTION =
   /\b(?:without|instead of|no need for|in place of|skip the|omit the)\s+(?:the\s+)?[a-z]+(?:\s+[a-z]+)?/g;
 
-/** Ingredients a step relies on, ignoring optional sentences and negated mentions. */
-function requiredStepMentions(step: string, recipeName: string): string[] {
-  const found: string[] = [];
+/**
+ * Ingredients a step mentions, split by whether the step relies on them. Optional
+ * sentences ("Optional: top with bacon", "cheddar if you like") don't make an ingredient
+ * needed, but still count for diet and exclusion checks. Negated mentions ("without
+ * butter") count for neither.
+ */
+function stepMentions(step: string, recipeName: string) {
+  const required: string[] = [];
+  const optional: string[] = [];
   for (const sentence of step.split(/[.;]\s+|\n/)) {
     const lower = sentence.toLowerCase();
-    if (OPTIONAL_SENTENCE.test(lower)) continue;
-    found.push(...mentionedIngredients(lower.replace(NEGATED_MENTION, " "), recipeName));
+    const found = mentionedIngredients(lower.replace(NEGATED_MENTION, " "), recipeName);
+    (OPTIONAL_SENTENCE.test(lower) ? optional : required).push(...found);
   }
-  return found;
+  return { required, optional };
 }
 
 export function verifyRecipe(
@@ -280,40 +373,45 @@ export function verifyRecipe(
     if (!listed.has(key)) listed.set(key, { ...i, fromSteps: false });
   }
   const listedNames = [...listed.values()].map((i) => i.name);
+  const optionalMentions: string[] = [];
   for (const step of r.steps) {
-    for (const mention of requiredStepMentions(step, r.name)) {
+    const { required, optional } = stepMentions(step, r.name);
+    optionalMentions.push(...optional);
+    for (const mention of required) {
       // A listed item must cover the mention: a listed "oil" does not cover "sesame oil".
-      if (listedNames.some((n) => covers(n, mention))) continue;
+      if (listedNames.some((n) => refersTo(n, mention))) continue;
       listedNames.push(mention);
       listed.set(`step:${mention}`, { name: mention, measurement: "", fromSteps: true });
     }
   }
   const all = [...listed.values()];
 
-  // Constraints that apply to every ingredient, including step-only ones and step text.
-  const stepWords = r.steps.flatMap((s) => words(s));
-  if (all.some((i) => violatesDiet(i.name, c.diet))) return { ok: false, reason: "diet" };
+  // Diet and exclusions apply to everything the recipe mentions, optional items included,
+  // and literal exclusions also to the raw step text.
+  const checkedNames = [...all.map((i) => i.name), ...optionalMentions];
+  const stepWords = expandCompounds(r.steps.flatMap((s) => words(s)));
+  if (checkedNames.some((n) => violatesDiet(n, c.diet))) return { ok: false, reason: "diet" };
   for (const ex of c.exclusions) {
-    if (all.some((i) => ex.test(tokens(i.name))) || (!ex.group && ex.test(stepWords))) {
+    if (checkedNames.some((n) => ex.test(groupTokens(n))) || (!ex.group && ex.test(stepWords))) {
       return { ok: false, reason: "excluded" };
     }
   }
 
-  // Time: stated total, but never less than the longest single step; flag if steps add up to more.
-  const stated = r.prepMinutes + r.cookMinutes;
-  if (stated < 1) return { ok: false, reason: "time" };
-  const durations = r.steps.flatMap(stepDurations);
-  const longest = Math.max(0, ...durations);
-  const sum = durations.reduce((a, b) => a + b, 0);
-  const total = Math.max(stated, longest);
-  if (total > limit) return { ok: false, reason: longest > stated ? "time_contradiction" : "time" };
-  const upper = sum > total + 10 ? sum : null;
+  const time = checkTime(r, limit);
+  if (!time.ok) return time;
+  const { total, upper } = time;
 
-  // Availability, computed against the confirmed list.
+  // Availability against the user's list. Only items the user confirmed can support
+  // "everything on hand"; a scanned item nobody confirmed is reported as "unconfirmed".
+  const confirmedInventory = c.inventory.filter((inv) => inv.confirmed !== false);
+  const unconfirmedInventory = c.inventory.filter((inv) => inv.confirmed === false);
   const ingredients: RecipeIngredient[] = all.map((i) => {
     if (isStaple(i.name)) return { ...i, status: "staple", short: null };
-    const match = c.inventory.find((inv) => covers(inv.name, i.name));
-    if (!match) return { ...i, status: "missing", short: null };
+    const match = confirmedInventory.find((inv) => covers(inv.name, i.name));
+    if (!match) {
+      const guess = unconfirmedInventory.some((inv) => covers(inv.name, i.name));
+      return { ...i, status: guess ? "unconfirmed" : "missing", short: null };
+    }
     const need = plainCount(i.measurement);
     const have = plainCount(match.quantity);
     const short = need !== null && have !== null && need > have ? { need, have } : null;
@@ -322,7 +420,8 @@ export function verifyRecipe(
   const counted = ingredients.filter((i) => i.status !== "staple");
   const haveCount = counted.filter((i) => i.status === "have").length;
   const missing = counted.filter((i) => i.status === "missing").map((i) => i.name);
-  if (haveCount === 0) return { ok: false, reason: "nothing_on_hand" };
+  const unconfirmed = counted.filter((i) => i.status === "unconfirmed").map((i) => i.name);
+  if (haveCount + unconfirmed.length === 0) return { ok: false, reason: "nothing_on_hand" };
   if (missing.length > MAX_MISSING) return { ok: false, reason: "too_many_missing" };
 
   // Requested traits need evidence in the ingredients.
@@ -333,16 +432,17 @@ export function verifyRecipe(
   if (c.kidFriendly && !c.spicy && spicy.length > 0)
     return { ok: false, reason: "too_spicy_for_kids" };
 
-  // Substitutions must replace a missing item with something the user actually has.
+  // Substitutions must replace a missing item with something the user confirmed they have.
   const substitutes = r.substitutes.filter(
     (s) =>
       missing.some((m) => sameIngredient(s.from, m)) &&
-      (isStaple(s.to) || c.inventory.some((inv) => covers(inv.name, s.to))) &&
-      !c.exclusions.some((ex) => ex.test(tokens(s.to))) &&
+      (isStaple(s.to) || confirmedInventory.some((inv) => covers(inv.name, s.to))) &&
+      !c.exclusions.some((ex) => ex.test(groupTokens(s.to))) &&
       !violatesDiet(s.to, c.diet),
   );
 
-  const everythingOnHand = missing.length === 0 && ingredients.every((i) => !i.short);
+  const everythingOnHand =
+    missing.length === 0 && unconfirmed.length === 0 && ingredients.every((i) => !i.short);
   const checks: string[] = [];
   if (upper === null && total <= 20) checks.push("Quick");
   if (c.diet !== "None") checks.push(`${c.diet} (checked)`);
@@ -365,6 +465,7 @@ export function verifyRecipe(
       matchPercent: counted.length ? Math.round((haveCount / counted.length) * 100) : 100,
       everythingOnHand,
       missing,
+      unconfirmed,
       ingredients,
       steps: r.steps,
       substitutes,
@@ -397,7 +498,7 @@ export function validateRecipes(
   recipes.sort(
     (a, b) =>
       Number(b.everythingOnHand) - Number(a.everythingOnHand) ||
-      a.missing.length - b.missing.length ||
+      a.missing.length + a.unconfirmed.length - (b.missing.length + b.unconfirmed.length) ||
       a.totalMinutes - b.totalMinutes,
   );
   return { recipes: recipes.slice(0, MAX_RECIPES), rejected };

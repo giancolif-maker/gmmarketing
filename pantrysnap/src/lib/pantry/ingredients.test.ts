@@ -99,8 +99,8 @@ describe("normalizeIngredients (shared by scan, typed and edits)", () => {
         { name: "x".repeat(200) },
       ]),
     ).toEqual([
-      { name: "scallions", quantity: "1 bunch" },
-      { name: "eggs", quantity: "" },
+      { name: "scallions", quantity: "1 bunch", confirmed: true },
+      { name: "eggs", quantity: "", confirmed: true },
     ]);
   });
 });
@@ -122,12 +122,12 @@ describe("parseTypedIngredients", () => {
         "6 eggs\n2 cans of chickpeas\nmilk (1 litre)\nlemons x3\na red onion\n1/2 cabbage",
       ),
     ).toEqual([
-      { name: "eggs", quantity: "6" },
-      { name: "chickpeas", quantity: "2 cans" },
-      { name: "milk", quantity: "1 litre" },
-      { name: "lemons", quantity: "3" },
-      { name: "red onion", quantity: "" },
-      { name: "cabbage", quantity: "1/2" },
+      { name: "eggs", quantity: "6", confirmed: true },
+      { name: "chickpeas", quantity: "2 cans", confirmed: true },
+      { name: "milk", quantity: "1 litre", confirmed: true },
+      { name: "lemons", quantity: "3", confirmed: true },
+      { name: "red onion", quantity: "", confirmed: true },
+      { name: "cabbage", quantity: "1/2", confirmed: true },
     ]);
   });
   it("de-duplicates and ignores empties", () => {

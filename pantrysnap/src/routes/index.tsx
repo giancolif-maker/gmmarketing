@@ -80,7 +80,7 @@ export const Route = createFileRoute("/")({
 
 // ---------------------------------------------------------------------------- flow persistence
 
-const FLOW_KEY = "pantrysnap:flow:v2";
+const FLOW_KEY = "pantrysnap:flow:v3";
 
 type Edits = { added: number; removed: number; renamed: number };
 type Feedback = { cooked?: "yes" | "not_yet"; useful?: "yes" | "no" };
@@ -139,6 +139,14 @@ const EMPTY_FLOW: Flow = {
   excluded: [],
   feedback: {},
 };
+
+function confirmAt(f: Flow, index: number): Flow {
+  if (f.ingredients[index]?.confirmed !== false) return f;
+  return {
+    ...f,
+    ingredients: f.ingredients.map((i, j) => (j === index ? { ...i, confirmed: true } : i)),
+  };
+}
 
 // Session storage only: photos never outlive the tab and are never uploaded for storage.
 function loadFlow(): Flow {
@@ -228,6 +236,7 @@ function Index() {
 
   const update = (patch: Partial<Flow>) => setFlow((f) => ({ ...f, ...patch }));
   const { photos, ingredients, scanId, recipes } = flow;
+  const unconfirmedCount = ingredients.filter((i) => !i.confirmed).length;
   const selected = recipes.find((r) => r.id === search.r) ?? null;
   const signedIn = !!account && !account.guest;
 
@@ -409,7 +418,8 @@ function Index() {
 
   function startReview(result: Extract<SessionResult, { ok: true }>, source: "scan" | "type") {
     usageForRef.current = null;
-    setUsage(result.usage);
+    if (result.usage) setUsage(result.usage);
+    else void refreshUsage(true);
     update({
       source,
       ingredients: result.ingredients,
@@ -473,6 +483,7 @@ function Index() {
       initialCount: flow.initialCount,
       finalCount: ingredients.length,
       ...flow.edits,
+      unconfirmed: ingredients.filter((i) => !i.confirmed).length,
     });
     const prefs = Object.fromEntries(PREF_KEYS.map((k) => [k, flow[k]])) as Pick<
       Flow,
@@ -528,7 +539,7 @@ function Index() {
       if (f.ingredients.some((i) => i.name.toLowerCase() === name)) return f;
       return {
         ...f,
-        ingredients: [...f.ingredients, { name, quantity: "" }],
+        ingredients: [...f.ingredients, { name, quantity: "", confirmed: true }],
         edits: { ...f.edits, added: f.edits.added + 1 },
       };
     });
@@ -551,17 +562,23 @@ function Index() {
     if (!name) return removeIngredient(index);
     setFlow((f) => {
       const current = f.ingredients[index];
-      if (!current || current.name === name) return f;
+      if (!current) return f;
+      // Opening an item and saving it counts as confirming it.
+      if (current.name === name) return confirmAt(f, index);
       const duplicate = f.ingredients.some((i, j) => j !== index && i.name.toLowerCase() === name);
       return {
         ...f,
         ingredients: duplicate
           ? f.ingredients.filter((_, j) => j !== index)
-          : f.ingredients.map((i, j) => (j === index ? { ...i, name } : i)),
+          : f.ingredients.map((i, j) => (j === index ? { ...i, name, confirmed: true } : i)),
         edits: { ...f.edits, renamed: f.edits.renamed + 1 },
       };
     });
   };
+
+  const confirmIngredient = (index: number) => setFlow((f) => confirmAt(f, index));
+  const confirmAll = () =>
+    setFlow((f) => ({ ...f, ingredients: f.ingredients.map((i) => ({ ...i, confirmed: true })) }));
 
   const startOver = () => {
     cancelRequest();
@@ -960,9 +977,31 @@ function Index() {
             <h1 className="mt-1 font-display text-5xl">
               {flow.source === "scan" ? "Did we get it right?" : "Your ingredients"}
             </h1>
-            <p className="mt-3 text-muted-foreground">
-              Tap an item to fix it. Recipes only count what’s on this list.
-            </p>
+            {unconfirmedCount > 0 ? (
+              <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <p className="text-muted-foreground">
+                  Tap <Check className="inline size-4" /> on what you really have, or tap a name to
+                  fix it.
+                </p>
+                <button
+                  type="button"
+                  className="text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                  onClick={confirmAll}
+                >
+                  Confirm all {ingredients.length}
+                </button>
+              </div>
+            ) : (
+              <p className="mt-3 text-muted-foreground">
+                Tap an item to fix it. Recipes only count what’s on this list.
+              </p>
+            )}
+            {unconfirmedCount > 0 && (
+              <p className="mt-2 text-sm text-muted-foreground" aria-live="polite">
+                {ingredients.length - unconfirmedCount} of {ingredients.length} confirmed ·
+                unconfirmed items are still used, but never counted as on hand.
+              </p>
+            )}
 
             <div className="mt-6 flex flex-wrap gap-2" aria-label="Ingredients">
               {ingredients.map((item, index) =>
@@ -998,14 +1037,27 @@ function Index() {
                 ) : (
                   <div
                     key={`${item.name}-${index}`}
-                    className="flex items-center gap-2 rounded-full border bg-card py-2 pl-4 pr-2 shadow-sm"
+                    data-confirmed={item.confirmed}
+                    className={`flex items-center gap-2 rounded-full border py-2 pl-4 pr-2 ${
+                      item.confirmed
+                        ? "bg-card shadow-sm"
+                        : "border-dashed border-muted-foreground/50 bg-muted/40"
+                    }`}
                   >
                     <button
                       type="button"
-                      className="font-semibold"
+                      className={
+                        item.confirmed ? "font-semibold" : "font-semibold text-foreground/80"
+                      }
                       aria-label={`Edit ${item.name}`}
                       onClick={() => setEditing({ index, value: item.name })}
                     >
+                      {!item.confirmed && (
+                        <Camera
+                          className="mr-1.5 inline size-3.5 text-muted-foreground"
+                          aria-label="From your photo, not confirmed"
+                        />
+                      )}
                       {item.name}
                       {item.quantity && (
                         <span className="ml-2 text-sm font-normal text-muted-foreground">
@@ -1013,6 +1065,17 @@ function Index() {
                         </span>
                       )}
                     </button>
+                    {!item.confirmed && (
+                      <button
+                        type="button"
+                        aria-label={`Confirm ${item.name}`}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => confirmIngredient(index)}
+                        className="rounded-full bg-primary p-1 text-primary-foreground"
+                      >
+                        <Check className="size-3" />
+                      </button>
+                    )}
                     <button
                       aria-label={`Remove ${item.name}`}
                       onMouseDown={(e) => e.preventDefault()}
@@ -1190,7 +1253,9 @@ function Index() {
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-sm font-bold text-primary">
-                  Checked against your {ingredients.length} ingredients
+                  {unconfirmedCount > 0
+                    ? `Checked against your ${ingredients.length - unconfirmedCount} confirmed ingredients`
+                    : `Checked against your ${ingredients.length} ingredients`}
                 </p>
                 <h1 className="mt-1 font-display text-5xl">What you can make</h1>
               </div>
@@ -1214,8 +1279,7 @@ function Index() {
                   <h2 className="font-display text-3xl leading-tight">{recipe.name}</h2>
                   <p className="mt-2 text-sm font-semibold text-muted-foreground">
                     <Clock3 className="mr-1 inline size-4" />
-                    {timeLabel(recipe)} · {recipe.servings} servings · {recipe.matchPercent}% on
-                    hand
+                    {timeLabel(recipe)} · {recipe.servings} servings
                   </p>
                   <p
                     className={`mt-3 font-bold ${recipe.everythingOnHand ? "text-primary" : "text-foreground"}`}
@@ -1223,14 +1287,21 @@ function Index() {
                     {recipe.everythingOnHand ? (
                       <>
                         <Check className="mr-1 inline size-5" />
-                        Everything on hand
+                        Everything on your confirmed list
                       </>
                     ) : recipe.missing.length ? (
                       `Need: ${recipe.missing.join(", ")}`
+                    ) : recipe.unconfirmed.length ? (
+                      `Check you have: ${recipe.unconfirmed.join(", ")}`
                     ) : (
                       "Check amounts before you start"
                     )}
                   </p>
+                  {recipe.missing.length > 0 && recipe.unconfirmed.length > 0 && (
+                    <p className="mt-1 text-sm font-semibold text-muted-foreground">
+                      Check you have: {recipe.unconfirmed.join(", ")}
+                    </p>
+                  )}
                   {recipe.checks.length > 0 && (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {recipe.checks.map((c) => (
@@ -1275,7 +1346,7 @@ function Index() {
                 </span>
               </span>
               <span>{selected.servings} servings</span>
-              <span>{selected.matchPercent}% on hand</span>
+              <span>{selected.matchPercent}% on your confirmed list</span>
             </div>
             {selected.totalMinutesUpper && (
               <p className="mt-2 text-sm text-muted-foreground">
@@ -1286,13 +1357,26 @@ function Index() {
               {selected.everythingOnHand ? (
                 <p className="font-bold">
                   <Check className="mr-1 inline size-5" />
-                  Everything on hand
+                  Everything on your confirmed list
                 </p>
               ) : (
                 <>
+                  {selected.unconfirmed.length > 0 && (
+                    <>
+                      <p className="font-bold">Check you have</p>
+                      <p className="mt-1 text-sm">
+                        {selected.unconfirmed.join(", ")}{" "}
+                        <span className="text-muted-foreground">
+                          (from your photo, not confirmed)
+                        </span>
+                      </p>
+                    </>
+                  )}
                   {selected.missing.length > 0 && (
                     <>
-                      <p className="font-bold">You’ll need</p>
+                      <p className={`font-bold ${selected.unconfirmed.length ? "mt-3" : ""}`}>
+                        You’ll need
+                      </p>
                       <p className="mt-1 text-sm">{selected.missing.join(", ")}</p>
                     </>
                   )}
@@ -1342,6 +1426,11 @@ function Index() {
                             check amount
                           </span>
                         )}
+                        {item.status === "unconfirmed" && (
+                          <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">
+                            from photo, not confirmed
+                          </span>
+                        )}
                         {item.status === "staple" && (
                           <span className="ml-2 text-xs text-muted-foreground">staple</span>
                         )}
@@ -1374,8 +1463,10 @@ function Index() {
             <div className="mt-10 rounded-2xl border bg-card p-5 text-sm text-muted-foreground">
               <p className="font-bold text-foreground">What we checked</p>
               <p className="mt-1">
-                Every ingredient in the list and in the steps against your list; time against the
-                step durations; diet and anything you asked to avoid by ingredient name.
+                Every ingredient in the list and in the steps against the ingredients you confirmed
+                (scanned items you didn’t confirm are never counted as on hand); time against the
+                step durations; diet and anything you asked to avoid by ingredient name, including
+                optional toppings.
                 {selected.servingsStated ? "" : " The recipe didn’t state its serving count."} Not
                 checked: exact amounts, taste, or allergens.
               </p>

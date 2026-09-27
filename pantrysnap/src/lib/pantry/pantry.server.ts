@@ -161,8 +161,9 @@ export async function runDetect(
     ingredientCount: count,
   });
   log("ai.detect", { ...base, outcome: "ok", count });
+  // The session is already charged and complete: never discard it because the summary
+  // read failed (the client refreshes usage separately).
   const summary = await readUsage(userId);
-  if (!summary) return fail("UNKNOWN");
   return { ok: true, scanId: usage.id, ingredients: outcome.ingredients, usage: summary };
 }
 
@@ -179,7 +180,6 @@ export async function runTyped(userId: string, data: TypedRequest): Promise<Sess
     ingredientCount: ingredients.length,
   });
   const summary = await readUsage(userId);
-  if (!summary) return fail("UNKNOWN");
   return { ok: true, scanId: usage.id, ingredients, usage: summary };
 }
 
@@ -228,6 +228,8 @@ export async function runRecipes(
     outcome: "ok",
     shown: outcome.recipes.length,
     everythingOnHand: outcome.recipes.filter((r) => r.everythingOnHand).length,
+    withUnconfirmed: outcome.recipes.filter((r) => r.unconfirmed.length > 0).length,
+    unconfirmedIngredients: data.ingredients.filter((i) => !i.confirmed).length,
   });
   log("ai.recipes", { ...props, outcome: "ok", shown: outcome.recipes.length });
   return { ok: true, recipes: outcome.recipes, excluded: outcome.excluded };

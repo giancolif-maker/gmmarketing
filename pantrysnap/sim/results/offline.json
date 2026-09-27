@@ -1,11 +1,27 @@
 {
   "trust": {
     "A": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 52,
         "na": 0,
         "shown": 104,
-        "eoh": 50,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 52,
+        "na": 0,
+        "shown": 104,
+        "eoh": 52,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -15,8 +31,58 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
         ],
         "examples": []
       },
@@ -24,7 +90,7 @@
         "runs": 52,
         "na": 0,
         "shown": 104,
-        "eoh": 50,
+        "eoh": 52,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -38,7 +104,23 @@
       }
     },
     "B": {
-      "uncorrected": {
+      "left unconfirmed": {
+        "runs": 52,
+        "na": 0,
+        "shown": 104,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
         "runs": 52,
         "na": 0,
         "shown": 104,
@@ -52,8 +134,58 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
         ],
         "examples": []
       },
@@ -61,7 +193,7 @@
         "runs": 52,
         "na": 0,
         "shown": 104,
-        "eoh": 50,
+        "eoh": 52,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -75,11 +207,27 @@
       }
     },
     "C": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 50,
         "na": 2,
         "shown": 100,
-        "eoh": 48,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 50,
+        "na": 2,
+        "shown": 100,
+        "eoh": 50,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -89,8 +237,56 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          4, 10, 2, 5, 4, 4, 2, 4, 4, 4, 4, 4, 2, 5, 3, 3, 2, 2, 4, 3, 2, 3, 5, 4, 3, 3, 3, 3, 7, 2,
-          3, 3, 3, 3, 4, 2, 2, 3, 2, 2, 2, 3, 3, 2, 3, 2, 2, 4, 3, 2
+          4,
+          10,
+          2,
+          5,
+          4,
+          4,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          2,
+          5,
+          3,
+          3,
+          2,
+          2,
+          4,
+          3,
+          2,
+          3,
+          5,
+          4,
+          3,
+          3,
+          3,
+          3,
+          7,
+          2,
+          3,
+          3,
+          3,
+          3,
+          4,
+          2,
+          2,
+          3,
+          2,
+          2,
+          2,
+          3,
+          3,
+          2,
+          3,
+          2,
+          2,
+          4,
+          3,
+          2
         ],
         "examples": []
       },
@@ -98,7 +294,7 @@
         "runs": 50,
         "na": 2,
         "shown": 100,
-        "eoh": 48,
+        "eoh": 50,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -112,22 +308,88 @@
       }
     },
     "D": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 52,
         "na": 0,
         "shown": 156,
-        "eoh": 101,
-        "falseEoh": 51,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 52,
+        "na": 0,
+        "shown": 156,
+        "eoh": 104,
+        "falseEoh": 52,
         "usingWrong": 104,
-        "usingWrongEoh": 51,
-        "onlyWrong": 51,
-        "onlyWrongEoh": 51,
+        "usingWrongEoh": 52,
+        "onlyWrong": 52,
+        "onlyWrongEoh": 52,
         "wronglyMissing": 0,
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
         ],
         "examples": [
           "k01 (nearly empty fridge): injected ∅→milk · \"Skillet with milk\" shown \"Everything on hand\" · not in kitchen: milk",
@@ -140,7 +402,7 @@
         "runs": 52,
         "na": 0,
         "shown": 104,
-        "eoh": 50,
+        "eoh": 52,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -154,13 +416,29 @@
       }
     },
     "E": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 51,
         "na": 1,
         "shown": 153,
-        "eoh": 100,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 51,
+        "na": 1,
+        "shown": 153,
+        "eoh": 102,
         "falseEoh": 51,
-        "usingWrong": 103,
+        "usingWrong": 102,
         "usingWrongEoh": 51,
         "onlyWrong": 51,
         "onlyWrongEoh": 51,
@@ -168,8 +446,57 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-          3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
         ],
         "examples": [
           "k01 (nearly empty fridge): injected ∅→milk; ∅→lemons; ∅→mustard · \"Skillet with milk\" shown \"Everything on hand\" · not in kitchen: milk",
@@ -182,7 +509,7 @@
         "runs": 51,
         "na": 1,
         "shown": 102,
-        "eoh": 49,
+        "eoh": 51,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -196,11 +523,27 @@
       }
     },
     "F": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 52,
         "na": 0,
         "shown": 155,
-        "eoh": 100,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 52,
+        "na": 0,
+        "shown": 155,
+        "eoh": 103,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -210,8 +553,58 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
         ],
         "examples": []
       },
@@ -219,7 +612,7 @@
         "runs": 52,
         "na": 0,
         "shown": 155,
-        "eoh": 100,
+        "eoh": 103,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -233,22 +626,82 @@
       }
     },
     "G": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 46,
         "na": 6,
         "shown": 184,
-        "eoh": 132,
+        "eoh": 0,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
         "onlyWrong": 0,
         "onlyWrongEoh": 0,
-        "wronglyMissing": 2,
+        "wronglyMissing": 1,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 46,
+        "na": 6,
+        "shown": 184,
+        "eoh": 137,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 1,
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
         ],
         "examples": []
       },
@@ -256,7 +709,7 @@
         "runs": 46,
         "na": 6,
         "shown": 92,
-        "eoh": 44,
+        "eoh": 46,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -270,11 +723,27 @@
       }
     },
     "H": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 43,
         "na": 9,
         "shown": 172,
-        "eoh": 86,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 40,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 43,
+        "na": 9,
+        "shown": 172,
+        "eoh": 89,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -284,8 +753,49 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2,
-          2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+          2,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
         ],
         "examples": []
       },
@@ -293,7 +803,7 @@
         "runs": 43,
         "na": 9,
         "shown": 86,
-        "eoh": 41,
+        "eoh": 43,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -307,11 +817,27 @@
       }
     },
     "I": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 30,
         "na": 22,
         "shown": 78,
-        "eoh": 45,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 30,
+        "na": 22,
+        "shown": 78,
+        "eoh": 48,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -321,7 +847,36 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          0, 0, 2, 2, 2, 2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0
+          0,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          0,
+          2,
+          2,
+          0,
+          2,
+          2,
+          2,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0
         ],
         "examples": []
       },
@@ -329,7 +884,7 @@
         "runs": 30,
         "na": 22,
         "shown": 60,
-        "eoh": 28,
+        "eoh": 30,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -343,11 +898,27 @@
       }
     },
     "J": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 18,
         "na": 34,
         "shown": 36,
-        "eoh": 17,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 18,
+        "na": 34,
+        "shown": 36,
+        "eoh": 18,
         "falseEoh": 3,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -356,7 +927,26 @@
         "wronglyMissing": 0,
         "noRecipes": 0,
         "fallback": 0,
-        "edits": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "edits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "examples": [
           "k01 (nearly empty fridge): injected eggs ×2→×12 · \"Quick eggs bowl\" shown \"Everything on hand\" · amount: needs 6 eggs, kitchen has 2",
           "k04 (college fridge): injected instant ramen ×3→×12 · \"Quick instant ramen bowl\" shown \"Everything on hand\" · amount: needs 6 instant ramen, kitchen has 3",
@@ -367,83 +957,6 @@
         "runs": 18,
         "na": 34,
         "shown": 36,
-        "eoh": 17,
-        "falseEoh": 0,
-        "usingWrong": 0,
-        "usingWrongEoh": 0,
-        "onlyWrong": 0,
-        "onlyWrongEoh": 0,
-        "wronglyMissing": 0,
-        "noRecipes": 0,
-        "fallback": 0,
-        "edits": [],
-        "examples": []
-      }
-    },
-    "K": {
-      "uncorrected": {
-        "runs": 52,
-        "na": 0,
-        "shown": 0,
-        "eoh": 0,
-        "falseEoh": 0,
-        "usingWrong": 0,
-        "usingWrongEoh": 0,
-        "onlyWrong": 0,
-        "onlyWrongEoh": 0,
-        "wronglyMissing": 0,
-        "noRecipes": 0,
-        "fallback": 52,
-        "edits": [
-          3, 12, 32, 7, 16, 14, 12, 8, 12, 14, 14, 12, 13, 8, 15, 8, 9, 7, 7, 3, 12, 10, 5, 10, 15,
-          12, 11, 10, 10, 10, 22, 5, 11, 9, 11, 11, 12, 6, 8, 9, 8, 7, 8, 11, 9, 7, 10, 8, 6, 12,
-          10, 7
-        ],
-        "examples": []
-      },
-      "fully corrected": {
-        "runs": 52,
-        "na": 0,
-        "shown": 104,
-        "eoh": 50,
-        "falseEoh": 0,
-        "usingWrong": 0,
-        "usingWrongEoh": 0,
-        "onlyWrong": 0,
-        "onlyWrongEoh": 0,
-        "wronglyMissing": 0,
-        "noRecipes": 0,
-        "fallback": 0,
-        "edits": [],
-        "examples": []
-      }
-    },
-    "L": {
-      "uncorrected": {
-        "runs": 16,
-        "na": 36,
-        "shown": 48,
-        "eoh": 30,
-        "falseEoh": 17,
-        "usingWrong": 21,
-        "usingWrongEoh": 17,
-        "onlyWrong": 17,
-        "onlyWrongEoh": 17,
-        "wronglyMissing": 0,
-        "noRecipes": 0,
-        "fallback": 0,
-        "edits": [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2],
-        "examples": [
-          "k06 (vegetarian kitchen): injected tofu→chicken breast · \"Skillet with chicken breast\" shown \"Everything on hand\" · not in kitchen: chicken breast",
-          "k06 (vegetarian kitchen): injected tofu→chicken breast · \"Quick chicken breast bowl\" shown \"Everything on hand\" · not in kitchen: chicken breast",
-          "k07 (high-protein kitchen): injected ground turkey→ground beef · \"Skillet with ground beef\" shown \"Everything on hand\" · not in kitchen: ground beef",
-          "k07 (high-protein kitchen): injected ground turkey→ground beef · \"Quick chicken breast bowl\" shown \"Everything on hand\" · not in kitchen: ground beef"
-        ]
-      },
-      "fully corrected": {
-        "runs": 16,
-        "na": 36,
-        "shown": 35,
         "eoh": 18,
         "falseEoh": 0,
         "usingWrong": 0,
@@ -457,23 +970,264 @@
         "examples": []
       }
     },
-    "M": {
-      "uncorrected": {
+    "K": {
+      "left unconfirmed": {
         "runs": 52,
         "na": 0,
-        "shown": 156,
-        "eoh": 101,
-        "falseEoh": 51,
-        "usingWrong": 104,
-        "usingWrongEoh": 51,
-        "onlyWrong": 51,
-        "onlyWrongEoh": 51,
+        "shown": 0,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 52,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 52,
+        "na": 0,
+        "shown": 0,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 52,
+        "edits": [
+          3,
+          12,
+          32,
+          7,
+          16,
+          14,
+          12,
+          8,
+          12,
+          14,
+          14,
+          12,
+          13,
+          8,
+          15,
+          8,
+          9,
+          7,
+          7,
+          3,
+          12,
+          10,
+          5,
+          10,
+          15,
+          12,
+          11,
+          10,
+          10,
+          10,
+          22,
+          5,
+          11,
+          9,
+          11,
+          11,
+          12,
+          6,
+          8,
+          9,
+          8,
+          7,
+          8,
+          11,
+          9,
+          7,
+          10,
+          8,
+          6,
+          12,
+          10,
+          7
+        ],
+        "examples": []
+      },
+      "fully corrected": {
+        "runs": 52,
+        "na": 0,
+        "shown": 104,
+        "eoh": 52,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      }
+    },
+    "L": {
+      "left unconfirmed": {
+        "runs": 16,
+        "na": 36,
+        "shown": 48,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 16,
+        "na": 36,
+        "shown": 48,
+        "eoh": 32,
+        "falseEoh": 19,
+        "usingWrong": 21,
+        "usingWrongEoh": 19,
+        "onlyWrong": 19,
+        "onlyWrongEoh": 19,
         "wronglyMissing": 0,
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2
+        ],
+        "examples": [
+          "k06 (vegetarian kitchen): injected tofu→chicken breast · \"Skillet with chicken breast\" shown \"Everything on hand\" · not in kitchen: chicken breast",
+          "k06 (vegetarian kitchen): injected tofu→chicken breast · \"Quick chicken breast bowl\" shown \"Everything on hand\" · not in kitchen: chicken breast",
+          "k07 (high-protein kitchen): injected ground turkey→ground beef · \"Skillet with ground beef\" shown \"Everything on hand\" · not in kitchen: ground beef",
+          "k07 (high-protein kitchen): injected ground turkey→ground beef · \"Quick chicken breast bowl\" shown \"Everything on hand\" · not in kitchen: ground beef"
+        ]
+      },
+      "fully corrected": {
+        "runs": 16,
+        "na": 36,
+        "shown": 35,
+        "eoh": 19,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      }
+    },
+    "M": {
+      "left unconfirmed": {
+        "runs": 52,
+        "na": 0,
+        "shown": 156,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 52,
+        "na": 0,
+        "shown": 156,
+        "eoh": 104,
+        "falseEoh": 52,
+        "usingWrong": 104,
+        "usingWrongEoh": 52,
+        "onlyWrong": 52,
+        "onlyWrongEoh": 52,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
         ],
         "examples": [
           "k01 (nearly empty fridge): injected ∅→bacon · \"Skillet with bacon\" shown \"Everything on hand\" · not in kitchen: bacon",
@@ -486,7 +1240,7 @@
         "runs": 52,
         "na": 0,
         "shown": 104,
-        "eoh": 50,
+        "eoh": 52,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -500,7 +1254,23 @@
       }
     },
     "N": {
-      "uncorrected": {
+      "left unconfirmed": {
+        "runs": 29,
+        "na": 23,
+        "shown": 87,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
         "runs": 29,
         "na": 23,
         "shown": 87,
@@ -514,7 +1284,35 @@
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          0, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2, 2, 0, 2, 2
+          0,
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          2,
+          2,
+          0,
+          2,
+          2
         ],
         "examples": [
           "k06 (vegetarian kitchen): injected coconut milk→milk · \"Skillet with milk\" shown \"Everything on hand\" · not in kitchen: milk",
@@ -527,7 +1325,7 @@
         "runs": 29,
         "na": 23,
         "shown": 61,
-        "eoh": 29,
+        "eoh": 32,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -541,22 +1339,68 @@
       }
     },
     "O": {
-      "uncorrected": {
+      "left unconfirmed": {
         "runs": 32,
         "na": 20,
         "shown": 96,
-        "eoh": 61,
-        "falseEoh": 30,
+        "eoh": 0,
+        "falseEoh": 0,
+        "usingWrong": 0,
+        "usingWrongEoh": 0,
+        "onlyWrong": 0,
+        "onlyWrongEoh": 0,
+        "wronglyMissing": 0,
+        "noRecipes": 0,
+        "fallback": 0,
+        "edits": [],
+        "examples": []
+      },
+      "confirmed unchecked": {
+        "runs": 32,
+        "na": 20,
+        "shown": 96,
+        "eoh": 64,
+        "falseEoh": 32,
         "usingWrong": 34,
-        "usingWrongEoh": 30,
-        "onlyWrong": 30,
-        "onlyWrongEoh": 30,
-        "wronglyMissing": 3,
+        "usingWrongEoh": 32,
+        "onlyWrong": 32,
+        "onlyWrongEoh": 32,
+        "wronglyMissing": 0,
         "noRecipes": 0,
         "fallback": 0,
         "edits": [
-          2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 2,
-          2, 1
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
         ],
         "examples": [
           "k02 (normal family fridge): injected greek yogurt→sour cream · \"Skillet with sour cream\" shown \"Everything on hand\" · not in kitchen: sour cream",
@@ -569,7 +1413,7 @@
         "runs": 32,
         "na": 20,
         "shown": 70,
-        "eoh": 37,
+        "eoh": 38,
         "falseEoh": 0,
         "usingWrong": 0,
         "usingWrongEoh": 0,
@@ -599,8 +1443,8 @@
     {
       "id": "V03",
       "attack": "stated 15 min, steps total 30 (no single step over limit)",
-      "outcome": "accepted · Everything on hand · 15–30 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: time_contradiction",
+      "problems": []
     },
     {
       "id": "V04",
@@ -611,8 +1455,10 @@
     {
       "id": "V05",
       "attack": "2 servings but 8 eggs",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "accepted · Everything on your confirmed list · 15 min",
+      "problems": [
+        "accepted (should be rejected)"
+      ]
     },
     {
       "id": "V06",
@@ -641,20 +1487,22 @@
     {
       "id": "V10",
       "attack": "step-only ingredient outside the vocabulary (stock)",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: stock · 15 min",
+      "problems": []
     },
     {
       "id": "V11",
       "attack": "step-only mirin and hoisin (not in vocabulary)",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: mirin, hoisin · 15 min",
+      "problems": []
     },
     {
       "id": "V12",
       "attack": "quantity written as '4 eggs, beaten' vs 2 listed",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · Everything on your confirmed list · 15 min",
+      "problems": [
+        "shown \"Everything on hand\""
+      ]
     },
     {
       "id": "V13",
@@ -665,8 +1513,10 @@
     {
       "id": "V14",
       "attack": "'Feeds a family of four' when 2 requested",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "accepted · Everything on your confirmed list · 15 min",
+      "problems": [
+        "accepted (should be rejected)"
+      ]
     },
     {
       "id": "V15",
@@ -689,8 +1539,8 @@
     {
       "id": "V18",
       "attack": "time written as 'twenty-five minutes' in a 15-min request",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: time_contradiction",
+      "problems": []
     },
     {
       "id": "V19",
@@ -719,8 +1569,8 @@
     {
       "id": "C03",
       "attack": "vegetarian; bacon as an OPTIONAL garnish",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: diet",
+      "problems": []
     },
     {
       "id": "C04",
@@ -731,8 +1581,8 @@
     {
       "id": "C05",
       "attack": "no dairy; cheddar as 'if you like'",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: excluded",
+      "problems": []
     },
     {
       "id": "C06",
@@ -743,14 +1593,14 @@
     {
       "id": "C07",
       "attack": "high protein; only 'egg noodles' as protein evidence",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: not_high_protein",
+      "problems": []
     },
     {
       "id": "C08",
       "attack": "'no spicy food'; hot sauce hidden in steps",
-      "outcome": "accepted · need: hot sauce · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: excluded",
+      "problems": []
     },
     {
       "id": "C09",
@@ -767,8 +1617,8 @@
     {
       "id": "C11",
       "attack": "vegan; ghee only in the steps",
-      "outcome": "accepted · Everything on hand · 20 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: diet",
+      "problems": []
     },
     {
       "id": "C12",
@@ -779,20 +1629,20 @@
     {
       "id": "C13",
       "attack": "vegetarian; bare 'worcestershire' in steps",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: diet",
+      "problems": []
     },
     {
       "id": "C14",
       "attack": "vegetarian; 'lardons' (not in meat list)",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: diet",
+      "problems": []
     },
     {
       "id": "C15",
       "attack": "gluten-free; beer in steps",
-      "outcome": "accepted · Everything on hand · 20 min",
-      "problems": ["accepted (should be rejected)"]
+      "outcome": "rejected: diet",
+      "problems": []
     },
     {
       "id": "C16",
@@ -827,8 +1677,10 @@
     {
       "id": "H01",
       "attack": "vague list item 'sauce' used as an ingredient",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · Everything on your confirmed list · 15 min",
+      "problems": [
+        "shown \"Everything on hand\""
+      ]
     },
     {
       "id": "H02",
@@ -851,50 +1703,50 @@
     {
       "id": "H05",
       "attack": "'sweet potatoes' on list, recipe needs potatoes",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: potatoes · 15 min",
+      "problems": []
     },
     {
       "id": "H06",
       "attack": "'chicken nuggets' on list, recipe needs chicken",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: chicken · 15 min",
+      "problems": []
     },
     {
       "id": "H07",
       "attack": "'milk chocolate' on list, recipe needs milk",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: milk · 15 min",
+      "problems": []
     },
     {
       "id": "H08",
       "attack": "'condensed milk' on list, recipe needs milk",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: milk · 15 min",
+      "problems": []
     },
     {
       "id": "H09",
       "attack": "'egg noodles' on list, recipe needs eggs",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: eggs · 15 min",
+      "problems": []
     },
     {
       "id": "H10",
       "attack": "'green beans' on list, recipe needs black beans",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: beans · 15 min",
+      "problems": []
     },
     {
       "id": "H11",
       "attack": "'green onions' on list, recipe needs onion",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: onion · 15 min",
+      "problems": []
     },
     {
       "id": "H12",
       "attack": "'frozen yogurt' on list, recipe needs yogurt",
-      "outcome": "accepted · Everything on hand · 15 min",
-      "problems": ["shown \"Everything on hand\""]
+      "outcome": "accepted · need: yogurt · 15 min",
+      "problems": []
     },
     {
       "id": "H13",
@@ -911,7 +1763,7 @@
     {
       "id": "H15",
       "attack": "spicy + kid-friendly together (contradiction)",
-      "outcome": "accepted · Everything on hand · 15 min",
+      "outcome": "accepted · Everything on your confirmed list · 15 min",
       "problems": []
     }
   ],
@@ -919,76 +1771,10 @@
     "total": 104,
     "wrong": [
       {
-        "inv": "cornflour",
-        "rec": "cornstarch",
-        "expect": "must",
-        "got": false
-      },
-      {
         "inv": "salad leaves",
         "rec": "mixed greens",
         "expect": "must",
         "got": false
-      },
-      {
-        "inv": "rice noodles",
-        "rec": "rice",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "sweet potatoes",
-        "rec": "potatoes",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "green beans",
-        "rec": "beans",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "green onions",
-        "rec": "onion",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "chicken nuggets",
-        "rec": "chicken",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "milk chocolate",
-        "rec": "milk",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "condensed milk",
-        "rec": "milk",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "chocolate milk",
-        "rec": "milk",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "egg noodles",
-        "rec": "eggs",
-        "expect": "must-not",
-        "got": true
-      },
-      {
-        "inv": "frozen yogurt",
-        "rec": "yogurt",
-        "expect": "must-not",
-        "got": true
       }
     ]
   },
@@ -1006,7 +1792,9 @@
     },
     {
       "id": 2,
-      "friction": ["unsupported: asking for one specific dish (no 'make me X' input)"],
+      "friction": [
+        "unsupported: asking for one specific dish (no 'make me X' input)"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2
@@ -1031,7 +1819,9 @@
     },
     {
       "id": 5,
-      "friction": ["1 list errors left in (review: none)"],
+      "friction": [
+        "1 list errors left in (review: none)"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2
@@ -1045,8 +1835,10 @@
     },
     {
       "id": 7,
-      "friction": ["1 list errors left in (review: none)"],
-      "scanFalse": 1,
+      "friction": [
+        "1 list errors left in (review: none)"
+      ],
+      "scanFalse": 0,
       "scan": 3,
       "typed": 2
     },
@@ -1062,14 +1854,18 @@
     },
     {
       "id": 9,
-      "friction": ["unsupported: per-person dislikes / picky eaters beyond one free-text note"],
+      "friction": [
+        "unsupported: per-person dislikes / picky eaters beyond one free-text note"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2
     },
     {
       "id": 10,
-      "friction": ["review screen has 16 chips (long scroll before \"Find recipes\")"],
+      "friction": [
+        "review screen has 16 chips (long scroll before \"Find recipes\")"
+      ],
       "scanFalse": 0,
       "scan": 3,
       "typed": 2
@@ -1083,7 +1879,9 @@
     },
     {
       "id": 12,
-      "friction": ["unsupported: skipping review (the list is always shown before recipes)"],
+      "friction": [
+        "unsupported: skipping review (the list is always shown before recipes)"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2
@@ -1110,7 +1908,9 @@
     },
     {
       "id": 15,
-      "friction": ["unsupported: shopping list / 'what to buy' (not built)"],
+      "friction": [
+        "unsupported: shopping list / 'what to buy' (not built)"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2
@@ -1127,7 +1927,9 @@
     },
     {
       "id": 17,
-      "friction": ["unsupported: follow-up questions / substitutions dialogue"],
+      "friction": [
+        "unsupported: follow-up questions / substitutions dialogue"
+      ],
       "scanFalse": 0,
       "scan": 2,
       "typed": 2

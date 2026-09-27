@@ -162,12 +162,59 @@ export type Database = {
         }
         Relationships: []
       }
+      usage_events: {
+        Row: {
+          created_at: string
+          finished_at: string | null
+          id: string
+          kind: string
+          scan_id: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          finished_at?: string | null
+          id?: string
+          kind: string
+          scan_id?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          finished_at?: string | null
+          id?: string
+          kind?: string
+          scan_id?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usage_events_scan_id_fkey"
+            columns: ["scan_id"]
+            isOneToOne: false
+            referencedRelation: "usage_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      begin_usage: {
+        Args: { p_kind: string; p_scan?: string; p_user: string }
+        Returns: Json
+      }
+      finish_usage: {
+        Args: { p_id: string; p_status: string }
+        Returns: undefined
+      }
+      usage_limits: { Args: never; Returns: Json }
+      usage_summary: { Args: { p_user: string }; Returns: Json }
     }
     Enums: {
       [_ in never]: never

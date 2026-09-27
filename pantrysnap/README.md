@@ -27,3 +27,20 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## Checks
+
+```sh
+npm run lint        # eslint + prettier (generated src/integrations/** is excluded)
+npx tsc --noEmit    # typecheck
+npm test            # unit tests: AI-output parsing, recipe validation, image sanitising, request limits
+npm run test:db     # applies drizzle/migrations to a throwaway local Postgres and tests RLS + usage limits
+npm run build
+```
+
+`npm run test:db` needs Postgres server binaries (`initdb`, `pg_ctl`) on the machine.
+
+## Server environment
+
+Server functions require `SUPABASE_SERVICE_ROLE_KEY` (usage ledger) and `LOVABLE_API_KEY` (AI gateway).
+If either is missing, scans fail closed with a friendly "unavailable" message.

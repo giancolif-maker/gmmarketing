@@ -174,4 +174,84 @@ SELECT pg_temp.expect('updated_at trigger fires',
   (SELECT updated_at > created_at FROM public.profiles WHERE id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'));
 RESET ROLE;
 
+
+-- ---------------------------------------------------------------- typed sessions, guests, analytics
+INSERT INTO auth.users (id, is_anonymous) VALUES
+  ('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', false),
+  ('99999999-9999-4999-8999-999999999999', true);
+
+SET ROLE service_role;
+DO $$
+DECLARE r jsonb; typed uuid; i int;
+BEGIN
+  -- typed sessions count toward the same monthly allowance and unlock recipe runs
+  r := public.begin_usage('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'typed');
+  typed := (r ->> 'id')::uuid;
+  PERFORM public.finish_usage(typed, 'complete');
+  IF NOT (public.begin_usage('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'recipes', typed) ->> 'ok')::boolean THEN
+    RAISE EXCEPTION 'FAIL recipes refused for a typed session';
+  END IF;
+  PERFORM public.finish_usage((public.begin_usage('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'detect') ->> 'id')::uuid, 'complete');
+  PERFORM public.finish_usage((public.begin_usage('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'typed') ->> 'id')::uuid, 'complete');
+  IF public.begin_usage('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'typed') ->> 'code' <> 'QUOTA_EXCEEDED' THEN
+    RAISE EXCEPTION 'FAIL typed sessions bypass the monthly allowance';
+  END IF;
+  RAISE NOTICE 'ok   typed sessions share the monthly allowance and unlock recipes';
+
+  -- guests: one session ever, two recipe runs, never Pro, no monthly reset
+  UPDATE public.profiles SET is_pro = true WHERE id = '99999999-9999-4999-8999-999999999999';
+  IF (public.usage_summary('99999999-9999-4999-8999-999999999999') ->> 'is_pro')::boolean THEN
+    RAISE EXCEPTION 'FAIL guest reported as Pro';
+  END IF;
+  r := public.begin_usage('99999999-9999-4999-8999-999999999999', 'typed');
+  typed := (r ->> 'id')::uuid;
+  PERFORM public.finish_usage(typed, 'complete');
+  FOR i IN 1..2 LOOP
+    IF NOT (public.begin_usage('99999999-9999-4999-8999-999999999999', 'recipes', typed) ->> 'ok')::boolean THEN
+      RAISE EXCEPTION 'FAIL guest recipe run % refused', i;
+    END IF;
+  END LOOP;
+  IF public.begin_usage('99999999-9999-4999-8999-999999999999', 'recipes', typed) ->> 'code' <> 'RECIPE_LIMIT' THEN
+    RAISE EXCEPTION 'FAIL guest third recipe run allowed';
+  END IF;
+  UPDATE public.usage_events SET created_at = now() - interval '40 days'
+  WHERE user_id = '99999999-9999-4999-8999-999999999999';
+  IF public.begin_usage('99999999-9999-4999-8999-999999999999', 'detect') ->> 'code' <> 'TRIAL_USED' THEN
+    RAISE EXCEPTION 'FAIL guest trial renewed';
+  END IF;
+  RAISE NOTICE 'ok   guest trial: 1 session lifetime, 2 recipe runs, never Pro';
+
+  -- analytics: session ids from other users are dropped; daily cap applies
+  PERFORM public.log_event('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'recipe_opened', '{"position":1}', typed);
+  -- events without a session (e.g. input mode chosen) are accepted
+  IF NOT public.log_event('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'input_mode_selected', '{"mode":"type"}') THEN
+    RAISE EXCEPTION 'FAIL session-less event refused';
+  END IF;
+  IF (SELECT session_id FROM public.app_events WHERE name = 'recipe_opened' ORDER BY id DESC LIMIT 1) IS NOT NULL THEN
+    RAISE EXCEPTION 'FAIL foreign session id accepted';
+  END IF;
+  BEGIN
+    PERFORM public.log_event('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'made_up_event', '{}');
+    RAISE EXCEPTION 'FAIL unknown event name accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+  INSERT INTO public.app_events (user_id, name)
+  SELECT 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'recipe_opened' FROM generate_series(1, 300);
+  IF public.log_event('eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee', 'recipe_opened', '{}') THEN
+    RAISE EXCEPTION 'FAIL analytics daily cap not enforced';
+  END IF;
+  RAISE NOTICE 'ok   analytics: allow-listed names, own sessions only, daily cap';
+END $$;
+RESET ROLE;
+
+SET ROLE authenticated;
+SET request.jwt.sub = 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';
+SELECT pg_temp.expect_denied('user cannot read analytics', $q$SELECT 1 FROM public.app_events$q$);
+SELECT pg_temp.expect_denied('user cannot write analytics',
+  $q$INSERT INTO public.app_events (user_id, name) VALUES (auth.uid(), 'recipe_opened')$q$);
+SELECT pg_temp.expect_denied('user cannot call log_event',
+  $q$SELECT public.log_event(auth.uid(), 'recipe_opened', '{}')$q$);
+SELECT pg_temp.expect_denied('user cannot call is_guest', $q$SELECT public.is_guest(auth.uid())$q$);
+RESET ROLE;
+
 \echo 'ALL POLICY TESTS PASSED'

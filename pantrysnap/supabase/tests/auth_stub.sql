@@ -6,7 +6,11 @@ CREATE ROLE service_role NOLOGIN BYPASSRLS;
 CREATE SCHEMA auth;
 GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
 GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
-CREATE TABLE auth.users (id uuid PRIMARY KEY, raw_user_meta_data jsonb DEFAULT '{}'::jsonb);
+CREATE TABLE auth.users (
+  id uuid PRIMARY KEY,
+  raw_user_meta_data jsonb DEFAULT '{}'::jsonb,
+  is_anonymous boolean NOT NULL DEFAULT false
+);
 CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$
   SELECT nullif(current_setting('request.jwt.sub', true), '')::uuid
 $$;

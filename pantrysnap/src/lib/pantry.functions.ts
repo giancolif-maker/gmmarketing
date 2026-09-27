@@ -2,7 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { ZodTypeAny, z } from "zod";
-import { detectRequestSchema, recipesRequestSchema } from "@/lib/pantry/schemas";
+import {
+  clientEventSchema,
+  detectRequestSchema,
+  recipesRequestSchema,
+  typedRequestSchema,
+} from "@/lib/pantry/schemas";
 
 /** Validates input without echoing schema details back to the caller. */
 const validate =
@@ -24,6 +29,14 @@ export const detectIngredients = createServerFn({ method: "POST" })
     return runDetect(context.userId, data, getRequest()?.signal);
   });
 
+export const startTypedSession = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(validate(typedRequestSchema))
+  .handler(async ({ data, context }) => {
+    const { runTyped } = await import("@/lib/pantry/pantry.server");
+    return runTyped(context.userId, data);
+  });
+
 export const generateRecipes = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator(validate(recipesRequestSchema))
@@ -37,4 +50,12 @@ export const getAccountStatus = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const { getAccount } = await import("@/lib/pantry/pantry.server");
     return getAccount(context.userId);
+  });
+
+export const trackEvent = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(validate(clientEventSchema))
+  .handler(async ({ data, context }) => {
+    const { trackClientEvent } = await import("@/lib/pantry/pantry.server");
+    return trackClientEvent(context.userId, data);
   });

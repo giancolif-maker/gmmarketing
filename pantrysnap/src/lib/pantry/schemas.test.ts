@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { classifyThrown } from "./errors";
-import { detectRequestSchema, recipesRequestSchema } from "./schemas";
+import {
+  clientEventSchema,
+  detectRequestSchema,
+  recipesRequestSchema,
+  typedRequestSchema,
+} from "./schemas";
 
 const jpeg = "data:image/jpeg;base64,/9j/4AAQSkZJRg==";
 const valid = {
@@ -10,6 +15,11 @@ const valid = {
   maxMinutes: "30",
   mealType: "Dinner",
   diet: "None",
+  highProtein: false,
+  spicy: false,
+  kidFriendly: false,
+  cuisine: "Any",
+  note: "",
 };
 
 describe("detectRequestSchema", () => {
@@ -69,5 +79,89 @@ describe("classifyThrown", () => {
     expect(classifyThrown(new TypeError("Failed to fetch"))).toBe("NETWORK");
     expect(classifyThrown(new DOMException("aborted", "AbortError"))).toBe("CANCELLED");
     expect(classifyThrown(new Error("Unexpected token 'S'"))).toBe("UNKNOWN");
+  });
+});
+
+describe("new constraint fields", () => {
+  it("accepts constraint toggles, cuisine and a short note", () => {
+    const r = recipesRequestSchema.safeParse({
+      ...valid,
+      highProtein: true,
+      spicy: true,
+      cuisine: "Mexican",
+      note: "  something crispy,\n no mushrooms  ",
+    });
+    expect(r.success && r.data.note).toBe("something crispy, no mushrooms");
+  });
+  it.each([
+    ["unknown cuisine", { cuisine: "Martian" }],
+    ["note too long", { note: "x".repeat(401) }],
+    ["toggle as string", { spicy: "yes" }],
+    ["missing toggles", { highProtein: undefined }],
+  ])("rejects %s", (_, patch) => {
+    expect(recipesRequestSchema.safeParse({ ...valid, ...patch }).success).toBe(false);
+  });
+});
+
+describe("typedRequestSchema", () => {
+  it("accepts text and rejects oversize or extra fields", () => {
+    expect(typedRequestSchema.safeParse({ text: "eggs, rice" }).success).toBe(true);
+    expect(typedRequestSchema.safeParse({ text: "x".repeat(2001) }).success).toBe(false);
+    expect(typedRequestSchema.safeParse({ text: "eggs", images: [] }).success).toBe(false);
+  });
+});
+
+describe("clientEventSchema", () => {
+  const sessionId = "11111111-1111-4111-8111-111111111111";
+  it("accepts the allow-listed events", () => {
+    for (const e of [
+      { name: "input_mode_selected", mode: "type", fallback: true },
+      {
+        name: "ingredients_confirmed",
+        sessionId,
+        source: "scan",
+        initialCount: 5,
+        finalCount: 6,
+        added: 2,
+        removed: 1,
+        renamed: 1,
+      },
+      {
+        name: "recipe_opened",
+        sessionId,
+        recipeName: "Omelette",
+        position: 1,
+        shown: 3,
+        everythingOnHand: true,
+        missingCount: 0,
+      },
+      { name: "recipe_feedback", sessionId, recipeName: "Omelette", cooked: "yes" },
+    ]) {
+      expect(clientEventSchema.safeParse(e).success).toBe(true);
+    }
+  });
+  it.each([
+    ["unknown event", { name: "page_view" }],
+    [
+      "extra free text",
+      { name: "input_mode_selected", mode: "scan", fallback: false, email: "a@b.c" },
+    ],
+    ["bad mode", { name: "input_mode_selected", mode: "voice", fallback: false }],
+    [
+      "negative count",
+      {
+        name: "ingredients_confirmed",
+        sessionId,
+        source: "scan",
+        initialCount: -1,
+        finalCount: 0,
+        added: 0,
+        removed: 0,
+        renamed: 0,
+      },
+    ],
+    ["bad session id", { name: "recipe_feedback", sessionId: "x", recipeName: "a", useful: "yes" }],
+  ])("rejects %s", (_, e) => {
+    expect(clientEventSchema.safeParse(e).success).toBe(false);
   });
 });

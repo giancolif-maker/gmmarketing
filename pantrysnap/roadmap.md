@@ -1,12 +1,13 @@
-# Pantry Snap MVP
+# Pantry Snap — validation MVP
 
-- [x] Mobile-first photo upload (camera or library), resized and metadata-stripped on device
-- [x] AI ingredient detection with validated output, one retry, timeouts and cancellation
-- [x] Ingredient confirmation and meal preferences
-- [x] Recipe generation validated in code: have/missing, time limit and diet are computed server-side, not trusted from the AI
-- [x] Email and Google sign-in
-- [x] Server-enforced monthly scan limit, per-scan recipe limit and abuse rate limits (usage_events ledger)
-- [x] Flow survives refresh, Back/Forward and sign-in redirects (per-tab session storage)
-- [ ] Saved recipes — removed until they can be persisted for real (recipes/favorites tables are unused)
-- [ ] Cooking mode — removed (the old button did nothing)
-- [ ] Paid plans — not built; `profiles.is_pro` can only be set by trusted server/admin code
+- [x] Two equal ways in: scan photos or type what you have (same pipeline)
+- [x] Empty scan falls back to typing; nobody is forced through computer vision
+- [x] One review screen: inline edit/remove/add ingredients + quick constraints
+- [x] Constraints: time, servings, diet, high protein, spicy, kid-friendly, meal, cuisine, free-text note
+- [x] Recipe verification in code: availability (list + steps), time vs step durations, servings,
+      diet, free-text exclusions, protein/spice evidence, counts, substitutions
+- [x] Results show verified facts; AI explanations are labelled as such
+- [x] Validation analytics (app_events) + "did you cook it / was it useful" feedback
+- [x] Optional one-time guest trial (inactive until anonymous sign-ins are enabled)
+- [ ] Real-model evaluation — harness ready (`npm run eval`), needs LOVABLE_API_KEY and real photos
+- [ ] Not building yet: saved recipes, pantry, payments, cooking mode, meal plans, shopping lists

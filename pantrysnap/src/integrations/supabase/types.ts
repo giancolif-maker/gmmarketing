@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_events: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          props: Json
+          session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          name: string
+          props?: Json
+          session_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          name?: string
+          props?: Json
+          session_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       favorites: {
         Row: {
           created_at: string
@@ -212,6 +239,11 @@ export type Database = {
       finish_usage: {
         Args: { p_id: string; p_status: string }
         Returns: undefined
+      }
+      is_guest: { Args: { p_user: string }; Returns: boolean }
+      log_event: {
+        Args: { p_name: string; p_props: Json; p_session?: string; p_user: string }
+        Returns: boolean
       }
       usage_limits: { Args: never; Returns: Json }
       usage_summary: { Args: { p_user: string }; Returns: Json }

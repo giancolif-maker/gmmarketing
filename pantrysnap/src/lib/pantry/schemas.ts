@@ -14,15 +14,27 @@ export const LIMITS = {
   maxQuantityChars: 40,
   minServings: 1,
   maxServings: 10,
+  maxTypedChars: 2000,
+  maxNoteChars: 200,
 } as const;
 
 export const TIME_OPTIONS = ["15", "30", "45", "60+"] as const;
 export const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner", "Snack"] as const;
 export const DIETS = ["None", "Vegetarian", "Vegan", "Gluten-free"] as const;
+export const CUISINES = [
+  "Any",
+  "American",
+  "Italian",
+  "Mexican",
+  "Asian",
+  "Indian",
+  "Mediterranean",
+] as const;
 
 export type TimeOption = (typeof TIME_OPTIONS)[number];
 export type MealType = (typeof MEAL_TYPES)[number];
 export type Diet = (typeof DIETS)[number];
+export type Cuisine = (typeof CUISINES)[number];
 
 /** Upper bound on total minutes for each time option. "60+" still rejects absurd values. */
 export const TIME_LIMIT_MINUTES: Record<TimeOption, number> = {
@@ -77,25 +89,91 @@ export const detectRequestSchema = z
   })
   .strict();
 
+export const typedRequestSchema = z.object({ text: z.string().max(LIMITS.maxTypedChars) }).strict();
+
 export const recipesRequestSchema = z
   .object({
+    /** Id of the scan or typed session this request belongs to. */
     scanId: z.string().uuid(),
     ingredients: z.array(ingredientSchema).min(1).max(LIMITS.maxIngredients),
     servings: z.number().int().min(LIMITS.minServings).max(LIMITS.maxServings),
     maxMinutes: z.enum(TIME_OPTIONS),
     mealType: z.enum(MEAL_TYPES),
     diet: z.enum(DIETS),
+    highProtein: z.boolean(),
+    spicy: z.boolean(),
+    kidFriendly: z.boolean(),
+    cuisine: z.enum(CUISINES),
+    note: z
+      .string()
+      .max(LIMITS.maxNoteChars * 2)
+      .transform(cleanText)
+      .pipe(z.string().max(LIMITS.maxNoteChars)),
   })
   .strict();
 
 export type DetectRequest = z.infer<typeof detectRequestSchema>;
+export type TypedRequest = z.infer<typeof typedRequestSchema>;
 export type RecipesRequest = z.infer<typeof recipesRequestSchema>;
+
+// ---------------------------------------------------------------------------- analytics
+
+const shortText = z.string().max(80).transform(cleanText);
+const count = z.number().int().min(0).max(1000);
+
+/** Client-reported validation events. Names and fields are allow-listed; no free text beyond a recipe name. */
+export const clientEventSchema = z.discriminatedUnion("name", [
+  z
+    .object({
+      name: z.literal("input_mode_selected"),
+      mode: z.enum(["scan", "type"]),
+      fallback: z.boolean(),
+    })
+    .strict(),
+  z
+    .object({
+      name: z.literal("ingredients_confirmed"),
+      sessionId: z.string().uuid(),
+      source: z.enum(["scan", "type"]),
+      initialCount: count,
+      finalCount: count,
+      added: count,
+      removed: count,
+      renamed: count,
+    })
+    .strict(),
+  z
+    .object({
+      name: z.literal("recipe_opened"),
+      sessionId: z.string().uuid(),
+      recipeName: shortText,
+      position: count,
+      shown: count,
+      everythingOnHand: z.boolean(),
+      missingCount: count,
+    })
+    .strict(),
+  z
+    .object({
+      name: z.literal("recipe_feedback"),
+      sessionId: z.string().uuid(),
+      recipeName: shortText,
+      cooked: z.enum(["yes", "not_yet"]).optional(),
+      useful: z.enum(["yes", "no"]).optional(),
+    })
+    .strict(),
+]);
+
+export type ClientEvent = z.input<typeof clientEventSchema>;
+
+// ---------------------------------------------------------------------------- results
 
 export type Usage = {
   isPro: boolean;
+  isAnonymous: boolean;
   scansUsed: number;
   scanLimit: number;
-  resetsAt: string;
+  resetsAt: string | null;
 };
 
 export type RecipeIngredient = {
@@ -103,25 +181,41 @@ export type RecipeIngredient = {
   measurement: string;
   /** Computed on the server against the confirmed ingredient list — never taken from the AI. */
   status: "have" | "staple" | "missing";
+  /** Mentioned only in the steps, not in the AI's ingredient list. */
+  fromSteps: boolean;
+  /** Both amounts are plain counts and the recipe needs more than the user listed. */
+  short: { need: number; have: number } | null;
 };
 
 export type Recipe = {
   id: string;
   name: string;
   description: string;
+  /** The AI's own one-line reason. Shown as its explanation, never as a verified claim. */
+  whyItFits: string;
   prepMinutes: number;
   cookMinutes: number;
+  /** Lower bound: max(stated prep+cook, longest single step duration). */
   totalMinutes: number;
+  /** Set when step durations add up to noticeably more than the stated time. */
+  totalMinutesUpper: number | null;
   servings: number;
+  /** True when the AI stated the serving count and nothing in the text contradicts it. */
+  servingsStated: boolean;
   /** Share of non-staple ingredients the user already has (0–100), computed on the server. */
   matchPercent: number;
+  /** True only when nothing is missing and no amount is known to be short. */
+  everythingOnHand: boolean;
   missing: string[];
   ingredients: RecipeIngredient[];
   steps: string[];
   substitutes: Array<{ from: string; to: string }>;
+  /** Short facts verified by code, e.g. "Vegetarian (checked)", "Protein: chicken, eggs". */
+  checks: string[];
 };
 
-export type DetectResult =
+export type SessionResult =
   { ok: true; scanId: string; ingredients: Ingredient[]; usage: Usage } | Failure;
-export type RecipesResult = { ok: true; recipes: Recipe[] } | Failure;
+export type DetectResult = SessionResult;
+export type RecipesResult = { ok: true; recipes: Recipe[]; excluded: string[] } | Failure;
 export type AccountResult = { ok: true; usage: Usage } | Failure;

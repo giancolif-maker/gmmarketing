@@ -77,6 +77,12 @@ const minutes = z.preprocess(
 const rawRecipeSchema = z.object({
   name: text(80),
   description: optionalText(300),
+  whyItFits: optionalText(160),
+  // Missing or unparseable servings are kept as null ("not stated"), never guessed.
+  servings: z.preprocess(
+    (v) => (typeof v === "string" ? Number.parseInt(v, 10) : v),
+    z.number().int().min(1).max(100).nullable().catch(null),
+  ),
   prepMinutes: minutes,
   cookMinutes: minutes,
   ingredients: z

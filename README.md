@@ -86,3 +86,16 @@ Behavior:
 | `sent_log.csv` | Auto-created dedup ledger (gitignored) |
 | `logs/send_attempts.log` | Auto-created attempt log (gitignored) |
 | `.env` | Your real credentials (gitignored, never commit) |
+
+## Wan2GP (AI video generation)
+
+[Wan2GP](https://github.com/deepbeepmeep/Wan2GP) is set up alongside this repo
+(not vendored into it). To install it into `../Wan2GP` with its own venv:
+
+```bash
+scripts/setup_wan2gp.sh            # or: scripts/setup_wan2gp.sh /path/to/Wan2GP
+cd ../Wan2GP && .venv/bin/python wgp.py   # opens the web UI
+```
+
+Needs an NVIDIA GPU (RTX 20xx-50xx, CUDA 13 driver) and ~10 GB of disk for
+dependencies, plus model downloads on first use.

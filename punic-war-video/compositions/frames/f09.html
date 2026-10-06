@@ -106,7 +106,7 @@ function buildFrame(gsap, document, P, CUE) {
   };
 
   const CUSTOM = {
-    title: (el, t) => { tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.12 }, t); const kids = el.querySelectorAll("text, g"); tl.from(kids, { opacity: 0, y: 40, duration: 0.4, stagger: 0.12, ease: "back.out(2)" }, t + 0.1); },
+    title: (el, t) => { tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.12 }, t); Array.from(cam.children).forEach((c) => { if (c !== el && c.tagName !== "defs") tl.to(c, { opacity: 0, duration: 0.01 }, t + 0.12); }); const kids = el.querySelectorAll("text, g"); tl.from(kids, { opacity: 0, y: 40, duration: 0.4, stagger: 0.12, ease: "back.out(2)" }, t + 0.1); },
     storm: (el, t) => { fade(el, t, 0.3); tl.fromTo(el.querySelectorAll(".rain"), { y: -60 }, { y: 60, duration: 0.5, repeat: 8, ease: "none" }, t); const bolt = el.querySelector("[id$='bolt']"); if (bolt) tl.fromTo(bolt, { opacity: 0 }, { opacity: 1, duration: 0.06, yoyo: true, repeat: 5 }, t + 0.4); },
     hand: (el, t) => slideY(el, t, -700, 0.6, "power2.out"),
     islands: (el, t) => { const b = base(el); tl.fromTo(el, { y: b.y + 60, opacity: 1 }, { y: b.y, duration: 0.6, ease: "back.out(2)" }, t + 0.55); },

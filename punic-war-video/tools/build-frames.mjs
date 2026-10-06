@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 import { FRAMES } from "./cues.mjs";
 const ROOT = new URL("../", import.meta.url);
 const rel = (p) => new URL(p, ROOT);
-for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js"]) await import(rel(f).href);
+for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js"]) await import(rel(f).href);
 const { Toon, Scenes } = globalThis;
 const timing = JSON.parse(readFileSync(rel("build/timing.json"), "utf8"));
 const engine = readFileSync(rel("assets/lib/engine.js"), "utf8");

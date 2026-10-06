@@ -19,8 +19,9 @@
   H.columns = (xs, y = 820, h = 640) => xs.map((x) => P.column(x, y, h)).join("");
   H.vignette = (id = "vig", o = 0.55) =>
     `<defs><radialGradient id="${id}" cx=".5" cy=".5" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="${o}"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#${id})" pointer-events="none"/>`;
-  H.grain = () => `<rect width="1920" height="1080" filter="url(#grain)" opacity=".7"/>`;
-  H.defs = () => `<defs>${Toon.paperGrain("grain")}</defs>`;
+  // Paper grain: a pre-baked noise tile (assets/lib/grain.js) — far cheaper to render than feTurbulence.
+  H.grain = () => `<rect width="1920" height="1080" fill="url(#grain)" opacity=".8" pointer-events="none"/>`;
+  H.defs = () => `<defs><pattern id="grain" width="256" height="256" patternUnits="userSpaceOnUse"><image href="${g.GRAIN_PNG}" width="256" height="256"/></pattern></defs>`;
 
   // Faction territory polygons (lon/lat) — clipped to land by Toon.map.
   const R = {

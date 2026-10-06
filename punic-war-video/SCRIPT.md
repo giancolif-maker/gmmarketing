@@ -1,386 +1,582 @@
-# SCRIPT — The Second Punic War (v2: dialogue-driven, ~2,600 words ≈ 16 min)
+# SCRIPT — The Second Punic War (v3: the funny one, ~2,750 words ≈ 16–17 min)
 
-**Voices:** one TTS voice per character (see Cast). Narrator: dry, deadpan, quick.
-**Format rule:** `NARRATOR:` lines carry the history; character lines carry the jokes.
-Stage directions in [brackets] are visuals/SFX, never spoken.
+**Voices:** expressive TTS, one voice per character. **Narrator: high energy, fast, amused** —
+a storyteller who can't believe this really happened, not a lecturer. He snaps to dead
+serious for the death tolls (Saguntum, Cannae, Metaurus, the ending) and back again.
+**Format:** `NARRATOR:` carries history; characters carry jokes. Exchanges are fast, 2–8
+words a line, punchline last. `[brackets]` = visuals/SFX, never spoken.
+**Rule:** every joke here is original. Mechanisms come from `COMEDY_NOTES.md`; no lines,
+names or gags are borrowed.
 
-## Cast (recurring)
+## Cast
 
-| Character | Who | Voice direction |
+| Character | Who | Voice |
 | --- | --- | --- |
-| NARRATOR | — | Dry, deadpan teacher. Throws jokes away. |
-| HANNIBAL | Carthage's general. Purple crest, short black beard | Calm, intense, quietly smug |
-| HAMILCAR | His dad. Revenge hobbyist | Loud, theatrical |
-| GISGO | Hannibal's anxious officer (real person, Plutarch) | Nervous, high, sensible |
-| SURUS | Hannibal's elephant (named in Roman sources) | Slow, deep, dim, sincere |
-| HANNO | Carthaginian senator who hates the Barcas | Bored, nasal. Mostly says "No." |
-| FLACCUS | Roman senator | Pompous, unflappable: "Okay. More legions." |
-| SCIPIO (elder) | Roman consul | Busy, harried dad |
-| PUBLIUS | His son, later Scipio Africanus | Earnest teen → cocky young general |
-| ENVOY | Roman ambassador | Grand, theatrical |
-| SAGUNTINE | Citizen of Saguntum | Cheerful, then not |
+| NARRATOR | — | Excited storyteller; throws jokes away, never laughs at them |
+| HANNIBAL | Carthage's general | Calm, quietly smug, terrifyingly polite |
+| MAGO | His little brother and officer. Worrier. Always right, never listened to | Anxious, high, fast |
+| SURUS | Hannibal's elephant | Slow, deep, sincere. Wants the beach |
+| HAMILCAR | Their dad | Loud, theatrical, unhinged |
+| HANNO | Carthage senate boss. Hates the Barcas. Answers everything "No." | Bored, nasal |
+| FLACCUS | Rome senate boss. Answers every disaster "Okay. More legions." | Pompous, unbothered |
+| DENNIS | Roman clerk who keeps the legion count | Flat, tired, honest |
+| SCIPIO | Roman consul, harried dad | Busy |
+| PUBLIUS | His son → Scipio Africanus. Studies Hannibal like homework | Earnest teen → cocky |
+| One-scene: ENVOY, SAGUNTINE, HASDRUBAL THE HANDSOME, SPY, TRIBESMAN, SEMPRONIUS, FLAMINIUS, FABIUS, VARRO, GISGO, MAHARBAL, SAILOR, ARCHIMEDES, MOTHER, MASINISSA, CATO | | |
 
-**Running gags:** Elephant Counter (37 → …) · Flaccus: "Okay. More legions." · Hanno: "No." · Consul Counter · Rome copies other people's homework.
+## Running gags (each escalates, then pays off or inverts)
+
+1. **"Okay. More legions."** — Flaccus to every disaster; Dennis reads the count and it gets
+   worse each time. Inverts at the end: Flaccus finally says Hanno's word, "No."
+2. **Hanno's "No."** — four letters from Hannibal, four Nos; by the 4th Hannibal writes Hanno's
+   answer for him. Inverts: Hanno finally *receives* a "No" and doesn't like it.
+3. **The Consul Welcome Pack** — the same welcome scene replays for every new consul, word
+   for word, with one name swapped. Consul Counter ticks up.
+4. **Surus wants the beach** — pays off when he finally reaches one, in Africa, right before
+   the worst day of his life.
+5. **REMEMBER THIS KID** — a sticky arrow on Publius; turns out to be the whole ending.
+6. **Rome copies homework** — the ship (Act 1) → Hannibal's battle plan (Act 4).
+7. **The invoice** — Rome bills Carthage for complaining (Act 1); the peace treaty is the
+   same invoice, much longer (Act 4).
+8. **Scoreboard bookend** — the cold-open scoreboard and "I'd like to see the replay" return
+   as the final scene.
 
 ---
 
-# ACT 1 — "Some Guy With Elephants" (pilot, ~6:00)
+# ACT 1 — "Some Guy With Elephants"
 
-## Scene 1 — Cold open (Frame 1)
+## F01 — Cold open: the scoreboard
 [Sports scoreboard: CARTHAGE vs ROME. Hannibal's column fills: W. W. W. W. W.]
 
-    NARRATOR: This man is Hannibal Barca. He invaded Italy with elephants, beat Rome in battle after battle, and won a victory so total that generals still study it today.
-    [Final box: L.]
+    NARRATOR: This is Hannibal Barca! He marched elephants over the Alps, beat Rome in battle after battle after battle, and won a victory so perfect that generals are STILL copying it, two thousand years later!
+    [Final box slams: L.]
     NARRATOR: He lost.
     HANNIBAL: I'd like to see the replay.
-    NARRATOR: This is the Second Punic War.
-[TITLE CARD: THE SECOND PUNIC WAR — Part 1: "Some Guy With Elephants"]
+    NARRATOR: Later. This is the Second Punic War!
+[TITLE: THE SECOND PUNIC WAR — Part 1: "Some Guy With Elephants"]
 
-## Scene 2 — The neighbors (Frame 2)
-[Mediterranean map. Rome and Carthage pop up either side of the sea like neighbors over a fence.]
+## F02 — The neighbours
+[Map. Rome and Carthage pop up either side of the sea like neighbours over a fence.]
 
-    NARRATOR: In one corner: Rome. Likes roads, laws, and everything that isn't Rome yet. In the other: Carthage, a rich North African trading city with the best navy around.
-    ROME (FLACCUS): Nice island you've got there.
-    CARTHAGINIAN: It's Sicily. It's ours.
-    FLACCUS: For now.
+    NARRATOR: On one side: Rome! Hobbies: roads, laws, and owning things that aren't Rome yet. On the other: Carthage! Rich, North African, best navy on Earth.
+    FLACCUS: Nice island.
+    CARTH: Thank you. It's ours.
+    FLACCUS: Is it, though?
 
-## Scene 3 — First war speed-run (Frame 3)
-[Rome's shipyard. A beached Carthaginian warship. Romans with measuring tape.]
+## F03 — First war speed-run (copying homework #1)
+[Roman shipyard. A beached Carthaginian warship. Romans with measuring tape.]
 
-    NARRATOR: They'd already fought once: the First Punic War, twenty-three years, mostly over Sicily. Rome had no real navy, so they found a wrecked Carthaginian warship and copied it. Plank. By. Plank.
-    GISGO (as Carthaginian sailor, offscreen): Hey, that's ours!
-    NARRATOR: Then Rome lost entire fleets. Not to Carthage. To storms.
+    NARRATOR: They'd already had one war over that island. Rome didn't have a navy, so Rome found a wrecked Carthaginian ship and copied it. Plank. By. Plank.
+    CARTH: That's literally my boat.
+    NARRATOR: Then Rome lost four entire fleets. Not to Carthage. To the weather.
     FLACCUS: Okay. More ships.
-    NARRATOR: And by being too stubborn to stop, Rome won. Carthage lost Sicily, and got a massive bill.
+    NARRATOR: And Rome won anyway, mostly by refusing to stop. Remember that. It's the whole video.
 
-## Scene 4 — The complaining fee (Frame 4)
-[Carthage fighting its own furious unpaid mercenaries. A Roman hand reaches across the sea and quietly lifts Sardinia and Corsica off the map.]
+## F04 — The complaining fee (invoice #1)
+[Carthage fighting its own unpaid mercenaries. A Roman hand reaches over and lifts Sardinia and Corsica off the map.]
 
-    NARRATOR: Then Carthage couldn't pay its mercenaries, who attacked Carthage. While it was busy, Rome took Sardinia. And Corsica.
-    CARTHAGINIAN: Hey! You can't just—
-    FLACCUS: We're borrowing them.
-    CARTHAGINIAN: For how long?
-    FLACCUS: Forever-ish.
-    NARRATOR: When Carthage complained, Rome added another twelve hundred talents to the bill. For complaining.
-[Invoice slides in: "COMPLAINING FEE — 1,200 talents"]
+    NARRATOR: Then Carthage's own mercenaries attacked Carthage, over pay. And while Carthage was busy, Rome quietly picked up Sardinia. And Corsica.
+    CARTH: Excuse me, those are—
+    FLACCUS: Ours now. Finders keepers.
+    CARTH: We didn't lose them, you TOOK them!
+    FLACCUS: Hm. That sounds like a complaint.
+    NARRATOR: Rome then charged Carthage twelve hundred more talents. For complaining. That really happened.
+[Invoice: "COMPLAINING FEE — 1,200 talents"]
 
-## Scene 5 — Hamilcar (Frame 5)
-[Dark room. A corkboard covered in Roman portraits and red string. A man stares at it, twitching.]
+## F05 — Hamilcar
+[Dark room. Corkboard of Roman faces and red string. Hamilcar, twitching.]
 
-    NARRATOR: Nobody took this harder than Hamilcar Barca. "Barca" meant lightning. His hobbies were Rome, and hating Rome.
-    HAMILCAR: Everything connects back to them. The islands. The fee. My lower back pain.
-    NARRATOR: Carthage's senate, led by a man called Hanno, was over it.
-    HAMILCAR: Send me to Spain. I'll conquer it, dig up the silver, pay off Rome. Purely financial.
-    HANNO: …Is this a revenge thing?
-    HAMILCAR: Purely. Financial.
+    NARRATOR: Nobody took it worse than Hamilcar Barca! His surname meant "lightning." His personality also meant lightning.
+    HAMILCAR: It's all connected. The islands. The fee. My knee. ROME.
+    HANNO: Your knee is not Rome.
+    HAMILCAR: Then explain why it hurts when I think about Rome!
+    NARRATOR: He asked the senate to send him to Spain, to "make money."
+    HANNO: Is this a revenge thing?
+    HAMILCAR: It's a money thing. With revenge… as a side dish.
     HANNO: No.
     NARRATOR: He went anyway.
 
-## Scene 6 — The oath (Frame 6)
+## F06 — The oath
 [Temple. Altar fire. Hamilcar kneels next to his nine-year-old son.]
 
-    HAMILCAR: Hannibal. Do you want to come to Spain with Daddy?
-    YOUNG HANNIBAL: Yes!
-    HAMILCAR: Then put your hand on the altar and swear eternal hatred of Rome.
-    YOUNG HANNIBAL: …Is there a version of Spain without the hatred?
-    HAMILCAR: No.
-    YOUNG HANNIBAL: …I swear.
-    NARRATOR: This really happened. Most kids that age get a pet.
-[Split screen: other kid hugging a puppy | Hannibal hugging a scroll that says ETERNAL HATRED]
-    NARRATOR: Hannibal got a grudge. He kept it forever.
+    HAMILCAR: Hannibal! Want to come on a trip with Daddy?
+    KID: Yes!
+    HAMILCAR: Great. Swear eternal hatred of Rome.
+    KID: …Do I get a snack after?
+    HAMILCAR: You get hatred. Forever.
+    KID: …Okay.
+    NARRATOR: The ancient historians say this really happened! Most kids his age got a pet.
+[Split screen: kid hugging a puppy | Hannibal hugging a scroll, ETERNAL HATRED]
+    NARRATOR: Hannibal got a grudge. And honestly? He took better care of it than most people take of a pet.
 
-## Scene 7 — Spain (Frame 7)
-[Map zooms to Iberia. Purple spreads. Silver coins spurt out of mines. A Roman spy in an obviously fake beard watches from a bush.]
+## F07 — Spain
+[Map zooms to Iberia. Purple spreads. Silver coins spurt from mines. A Roman spy in a fake beard behind a bush.]
 
-    NARRATOR: In Spain, Hamilcar built a new empire: silver mines, tough soldiers, elephants.
-    ROMAN SPY: (into a scroll) Carthage. Getting rich again. Also — elephants.
-    NARRATOR: Then, retreating from a battle, Hamilcar drowned in a river.
+    NARRATOR: In Spain, Hamilcar built a whole new empire! Silver mines. Tough soldiers. Elephants.
+    SPY: Carthage: rich again. Spain: theirs. Elephants: yes. My beard: convincing.
+    NARRATOR: Then, while retreating across a river… Hamilcar drowned.
 [River. One "blub." A helmet floats.]
-    HAMILCAR (bubbles): Remember — hate Rome! And feed the elephants!
+    HAMILCAR: Boys! Hate Rome! Feed the elephants! And don't—
+[Blub.]
+    NARRATOR: Historians have spent two thousand years wondering what "don't" was.
 
-## Scene 8 — Handsome, then not (Frame 8)
+## F08 — Handsome, then not
 [A sparkling man with perfect hair. Rose petals.]
 
-    NARRATOR: Next came his son-in-law, known as Hasdrubal the Handsome. Not "the Brave." Not "the Wise." The Handsome.
-    HASDRUBAL: (flips hair)
+    NARRATOR: Next in charge: his son-in-law, Hasdrubal! Known to history as… Hasdrubal the Handsome. Not "the Brave." Not "the Wise." Just. Handsome.
+    HASDRUBAL: It's a burden.
     NARRATOR: He signed a deal with Rome: Carthage stays south of the River Ebro.
-[Dotted line draws across Spain. Hasdrubal and a Roman shake hands.]
     FLACCUS: Not one toe over this line.
-    HASDRUBAL: Wouldn't dream of it, darling.
-    NARRATOR: Then a servant with a personal grudge assassinated him. The Barca family had a lot of problems. Most were grudges.
+    HASDRUBAL: Have you SEEN my toes? I'd never risk them.
+    NARRATOR: Then a servant with a grudge assassinated him. Hasdrubal the Handsome became Hasdrubal the… Late. That family had a lot of grudges.
 
-## Scene 9 — Hannibal in charge (Frame 9)
-[Soldiers raise a grown-up Hannibal on a shield. Flash insert: little Hannibal, same scowl.]
+## F09 — Hannibal in charge
+[Soldiers raise grown-up Hannibal on a shield. Flash insert: little Hannibal, same scowl.]
 
-    NARRATOR: In 221 BC, the army picked a new commander: Hannibal, twenty-six. The kid from the altar. Still angry. The soldiers loved him. He slept on the ground in his cloak, next to the sentries.
-    GISGO: He sleeps on the ground? I have a bed. Now I feel bad about my bed.
+    NARRATOR: So in 221 BC, the army picked a new boss. Hannibal! Twenty-six years old! The kid from the altar. Still holding the grudge. His soldiers adored him. He ate what they ate, and slept on the ground in his cloak, next to the guards.
+    MAGO: He sleeps on the GROUND. I have a pillow. Now I feel like a monster.
+    NARRATOR: This is Mago, his little brother. Mago worries. Mago is always right. Nobody ever listens to Mago.
 
-## Scene 10 — Saguntum (Frame 10)
-[Small walled town with a big hand-painted sign: "FRIENDS WITH ROME ♥"]
+## F10 — Saguntum
+[Small walled town with a hand-painted sign: "FRIENDS WITH ROME ♥"]
 
-    NARRATOR: South of the Ebro sat Saguntum. Saguntum was friends with Rome.
-    SAGUNTINE: We're friends with Rome! Rome will protect us!
+    NARRATOR: South of the Ebro sat a little town called Saguntum. Saguntum had a best friend.
+    SAGUNTINE: We're friends with Rome! Rome's got our back!
     NARRATOR: Hannibal attacked it anyway.
-[Calendar flips: month 1… month 4… month 8. The sign gets more and more burned.]
-    NARRATOR: The siege lasted eight months. Rome, its very good friend, sent…
-[A messenger hands over a scroll.]
-    SAGUNTINE: (reads) "Thoughts and prayers. — Rome."
-    NARRATOR: Saguntum fell.
+[Calendar flips: month 1… 4… 8. The sign burns.]
+    NARRATOR: The siege lasted eight months. And Rome, their best friend in the whole world, sent…
+    SAGUNTINE: (reads scroll) "Thinking of you! — Rome."
+    NARRATOR: When Saguntum fell, many of its people chose to die rather than surrender. Rome had promised to protect them. Rome had been busy.
 
-## Scene 11 — The toga (Frame 11)
-[Carthage's senate chamber. A Roman envoy holds up a fold of his toga.]
+## F11 — The toga
+[Carthage's senate. A Roman envoy holds up a fold of his toga.]
 
-    NARRATOR: So Rome sent envoys to Carthage, to demand Hannibal be handed over.
-    ENVOY: In this fold of my toga, I carry peace — and war. Choose!
-    HANNO: You keep war in your toga?
-    ENVOY: Yes.
-    HANNO: What else is in there?
-    ENVOY: …Snacks. Choose!
-    CARTHAGINIAN SENATE: You choose.
-    ENVOY: (drops the fold) Then I give you… war!
-    NARRATOR: That really happened. The Second Punic War began in 218 BC. With a toga.
+    NARRATOR: So Rome sent envoys to Carthage, demanding Hannibal be handed over. And the lead envoy did the most dramatic thing a man in a bedsheet has ever done.
+    ENVOY: In this fold of my toga, I hold peace — and war! Choose!
+    HANNO: Which side is which?
+    ENVOY: It doesn't— it's metaphorical. CHOOSE!
+    HANNO: You choose.
+    ENVOY: Fine! I let fall… WAR!
+    HANNO: …You dropped a sandwich.
+    NARRATOR: The toga part is real. The sandwich is just very likely. The Second Punic War had begun! 218 BC.
 
-## Scene 12 — The plan (Frame 12)
-[Roman war room: confident senators push ship tokens toward Spain and Africa. Cut to Hannibal's tent: he drags one long arrow from Spain, over the mountains, into Italy.]
+## F12 — The plan
+[Roman war room: ship tokens push toward Spain and Africa. Cut to Hannibal's tent: one long arrow over the mountains into Italy.]
 
-    NARRATOR: Rome owned the sea. The plan: one army sails to Spain, one to Africa. Easy.
+    NARRATOR: Rome owned the sea, so Rome's plan was simple: one army sails to Spain, one army sails to Africa. Done.
     FLACCUS: Where's he going to go? He can't sail. He can't fly.
-    NARRATOR: Hannibal's plan was simpler.
+    NARRATOR: Nobody had ever marched an army over the Alps, in autumn, with elephants. Because that's insane. So, naturally…
     HANNIBAL: We walk.
-    GISGO: Sir. Those are mountains.
+    MAGO: Walk. To Italy. Through those?
+    HANNIBAL: Mm-hm.
+    MAGO: They're called the Alps. People die there for fun.
+    HANNIBAL: Then it will be fun.
+    MAGO: That's not what I— okay.
+    NARRATOR: It would not be fun.
+
+## F13 — Roll call
+[Huge column of troops. Counters spin up.]
+
+    NARRATOR: Hannibal marched out with ninety thousand infantry! Twelve thousand cavalry! And thirty-seven elephants!
+[Elephant Counter pins to the corner: 37]
+    NARRATOR: This is Surus. Surus is the biggest one. Surus thinks this is a holiday.
+    SURUS: Is there a beach?
+    HANNIBAL: There's… a coast. Eventually.
+    SURUS: I'll pack my towel.
+
+## F14 — The Pyrenees
+[Route draws over the Pyrenees. Soldiers peel off holding little "nope" signs.]
+
+    NARRATOR: First up: the Pyrenees! Hostile tribes the whole way. Thousands of his men decided they'd rather go home. So Hannibal just… let them.
+    MAGO: Hold on. We were ALLOWED to go home?
     HANNIBAL: Yes.
-    GISGO: Big ones.
-    HANNIBAL: Yes.
-    GISGO: With snow on.
-    HANNIBAL: It'll be fine.
-    NARRATOR: It would not be fine.
-
-## Scene 13 — Roll call (Frame 13)
-[Huge column of troops. Three counters spin up.]
-
-    NARRATOR: Hannibal set off with ninety thousand infantry, twelve thousand cavalry, and thirty-seven elephants.
-[Elephant Counter pins to the corner: 🐘 37]
-    NARRATOR: This is Surus. Surus has no idea what he signed up for.
-    SURUS: Are we going to the beach?
-    HANNIBAL: Sort of.
-
-## Scene 14 — The Pyrenees (Frame 14)
-[Route draws over the Pyrenees. Soldiers peel off the column with little "nope" signs.]
-
-    NARRATOR: First, the Pyrenees, fighting tribes the whole way. Thousands of soldiers wanted out. So Hannibal just… sent them home.
-    GISGO: Wait, we were allowed to leave?
+    MAGO: Great, I'll just—
     HANNIBAL: Not you.
 
-## Scene 15 — The Rhône (Frame 15)
+## F15 — The Rhône
 [River. A giant raft covered in dirt and grass. Surus on top, suspicious.]
 
-    NARRATOR: Next, the Rhône. Elephants hate water, so engineers built huge rafts covered in dirt, so they'd think it was land.
-    SURUS: This is ground.
-    [Raft pushes off.]
-    SURUS: …The ground is moving.
-    [Surus leaps off, sinks, then pops up with his trunk sticking out like a snorkel.]
-    NARRATOR: Some panicked and jumped in. Turns out elephants can swim, using their trunks as snorkels. Everyone learned something that day.
+    NARRATOR: Next: the river Rhône. Elephants hate deep water, so the engineers built enormous rafts and covered them in dirt, to trick the elephants into thinking it was land.
+    SURUS: Ground. Good ground.
+[Raft pushes off.]
+    SURUS: Why is the ground leaving?
+[Surus panics, leaps off, sinks — then pops up, trunk up like a snorkel.]
+    NARRATOR: Some panicked and jumped in, and discovered elephants can swim, using their trunks as snorkels! Surus considered this the beach.
+    SURUS: Five stars.
 
-## Scene 16 — Three days late (Frame 16)
-[A Roman ship crunches onto a riverbank. Scipio leaps off, sword raised. Nobody. A smoking campfire. A tumbleweed. A large pile of elephant dung.]
+## F16 — Three days late
+[A Roman ship crunches ashore. Scipio leaps off, sword up. Smoking campfire. Tumbleweed. A large pile of dung.]
 
-    NARRATOR: Meanwhile, the consul Publius Scipio raced to the Rhône to stop him.
-    SCIPIO: Hannibal! Surrender in the name of— oh.
-    NARRATOR: He arrived three days after Hannibal had left.
-    SCIPIO: (pokes the dung) It's still warm.
+    NARRATOR: Meanwhile, the Roman consul Publius Scipio was racing to the Rhône to stop him!
+    SCIPIO: Hannibal! In the name of the Senate and People of— oh.
+    NARRATOR: He was three days late.
+    SCIPIO: (pokes the dung) Still warm. We're close.
+    NARRATOR: He was not close. He then sailed to Spain anyway, which turned out to matter a lot. Remember him.
 
-## Scene 17 — The Alps (Frame 17)
-[Towering white peaks. Blizzard. A tiny column on a ledge.]
+## F17 — The Alps
+[Towering peaks. Blizzard. A tiny column on a ledge.]
 
-    NARRATOR: And then: the Alps. In autumn. With elephants.
-    NARRATOR: Snow, ice, landslides, narrow paths over enormous drops. Many of his men had never seen snow. They hated it immediately.
-    GISGO: Sir, it's very cold.
-    HANNIBAL: Think warm thoughts.
-    GISGO: My warm thought is Spain, sir.
+    NARRATOR: And then: the Alps. In autumn. With elephants. Snow, ice, landslides, paths one foot wide over a two thousand foot drop. Most of his men had never even SEEN snow. They hated it immediately.
+    MAGO: Brother, I can't feel my face.
+    HANNIBAL: Then it can't hurt.
+    MAGO: That's— that's not how faces work.
 
-## Scene 18 — Rocks from above (Frame 18)
-[Mountain tribesmen on a cliff top with a bowling-alley scoreboard. They roll boulders down onto the column.]
+## F18 — Rocks from above
+[Mountain tribesmen on a clifftop with a bowling scoreboard. Boulders roll down.]
 
-    NARRATOR: The mountain tribes didn't love an army marching through their home, so they rolled rocks onto it.
-    TRIBESMAN: Strike!
-    NARRATOR: He fought through, but lost a lot of men.
+    NARRATOR: The local tribes did not love a giant army marching through their living room. So they rolled boulders on it.
+    TRIBESMAN: Strike! …Spare. …Strike! Ooh, an elephant, that's double points.
+    SURUS: I am not a pin!
+    NARRATOR: Hannibal fought through. But he lost a lot of men on those cliffs.
 
-## Scene 19 — The boulder (Frame 19)
-[Cooking-show set. Banner: "CHEF HANNIBAL'S ROCK REMOVAL." A massive boulder blocks the path.]
+## F19 — The boulder
+[Cooking-show set: "CHEF HANNIBAL'S ROCK REMOVAL." A huge boulder blocks the path.]
 
-    NARRATOR: At one point a rock blocked the path. Livy says they lit a fire against it, poured sour wine on, and cracked it apart.
-    HANNIBAL: First, heat your rock for several hours. Then, a generous splash of vinegar. And… smash.
-    NARRATOR: Is that true? Historians argue about it. Is it awesome? Historians do not argue about that.
+    NARRATOR: Then a giant rock blocked the path. And the Roman historian Livy says Hannibal heated it with fire, splashed it with sour wine, and cracked it apart!
+    HANNIBAL: Heat your rock for six hours. A generous splash of vinegar. Season with violence. And… smash.
+    NARRATOR: Is it true? Historians argue about it. Is it awesome? No historian has ever argued about that.
 
-## Scene 20 — Italy (Frame 20)
-[An exhausted, frozen army stumbles out onto the green plains of northern Italy. Counters spin DOWN.]
+## F20 — Italy
+[An exhausted, frozen army stumbles onto the green plains of northern Italy. Counters spin DOWN.]
 
-    NARRATOR: Fifteen days later, they stumbled into Italy. Of ninety thousand infantry… about twenty thousand were left. Six thousand cavalry. And thirty-seven elephants—
+    NARRATOR: After fifteen days in the mountains, they stumbled out into Italy. Of ninety thousand infantry… roughly twenty thousand were left. Six thousand cavalry. And thirty-seven elephants—
 [Counter wobbles… stays at 37.]
-    NARRATOR: —who somehow mostly made it. Nobody knows how.
-    SURUS: That was a terrible beach.
-    NARRATOR: He'd lost most of his army. But he was in Italy, and Rome hadn't seen it coming, because nobody had ever done anything this stupid before.
+    NARRATOR: —who were totally fine? Somehow? Nobody knows how!
+    SURUS: Worst beach ever.
+    NARRATOR: He'd lost most of his army. But he was in Italy, and Rome had not seen it coming, because nobody had ever been crazy enough to try.
 
-## Scene 21 — Rome finds out / Ticinus (Frame 21)
+## F21 — Rome finds out / Ticinus
 [Roman senate. A messenger whispers. Flaccus does a spit-take.]
 
-    FLACCUS: He did WHAT? He walked?! Over the ALPS?!
-    NARRATOR: Scipio rushed back and met Hannibal's cavalry at the Ticinus River. It went badly. Scipio was wounded, and only saved when his seventeen-year-old son charged in and dragged him out.
+    FLACCUS: He WALKED?! Over the ALPS?! With ELEPHANTS?! …Is that allowed?
+    NARRATOR: Scipio rushed back and met Hannibal's cavalry at the Ticinus River. It went badly. Scipio was wounded — and only survived because his seventeen-year-old son charged into the fight and dragged him out.
     PUBLIUS: Dad! I've got you!
-    SCIPIO: Publius?! You're supposed to be guarding the baggage!
-    PUBLIUS: You're welcome.
+    SCIPIO: Publius?! You're supposed to be guarding the luggage!
+    PUBLIUS: The luggage is fine!
 [Red arrow points at the kid: REMEMBER THIS KID.]
 
-## Scene 22 — Cliffhanger (Frame 22)
+## F22 — Cliffhanger
 [Night. Campfires across the Po valley. Hannibal on Surus, looking south.]
 
-    NARRATOR: Hannibal was in Italy. The local Gauls, who hated Rome, flocked to join him.
+    NARRATOR: The local Gauls hated Rome, so they flocked to join him by the thousands!
+    FLACCUS: Dennis. How many legions do we have?
+    DENNIS: Plenty, sir.
     FLACCUS: Okay. More legions.
-    NARRATOR: Rome was about to learn just how bad this was going to get.
+    NARRATOR: Rome was about to find out just how bad this was going to get.
     SURUS: Are we there yet?
-    HANNIBAL: Not even close.
-[END CARD: "NEXT TIME — Part 2: Rome Keeps Sending Consuls"]
+    HANNIBAL: We haven't even started.
+[END CARD: "NEXT TIME — Rome Keeps Sending Consuls"]
 
 ---
 
-# ACT 2 — "Rome Keeps Sending Consuls" (~4:00)
+# ACT 2 — "Rome Keeps Sending Consuls"
 
-    NARRATOR: Rome sent the other consul, Sempronius Longus, to deal with Hannibal at the River Trebia. It was December. It was snowing.
-    HANNIBAL: Gisgo, take some horsemen, go poke the Romans. Then run away.
-    GISGO: That's it?
-    HANNIBAL: That's the whole plan.
-    NARRATOR: At dawn, Numidian cavalry rode up to the Roman camp and threw things at it. Sempronius was furious. He marched his whole army out — before breakfast — and waded across the freezing river, chest-deep.
-    SEMPRONIUS: Charge! (teeth chattering) Ch-ch-charge!
-    NARRATOR: On the other side, Hannibal's men had eaten a hot breakfast and rubbed olive oil on themselves to keep warm.
-    GISGO: (oily, thumbs up) Toasty.
-    NARRATOR: Then Hannibal's brother Mago burst out of a hidden riverbed behind the Romans. Rome lost something like twenty thousand men. Hannibal lost… mostly elephants. The cold killed nearly all of them.
+## F23 — The Welcome Pack #1: Sempronius
+[Senate office. Flaccus hands a nervous new consul a welcome basket and a mug: "WORLD'S BEST CONSUL".]
+
+    FLACCUS: Welcome to consul! Here's your army, your mug, and your enemy. Any questions?
+    SEMPRONIUS: Just one. What happened to the last guy?
+    FLACCUS: He's… resting.
+    NARRATOR: Sempronius met Hannibal at the River Trebia. In December. In the snow. And Hannibal had a plan.
+    HANNIBAL: Mago. Hide in that riverbed with a thousand men. Don't make a sound.
+    MAGO: How long?
+    HANNIBAL: Until it's funny.
+
+## F24 — Breakfast
+[Dawn. Numidian horsemen pelt the Roman camp. Sempronius wades a chest-deep icy river.]
+
+    NARRATOR: At dawn, Hannibal's Numidian cavalry rode up to the Roman camp and started throwing things at it. Sempronius was furious. So he marched his entire army out — before breakfast — straight through a freezing river, chest-deep.
+    SEMPRONIUS: Ch-ch-charge! Wh-why is it ch-chunky?
+    NARRATOR: On the other side, Hannibal's men had eaten a hot breakfast by the fire and rubbed themselves down with olive oil to keep warm.
+    HANNIBAL: (sipping) Hm. Good river.
+
+## F25 — Trebia, the result
+[Mago bursts out of the riverbed behind the Romans. Elephant counter drops.]
+
+    NARRATOR: Then Mago burst out of the riverbed right behind them!
+    MAGO: Is it funny yet?!
+    NARRATOR: Rome lost something like twenty thousand men. And Hannibal lost… mostly elephants. The freezing winter killed nearly all of them.
 [Elephant counter: 37 → 1]
-    SURUS: Hello? …Guys?
+    SURUS: Guys? …Hello?
+    FLACCUS: Dennis?
+    DENNIS: Down a few legions, sir.
     FLACCUS: Okay. More legions.
 
-    NARRATOR: Next spring, Hannibal took a shortcut through a flooded marsh. For four days and three nights his army waded through water, sleeping on piles of dead pack animals. Hannibal caught an eye infection — and lost the sight in one eye.
+## F26 — The marsh
+[Hannibal's army waist-deep in a flooded marsh; men sleeping on piles of dead pack animals.]
+
+    NARRATOR: Next spring, Hannibal took a shortcut. Through a flooded marsh. For FOUR days and three nights. Nowhere dry to sleep — except on top of the dead pack animals. And Hannibal caught an infection… and lost the sight in one eye.
 [Hannibal now wears an eyepatch.]
     HANNIBAL: Shortcut.
-    GISGO: It was not a shortcut, sir.
+    MAGO: Brother. You lost an EYE.
+    HANNIBAL: And we saved a whole day.
 
-    NARRATOR: Chasing him was a new consul, Flaminius. Hannibal hid his whole army in the hills above Lake Trasimene, on a foggy morning, and waited.
-    FLAMINIUS: Lovely fog. Can't see a thing. Onward!
-    NARRATOR: The Romans marched into the gap between the hills and the lake. And the hills attacked. In about three hours, around fifteen thousand Romans were killed, some drowning in the lake trying to swim away in armor. Flaminius died too.
+## F27 — The Welcome Pack #2: Flaminius, Lake Trasimene
+[Same senate office. Same basket. Same mug, slightly chipped. Then: fog over the lake; hills full of hidden soldiers.]
+
+    FLACCUS: Welcome to consul! Here's your army, your mug, and your enemy. Any questions?
+    FLAMINIUS: What happened to the last guy?
+    FLACCUS: He's… also resting.
+    NARRATOR: Flaminius chased Hannibal to Lake Trasimene. Hannibal hid his entire army in the hills above the lake road, on a foggy morning… and waited.
+    FLAMINIUS: Can't see a thing in this fog. Excellent! That means they can't see us either!
+    NARRATOR: Hey. Flaminius. Maybe… look at the hills?
+    FLAMINIUS: Did somebody say something?
+    NARRATOR: In about three hours, fifteen thousand Romans were killed. Many drowned trying to swim away in their armor. Flaminius died too.
 [Consul Counter: 1]
-    FLACCUS: Okay… more legions?
+    FLACCUS: Dennis?
+    DENNIS: Sir, we're down… a consul.
+    FLACCUS: Okay. More consuls.
 
-    NARRATOR: Rome was now properly scared, and appointed a dictator: Quintus Fabius Maximus. His strategy was revolutionary: don't fight Hannibal.
-    FABIUS: We follow him. We watch him. We take his food. And we never — ever — give him a battle.
+## F28 — Fabius the Delayer
+[A slow, elderly man in a toga. Snail on his shoulder.]
+
+    NARRATOR: Rome was now properly scared, so they appointed a dictator: Quintus Fabius Maximus! And his strategy was revolutionary: don't fight Hannibal.
+    FABIUS: We follow him. We starve him. We annoy him. We never, ever give him a battle.
     FLACCUS: That's cowardly.
     FABIUS: It's patient.
-    FLACCUS: It's boring.
-    NARRATOR: The Romans called him Cunctator: "the Delayer." It was not a compliment. Yet.
-    NARRATOR: Once, Fabius actually trapped Hannibal in a valley. So at night, Hannibal tied burning sticks to the horns of two thousand cattle and stampeded them up a hillside. The Romans guarding the pass saw thousands of torches and assumed the whole army was escaping that way. They ran after the torches. It was cows. Hannibal's army walked out through the empty pass.
-    ROMAN SOLDIER: (holding a cow) Sir… I've captured… a cow.
+    FLACCUS: It's BORING.
+    FABIUS: It's working.
+    NARRATOR: The Romans nicknamed him Cunctator: "the Delayer." It was an insult. Give it time.
 
-    NARRATOR: Rome got bored of being patient. In 216 BC, they raised the largest army they had ever put in the field — around eighty thousand men — and sent both consuls, Varro and Paullus, to crush Hannibal for good. They met at Cannae.
-    GISGO: Sir… there are so many of them.
-    HANNIBAL: Gisgo, there's something even more astonishing.
+## F29 — The cows
+[Night valley. Two thousand cattle with burning sticks on their horns stampede uphill.]
+
+    NARRATOR: Once, Fabius actually trapped Hannibal in a valley! So that night, Hannibal tied burning sticks to the horns of two thousand cows, and stampeded them up the hill.
+    MAGO: This is either genius or the worst barbecue in history.
+    NARRATOR: The Romans guarding the pass saw thousands of torches, assumed the whole army was escaping that way, and ran after them. While Hannibal's army strolled out through the empty pass.
+    SOLDIER: Sir! I've captured… one… cow.
+
+## F30 — Cannae: the Welcome Pack #3, and Gisgo
+[Same senate office. TWO consuls, one mug. Then a huge Roman army on a plain.]
+
+    FLACCUS: Welcome to consul! Both of you!
+    VARRO: What happened to the last guys?
+    FLACCUS: Don't worry about it. Here's eighty thousand men.
+    NARRATOR: In 216 BC, Rome built the biggest army it had ever put in the field, and sent both consuls to crush Hannibal for good, at a place called Cannae.
+    NARRATOR: This is Gisgo. Gisgo is one of Hannibal's officers. Gisgo has exactly one moment in history, and this is it.
+    GISGO: Sir… there are SO many of them.
+    HANNIBAL: True. But Gisgo, there's something even more amazing.
     GISGO: What?
-    HANNIBAL: In all that crowd, not one of them is named Gisgo.
-    NARRATOR: That joke is real. Plutarch recorded it. Hannibal's whole army burst out laughing, and the Romans had no idea why.
-    NARRATOR: The Roman plan: make the middle extra deep, and push straight through. Hannibal's plan: let them. He put his weakest troops in the center, curved forward. The Romans pushed. The center bent back… and back… into a U — while his best veterans waited on the sides. Then the sides closed in. Then Hannibal's cavalry, who had already chased off the Roman horsemen, slammed into the Roman rear.
-[Battle diagram: red block squeezed inside a white ring.]
-    NARRATOR: Eighty thousand men were surrounded. Packed so tightly that many couldn't even lift their swords. By sunset, somewhere around fifty thousand Romans were dead. Including the consul Paullus. And around eighty senators.
-[Stat card: BATTLE OF CANNAE — Rome ~86,000 / Carthage ~50,000 — Killed ~50,000 / ~6,000]
-    NARRATOR: It's one of the bloodiest days of battle in all of history.
+    HANNIBAL: Of all those thousands of men… not one of them is called Gisgo.
+    NARRATOR: That is a real joke! Plutarch wrote it down! And the whole army burst out laughing, and the Romans had no idea why.
+    GISGO: …I don't get it.
+
+## F31 — The plan at Cannae
+[Battle diagram, top-down.]
+
+    NARRATOR: Rome's plan: make the middle extra deep and just shove straight through! Hannibal's plan: let them. He put his weakest troops in the center, bulging forward. The Romans pushed. The center bent back… and back… and back… into a U. While his best veterans waited on both sides.
+    VARRO: They're running! Push! PUSH!
+    MAGO: Brother, the middle is folding!
+    HANNIBAL: Yes. Like a napkin.
+    NARRATOR: Then the sides closed in. And then Hannibal's cavalry, who had already chased off the Roman horsemen, came back around and slammed into the Roman rear.
+
+## F32 — Cannae, the cost
+[The red block squeezed inside a white ring. Then a stat card. No jokes.]
+
+    NARRATOR: Eighty thousand men were surrounded, packed in so tight many couldn't even raise their swords. By sunset, somewhere around fifty thousand Romans were dead. One of the consuls. Some eighty senators. More Romans were killed in a single afternoon than in almost any battle in history.
+[Stat card: CANNAE — Rome ~86,000 / Carthage ~50,000 — Killed ~50,000 / ~6,000]
 [Consul Counter: 2]
-    NARRATOR: Hannibal's cavalry commander, Maharbal, said: give me the cavalry, and in five days you'll eat dinner in Rome. Hannibal said: not yet.
+    NARRATOR: It was the most perfect battle ever fought. Generals still study it today.
+
+## F33 — Maharbal
+[Hannibal's tent. Maharbal, cavalry commander, leaning in.]
+
+    NARRATOR: Hannibal's cavalry commander, Maharbal, said: give me the horsemen, and in five days you'll be eating dinner in Rome!
+    HANNIBAL: Not yet.
     MAHARBAL: You know how to win a victory, Hannibal. You don't know how to use one.
-    NARRATOR: People are still arguing about whether Maharbal was right.
+    MAGO: (quietly) He's not wrong.
+    NARRATOR: Livy says that line is real. People have argued about it ever since. Mago has argued about it the hardest.
 
 ---
 
-# ACT 3 — "The Longest Vacation in Italy" (~3:45)
+# ACT 3 — "The Longest Vacation in Italy"
 
-    NARRATOR: After Cannae, any normal country would have asked for peace. Hannibal was counting on it.
-    HANNIBAL: So. Shall we talk terms?
+## F34 — Terms
+[Hannibal at a little negotiating table. Flaccus across from him, arms crossed.]
+
+    NARRATOR: After Cannae, any normal country would have asked for peace. Carthage gets its islands back, Rome keeps its city, everybody goes home for dinner. Hannibal was counting on it. Except… no.
+    HANNIBAL: So. Shall we discuss terms?
     FLACCUS: No.
     HANNIBAL: You lost eighty thousand men.
-    FLACCUS: Okay. More legions.
-    NARRATOR: Rome refused to even discuss peace. Refused to ransom its own prisoners. Limited public mourning to thirty days. Bought eight thousand slaves, armed them, and sent them to fight. Rome refused to lose.
-    NARRATOR: Some allies did switch to Hannibal — including big, rich Capua. King Philip the Fifth of Macedon signed up. Syracuse in Sicily switched too, defended by Archimedes, who built giant cranes that grabbed Roman ships and flipped them over.
-    ROMAN SAILOR: (dangling upside down) Is this normal?!
-    NARRATOR: Rome besieged Syracuse for two years anyway, took it, and in the chaos, a Roman soldier killed Archimedes. Possibly while he was doing maths.
-    ARCHIMEDES: Don't disturb my circles!
+    FLACCUS: Dennis?
+    DENNIS: Sir… we're out of legions.
+    FLACCUS: …Okay. Make more legions.
 
-    NARRATOR: Meanwhile, Hannibal had a problem. He couldn't take big walled cities. He had no siege engines, and not enough men. He wrote home for reinforcements.
-    HANNIBAL: (letter) Dear Carthage. Winning. Need more men. Love, Hannibal.
+## F35 — Rome refuses to lose
+[Montage of stamps: REFUSED. REFUSED. REFUSED.]
+
+    NARRATOR: Rome refused to discuss peace. Refused to pay ransom for its own captured soldiers. Banned mourning for longer than thirty days. Bought eight thousand slaves, armed them, and sent them to fight. Rome did not know how to lose. It was honestly a bit scary.
+
+## F36 — Allies switch
+[Map: Capua, Macedon and Syracuse turn purple.]
+
+    NARRATOR: But Cannae did change some minds! Big, rich Capua switched to Hannibal. King Philip the Fifth of Macedon signed up. And Syracuse, in Sicily, switched too… and Syracuse had a secret weapon. His name was Archimedes.
+
+## F37 — Archimedes
+[Giant crane claw lifts a Roman ship and flips it.]
+
+    SAILOR: Is this normal?! Is this a normal thing for the ocean to do?!
+    NARRATOR: Archimedes built giant cranes that grabbed Roman ships out of the water and flipped them over! Rome besieged Syracuse for two years anyway, took it, and in the chaos a Roman soldier killed Archimedes. The story goes he was in the middle of a maths problem.
+    ARCHIMEDES: Excuse me, you're standing on my circles.
+    NARRATOR: Rome, as usual, said sorry by taking all his stuff.
+
+## F38 — Letters home
+[Hannibal writing letters by lamplight. Cut to Hanno at his desk with a stamp that says NO.]
+
+    NARRATOR: Meanwhile, Hannibal had a problem. He had no siege equipment, not enough men, and he couldn't take the big walled cities. So he wrote home.
+    HANNIBAL: Dear Carthage. Winning. Need men. Love, Hannibal.
     HANNO: No.
-    HANNIBAL: (letter) Dear Carthage. Still winning. Really need more men.
+    HANNIBAL: Dear Carthage. Still winning. Really need men.
     HANNO: No.
-    HANNIBAL: (letter) Dear Carthage. Please.
-    HANNO: (thinks) …No.
+    HANNIBAL: Dear Carthage. Please.
+    HANNO: No.
+    HANNIBAL: Dear Hanno. I know what you're going to say.
+    HANNO: …Yes?
+    HANNIBAL: (reading on) "…Yes?" Ha. Got you.
+    HANNO: No.
 
-    NARRATOR: So Rome went back to Fabius' plan. Never fight Hannibal. Fight everyone around Hannibal. In 211, Rome besieged Capua. To pull them off it, Hannibal marched on Rome itself and camped three miles outside the walls.
-    ROMAN MOTHER: Eat your vegetables or Hannibal will get you.
-    NARRATOR: For centuries, "Hannibal ad portas" — "Hannibal's at the gates" — was what Roman parents said to scare their kids. But Rome didn't move a single legion from Capua. Instead, Livy says, they auctioned off the land Hannibal was camping on. And it sold. At full price.
-    HANNIBAL: They're selling my tent?
-    NARRATOR: Hannibal left. Capua fell.
+## F39 — Hannibal at the gates
+[Roman house. A mother wags a finger at a kid. Then: Hannibal's camp three miles from Rome; an auctioneer on the walls.]
 
-    NARRATOR: In Spain, though, Rome was losing. Both Scipio brothers — including our consul from the Rhône — were killed in 211. Rome needed a new commander in Spain. Nobody wanted the job. Except one twenty-five-year-old.
-    PUBLIUS: I'll do it!
+    NARRATOR: Rome went back to Fabius's plan: never fight Hannibal. Fight everyone near Hannibal. In 211, Rome besieged Capua. And to pull them away, Hannibal marched right up to Rome itself.
+    MOTHER: Eat your vegetables, or Hannibal's going to get you!
+    NARRATOR: "Hannibal ad portas!" Hannibal is at the gates! Roman parents scared kids with that for centuries! But Rome did not move a single soldier from Capua. Instead, says Livy, they auctioned off the land Hannibal was camped on. And somebody bought it. At full price.
+    HANNIBAL: They sold my tent?
+    MAGO: To a man named Gaius. He'd like you off his lawn.
+
+## F40 — Nobody wants Spain
+[Senate. A sign-up sheet: COMMANDER, SPAIN. Empty.]
+
+    NARRATOR: And in Spain, Rome was losing. Both Scipio brothers — including our consul from the Rhône — were killed there in 211. Rome needed a new commander in Spain. Nobody volunteered. Except one twenty-five-year-old.
+    PUBLIUS: Me! I'll do it!
     FLACCUS: Who are you?
-    PUBLIUS: The kid from the Ticinus! Remember?
-[Red arrow: REMEMBER THIS KID — ✔]
-    NARRATOR: Publius Cornelius Scipio studied Hannibal like homework. In 209, he marched on New Carthage, Carthage's capital in Spain, learned from fishermen that the lagoon behind it got shallow in the evening, and sent men wading across while everyone was defending the front wall. He took the city in a day.
-    PUBLIUS: I copied his homework.
-    NARRATOR: Meanwhile, Hannibal's younger brother Hasdrubal escaped Spain with an army, and crossed the Alps too. (It went much better this time.) But the Romans captured his messengers, and at the Metaurus River two consuls ganged up on him. Hasdrubal was killed. The Romans threw his head into Hannibal's camp.
-    NARRATOR: That's how Hannibal found out.
-    NARRATOR: In 206, Scipio crushed the last big Carthaginian army in Spain at Ilipa. Spain was Rome's. And Hannibal — still undefeated in Italy — was stuck in the toe of the boot.
+    PUBLIUS: The kid! From the river! You were all told to remember me!
+[Red arrow returns: REMEMBER THIS KID ✔]
+    FLACCUS: Okay. More… kid.
+
+## F41 — New Carthage (copying homework #2)
+[Spain. A lagoon behind New Carthage, getting shallow at evening; Romans wading across.]
+
+    NARRATOR: Publius Cornelius Scipio studied Hannibal like homework. He marched on New Carthage, Carthage's capital in Spain, and found out from local fishermen that the lagoon behind the city got shallow in the evening. Nobody would ever attack across the lagoon. So he attacked across the lagoon! His men waded over while everyone was busy defending the front wall, and he took the city in a single day!
+    PUBLIUS: Surprise from an unexpected direction. Hannibal does that. I just… also did that.
+
+## F42 — Hasdrubal
+[Hannibal's other brother crosses the Alps fast. Metaurus River. A Roman messenger bag.]
+
+    NARRATOR: Meanwhile Hannibal's other brother, Hasdrubal, slipped out of Spain with an army and crossed the Alps too! Much faster this time — the paths were all broken in.
+    NARRATOR: But the Romans captured his messengers, read the plan, and two Roman armies ganged up on him at the Metaurus River. Hasdrubal was killed.
+    NARRATOR: The Romans threw his head into Hannibal's camp. That is how Hannibal found out.
+[Silence. Hannibal alone in the tent.]
+
+## F43 — Stuck in the toe
+[Map of Italy. Hannibal's purple shrinks into the toe of the boot.]
+
+    NARRATOR: In 206, Scipio crushed Carthage's last big army in Spain. Spain was Rome's. And Hannibal — still never beaten in a major battle in Italy — was stuck down in the toe of the boot.
     SURUS: Are we there yet?
     HANNIBAL: …No.
+    SURUS: Is there a beach in the toe?
+    MAGO: There's a beach. Romans are standing on it.
 
 ---
 
-# ACT 4 — "Copy His Homework" (~3:30)
+# ACT 4 — "Copy His Homework"
 
-    NARRATOR: Scipio came home a hero, became consul, and had an idea.
-    PUBLIUS: Hannibal came to us. So let's go to them.
+## F44 — Scipio's idea
+[Scipio, now a hero, pitches to the senate. Old Fabius frowns.]
+
+    NARRATOR: Scipio came home a hero, got elected consul, and had a big idea.
+    PUBLIUS: Hannibal came to our house. So let's go to HIS house.
     FABIUS: That's reckless.
-    PUBLIUS: That's the point.
-    NARRATOR: The senate gave him Sicily and permission, but barely any army, so he raised volunteers — including survivors of Cannae who'd been sent to Sicily in disgrace — and in 204 BC, landed in Africa.
-    NARRATOR: He found an ally: Masinissa, a Numidian prince with the best cavalry in the world and a grudge against Carthage's ally Syphax.
-    MASINISSA: I hate Syphax.
-    PUBLIUS: I can work with that.
+    PUBLIUS: It's what Hannibal would do.
+    FABIUS: Yes! That's why it's reckless!
+
+## F45 — The leftover army
+[Sicily. A rag-tag army: volunteers and the shamed survivors of Cannae, holding a banner: "WE'RE BACK".]
+
+    NARRATOR: The senate gave him Sicily and permission… but hardly any army. So he took volunteers, plus the survivors of Cannae, who'd been shipped off to Sicily in disgrace for losing. They really, really wanted a rematch. In 204 BC, they landed in Africa.
+
+## F46 — Masinissa
+[A Numidian prince on a horse, with the best cavalry in the world behind him.]
+
+    NARRATOR: There, he found an ally: Masinissa, a Numidian prince, with the best cavalry in the world, and a huge grudge against Carthage's ally, King Syphax.
+    MASINISSA: I hate Syphax. He stole my kingdom. And my fiancée.
+    PUBLIUS: I'll get you the kingdom.
+    MASINISSA: …And the fiancée?
+    PUBLIUS: Let's focus on the kingdom.
+
+## F47 — Carthage panics
+[Syphax's camps burn at night. Carthage's senate in uproar.]
+
     NARRATOR: Scipio burned Syphax's camps in a night attack, beat Carthage in the field, and suddenly Carthage was very, very worried.
-    HANNO: Bring Hannibal home.
-    GISGO: Oh, NOW we're sending boats.
+    HANNO: Bring Hannibal home! Send ships! Send ALL the ships!
+    MAGO: Oh, NOW we're sending stuff?
 
-    NARRATOR: So, after fifteen years in Italy — fifteen years, never once beaten in a major battle — Hannibal sailed home.
-    SURUS: The beach!
-    NARRATOR: In 202 BC, near Zama, the two greatest generals of their age actually met face to face before the battle. Hannibal, older, with one eye, offered peace.
+## F48 — Hannibal leaves Italy
+[Hannibal on the Italian shore, looking back. Surus on the deck. Then: an African beach.]
+
+    NARRATOR: And so, after fifteen years in Italy — fifteen years! — never once beaten in a major battle there… Hannibal sailed home.
+    SURUS: Sand. Sun. Waves. Is it…?
+    HANNIBAL: Yes, Surus. It's a beach.
+    SURUS: (crying) It's the most beautiful thing I've ever seen.
+    NARRATOR: He got about a week.
+
+## F49 — The meeting at Zama
+[Two tents, a field between them. Hannibal and Publius meet face to face.]
+
+    NARRATOR: In 202 BC, near Zama, the two greatest generals alive actually met, face to face, before the battle! Hannibal — older now, one eye — offered peace.
     HANNIBAL: You're young. You've been lucky. Luck runs out.
-    PUBLIUS: I've been reading your stuff.
-    HANNIBAL: …Oh no.
+    PUBLIUS: I'm a big fan, by the way. I read everything about you.
+    HANNIBAL: …Everything?
+    PUBLIUS: Took notes.
+    HANNIBAL: Oh no.
 
-    NARRATOR: Hannibal had eighty fresh elephants.
+## F50 — The elephants
+[Hannibal's 80 elephants charge. Romans stand in lines with open lanes between units.]
+
+    NARRATOR: Hannibal had eighty brand-new elephants!
 [Elephant Counter: 1 → 81]
-    NARRATOR: Scipio had studied him for years. He lined his men up with lanes between the units. When the elephants charged, the Romans blew every horn and trumpet they had. The elephants panicked. Many ran straight down the lanes and out the back. Some turned around and trampled Carthage's own cavalry.
-    SURUS: (from the sidelines) Amateurs.
+    NARRATOR: But Scipio had studied him for years. He lined his men up with lanes in between the units. When the elephants charged, every Roman blew every horn and trumpet they had. The elephants freaked out. Lots of them ran straight down the lanes and out the back! Some turned around and trampled Carthage's own cavalry.
+    SURUS: (from the sidelines, sipping a coconut) Rookies.
 [Elephant Counter: 81 → 1]
-    NARRATOR: The infantry fought for hours. Then Masinissa and Laelius came back with the cavalry and smashed into Hannibal's rear. Surround the enemy. Hit them from behind. That was Cannae. Scipio beat Hannibal with Hannibal's own move.
-    PUBLIUS: Copied your homework.
+
+## F51 — The replay (copying homework #3)
+[Masinissa's cavalry slams into Hannibal's rear. Split screen: Cannae diagram | Zama diagram.]
+
+    NARRATOR: The infantry fought for hours. And then Masinissa and the Roman cavalry came charging back, and slammed into Hannibal's rear. Wait. Surround them. Hit them from behind. Hannibal had seen this one before. He invented it.
+    PUBLIUS: I copied your homework.
     HANNIBAL: You got a better grade.
 
-    NARRATOR: Rome named him Scipio Africanus. Carthage surrendered in 201 BC. It lost Spain. Gave up its navy except ten ships. Agreed to pay ten thousand talents over fifty years. And promised never to start a war — ever again — without Rome's permission.
-    HANNO: (signing) Can we at least—
-    FLACCUS: No.
-    HANNO: …Huh. So that's what that feels like.
+## F52 — The invoice, again
+[The Act 1 invoice unrolls. And unrolls. Hanno signs at the bottom.]
 
-    NARRATOR: And Hannibal? He went back to Carthage, got elected to high office, fought corruption, and fixed the finances so well that Carthage offered to pay off the fifty-year debt early.
-    FLACCUS: …That's suspicious.
-    NARRATOR: Rome pressured him into exile. For years he advised Rome's enemies, from Syria to Bithynia, and in 183 BC, with Roman agents closing in, he took poison rather than be handed over. Scipio Africanus died around the same time, in self-imposed exile, bitter at the Romans he'd saved.
-    NARRATOR: As for Carthage: an old senator named Cato started ending every speech — about anything — with the same words.
-    CATO: …and that concludes my thoughts on the price of figs. Also, Carthage must be destroyed.
+    NARRATOR: Rome gave Scipio a new name: Scipio Africanus! Carthage surrendered in 201 BC, and Rome sent the bill. Lose Spain. Lose your navy, except ten ships. Ten thousand talents, over fifty years. And never start a war again — ever — without Rome's permission.
+    HANNO: Can we at least—
+    FLACCUS: No.
+    HANNO: …Oh. Oh, I don't like that at all.
+    FLACCUS: (to himself) Oh, I LOVE that.
+
+## F53 — Hannibal, afterwards
+[Hannibal in a toga at a desk of ledgers. Then a ship into exile. Then a small cup.]
+
+    NARRATOR: And Hannibal? He went home, got elected to high office, cracked down on corruption, and fixed Carthage's money so well that Carthage offered to pay off the fifty-year debt early.
+    FLACCUS: Dennis. That's suspicious.
+    DENNIS: Sir, it's money.
+    FLACCUS: Suspicious money.
+    NARRATOR: Rome pushed him into exile. He spent years advising Rome's enemies, all the way from Syria to the Black Sea. And in 183 BC, with Roman agents closing in, he took poison, rather than be handed over. The same year, Scipio Africanus died too — in exile, bitter at the Romans he had saved.
+
+## F54 — Cato
+[An old senator at a podium. Banner: "THE PRICE OF FIGS".]
+
+    NARRATOR: As for Carthage, an old Roman senator named Cato started ending every speech — on any subject — with the same sentence.
+    CATO: …and that is why the figs are overpriced. Also, Carthage must be destroyed.
     NARRATOR: Fifty years later, it was. But that's another war.
 
+## F55 — The replay (bookend)
+[The cold-open scoreboard returns: W W W W W … L. Hannibal stands beside it.]
+
     NARRATOR: Hannibal won almost every battle. Rome won the war. Because Rome never, ever quit. And because one kid did his homework.
+    HANNIBAL: Can I see the replay now?
+    NARRATOR: You're in it.
     SURUS: Are we there yet?
     NARRATOR: Yes, Surus. We're there.
 [END]

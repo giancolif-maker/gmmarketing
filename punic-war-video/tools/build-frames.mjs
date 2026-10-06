@@ -43,7 +43,9 @@ for (const n of Object.keys(FRAMES).sort()) {
       if (id.startsWith("st-") && !(l.sfx || []).length) sfxTrack.push({ name: "slam", t: cursor + t, vol: 0.5 });
     }
     if (l.b) {
-      const hideAt = l.keep ? null : L[i + 2] ? L[i + 2].s - 0.02 : null;
+      // leave before the next bubble in this spot pops: same speaker next → at the next line; else two lines on
+      const nxt = L[i + 1] && L[i + 1].who === l.who ? L[i + 1] : L[i + 2];
+      const hideAt = l.keep ? null : nxt ? Math.max(l.e, nxt.s - 0.36) : null;
       reveals.push({ id: l.b, t: Math.max(0, l.s - 0.06), hideAt });
       sfxTrack.push({ name: l.b.startsWith("st-") ? "slam" : "pop", t: cursor + Math.max(0, l.s - 0.06), vol: l.b.startsWith("st-") ? 0.5 : 0.25 });
     }

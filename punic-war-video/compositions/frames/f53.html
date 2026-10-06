@@ -44,7 +44,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -124,6 +126,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -173,7 +178,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"53","D":35.541,"lines":[{"s":0.4,"e":10.102,"el":null},{"s":10.342,"e":12.339,"el":"flaccus-pip"},{"s":12.579,"e":13.641,"el":null},{"s":13.881,"e":15.473,"el":"flaccus-pip"},{"s":15.713,"e":22.219,"el":null},{"s":22.379,"e":34.742,"el":null}],"reveals":[{"id":"coins","t":6.221,"hideAt":null},{"id":"st-paid","t":8.162,"hideAt":null},{"id":"flaccus-pip","t":10.342,"hideAt":null},{"id":"a-1","t":10.282,"hideAt":13.521},{"id":"dennis","t":12.579,"hideAt":null},{"id":"a-2","t":12.519,"hideAt":15.353},{"id":"a-3","t":13.821,"hideAt":22.019000000000002},{"id":"exile","t":16.038,"hideAt":null}],"counts":{},"moves":[{"id":"flaccus-pip","t":15.713,"d":0.25,"o":0},{"id":"dennis","t":15.713,"d":0.25,"o":0}],"counters":[]};
+  const CUE = {"drop":[],"frame":"53","D":35.541,"lines":[{"s":0.4,"e":10.102,"el":null},{"s":10.342,"e":12.339,"el":"flaccus-pip"},{"s":12.579,"e":13.641,"el":null},{"s":13.881,"e":15.473,"el":"flaccus-pip"},{"s":15.713,"e":22.219,"el":null},{"s":22.379,"e":34.742,"el":null}],"reveals":[{"id":"coins","t":6.221,"hideAt":null},{"id":"st-paid","t":8.162,"hideAt":null},{"id":"flaccus-pip","t":10.342,"hideAt":null},{"id":"a-1","t":10.282,"hideAt":13.521},{"id":"dennis","t":12.579,"hideAt":null},{"id":"a-2","t":12.519,"hideAt":15.353},{"id":"a-3","t":13.821,"hideAt":22.019000000000002},{"id":"exile","t":16.038,"hideAt":null}],"counts":{},"moves":[{"id":"flaccus-pip","t":15.713,"d":0.25,"o":0},{"id":"dennis","t":15.713,"d":0.25,"o":0}],"counters":[]};
   window.__timelines["f53"] = buildFrame(gsap, document, "f53-", CUE);
 })();
 </script>

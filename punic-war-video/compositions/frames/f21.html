@@ -77,7 +77,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -157,6 +159,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -206,7 +211,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"21","D":22.789,"lines":[{"s":0.4,"e":4.144,"el":"senate"},{"s":4.384,"e":9.175,"el":null},{"s":9.335,"e":16.149,"el":null},{"s":16.389,"e":17.665,"el":"publius"},{"s":17.905,"e":20.368,"el":"scipio"},{"s":20.608,"e":21.989,"el":"publius"}],"reveals":[{"id":"senate","t":0.4,"hideAt":4.3340000000000005},{"id":"numidians","t":4.384,"hideAt":null},{"id":"dust","t":4.384,"hideAt":null},{"id":"scipio","t":4.384,"hideAt":null},{"id":"publius","t":9.335,"hideAt":null},{"id":"a-3","t":16.329,"hideAt":20.248},{"id":"a-4","t":17.845000000000002,"hideAt":null},{"id":"ptr","t":20.608,"hideAt":null},{"id":"b-welcome","t":20.548000000000002,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"drop":[],"frame":"21","D":22.789,"lines":[{"s":0.4,"e":4.144,"el":"senate"},{"s":4.384,"e":9.175,"el":null},{"s":9.335,"e":16.149,"el":null},{"s":16.389,"e":17.665,"el":"publius"},{"s":17.905,"e":20.368,"el":"scipio"},{"s":20.608,"e":21.989,"el":"publius"}],"reveals":[{"id":"senate","t":0.4,"hideAt":4.3340000000000005},{"id":"numidians","t":4.384,"hideAt":null},{"id":"dust","t":4.384,"hideAt":null},{"id":"scipio","t":4.384,"hideAt":null},{"id":"publius","t":9.335,"hideAt":null},{"id":"a-3","t":16.329,"hideAt":20.248},{"id":"a-4","t":17.845000000000002,"hideAt":null},{"id":"ptr","t":20.608,"hideAt":null},{"id":"b-welcome","t":20.548000000000002,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f21"] = buildFrame(gsap, document, "f21-", CUE);
 })();
 </script>

@@ -13,7 +13,7 @@ export const FRAMES_A34 = {
     { who: "FLACCUS", text: "No.", add: [1460, 420, 200, "br", 64], el: "flaccus" },
     { who: "HANNIBAL", text: "You lost eighty thousand men.", add: [160, 400, 480, "bl", 40], el: "hannibal" },
     { who: "FLACCUS", text: "Dennis?", add: [1400, 420, 260, "br", 46], el: "flaccus" },
-    { who: "DENNIS", text: "Sir… we're out of legions.", add: [1120, 120, 420, "br", 40], pip: ["dennis", "dennis", 1640, 200, "DENNIS (ACCOUNTS)"] },
+    { who: "DENNIS", text: "Sir… we're out of legions.", add: [1160, 200, 420, "br", 40], pip: ["dennis", "dennis", 1680, 300, "DENNIS (ACCOUNTS)"] },
     { who: "FLACCUS", text: "…Okay. Make more legions.", add: [1240, 420, 440, "br", 40], el: "flaccus", keep: true },
   ],
   "35": [
@@ -81,7 +81,7 @@ export const FRAMES_A34 = {
     { who: "SURUS", text: "Are we there yet?", add: [1260, 560, 380, "br", 42], el: "surus" },
     { who: "HANNIBAL", text: "…No.", add: [1000, 640, 200, "br", 52], el: "hannibal" },
     { who: "SURUS", text: "Is there a beach in the toe?", add: [1220, 560, 460, "br", 40], el: "surus" },
-    { who: "MAGO", text: "There's a beach. Romans are standing on it.", add: [140, 160, 520, "bl", 38], keep: true },
+    { who: "MAGO", text: "There's a beach. Romans are standing on it.", add: [80, 760, 520, "bl", 38], keep: true },
   ],
   // ---------------- ACT 4 ----------------
   "44": [
@@ -140,7 +140,7 @@ export const FRAMES_A34 = {
     N("Lose Spain.", { at: ["st-a"] }),
     N("Lose your navy, except ten ships.", { at: ["st-b"] }),
     N("Ten thousand talents, over fifty years.", { at: ["st-c"] }),
-    N("And never start a war again — ever — without Rome's permission.", { at: ["st-d"], stk: [1500, 820, "+ COMPLAINING FEE", 40, 4] }),
+    N("And never start a war again — ever — without Rome's permission.", { at: ["st-d"], stk: [960, 990, "+ COMPLAINING FEE (AGAIN)", 40, 3] }),
     { who: "HANNO", text: "Can we at least—", add: [240, 560, 380, "bl", 40], el: "hanno" },
     { who: "FLACCUS", text: "No.", add: [1460, 580, 200, "br", 64], el: "flaccus" },
     { who: "HANNO", text: "…Oh. Oh, I don't like that at all.", add: [180, 560, 520, "bl", 38], el: "hanno" },

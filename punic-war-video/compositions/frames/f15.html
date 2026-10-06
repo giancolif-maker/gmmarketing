@@ -30,7 +30,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -110,6 +112,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -159,7 +164,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"15","D":22.796,"lines":[{"s":0.4,"e":9.416,"el":null},{"s":9.656,"e":11.356,"el":"surus"},{"s":11.516,"e":13.139,"el":"surus"},{"s":13.379,"e":20.59,"el":null},{"s":20.83,"e":21.996,"el":null}],"reveals":[{"id":"raft","t":0.4,"hideAt":null},{"id":"a-1","t":9.596,"hideAt":11.356},{"id":"b-moving","t":11.456,"hideAt":20.47},{"id":"snorkel","t":13.379,"hideAt":null},{"id":"st-swim","t":13.379,"hideAt":null},{"id":"a-4","t":20.77,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"drop":[],"frame":"15","D":22.796,"lines":[{"s":0.4,"e":9.416,"el":null},{"s":9.656,"e":11.356,"el":"surus"},{"s":11.516,"e":13.139,"el":"surus"},{"s":13.379,"e":20.59,"el":null},{"s":20.83,"e":21.996,"el":null}],"reveals":[{"id":"raft","t":0.4,"hideAt":null},{"id":"a-1","t":9.596,"hideAt":11.356},{"id":"b-moving","t":11.456,"hideAt":20.47},{"id":"snorkel","t":13.379,"hideAt":null},{"id":"st-swim","t":13.379,"hideAt":null},{"id":"a-4","t":20.77,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f15"] = buildFrame(gsap, document, "f15-", CUE);
 })();
 </script>

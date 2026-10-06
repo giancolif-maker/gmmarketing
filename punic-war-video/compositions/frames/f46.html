@@ -53,7 +53,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -133,6 +135,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -182,7 +187,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"46","D":18.057,"lines":[{"s":0.4,"e":8.793,"el":null},{"s":9.033,"e":12.354,"el":"masinissa"},{"s":12.594,"e":14.008,"el":"publius"},{"s":14.248,"e":15.348,"el":"masinissa"},{"s":15.588,"e":17.257,"el":"publius"}],"reveals":[{"id":"masinissa","t":0.4,"hideAt":null},{"id":"cav","t":3.757,"hideAt":null},{"id":"st-mas","t":4.596,"hideAt":null},{"id":"a-1","t":8.972999999999999,"hideAt":13.888},{"id":"a-2","t":12.533999999999999,"hideAt":15.228},{"id":"a-3","t":14.187999999999999,"hideAt":null},{"id":"a-4","t":15.527999999999999,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"drop":[],"frame":"46","D":18.057,"lines":[{"s":0.4,"e":8.793,"el":null},{"s":9.033,"e":12.354,"el":"masinissa"},{"s":12.594,"e":14.008,"el":"publius"},{"s":14.248,"e":15.348,"el":"masinissa"},{"s":15.588,"e":17.257,"el":"publius"}],"reveals":[{"id":"masinissa","t":0.4,"hideAt":null},{"id":"cav","t":3.757,"hideAt":null},{"id":"st-mas","t":4.596,"hideAt":null},{"id":"a-1","t":8.972999999999999,"hideAt":13.888},{"id":"a-2","t":12.533999999999999,"hideAt":15.228},{"id":"a-3","t":14.187999999999999,"hideAt":null},{"id":"a-4","t":15.527999999999999,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f46"] = buildFrame(gsap, document, "f46-", CUE);
 })();
 </script>

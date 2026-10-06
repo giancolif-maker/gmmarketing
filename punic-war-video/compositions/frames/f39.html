@@ -43,7 +43,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -123,6 +125,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -172,7 +177,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"39","D":37.163,"lines":[{"s":0.4,"e":11.728,"el":null},{"s":11.968,"e":14.784,"el":"mother"},{"s":15.024,"e":20.464,"el":null},{"s":20.624,"e":29.932,"el":null},{"s":30.172,"e":31.74,"el":"hannibal"},{"s":31.98,"e":34.294,"el":null},{"s":34.534,"e":36.363,"el":null}],"reveals":[{"id":"camp","t":9.462,"hideAt":null},{"id":"hannibal","t":9.462,"hideAt":null},{"id":"mother","t":11.968,"hideAt":null},{"id":"kid","t":11.968,"hideAt":null},{"id":"a-1","t":11.908,"hideAt":20.264},{"id":"st-portas","t":15.568,"hideAt":null},{"id":"sale","t":26.209,"hideAt":null},{"id":"a-4","t":30.112000000000002,"hideAt":34.174},{"id":"a-5","t":31.92,"hideAt":null}],"counts":{},"moves":[{"id":"hannibal","t":34.9,"d":1.6,"dx":-900}],"counters":[]};
+  const CUE = {"drop":[],"frame":"39","D":37.163,"lines":[{"s":0.4,"e":11.728,"el":null},{"s":11.968,"e":14.784,"el":"mother"},{"s":15.024,"e":20.464,"el":null},{"s":20.624,"e":29.932,"el":null},{"s":30.172,"e":31.74,"el":"hannibal"},{"s":31.98,"e":34.294,"el":null},{"s":34.534,"e":36.363,"el":null}],"reveals":[{"id":"camp","t":9.462,"hideAt":null},{"id":"hannibal","t":9.462,"hideAt":null},{"id":"mother","t":11.968,"hideAt":null},{"id":"kid","t":11.968,"hideAt":null},{"id":"a-1","t":11.908,"hideAt":20.264},{"id":"st-portas","t":15.568,"hideAt":null},{"id":"sale","t":26.209,"hideAt":null},{"id":"a-4","t":30.112000000000002,"hideAt":34.174},{"id":"a-5","t":31.92,"hideAt":null}],"counts":{},"moves":[{"id":"hannibal","t":34.9,"d":1.6,"dx":-900}],"counters":[]};
   window.__timelines["f39"] = buildFrame(gsap, document, "f39-", CUE);
 })();
 </script>

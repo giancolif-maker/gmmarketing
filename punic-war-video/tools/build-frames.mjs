@@ -16,7 +16,8 @@ let BUSED = new Set(), BOVR = {};
 Toon.P.bubble = (x, y, w, h, text, o = {}) => {
   const id = o.id || "";
   if (id.endsWith("-pipb")) return "";
-  if (/^b/.test(id)) { if (!BUSED.has(id)) return ""; if (BOVR[id] != null) text = BOVR[id]; }
+  if (/^b/.test(id) && !BUSED.has(id)) return "";
+  if (BOVR[id] != null) text = BOVR[id];
   return rawBubble(x, y, w, h, text, o);
 };
 const shown = (l) => l.bt ?? l.text;
@@ -65,7 +66,7 @@ for (const n of Object.keys(FRAMES).sort()) {
   // extra bubbles for lines that need one
   let extra = "";
   BUSED = new Set(L.filter((l) => l.b).map((l) => l.b)); BOVR = {};
-  for (const l of L) if (l.b && /^b/.test(l.b)) BOVR[l.b] = shown(l);
+  for (const l of L) if (l.b) BOVR[l.b] = shown(l);
   L.forEach((l, i) => {
     if (l.stk) { const [x, y, text, size = 46, rot = -3, bg] = l.stk; const sid = `st-k${i}`; extra += Toon.sticker(x, y, text, { size, rot, id: sid, ...(bg ? { bg } : {}) }); l.at = [...(l.at || []), `${sid}@${l.stkAt ?? 0}`]; }
     if (l.pip) { const [pid, preset, x, y, label] = l.pip; extra += pipSvg(pid, preset, x, y, label); l.at = [...(l.at || []), pid]; }
@@ -89,7 +90,8 @@ for (const n of Object.keys(FRAMES).sort()) {
     if (l.b) {
       // leave before the next bubble in this spot pops: same speaker next → at the next line; else two lines on
       const nxt = L[i + 1] && L[i + 1].who === l.who ? L[i + 1] : L[i + 2];
-      const hideAt = l.keep ? null : nxt ? Math.max(l.e, nxt.s - 0.36) : null;
+      let hideAt = l.keep ? null : nxt ? Math.max(l.e, nxt.s - 0.36) : null;
+      if (wel && i < wel.until) hideAt = Math.min(hideAt ?? 1e9, L[wel.until].s - 0.25);
       reveals.push({ id: l.b, t: Math.max(0, l.s - 0.06), hideAt });
       sfxTrack.push({ name: l.b.startsWith("st-") ? "slam" : "pop", t: cursor + Math.max(0, l.s - 0.06), vol: l.b.startsWith("st-") ? 0.5 : 0.25 });
     }
@@ -99,7 +101,7 @@ for (const n of Object.keys(FRAMES).sort()) {
     for (const [id, frac, from, to] of l.count || []) counters.push({ id, t: at(frac), from, to });
     for (const id of l.hide || []) moves.push({ id, t: l.s, d: 0.25, o: 0 });
   });
-  const CUE = { frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {}, moves, counters };
+  const CUE = { drop: (META || {})[n]?.drop || [], frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {}, moves, counters };
 
   const svg = prefixIds(`<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><style>${Toon.STYLE}</style><g id="cam">${Scenes[n]()}${extra}</g></svg>`, P);
   const id = `f${n}`;

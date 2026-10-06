@@ -38,7 +38,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -118,6 +120,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -167,7 +172,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"44","D":17.136,"lines":[{"s":3.4,"e":7.702,"el":null},{"s":7.942,"e":10.855,"el":"publius"},{"s":11.095,"e":12.36,"el":"fabius"},{"s":12.6,"e":14.162,"el":"publius"},{"s":14.402,"e":16.336,"el":"fabius"}],"reveals":[{"id":"act","t":0,"hideAt":3.05},{"id":"africa-map","t":7.942,"hideAt":null},{"id":"a-1","t":7.882000000000001,"hideAt":12.24},{"id":"a-2","t":11.035,"hideAt":14.042},{"id":"a-3","t":12.54,"hideAt":null},{"id":"a-4","t":14.341999999999999,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"drop":[],"frame":"44","D":17.136,"lines":[{"s":3.4,"e":7.702,"el":null},{"s":7.942,"e":10.855,"el":"publius"},{"s":11.095,"e":12.36,"el":"fabius"},{"s":12.6,"e":14.162,"el":"publius"},{"s":14.402,"e":16.336,"el":"fabius"}],"reveals":[{"id":"act","t":0,"hideAt":3.05},{"id":"africa-map","t":7.942,"hideAt":null},{"id":"a-1","t":7.882000000000001,"hideAt":12.24},{"id":"a-2","t":11.035,"hideAt":14.042},{"id":"a-3","t":12.54,"hideAt":null},{"id":"a-4","t":14.341999999999999,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f44"] = buildFrame(gsap, document, "f44-", CUE);
 })();
 </script>

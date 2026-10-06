@@ -42,7 +42,9 @@ function buildFrame(gsap, document, P, CUE) {
   const $ = (id) => document.getElementById(P + id);
   const cam = document.getElementById(P + "cam");
   const all = (sel) => Array.from(cam.querySelectorAll(sel));
-  const base = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
+  const BASES = new Map();
+  const base = (el) => BASES.get(el) || (BASES.set(el, base0(el)), BASES.get(el));
+  const base0 = (el) => ({ x: gsap.getProperty(el, "x"), y: gsap.getProperty(el, "y"), sx: gsap.getProperty(el, "scaleX"), sy: gsap.getProperty(el, "scaleY"), r: gsap.getProperty(el, "rotation") });
   const reps = (period, until) => Math.max(0, Math.floor(until / period) - 1);
   // Set each element's transform origin ONCE, in its natural state, before any tween reads or
   // changes it (GSAP's smoothOrigin otherwise bakes a position offset in mid-animation).
@@ -122,6 +124,9 @@ function buildFrame(gsap, document, P, CUE) {
   const moveBase = new Map();
   for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
 
+  for (const l of CUE.lines) if (l.el && $(l.el)) base($(l.el));
+  for (const r of CUE.reveals) if ($(r.id)) base($(r.id));
+  for (const id of CUE.drop || []) { const el = $(id); if (el) tl.set(el, { opacity: 0 }, 0); }
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -171,7 +176,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"frame":"28","D":25.087,"lines":[{"s":0.4,"e":8.891,"el":null},{"s":9.131,"e":13.225,"el":"fabius"},{"s":13.465,"e":14.953,"el":"flaccus"},{"s":15.193,"e":16.384,"el":"fabius"},{"s":16.624,"e":17.808,"el":"flaccus"},{"s":18.048,"e":19.207,"el":"fabius"},{"s":19.447,"e":24.287,"el":null}],"reveals":[{"id":"fabius","t":0.4,"hideAt":null},{"id":"flaccus","t":0.4,"hideAt":null},{"id":"plan-0","t":9.336,"hideAt":null},{"id":"plan-1","t":10.155,"hideAt":null},{"id":"plan-2","t":10.973,"hideAt":null},{"id":"plan-3","t":11.997,"hideAt":null},{"id":"a-2","t":13.405,"hideAt":16.264},{"id":"a-3","t":15.133,"hideAt":17.688},{"id":"a-4","t":16.564,"hideAt":19.087},{"id":"a-5","t":17.988,"hideAt":null},{"id":"st-delay","t":19.447,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"drop":[],"frame":"28","D":25.087,"lines":[{"s":0.4,"e":8.891,"el":null},{"s":9.131,"e":13.225,"el":"fabius"},{"s":13.465,"e":14.953,"el":"flaccus"},{"s":15.193,"e":16.384,"el":"fabius"},{"s":16.624,"e":17.808,"el":"flaccus"},{"s":18.048,"e":19.207,"el":"fabius"},{"s":19.447,"e":24.287,"el":null}],"reveals":[{"id":"fabius","t":0.4,"hideAt":null},{"id":"flaccus","t":0.4,"hideAt":null},{"id":"plan-0","t":9.336,"hideAt":null},{"id":"plan-1","t":10.155,"hideAt":null},{"id":"plan-2","t":10.973,"hideAt":null},{"id":"plan-3","t":11.997,"hideAt":null},{"id":"a-2","t":13.405,"hideAt":16.264},{"id":"a-3","t":15.133,"hideAt":17.688},{"id":"a-4","t":16.564,"hideAt":19.087},{"id":"a-5","t":17.988,"hideAt":null},{"id":"st-delay","t":19.447,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f28"] = buildFrame(gsap, document, "f28-", CUE);
 })();
 </script>

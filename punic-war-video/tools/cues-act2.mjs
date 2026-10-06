@@ -15,7 +15,7 @@ const WF = "w-flaccus";
 export const FRAMES_A2 = {
   "23": [
     { who: "FLACCUS", text: "Welcome to consul! Here's your army, your mug, and your enemy. Any questions?", add: [120, 300, 600, "bl", 36], el: WF },
-    { who: "SEMPRONIUS", text: "Just one. What happened to the last guy?", add: [1200, 330, 500, "br", 38], el: "w-consul" },
+    { who: "SEMPRONIUS", text: "Just one. What happened to the last guy?", add: [1000, 470, 520, "br", 38], el: "w-consul" },
     { who: "FLACCUS", text: "He's… resting.", add: [180, 330, 340, "bl", 44], el: WF, keep: true },
     N("Sempronius met Hannibal at the River Trebia. In December. In the snow. And Hannibal had a plan.", { at: ["table"] }),
     { who: "HANNIBAL", text: "Mago. Hide in that riverbed with a thousand men. Don't make a sound.", add: [140, 330, 600, "bl", 36], el: "hannibal" },
@@ -35,7 +35,7 @@ export const FRAMES_A2 = {
     N("And Hannibal lost… mostly elephants. The freezing winter killed nearly all of them.", { count: [["el-counter", 0.45, 37, 1]], at: ["surus@0.4"], sfx: [["scratch", 1.2]] }),
     { who: "SURUS", text: "Guys? …Hello?", add: [1180, 520, 340, "br", 44], el: "surus" },
     { who: "FLACCUS", text: "Dennis?", add: [1100, 80, 240, "br", 44], el: "flaccus-pip", at: ["flaccus-pip"] },
-    { who: "DENNIS", text: "Down a few legions, sir.", add: [1120, 360, 420, "br", 40], pip: ["dennis", "dennis", 1600, 470, "DENNIS (ACCOUNTS)"] },
+    { who: "DENNIS", text: "Down a few legions, sir.", add: [760, 300, 420, "br", 40], pip: ["dennis", "dennis", 1240, 400, "DENNIS (ACCOUNTS)"] },
     { who: "FLACCUS", text: "Okay. More legions.", add: [1030, 100, 380, "br", 40], el: "flaccus-pip", keep: true },
   ],
   "26": [
@@ -47,7 +47,7 @@ export const FRAMES_A2 = {
   ],
   "27": [
     { who: "FLACCUS", text: "Welcome to consul! Here's your army, your mug, and your enemy. Any questions?", add: [120, 300, 600, "bl", 36], el: WF },
-    { who: "FLAMINIUS", text: "What happened to the last guy?", add: [1200, 330, 460, "br", 40], el: "w-consul" },
+    { who: "FLAMINIUS", text: "What happened to the last guy?", add: [1020, 470, 480, "br", 40], el: "w-consul" },
     { who: "FLACCUS", text: "He's… also resting.", add: [180, 330, 380, "bl", 42], el: WF, keep: true },
     N("Flaminius chased Hannibal to Lake Trasimene. Hannibal hid his entire army in the hills above the lake road, on a foggy morning… and waited.", { at: ["flaminius", "fog@0.6"] }),
     { who: "FLAMINIUS", text: "Can't see a thing in this fog. Excellent! That means they can't see us either!", add: [960, 480, 620, "br", 36], el: "flaminius", move: [["r-col", 0.2, { dx: 260 }, 2.4]] },
@@ -55,7 +55,7 @@ export const FRAMES_A2 = {
     { who: "FLAMINIUS", text: "Did somebody say something?", add: [1040, 520, 460, "br", 40], el: "flaminius" },
     N("In about three hours, fifteen thousand Romans were killed. Many drowned trying to swim away in their armor. Flaminius died too.", { move: [["c-hide", 0.0, { dy: 190 }, 0.8], ["fog", 0.0, { o: 0.25 }, 1.0], ["r-col", 0.3, { dy: 70, o: 0.35 }, 1.4], ["flaminius", 0.85, { dr: 85, o: 0.6 }, 0.5]], count: [["consul-counter", 0.9, 0, 1]], hide: ["st-k5"], sfx: [["crash", 0.1]] }),
     { who: "FLACCUS", text: "Dennis?", add: [1100, 80, 240, "br", 44], el: "flaccus-pip", at: ["flaccus-pip"] },
-    { who: "DENNIS", text: "Sir, we're down… a consul.", add: [1100, 360, 440, "br", 40], pip: ["dennis", "dennis", 1600, 470, "DENNIS (ACCOUNTS)"] },
+    { who: "DENNIS", text: "Sir, we're down… a consul.", add: [740, 300, 440, "br", 40], pip: ["dennis", "dennis", 1240, 400, "DENNIS (ACCOUNTS)"] },
     { who: "FLACCUS", text: "Okay. More consuls.", add: [1030, 100, 380, "br", 40], el: "flaccus-pip", keep: true },
   ],
   "28": [
@@ -75,13 +75,13 @@ export const FRAMES_A2 = {
   ],
   "30": [
     { who: "FLACCUS", text: "Welcome to consul! Both of you!", add: [120, 300, 520, "bl", 40], el: WF },
-    { who: "VARRO", text: "What happened to the last guys?", add: [1100, 330, 480, "br", 40], el: "w-consul" },
+    { who: "VARRO", text: "What happened to the last guys?", add: [1000, 470, 480, "br", 40], el: "w-consul" },
     { who: "FLACCUS", text: "Don't worry about it. Here's eighty thousand men.", add: [120, 300, 560, "bl", 38], el: WF, keep: true },
     N("In 216 BC, Rome built the biggest army it had ever put in the field, and sent both consuls to crush Hannibal for good, at a place called Cannae.", { at: ["romans@0.3"] }),
     N("This is Gisgo. Gisgo is one of Hannibal's officers. Gisgo has exactly one moment in history, and this is it.", { stk: [1000, 940, "GISGO. NOT MAGO. DIFFERENT GUY.", 40, -2] }),
     { who: "GISGO", text: "Sir… there are SO many of them.", add: [560, 520, 440, "bl", 38], el: "gisgo" },
     { who: "HANNIBAL", text: "True. But Gisgo, there's something even more amazing.", add: [100, 500, 520, "bl", 36], el: "hannibal" },
-    { who: "GISGO", text: "What?", add: [620, 560, 200, "bl", 48], el: "gisgo" },
+    { who: "GISGO", text: "What?", add: [700, 400, 200, "bl", 48], el: "gisgo" },
     { who: "HANNIBAL", text: "Of all those thousands of men… not one of them is called Gisgo.", add: [100, 470, 580, "bl", 36], el: "hannibal", keep: true },
     N("That is a real joke! Plutarch wrote it down! And the whole army burst out laughing, and the Romans had no idea why.", { at: ["st-real", "laugh@0.45", "confused@0.8"] }),
     { who: "GISGO", text: "…I don't get it.", add: [620, 560, 320, "bl", 44], el: "gisgo", keep: true },
@@ -90,8 +90,8 @@ export const FRAMES_A2 = {
     N("Rome's plan: make the middle extra deep and just shove straight through! Hannibal's plan: let them. He put his weakest troops in the center, bulging forward.", { at: ["rome", "c-center@0.55", "c-left@0.65", "c-right@0.65", "cav-l@0.65", "cav-r@0.65"] }),
     N("The Romans pushed. The center bent back… and back… and back… into a U. While his best veterans waited on both sides.", { at: ["push"], move: [["rome", 0.1, { dy: -150 }, 3.5], ["c-center", 0.1, { dy: -150 }, 3.5], ["push", 0.1, { dy: -150 }, 3.5]] }),
     { who: "VARRO", text: "They're running! Push! PUSH!", add: [120, 80, 460, "bl", 40] },
-    { who: "MAGO", text: "Brother, the middle is folding!", add: [1240, 80, 480, "br", 38] },
-    { who: "HANNIBAL", text: "Yes. Like a napkin.", add: [1300, 80, 400, "br", 40], keep: true },
+    { who: "MAGO", text: "Brother, the middle is folding!", add: [1100, 150, 480, "br", 38] },
+    { who: "HANNIBAL", text: "Yes. Like a napkin.", add: [1180, 300, 400, "br", 40], keep: true },
     N("Then the sides closed in. And then Hannibal's cavalry, who had already chased off the Roman horsemen, came back around and slammed into the Roman rear.", { move: [["c-left", 0.05, { dx: 120, dy: 150, dr: 90 }, 1.4], ["c-right", 0.05, { dx: -120, dy: 150, dr: -90 }, 1.4], ["cav-l", 0.5, { dx: 470, dy: 400 }, 1.6], ["cav-r", 0.5, { dx: -470, dy: 400 }, 1.6], ["push", 0.0, { o: 0 }, 0.3]], hide: ["a-4"], sfx: [["crash", 4.5]] }),
   ],
   "32": [

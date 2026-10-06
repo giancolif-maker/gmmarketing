@@ -15,7 +15,7 @@ export const VOICES = {
 };
 const N = (text, x = {}) => ({ who: "NARRATOR", text, ...x });
 
-export const META = {};
+export const META = { "02": { drop: ["st-fornow"] } };
 
 export const FRAMES = {
   "01": [
@@ -44,7 +44,7 @@ export const FRAMES = {
     { who: "CARTH", text: "Excuse me, those are—", add: [120, 560, 460, "br", 40] },
     { who: "FLACCUS", text: "Ours now. Finders keepers.", add: [1330, 70, 470, "bl", 40], el: "flaccus" },
     { who: "CARTH", text: "We didn't lose them, you TOOK them!", add: [120, 700, 520, "br", 38] },
-    { who: "FLACCUS", text: "Hm. That sounds like a complaint.", b: "b-forever", el: "flaccus" },
+    { who: "FLACCUS", text: "Hm. That sounds like a complaint.", add: [1380, 520, 480, "bl", 36], el: "flaccus" },
     N("Rome then charged Carthage twelve hundred more talents. For complaining. That really happened.", { at: ["invoice"], sfx: [["slam", 1.0]] }),
   ],
   "05": [
@@ -63,7 +63,7 @@ export const FRAMES = {
     { who: "KID", text: "Yes!", add: [1200, 360, 220, "bl", 56], el: "kid" },
     { who: "HAMILCAR", text: "Great. Swear eternal hatred of Rome.", add: [200, 220, 560, "br", 38], el: "hamilcar" },
     { who: "KID", text: "…Do I get a snack after?", b: "b-version", el: "kid" },
-    { who: "HAMILCAR", text: "You get hatred. Forever.", b: "b-no", el: "hamilcar" },
+    { who: "HAMILCAR", text: "You get hatred. Forever.", add: [200, 230, 500, "br", 40], el: "hamilcar" },
     { who: "KID", text: "…Okay.", add: [1220, 380, 260, "bl", 46], el: "kid" },
     N("The ancient historians say this really happened! Most kids his age got a pet.", { at: ["split"], sfx: [["whoosh", 0]] }),
     N("Hannibal got a grudge. And honestly? He took better care of it than most people take of a pet.", { at: ["split-r"] }),
@@ -125,11 +125,11 @@ export const FRAMES = {
     N("This is Surus. Surus is the biggest one. Surus thinks this is a holiday.", { at: ["surus", "surus-label"], sfx: [["boing", 0.4]] }),
     { who: "SURUS", text: "Is there a beach?", b: "b-beach", el: "surus" },
     { who: "HANNIBAL", text: "There's… a coast. Eventually.", b: "b-sort", el: "hannibal", at: ["hannibal", "el-counter"] },
-    { who: "SURUS", text: "I'll pack my towel.", add: [1180, 360, 380, "br", 42], el: "surus", keep: true },
+    { who: "SURUS", text: "I'll pack my towel.", add: [760, 560, 360, "bl", 42], el: "surus", keep: true },
   ],
   "14": [
     N("First up: the Pyrenees! Hostile tribes the whole way. Thousands of his men decided they'd rather go home. So Hannibal just… let them.", { at: ["deserters"] }),
-    { who: "MAGO", text: "Hold on. We were ALLOWED to go home?", b: "b-leave", el: "gisgo" },
+    { who: "MAGO", text: "Hold on. We were ALLOWED to go home?", add: [1160, 340, 560, "br", 36], el: "gisgo" },
     { who: "HANNIBAL", text: "Yes.", add: [700, 420, 180, "bl", 48], el: "hannibal" },
     { who: "MAGO", text: "Great, I'll just—", add: [1200, 420, 340, "br", 42], el: "gisgo" },
     { who: "HANNIBAL", text: "Not you.", b: "b-notyou", el: "hannibal", keep: true },
@@ -184,9 +184,9 @@ export const FRAMES = {
   ],
   "22": [
     N("The local Gauls hated Rome, so they flocked to join him by the thousands!", { at: ["fires"] }),
-    { who: "FLACCUS", text: "Dennis. How many legions do we have?", add: [560, 80, 420, "br", 36], el: "flaccus-pip", at: ["flaccus-pip"] },
+    { who: "FLACCUS", text: "Dennis. How many legions do we have?", add: [960, 200, 440, "br", 36], el: "flaccus-pip", at: ["flaccus-pip"] },
     { who: "DENNIS", text: "Plenty, sir.", add: [1180, 60, 280, "br", 42], pip: ["dennis", "dennis", 1600, 190, "DENNIS (ACCOUNTS)"] },
-    { who: "FLACCUS", text: "Okay. More legions.", add: [580, 80, 380, "br", 40], el: "flaccus-pip" },
+    { who: "FLACCUS", text: "Okay. More legions.", add: [1000, 210, 380, "br", 40], el: "flaccus-pip" },
     N("Rome was about to find out just how bad this was going to get."),
     { who: "SURUS", text: "Are we there yet?", b: "b-yet", el: "surus", keep: true },
     { who: "HANNIBAL", text: "We haven't even started.", b: "b-close", el: "surus", keep: true, at: ["endcard"], sfx: [["sting", 1.0]] },

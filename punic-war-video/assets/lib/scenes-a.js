@@ -77,7 +77,7 @@
     `<path id="tape" d="M640 740 L1150 760" stroke="${C.gold}" stroke-width="10" stroke-dasharray="4 10"/>` +
     place(CAST.legionary({ pose: "point", brows: "neutral", mouth: "open", shield: false }), 960, 930, 0.85, { id: "measurer" }) +
     place(CAST.romanSenator({ pose: "hold", brows: "happy", mouth: "smile", prop: P.scroll(70, 196, 60, 40) }), 1660, 960, 0.85, { id: "copier", flip: true }) +
-    say(300, 360, "Hey, that's ours!", { size: 56, id: "offscreen" }) +
+    say(300, 360, "That's literally my boat!", { size: 56, id: "offscreen" }) +
     sticker(1180, 300, "PLANK. BY. PLANK.", { size: 64, rot: -3, id: "st-plank" }) + `<g id="storm" opacity="0" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#1d2433" opacity=".82"/>${Array.from({ length: 60 }, (_, i) => `<path class="rain" d="M${(i * 173) % 1920} ${(i * 89) % 1080} l-30 70" stroke="#9fb4d6" stroke-width="4" opacity=".7"/>`).join("")}<path id="bolt" d="M1300 0 L1220 260 L1300 260 L1180 560 L1360 220 L1280 220 L1360 0Z" fill="${C.fireLt}" stroke="${C.ink}" stroke-width="5"/>${P.ship(760, 760, 1.0, { col: C.rome, sunk: 28 })}${P.ship(1500, 820, 0.7, { col: C.rome, sunk: -34 })}</g>` + sticker(760, 480, "ROME WINS. SOMEHOW.", { size: 64, rot: 3, id: "st-win" }) + H.grain();
 
   // 04 — The complaining fee
@@ -171,7 +171,7 @@
       </g><g id="fires">${P.fire(560, 430, 0.8)}${P.fire(1380, 440, 0.9)}${P.fire(1280, 520, 0.6)}</g>` +
     `<g id="calendar" transform="translate(110 150)"><rect width="250" height="270" rx="14" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><rect width="250" height="70" rx="14" fill="${C.rome}" stroke="${C.ink}" stroke-width="6"/><text x="125" y="50" text-anchor="middle" class="t-flag" font-size="34">SIEGE</text><text id="cal-n" x="125" y="180" text-anchor="middle" class="t-ink" font-size="110">8</text><text x="125" y="240" text-anchor="middle" class="t-ink" font-size="36">MONTHS</text></g>` +
     place(CAST.saguntine({ pose: "hold", brows: "sad", mouth: "frown", sweat: true, prop: P.scroll(50, 190, 100, 60) }), 1640, 1050, 1.15, { id: "saguntine" }) +
-    `<g id="letter">${P.scroll(1200, 140, 560, 170, ["Thoughts and prayers.", "— Rome"], { size: 46 })}</g>` + place(CAST.saguntine({ pose: "armsUp", brows: "happy", mouth: "grin" }), 1640, 1050, 1.15, { id: "saguntine-happy" }) + H.grain();
+    `<g id="letter">${P.scroll(1200, 140, 560, 170, ["Thinking of you!", "— Rome"], { size: 46 })}</g>` + place(CAST.saguntine({ pose: "armsUp", brows: "happy", mouth: "grin" }), 1640, 1050, 1.15, { id: "saguntine-happy" }) + H.grain();
 
   // 11 — The toga
   S["11"] = () => {

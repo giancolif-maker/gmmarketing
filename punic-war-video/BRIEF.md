@@ -8,7 +8,7 @@ aspect: 1920x1080
 language: en
 audience: general audience who enjoys comedic history
 length: 16m (full script) · 4m pilot (Act 1) built first
-voice: gemini — dry, deadpan male narrator
+voice: kokoro (local) — deadpan male narrator + distinct character voices
 ---
 
 ## Intent
@@ -30,7 +30,8 @@ rendered as a pilot; Acts 2–4 are built only after the pilot is approved.
 
 - Real-feeling map scenes for army movements (Alps route, battle positions, Rome vs Carthage territory).
 - Music bed + comic SFX stings (boings, swooshes, record-scratch).
-- Narration via Gemini TTS, word-timed captions.
+- Dialogue-driven script (STYLE_NOTES.md): narrator + recurring cast (Gisgo, Surus, Hanno, Flaccus), one voice each.
+- Narration via local Kokoro TTS (Gemini key not reaching the API in this container), word-timed captions.
 
 ## Notes
 

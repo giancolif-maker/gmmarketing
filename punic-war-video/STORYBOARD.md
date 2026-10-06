@@ -1,6 +1,6 @@
 ---
 format: 1920x1080
-duration: 4m48s (Act 1 pilot; full episode ~16m)
+duration: ~6m (Act 1 pilot; full episode ~16m)
 message: "Rome nearly lost everything to one guy with elephants — and won by refusing to quit and copying his homework."
 arc: Cold open → Setup (rivals) → Grudge (oath) → Spark (Saguntum, toga) → Insane plan → Journey (Pyrenees, Rhône, Alps) → Arrival → Cliffhanger
 audience: general audience who enjoys comedic history
@@ -11,55 +11,55 @@ running_gags: elephant counter (37 → …), "Okay. More legions.", Hanno says "
 
 ## Frame 1 — Cold open
 
-- scene: Hannibal on an elephant atop a snowy Alp; title card slams in "THE SECOND PUNIC WAR · Part 1: Some Guy With Elephants"
+- scene: Sports scoreboard CARTHAGE vs ROME fills W W W W W … L; Hannibal: "I'd like to see the replay"; title card
 - duration: 14s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/01-cold-open.html
 - motion: titlecard-reveal + kinetic-beat-slam; "WIN · WIN · WIN · LOSE" tally stamps
-- voiceover: "In 218 BC, a man marched an army — with elephants — over the Alps… He still lost."
+- voiceover (guide; SCRIPT.md is authoritative): "In 218 BC, a man marched an army — with elephants — over the Alps… He still lost."
 
 Hook: the paradox (won every battle, lost the war) is the reason to watch.
 
 ## Frame 2 — The neighbors
 
-- scene: Mediterranean parchment map; Rome (red) and Carthage (purple) characters pop up on their cities, each grabbing territory
+- scene: Navy-sea Mediterranean map; Rome (red) and Carthage (purple) as neighbors over a fence — "Nice island." "It's ours." "For now."
 - duration: 13s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/02-neighbors.html
 - motion: spring-pop-entrance (characters), svg-path-draw (territory fills)
-- voiceover: "Meet Rome… The Mediterranean was not big enough for two people who like owning things."
+- voiceover (guide; SCRIPT.md is authoritative): "Meet Rome… The Mediterranean was not big enough for two people who like owning things."
 
 ## Frame 3 — First Punic War speed-run
 
-- scene: Sicily tug-of-war; Roman ships built → sink → built → sink → built; "23 YEARS" stamp; Carthage hands over Sicily + bag of money
+- scene: Romans measure a wrecked Carthaginian ship and copy it plank by plank; storms sink fleets; Flaccus: "Okay. More ships."
 - duration: 16s
 - transition_in: wipe
 - status: outline
 - src: compositions/frames/03-first-war.html
 - motion: discrete-text-sequence (ship build/sink loop), physics-press-reaction
-- voiceover: "So they'd already fought once… Carthage lost Sicily and had to pay a fortune."
+- voiceover (guide; SCRIPT.md is authoritative): "So they'd already fought once… Carthage lost Sicily and had to pay a fortune."
 
 ## Frame 4 — Sardinia, just because
 
-- scene: Carthage busy fighting angry mercenaries; Roman hand reaches in and quietly pockets Sardinia & Corsica; caption "just… took them"
+- scene: Roman hand lifts Sardinia & Corsica off the map — "We're borrowing them. Forever-ish." — invoice: COMPLAINING FEE 1,200 talents
 - duration: 11s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/04-sardinia.html
 - motion: card-morph-anchor (islands lift off map), caption slam
-- voiceover: "Then, while Carthage was busy… Because they could."
+- voiceover (guide; SCRIPT.md is authoritative): "Then, while Carthage was busy… Because they could."
 
 ## Frame 5 — Hamilcar "Lightning" Barca
 
-- scene: Character intro card — Hamilcar, furious, lightning bolt behind him; name plate "HAMILCAR BARCA — 'Lightning'"
+- scene: Hamilcar at a red-string revenge corkboard; Hanno: "Is this a revenge thing?" "Purely. Financial." "No."
 - duration: 10s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/05-hamilcar.html
 - motion: titlecard-reveal (character intro plate), particle-burst (sparks)
-- voiceover: "One Carthaginian general took this very personally…"
+- voiceover (guide; SCRIPT.md is authoritative): "One Carthaginian general took this very personally…"
 
 ## Frame 6 — The oath
 
@@ -69,17 +69,17 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/06-oath.html
 - motion: comparison-split (pet vs feud), ambient-glow-bloom (fire)
-- voiceover: "Before leaving for Spain… The kid's name was Hannibal."
+- voiceover (guide; SCRIPT.md is authoritative): "Before leaving for Spain… The kid's name was Hannibal."
 
 ## Frame 7 — Spain, and a river
 
-- scene: Map zooms to Iberia; Carthage purple spreads, silver coins pop from mines; Hamilcar retreating into a river, a single "blub" bubble
+- scene: Iberia map; silver coins spurt; Roman spy in fake beard; Hamilcar drowns — "Feed the elephants!"
 - duration: 14s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/07-spain.html
 - motion: coordinate-target-zoom (map), counting-dynamic-scale (silver), sine-wave-loop (water)
-- voiceover: "In Spain, Hamilcar built Carthage a brand-new empire… Which was… a setback."
+- voiceover (guide; SCRIPT.md is authoritative): "In Spain, Hamilcar built Carthage a brand-new empire… Which was… a setback."
 
 ## Frame 8 — Hasdrubal the Handsome & the Ebro line
 
@@ -89,7 +89,7 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/08-ebro.html
 - motion: svg-path-draw (Ebro line), press-release-spring (handshake)
-- voiceover: "His son-in-law, Hasdrubal the Handsome… Being handsome was not enough."
+- voiceover (guide; SCRIPT.md is authoritative): "His son-in-law, Hasdrubal the Handsome… Being handsome was not enough."
 
 ## Frame 9 — Hannibal takes command
 
@@ -99,47 +99,47 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/09-command.html
 - motion: scale-swap-transition (kid → adult), kinetic-beat-slam
-- voiceover: "And so, at about twenty-six… Still angry."
+- voiceover (guide; SCRIPT.md is authoritative): "And so, at about twenty-six… Still angry."
 
 ## Frame 10 — Saguntum
 
-- scene: Tiny walled town with a Rome friendship flag; siege calendar flips 8 months; Roman messenger delivers a scroll: "STRONGLY WORDED LETTER"
+- scene: Saguntum's "FRIENDS WITH ROME ♥" sign burns over 8 calendar months; Rome's letter: "Thoughts and prayers."
 - duration: 15s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/10-saguntum.html
 - motion: dynamic-content-sequencing (calendar flips), spring-pop-entrance (letter)
-- voiceover: "South of the Ebro sat a small town called Saguntum… a strongly worded letter."
+- voiceover (guide; SCRIPT.md is authoritative): "South of the Ebro sat a small town called Saguntum… a strongly worded letter."
 
 ## Frame 11 — Peace or war (the toga)
 
-- scene: Carthaginian senate chamber; Roman envoy holds up toga fold, two labels "PEACE" / "WAR"; senators shrug "you choose"; toga drops, "WAR" slams
+- scene: Senate chamber; envoy's toga fold — "What else is in there?" "…Snacks." — toga drops, WAR slams
 - duration: 17s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/11-toga.html
 - motion: kinetic-type-beats (PEACE/WAR token swap), kinetic-beat-slam
-- voiceover: "Then Rome sent envoys to Carthage… a great way to drop a toga."
+- voiceover (guide; SCRIPT.md is authoritative): "Then Rome sent envoys to Carthage… a great way to drop a toga."
 
 ## Frame 12 — The insane plan
 
-- scene: War-table map; dashed arrows for "expected" sea routes get crossed out; Hannibal draws one long overland arrow Spain → Alps → Italy; caption "because it was insane"
+- scene: Roman ship tokens vs Hannibal's one overland arrow; Gisgo: "Those are mountains." "It'll be fine." — "It would not be fine."
 - duration: 14s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/12-plan.html
 - motion: svg-path-draw (route arrow), physics-press-reaction (crossed-out arrows)
-- voiceover: "Rome now owned the sea… Because it was insane."
+- voiceover (guide; SCRIPT.md is authoritative): "Rome now owned the sea… Because it was insane."
 
 ## Frame 13 — Roll call
 
-- scene: Army column; three counters count up — 90,000 infantry, 12,000 cavalry, 37 elephants; elephant counter badge pins to top-right corner (persists from here)
+- scene: Counters 90,000 / 12,000 / 37; elephant counter pins to corner; meet Surus — "Are we going to the beach?"
 - duration: 12s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/13-army.html
 - motion: dataviz-countup + counting-dynamic-scale
-- voiceover: "He set off with around ninety thousand infantry… They will not have a good time."
+- voiceover (guide; SCRIPT.md is authoritative): "He set off with around ninety thousand infantry… They will not have a good time."
 
 ## Frame 14 — The Pyrenees
 
@@ -149,7 +149,7 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/14-pyrenees.html
 - motion: svg-path-draw, waterfall-entry (deserters)
-- voiceover: "First, the Pyrenees… Fair enough."
+- voiceover (guide; SCRIPT.md is authoritative): "First, the Pyrenees… Fair enough."
 
 ## Frame 15 — The Rhône rafts
 
@@ -159,7 +159,7 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/15-rhone.html
 - motion: sine-wave-loop (water, raft bob), spring-pop-entrance (caption)
-- voiceover: "Then the river Rhône… Elephants can swim. Who knew."
+- voiceover (guide; SCRIPT.md is authoritative): "Then the river Rhône… Elephants can swim. Who knew."
 
 ## Frame 16 — Scipio, three days late
 
@@ -169,7 +169,7 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/16-scipio-late.html
 - motion: titlecard-reveal (time card), physics-press-reaction (landing)
-- voiceover: "Meanwhile, the Roman consul Publius Scipio… Oops."
+- voiceover (guide; SCRIPT.md is authoritative): "Meanwhile, the Roman consul Publius Scipio… Oops."
 
 ## Frame 17 — The Alps
 
@@ -179,27 +179,27 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/17-alps.html
 - motion: multi-phase-camera (slow push up the mountain), particle-burst (snow)
-- voiceover: "And then: the Alps… Nobody had packed for this."
+- voiceover (guide; SCRIPT.md is authoritative): "And then: the Alps… Nobody had packed for this."
 
 ## Frame 18 — Rocks from above
 
-- scene: Gauls on the cliff top push boulders; rocks bounce down onto the column; shields up
+- scene: Tribesmen on the cliff with a bowling scoreboard roll boulders — "Strike!"
 - duration: 11s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/18-ambush.html
 - motion: physics-press-reaction (rock bounces), waterfall-entry
-- voiceover: "The local Gauls also really didn't like strangers… A lot."
+- voiceover (guide; SCRIPT.md is authoritative): "The local Gauls also really didn't like strangers… A lot."
 
 ## Frame 19 — The boulder cooking show
 
-- scene: Cooking-show set: "CHEF HANNIBAL'S ROCK REMOVAL"; ingredients: fire + sour wine; boulder cracks; caption "Is it true? Possibly not. Is it awesome? Yes."
+- scene: Cooking show "CHEF HANNIBAL'S ROCK REMOVAL" — heat, splash of vinegar, smash
 - duration: 14s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/19-boulder.html
 - motion: titlecard-reveal (show title), particle-burst (crack)
-- voiceover: "At one point a giant boulder blocked the path… Is it awesome? Yes."
+- voiceover (guide; SCRIPT.md is authoritative): "At one point a giant boulder blocked the path… Is it awesome? Yes."
 
 ## Frame 20 — Into Italy
 
@@ -209,7 +209,7 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/20-italy.html
 - motion: dataviz-countup (count-down), counting-dynamic-scale
-- voiceover: "About fifteen days later… mostly fine."
+- voiceover (guide; SCRIPT.md is authoritative): "About fifteen days later… mostly fine."
 
 ## Frame 21 — Ticinus
 
@@ -219,14 +219,14 @@ Hook: the paradox (won every battle, lost the war) is the reason to watch.
 - status: outline
 - src: compositions/frames/21-ticinus.html
 - motion: kinetic-beat-slam (spit-take), spring-pop-entrance (label)
-- voiceover: "Rome was… surprised… Remember that kid too."
+- voiceover (guide; SCRIPT.md is authoritative): "Rome was… surprised… Remember that kid too."
 
 ## Frame 22 — Cliffhanger
 
-- scene: Hannibal on the elephant at night overlooking Italy, campfires; "NEXT: Rome Keeps Sending Consuls" end card
+- scene: Night over Italy; Flaccus: "Okay. More legions."; Surus: "Are we there yet?" "Not even close."; end card
 - duration: 10s
 - transition_in: crossfade
 - status: outline
 - src: compositions/frames/22-cliffhanger.html
 - motion: titlecard-reveal, ambient-glow-bloom
-- voiceover: "So Hannibal was in Italy… just how bad this was going to get."
+- voiceover (guide; SCRIPT.md is authoritative): "So Hannibal was in Italy… just how bad this was going to get."

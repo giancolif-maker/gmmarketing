@@ -16,13 +16,13 @@
     return H.defs() + Toon.map(g.MED, { regions: [reg("italy", C.rome), reg("sicily", C.rome), reg("sardinia", C.rome), reg("corsica", C.rome), reg("africa", C.carth), reg("spainS", C.carth)] }) +
       `<g id="sea-plans" opacity=".9"><path d="M${rx - 20} ${ry + 40} C700 520 560 560 ${nx + 20} ${ny - 10}" stroke="#fffaf0" stroke-width="8" stroke-dasharray="20 14" fill="none"/><path d="M${rx} ${ry + 60} C960 500 900 560 ${cx + 10} ${cy - 20}" stroke="#fffaf0" stroke-width="8" stroke-dasharray="20 14" fill="none"/>${P.ship(640, 520, 0.28, { col: C.rome })}${P.ship(930, 520, 0.28, { col: C.rome })}
         <path id="x1" d="M600 470 l80 80 M680 470 l-80 80" stroke="${C.rome}" stroke-width="16" stroke-linecap="round"/><path id="x2" d="M890 470 l80 80 M970 470 l-80 80" stroke="${C.rome}" stroke-width="16" stroke-linecap="round"/></g>` +
-      `<path id="route" d="${hannibalRoute}" stroke="${C.ink}" stroke-width="30" fill="none" stroke-linecap="round"/><path d="${hannibalRoute}" stroke="${C.gold}" stroke-width="18" fill="none" stroke-linecap="round"/>` +
+      `<g id="route"><path d="${hannibalRoute}" stroke="${C.ink}" stroke-width="30" fill="none" stroke-linecap="round"/><path d="${hannibalRoute}" stroke="${C.gold}" stroke-width="18" fill="none" stroke-linecap="round"/></g>` +
       Toon.city(nx, ny, "NEW CARTHAGE", { dy: 52 }) + Toon.city(rx, ry, "ROME") +
       `<text x="${Geo.at("AlpsPass")[0] - 40}" y="${Geo.at("AlpsPass")[1] - 70}" text-anchor="middle" class="t-label">THE ALPS?!</text>` +
       place(CAST.hannibal({ pose: "point", mouth: "flat", brows: "smug" }), 1450, 1060, 1.0, { id: "hannibal", flip: true }) +
       place(CAST.gisgo({ pose: "shrug", eyes: "wide" }), 1720, 1060, 1.0, { id: "gisgo" }) +
       P.bubble(1480, 620, 400, 140, "Sir. Those are mountains.", { tail: "br", id: "b-mtn", size: 38 }) +
-      P.bubble(1060, 700, 300, 110, "It'll be fine.", { tail: "br", id: "b-fine", size: 40 }) + H.grain();
+      P.bubble(1060, 700, 300, 110, "It'll be fine.", { tail: "br", id: "b-fine", size: 40 }) + `<g id="flaccus-pip"><circle cx="1080" cy="150" r="110" fill="#efe6d2" stroke="${C.ink}" stroke-width="8"/><clipPath id="pip-c"><circle cx="1080" cy="150" r="104"/></clipPath><g clip-path="url(#pip-c)">${place(CAST.flaccus({ pose: "shrug", brows: "smug", mouth: "smirk" }), 1080, 380, 0.95)}</g></g>` + sticker(760, 900, "IT WOULD NOT BE FINE.", { size: 60, rot: -3, bg: C.ink, id: "st-notfine" }) + H.grain();
   };
 
   // 13 — Roll call + meet Surus
@@ -31,10 +31,10 @@
     `<g id="army">${column(80, 640, 1840, 640, 22, 0.3)}${column(40, 700, 1880, 700, 24, 0.33)}</g>` +
     `<g id="counters">${[["INFANTRY", "90,000"], ["CAVALRY", "12,000"], ["ELEPHANTS", "37"]].map(([l, n], i) => `<g id="cnt-${i}" transform="translate(${170 + i * 560} 120)"><rect width="480" height="190" rx="24" fill="${C.ink}" opacity=".9"/><text x="240" y="64" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="34" fill="#c9b38f">${l}</text><text x="240" y="160" text-anchor="middle" class="t-title" font-size="96" ${i === 2 ? `fill="${C.gold}"` : ""}>${n}</text></g>`).join("")}</g>` +
     placeEl(elephant({ brows: "happy", mouth: "smile" }), 820, 1060, 1.1, { id: "surus" }) +
-    `<text x="820" y="1052" text-anchor="middle" class="t-cap" font-size="34">SURUS</text>` +
+    `<text id="surus-label" x="820" y="1052" text-anchor="middle" class="t-cap" font-size="34">SURUS</text>` +
     place(CAST.hannibal({ pose: "hips", mouth: "flat" }), 1280, 1070, 0.95, { id: "hannibal", flip: true }) +
     P.bubble(980, 420, 500, 120, "Are we going to the beach?", { tail: "bl", id: "b-beach", size: 38 }) +
-    P.bubble(1400, 640, 260, 100, "Sort of.", { tail: "bl", id: "b-sort", size: 40 }) + H.grain();
+    P.bubble(1400, 640, 260, 100, "Sort of.", { tail: "bl", id: "b-sort", size: 40 }) + Toon.elCounter(37) + H.grain();
 
   // 14 — The Pyrenees: free exit policy
   S["14"] = () =>
@@ -124,7 +124,7 @@
     place(CAST.scipio({ pose: "shrug", eyes: "x", mouth: "wobbly", brows: "sad" }), 640, 1000, 1.0, { id: "scipio", rot: -12 }) +
     place(CAST.publius({ pose: "reach", brows: "angry", mouth: "grin" }), 380, 1010, 1.0, { id: "publius" }) +
     P.bubble(60, 300, 420, 110, "You're welcome.", { tail: "bl", id: "b-welcome", size: 44 }) +
-    P.pointer(420, 720, "REMEMBER THIS KID", { id: "ptr" }) + Toon.elCounter(37) + H.grain();
+    P.pointer(420, 720, "REMEMBER THIS KID", { id: "ptr" }) + `<g id="senate" opacity="0"><rect width="1920" height="1080" fill="#cbb38c"/>${[200, 1720].map((x) => P.column(x, 900, 800)).join("")}<rect y="900" width="1920" height="180" fill="#9a7a56" stroke="${C.ink}" stroke-width="5"/>${[420, 640, 1280, 1500].map((x) => place(CAST.romanSenator({ brows: "surprised", eyes: "wide", mouth: "open" }), x, 980, 0.9)).join("")}${place(CAST.flaccus({ pose: "armsUp", brows: "surprised", eyes: "wide", mouth: "shout" }), 960, 1040, 1.5)}<g id="spray">${Array.from({ length: 14 }, (_, i) => `<circle cx="${960 + Math.cos(i) * (120 + i * 12)}" cy="${640 + Math.sin(i * 2) * 60}" r="${6 + (i % 3) * 3}" fill="#bfe3f7" stroke="${C.ink}" stroke-width="2"/>`).join("")}</g>${sticker(960, 180, "BY LAND?!", { size: 110, rot: 3 })}</g>` + Toon.elCounter(37) + H.grain();
 
   // 22 — Cliffhanger
   S["22"] = () => {
@@ -135,7 +135,7 @@
       placeEl(elephant({ brows: "neutral", rider: place(CAST.hannibal({ pose: "point", mouth: "flat" }), 200, 112, 0.62) }), 360, 1060, 1.05, { id: "surus" }) +
       P.bubble(560, 520, 380, 110, "Are we there yet?", { tail: "bl", id: "b-yet", size: 42 }) +
       P.bubble(300, 300, 340, 110, "Not even close.", { tail: "bl", id: "b-close", size: 42 }) +
-      `<g id="endcard"><rect x="1000" y="880" width="860" height="150" rx="20" fill="${C.ink}" opacity=".9"/><text x="1430" y="940" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="34" fill="#c9b38f">NEXT TIME — PART 2</text><text x="1430" y="1002" text-anchor="middle" class="t-title" font-size="54">Rome Keeps Sending Consuls</text></g>` + Toon.elCounter(37) + H.vignette() + H.grain();
+      `<g id="endcard"><rect x="1000" y="880" width="860" height="150" rx="20" fill="${C.ink}" opacity=".9"/><text x="1430" y="940" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="34" fill="#c9b38f">NEXT TIME — PART 2</text><text x="1430" y="1002" text-anchor="middle" class="t-title" font-size="54">Rome Keeps Sending Consuls</text></g>` + `<g id="flaccus-pip"><circle cx="1500" cy="420" r="110" fill="#efe6d2" stroke="${C.ink}" stroke-width="8"/><clipPath id="pip22"><circle cx="1500" cy="420" r="104"/></clipPath><g clip-path="url(#pip22)">${place(CAST.flaccus({ pose: "shrug", brows: "neutral", mouth: "flat" }), 1500, 650, 0.95)}</g>${P.bubble(1060, 230, 360, 110, "Okay. More legions.", { tail: "br", size: 38 })}</g>` + Toon.elCounter(37) + H.vignette() + H.grain();
   };
 
   g.Scenes = Object.assign(g.Scenes || {}, S);

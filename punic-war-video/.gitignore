@@ -2,3 +2,8 @@ renders/
 node_modules/
 *.mp4
 .hyperframes/cache/
+build/
+assets/audio/vo/
+assets/audio/sfx/
+assets/audio/music/
+snapshots/

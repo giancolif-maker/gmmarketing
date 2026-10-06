@@ -50,7 +50,7 @@
         <text x="960" y="580" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="30" fill="#a89a8c">TREBIA · TRASIMENE · CANNAE · … · ZAMA</text></g>` +
       placeEl(elephant({ brows: "neutral", rider: place(CAST.hannibal({ pose: "hips", mouth: "flat" }), 200, 112, 0.62) }), 330, 1040, 0.95, { id: "surus" }) +
       P.bubble(600, 690, 720, 130, "I'd like to see the replay.", { tail: "bl", id: "b-replay", size: 52 }) +
-      sticker(1560, 960, "HE LOST.", { size: 70, rot: 5, id: "st-lost" }) + H.grain();
+      sticker(1560, 960, "HE LOST.", { size: 70, rot: 5, id: "st-lost" }) + `<g id="title" opacity="0"><rect width="1920" height="1080" fill="${C.carthDk}"/>${Array.from({ length: 12 }, (_, i) => `<path d="M960 540 L${960 + Math.cos(i / 6 * Math.PI) * 1400} ${540 + Math.sin(i / 6 * Math.PI) * 1400} L${960 + Math.cos((i + .5) / 6 * Math.PI) * 1400} ${540 + Math.sin((i + .5) / 6 * Math.PI) * 1400}Z" fill="${C.carth}"/>`).join("")}<text x="960" y="430" text-anchor="middle" class="t-title" font-size="150">THE SECOND</text><text x="960" y="600" text-anchor="middle" class="t-title" font-size="190" fill="${C.gold}">PUNIC WAR</text><g transform="translate(960 760) rotate(-2)"><rect x="-560" y="-50" width="1120" height="100" rx="16" fill="${C.rome}" stroke="${C.ink}" stroke-width="8"/><text x="0" y="22" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="54" fill="#fffaf0">Part 1: Some Guy With Elephants</text></g>${placeEl(elephant({ trunk: "up", brows: "happy", mouth: "smile" }), 1640, 1060, 0.7)}${place(CAST.hannibal({ pose: "point", mouth: "flat" }), 260, 1060, 0.9)}</g>` + H.grain();
   };
 
   // 02 — The neighbors over the sea
@@ -77,7 +77,7 @@
     place(CAST.legionary({ pose: "point", brows: "neutral", mouth: "open", shield: false }), 960, 930, 0.85, { id: "measurer" }) +
     place(CAST.romanSenator({ pose: "hold", brows: "happy", mouth: "smile", prop: P.scroll(70, 196, 60, 40) }), 1660, 960, 0.85, { id: "copier", flip: true }) +
     say(300, 360, "Hey, that's ours!", { size: 56, id: "offscreen" }) +
-    sticker(1180, 300, "PLANK. BY. PLANK.", { size: 64, rot: -3, id: "st-plank" }) + H.grain();
+    sticker(1180, 300, "PLANK. BY. PLANK.", { size: 64, rot: -3, id: "st-plank" }) + `<g id="storm" opacity="0"><rect width="1920" height="1080" fill="#1d2433" opacity=".82"/>${Array.from({ length: 60 }, (_, i) => `<path class="rain" d="M${(i * 173) % 1920} ${(i * 89) % 1080} l-30 70" stroke="#9fb4d6" stroke-width="4" opacity=".7"/>`).join("")}<path id="bolt" d="M1300 0 L1220 260 L1300 260 L1180 560 L1360 220 L1280 220 L1360 0Z" fill="${C.fireLt}" stroke="${C.ink}" stroke-width="5"/>${P.ship(760, 760, 1.0, { col: C.rome, sunk: 28 })}${P.ship(1500, 820, 0.7, { col: C.rome, sunk: -34 })}</g>` + sticker(760, 480, "ROME WINS. SOMEHOW.", { size: 64, rot: 3, id: "st-win" }) + H.grain();
 
   // 04 — The complaining fee
   S["04"] = () => {
@@ -90,7 +90,7 @@
       Toon.city(...Geo.at("Rome"), "ROME") +
       place(CAST.flaccus({ pose: "shrug", brows: "smug", mouth: "smirk" }), 1260, 520, 0.8, { id: "flaccus" }) +
       P.bubble(1330, 200, 420, 110, "Forever-ish.", { tail: "bl", id: "b-forever", size: 50 }) +
-      `<g id="invoice" transform="translate(300 700) rotate(-6)"><rect x="0" y="0" width="520" height="300" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><text x="260" y="66" text-anchor="middle" class="t-ink" font-size="44">INVOICE</text><path d="M40 92 H480" stroke="${C.ink}" stroke-width="4"/><text x="40" y="150" class="t-ink" font-size="30">Complaining fee</text><text x="480" y="216" text-anchor="end" class="t-ink" font-size="56" fill="${C.rome}">1,200 talents</text><text x="40" y="270" font-family="Fredoka" font-size="22" fill="${C.greyDk}">payable to: ROME</text></g>` + H.grain();
+      `<g id="invoice" transform="translate(1330 700) rotate(-6)"><rect x="0" y="0" width="520" height="300" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><text x="260" y="66" text-anchor="middle" class="t-ink" font-size="44">INVOICE</text><path d="M40 92 H480" stroke="${C.ink}" stroke-width="4"/><text x="40" y="150" class="t-ink" font-size="30">Complaining fee</text><text x="480" y="216" text-anchor="end" class="t-ink" font-size="56" fill="${C.rome}">1,200 talents</text><text x="40" y="270" font-family="Fredoka" font-size="22" fill="${C.greyDk}">payable to: ROME</text></g>` + `<g id="mercs">${[0, 1, 2].map((i) => place(CAST.mercenary({ pose: i === 1 ? "armsUp" : "point", spear: i !== 1 }), Geo.at("Carthage")[0] - 260 + i * 90, Geo.at("Carthage")[1] + 300, 0.55)).join("")}${place(CAST.carthSenator({ pose: "shrug", brows: "worried", mouth: "open", eyes: "wide" }), Geo.at("Carthage")[0] + 80, Geo.at("Carthage")[1] + 310, 0.6, { flip: true })}</g>` + H.grain();
   };
 
   // 05 — Hamilcar's revenge corkboard / Hanno says no
@@ -117,7 +117,8 @@
     place(CAST.hamilcar({ pose: "point", mouth: "flat", brows: "angry" }), 640, 940, 1.15, { id: "hamilcar" }) +
     place(CAST.hannibalKid({ pose: "raise", brows: "worried", mouth: "flat" }), 1220, 940, 1.0, { id: "kid" }) +
     P.bubble(1180, 220, 640, 150, "Is there a version of Spain without the hatred?", { tail: "bl", id: "b-version", size: 34 }) +
-    P.bubble(300, 340, 200, 110, "No.", { tail: "br", id: "b-no", size: 64 }) + H.vignette("vig", 0.7) + H.grain();
+    P.bubble(300, 340, 200, 110, "No.", { tail: "br", id: "b-no", size: 64 }) + H.vignette("vig", 0.7) + `<g id="split" opacity="0"><rect width="960" height="1080" fill="#f7d77a"/><text x="480" y="140" text-anchor="middle" class="t-title" font-size="70">MOST KIDS</text>${place(CAST.kid({ pose: "hold" }), 420, 900, 1.6)}<g transform="translate(540 760)"><ellipse rx="90" ry="60" fill="#c98d4a" stroke="${C.ink}" stroke-width="6"/><circle cx="80" cy="-50" r="50" fill="#c98d4a" stroke="${C.ink}" stroke-width="6"/><path d="M60 -96 l-20 -40 l30 20Z M110 -92 l10 -44 l14 34Z" fill="#8a5a32" stroke="${C.ink}" stroke-width="5"/><circle cx="96" cy="-56" r="7" fill="${C.ink}"/><path d="M120 -36 q10 8 0 14" stroke="${C.ink}" stroke-width="5" fill="none"/></g>
+  <g id="split-r"><rect x="960" width="960" height="1080" fill="#3a2a22"/><text x="1440" y="140" text-anchor="middle" class="t-title" font-size="70">THIS KID</text>${place(CAST.hannibalKid({ pose: "hold", brows: "furious", mouth: "grit" }), 1400, 900, 1.6)}${P.scroll(1440, 560, 300, 150, ["ETERNAL", "HATRED"], { size: 52 })}</g><rect x="954" width="12" height="1080" fill="${C.ink}"/></g>` + H.grain();
 
   // 07 — Spain: silver, a spy, and a river
   S["07"] = () => {
@@ -125,11 +126,11 @@
     const z = 2.1, tx = 960 - ix * z, ty = 540 - iy * z;
     const coins = [[-4.5, 37.9], [-2.4, 38.6], [-6.2, 37.4], [-1.2, 38.0], [-3.2, 37.5]].map((ll, i) => { const [x, y] = Geo.project(ll); return `<g class="coin" id="coin-${i}">${P.coin(x, y - 20, 12)}</g>`; }).join("");
     return H.defs() + `<g id="zoom" transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${z})">` +
-      Toon.map(g.MED, { regions: [reg("spainS", C.carth, "r-spain"), reg("africa", C.carth)], graticule: false }) + coins + `</g>` +
+      Toon.map(g.MED, { regions: [reg("spainS", C.carth, "r-spain"), reg("africa", C.carth)], graticule: false }) + `<g id="coins">` + coins + `</g></g>` +
       `<g id="bush"><circle cx="1560" cy="980" r="110" fill="${C.grassDk}" stroke="${C.ink}" stroke-width="6"/><circle cx="1700" cy="1000" r="110" fill="${C.grass}" stroke="${C.ink}" stroke-width="6"/></g>` +
       place(CAST.spy({ pose: "hold", prop: P.scroll(60, 200, 80, 50) }), 1640, 1060, 0.95, { id: "spy" }) +
       P.bubble(1000, 470, 620, 170, "Carthage. Getting rich again. Also — elephants.", { tail: "br", id: "b-spy", size: 36 }) +
-      Toon.city(...(() => { const [x, y] = Geo.at("NewCarthage"); return [x * z + tx, y * z + ty]; })(), "NEW CARTHAGE", { dy: 52 }) + H.grain();
+      Toon.city(...(() => { const [x, y] = Geo.at("NewCarthage"); return [x * z + tx, y * z + ty]; })(), "NEW CARTHAGE", { dy: 52 }) + `<g id="river" opacity="0"><rect width="1920" height="1080" fill="#9fd0ea"/><path d="M0 420 C500 380 1300 440 1920 400 V1080 H0Z" fill="#3d7bb0" stroke="${C.ink}" stroke-width="6"/>${[520, 640, 780, 920].map((y) => `<path d="M0 ${y} q80 -16 160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0" stroke="#bfe3f7" stroke-width="5" fill="none" opacity=".7"/>`).join("")}<g id="helmet" transform="translate(960 470)"><g transform="scale(1.4) translate(-100 -40)"><path d="M32 96 C30 46 62 24 100 24 C138 24 170 46 168 96 C150 82 128 76 100 76 C72 76 50 82 32 96Z" fill="${C.gold}" stroke="${C.ink}" stroke-width="6"/><path d="M100 22 C96 -6 120 -20 136 -12 C122 -6 116 8 112 24Z" fill="${C.rome}" stroke="${C.ink}" stroke-width="5"/></g></g>${[[900, 380, 18], [1010, 330, 12], [950, 280, 9]].map(([x, y, r]) => `<circle class="bubble" cx="${x}" cy="${y}" r="${r}" fill="#dff3ff" stroke="${C.ink}" stroke-width="4"/>`).join("")}<text x="1080" y="420" class="t-cap" font-size="56">blub.</text></g>` + H.grain();
   };
 
   // 08 — Hasdrubal the Handsome and the Ebro line
@@ -140,13 +141,13 @@
     return H.defs() + `<g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${z})">` +
       Toon.map(g.MED, { regions: [reg("spainS", C.carth, "r-spain")], graticule: false }) +
       `<path id="ebro" d="${ebro}" stroke="#fffaf0" stroke-width="9" fill="none" stroke-dasharray="16 10" stroke-linecap="round"/></g>` +
-      `<text x="1250" y="210" class="t-label" font-size="54">THE EBRO</text>` +
+      `<text id="ebro-label" x="1250" y="210" class="t-label" font-size="54">THE EBRO</text>` +
       `<g id="sparkles">${[[520, 520], [760, 470], [600, 760], [470, 680]].map(([x, y]) => `<path d="M${x} ${y - 30} L${x + 8} ${y - 8} L${x + 30} ${y} L${x + 8} ${y + 8} L${x} ${y + 30} L${x - 8} ${y + 8} L${x - 30} ${y} L${x - 8} ${y - 8}Z" fill="${C.fireLt}" stroke="${C.ink}" stroke-width="3"/>`).join("")}</g>` +
       place(CAST.hasdrubal({ pose: "point" }), 620, 1020, 1.25, { id: "hasdrubal" }) +
       place(CAST.flaccus({ pose: "point", brows: "angry", mouth: "flat" }), 1300, 1020, 1.25, { id: "flaccus", flip: true }) +
       P.bubble(1360, 520, 460, 130, "Not one toe over this line.", { tail: "bl", id: "b-toe", size: 34 }) +
       P.bubble(160, 470, 480, 120, "Wouldn't dream of it, darling.", { tail: "br", id: "b-darling", size: 32 }) +
-      sticker(560, 150, "HASDRUBAL THE HANDSOME", { size: 50, rot: -2, bg: "#e07ab0", id: "st-name" }) + H.grain();
+      sticker(560, 150, "HASDRUBAL THE HANDSOME", { size: 50, rot: -2, bg: "#e07ab0", id: "st-name" }) + `<g id="dagger" opacity="0"><rect width="1920" height="1080" fill="#120c0a" opacity=".7"/><g transform="translate(640 560) rotate(-30)"><rect x="-10" y="-150" width="20" height="140" fill="#dfe6ee" stroke="${C.ink}" stroke-width="5"/><rect x="-40" y="-14" width="80" height="16" rx="6" fill="${C.gold}" stroke="${C.ink}" stroke-width="5"/><rect x="-9" y="0" width="18" height="60" rx="5" fill="${C.wood}" stroke="${C.ink}" stroke-width="5"/></g><text x="1100" y="560" class="t-title" font-size="90">GRUDGE #2</text></g>` + H.grain();
   };
 
   // 09 — Hannibal raised on a shield
@@ -157,8 +158,7 @@
       <ellipse cx="960" cy="720" rx="300" ry="44" fill="${C.carth}" stroke="${C.ink}" stroke-width="8"/><ellipse cx="960" cy="712" rx="260" ry="30" fill="${C.gold}" stroke="${C.ink}" stroke-width="4"/>
       ${place(CAST.hannibal({ pose: "raise", sword: true, swordRot: -10 }), 960, 712, 1.15, { id: "hannibal" })}</g>` +
     `<g id="flash"><circle cx="1560" cy="300" r="150" fill="#fffaf0" stroke="${C.ink}" stroke-width="8"/><clipPath id="fl-clip"><circle cx="1560" cy="300" r="146"/></clipPath><g clip-path="url(#fl-clip)"><rect x="1400" y="140" width="320" height="320" fill="#3a2a22"/>${place(CAST.hannibalKid({ pose: "raise" }), 1560, 470, 0.95)}</g><text x="1560" y="490" text-anchor="middle" class="t-cap" font-size="32">age 9</text></g>` +
-    sticker(560, 220, "STILL ANGRY.", { size: 84, rot: -4, id: "st-angry" }) +
-    say(1520, 1030, "He sleeps on the ground?", { size: 40, id: "gisgo-line" }) + H.grain();
+    sticker(560, 220, "STILL ANGRY.", { size: 84, rot: -4, id: "st-angry" }) + H.grain();
 
   // 10 — Saguntum
   S["10"] = () =>
@@ -167,10 +167,10 @@
     Array.from({ length: 13 }, (_, i) => `<rect x="${460 + i * 80}" y="390" width="44" height="40" fill="#e8d6b0" stroke="${C.ink}" stroke-width="6"/>`).join("") +
     `<rect x="880" y="600" width="160" height="180" rx="80" fill="#5a3b22" stroke="${C.ink}" stroke-width="6"/>
       <g id="sign" transform="rotate(-4 960 500)"><rect x="660" y="450" width="600" height="110" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><text x="960" y="525" text-anchor="middle" class="t-ink" font-size="52">FRIENDS WITH ROME <tspan fill="${C.rome}">♥</tspan></text></g>
-      ${P.fire(560, 430, 0.8)}${P.fire(1380, 440, 0.9)}${P.fire(1280, 520, 0.6)}</g>` +
-    `<g id="calendar" transform="translate(110 150)"><rect width="250" height="270" rx="14" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><rect width="250" height="70" rx="14" fill="${C.rome}" stroke="${C.ink}" stroke-width="6"/><text x="125" y="50" text-anchor="middle" class="t-flag" font-size="34">SIEGE</text><text x="125" y="180" text-anchor="middle" class="t-ink" font-size="110">8</text><text x="125" y="240" text-anchor="middle" class="t-ink" font-size="36">MONTHS</text></g>` +
+      </g><g id="fires">${P.fire(560, 430, 0.8)}${P.fire(1380, 440, 0.9)}${P.fire(1280, 520, 0.6)}</g>` +
+    `<g id="calendar" transform="translate(110 150)"><rect width="250" height="270" rx="14" fill="#fffaf0" stroke="${C.ink}" stroke-width="6"/><rect width="250" height="70" rx="14" fill="${C.rome}" stroke="${C.ink}" stroke-width="6"/><text x="125" y="50" text-anchor="middle" class="t-flag" font-size="34">SIEGE</text><text id="cal-n" x="125" y="180" text-anchor="middle" class="t-ink" font-size="110">8</text><text x="125" y="240" text-anchor="middle" class="t-ink" font-size="36">MONTHS</text></g>` +
     place(CAST.saguntine({ pose: "hold", brows: "sad", mouth: "frown", sweat: true, prop: P.scroll(50, 190, 100, 60) }), 1640, 1050, 1.15, { id: "saguntine" }) +
-    `<g id="letter">${P.scroll(1200, 140, 560, 170, ["Thoughts and prayers.", "— Rome"], { size: 46 })}</g>` + H.grain();
+    `<g id="letter">${P.scroll(1200, 140, 560, 170, ["Thoughts and prayers.", "— Rome"], { size: 46 })}</g>` + place(CAST.saguntine({ pose: "armsUp", brows: "happy", mouth: "grin" }), 1640, 1050, 1.15, { id: "saguntine-happy" }) + H.grain();
 
   // 11 — The toga
   S["11"] = () => {
@@ -186,7 +186,7 @@
       place(CAST.envoy({ pose: "raise", brows: "angry", mouth: "open" }), 900, 1030, 1.3, { id: "envoy" }) +
       `<g id="fold"><path d="M990 650 C960 690 980 760 1010 790 C1040 760 1060 700 1030 650Z" fill="${C.white}" stroke="${C.ink}" stroke-width="6"/><path d="M1000 690 C1006 720 1012 744 1012 770" stroke="#d8cbb0" stroke-width="4" fill="none"/><text x="1080" y="700" class="t-cap" font-size="44"><tspan fill="#bfe8b2">PEACE</tspan></text><text x="1080" y="760" class="t-cap" font-size="44"><tspan fill="#ff8f86">WAR</tspan></text></g>` +
       P.bubble(400, 300, 440, 120, "What else is in there?", { tail: "bl", id: "b-what", size: 38 }) +
-      P.bubble(1110, 300, 400, 120, "…Snacks. Choose!", { tail: "bl", id: "b-snacks", size: 44 }) + H.grain();
+      P.bubble(1110, 300, 400, 120, "…Snacks. Choose!", { tail: "bl", id: "b-snacks", size: 44 }) + sticker(960, 520, "WAR.", { size: 160, rot: -4, id: "st-war" }) + H.grain();
   };
 
   g.Scenes = Object.assign(g.Scenes || {}, S);

@@ -8,6 +8,7 @@ Every new line is checked with speech recognition and re-generated (new seed) if
 Usage:
   python tools/tts-cb.py --refs --kokoro DIR   make character reference clips (needs kokoro_onnx)
   python tools/tts-cb.py [--only 01,02]        synthesize + lay out
+  python tools/tts-cb.py --redo 21/1,36/0      re-take slurred lines with calmer settings
 Lines are cached by content hash in build/vo-cache-cb/."""
 import json, hashlib, re, sys, os, difflib
 import numpy as np, soundfile as sf
@@ -55,6 +56,9 @@ import torch, torchaudio as ta, librosa
 from chatterbox.tts import ChatterboxTTS
 from faster_whisper import WhisperModel
 only = set(sys.argv[sys.argv.index("--only") + 1].split(",")) if "--only" in sys.argv else None
+# --redo 21/1,36/0: re-take slurred lines with calmer settings and no speed-up
+REDO = set(sys.argv[sys.argv.index("--redo") + 1].split(",")) if "--redo" in sys.argv else set()
+CALM = dict(exaggeration=0.5, cfg_weight=0.5)
 cache = os.path.join(ROOT, "build/vo-cache-cb"); os.makedirs(cache, exist_ok=True)
 tts = asr = None
 def key(l): return hashlib.sha1(f"cb2|{l['who']}|{clean(l['text'])}".encode()).hexdigest()[:16]
@@ -64,10 +68,11 @@ def synth(l, seed):
     if tts is None: tts = ChatterboxTTS.from_pretrained(device="cpu")
     torch.manual_seed(seed)
     ref = None if l["who"] == "NARRATOR" else os.path.join(refdir, l["who"] + ".wav")
-    w = tts.generate(clean(l["text"]), audio_prompt_path=ref, **(NARR if ref is None else CHAR))
+    calm = f"{l['frame']}/{l['idx']}" in REDO
+    w = tts.generate(clean(l["text"]), audio_prompt_path=ref, **(CALM if calm else NARR if ref is None else CHAR))
     a = trim(w.squeeze(0).numpy().astype(np.float32))
     sp = SPEED.get(l["who"])
-    if sp: a = librosa.effects.time_stretch(a, rate=sp)
+    if sp and not calm: a = librosa.effects.time_stretch(a, rate=sp)
     return a
 
 def score(a, text):
@@ -77,6 +82,8 @@ def score(a, text):
     heard = " ".join(s.text for s in segs)
     return difflib.SequenceMatcher(None, words(clean(text)), words(heard)).ratio(), heard
 
+for l in lines:
+    if f"{l['frame']}/{l['idx']}" in REDO and os.path.exists(os.path.join(cache, key(l) + ".wav")): os.remove(os.path.join(cache, key(l) + ".wav"))
 todo = [l for l in lines if (only is None or l["frame"] in only)]
 log = open(os.path.join(ROOT, "build/tts-cb.log"), "a")
 for n, l in enumerate(todo):

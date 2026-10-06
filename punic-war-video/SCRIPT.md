@@ -288,7 +288,7 @@ names or gags are borrowed.
     NARRATOR: At dawn, Hannibal's Numidian cavalry rode up to the Roman camp and started throwing things at it. Sempronius was furious. So he marched his entire army out — before breakfast — straight through a freezing river, chest-deep.
     SEMPRONIUS: Ch-ch-charge! Wh-why is it ch-chunky?
     NARRATOR: On the other side, Hannibal's men had eaten a hot breakfast by the fire and rubbed themselves down with olive oil to keep warm.
-    HANNIBAL: (sipping) Hm. Good river.
+    MAGO: (sipping, finally relaxed) Ahh. Good river.
 
 ## F25 — Trebia, the result
 [Mago bursts out of the riverbed behind the Romans. Elephant counter drops.]
@@ -576,7 +576,7 @@ names or gags are borrowed.
 
     NARRATOR: Hannibal won almost every battle. Rome won the war. Because Rome never, ever quit. And because one kid did his homework.
     HANNIBAL: Can I see the replay now?
-    NARRATOR: You're in it.
+    NARRATOR: You just watched it.
     SURUS: Are we there yet?
     NARRATOR: Yes, Surus. We're there.
 [END]

@@ -9,6 +9,39 @@ const ROOT = new URL("../", import.meta.url);
 const rel = (p) => new URL(p, ROOT);
 for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js", "assets/lib/scenes-c.js", "assets/lib/scenes-d.js", "assets/lib/scenes-e.js"]) await import(rel(f).href);
 const { Toon, Scenes } = globalThis;
+// Scene-baked speech bubbles: a bubble no cue line uses is dropped, one a line uses shows that
+// line's text (or its bt), and picture-in-picture bubbles (-pipb) always give way to cue bubbles.
+const rawBubble = Toon.P.bubble;
+let BUSED = new Set(), BOVR = {};
+Toon.P.bubble = (x, y, w, h, text, o = {}) => {
+  const id = o.id || "";
+  if (id.endsWith("-pipb")) return "";
+  if (/^b/.test(id)) { if (!BUSED.has(id)) return ""; if (BOVR[id] != null) text = BOVR[id]; }
+  return rawBubble(x, y, w, h, text, o);
+};
+const shown = (l) => l.bt ?? l.text;
+// Minor characters who only appear as a portrait in a circle (cue line: pip: [id, preset, x, y])
+const PIPS = {
+  dennis: () => Toon.CAST.romanSenator({ hat: "hair", hairCol: "#5b4a3a", brows: "sad", mouth: "flat" }),
+  flaccus: () => Toon.CAST.flaccus({ pose: "shrug", brows: "smug", mouth: "smirk" }),
+};
+const pipSvg = (id, preset, x, y, label) => `<g id="${id}"><circle cx="${x}" cy="${y}" r="100" fill="#efe6d2" stroke="${Toon.C.ink}" stroke-width="8"/><clipPath id="${id}-c"><circle cx="${x}" cy="${y}" r="94"/></clipPath><g clip-path="url(#${id}-c)">${Toon.place(PIPS[preset](), x, y + 215, 0.88)}</g>${label ? Toon.sticker(x, y + 112, label, { size: 26, rot: -2, bg: Toon.C.ink, pad: 14 }) : ""}</g>`;
+// The Consul Welcome Pack: a full-screen office that replays for each new consul (META[n].welcome)
+const welcomeSvg = ({ consul, sign = 0 }) => {
+  const { C, CAST, place, sticker } = Toon;
+  const who = consul === "pair"
+    ? place(CAST.romanSenator({ brows: "worried", mouth: "open" }), 1300, 1010, 1.05, { id: "w-consul", flip: true }) + place(CAST.romanSenator({ hat: "hair", hairCol: "#3a2a1a", brows: "worried", mouth: "flat" }), 1600, 1010, 1.05, { id: "w-consul2", flip: true })
+    : place(CAST[consul]({ brows: "worried", mouth: "open" }), 1420, 1010, 1.1, { id: "w-consul", flip: true });
+  return `<g id="r-welcome" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#e9dcc0"/><rect y="760" width="1920" height="320" fill="#c9a86a"/>` +
+    [260, 960, 1660].map((x) => `<rect x="${x - 40}" y="80" width="80" height="600" fill="#f4ecd8" stroke="${C.ink}" stroke-width="5"/>`).join("") +
+    `<g transform="translate(960 150) rotate(-1.5)"><rect x="-520" y="-56" width="1040" height="112" rx="16" fill="${C.rome}" stroke="${C.ink}" stroke-width="7"/><text y="26" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="64" fill="#fffaf0">WELCOME TO CONSUL!</text></g>` +
+    `<g transform="translate(1560 360) rotate(2)"><rect x="-170" y="-80" width="340" height="160" rx="10" fill="#fffaf0" stroke="${C.ink}" stroke-width="5"/><text y="-28" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="26" fill="${C.ink}">DAYS WITHOUT LOSING</text><text y="2" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="26" fill="${C.ink}">A CONSUL:</text><text y="66" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="60" fill="${C.rome}">${sign}</text></g>` +
+    place(CAST.flaccus({ pose: "shrug", brows: "happy", mouth: "smile" }), 520, 1010, 1.1, { id: "w-flaccus" }) +
+    `<g><rect x="760" y="700" width="420" height="34" rx="6" fill="${C.wood}" stroke="${C.ink}" stroke-width="5"/><rect x="790" y="734" width="24" height="200" fill="${C.wood}" stroke="${C.ink}" stroke-width="4"/><rect x="1126" y="734" width="24" height="200" fill="${C.wood}" stroke="${C.ink}" stroke-width="4"/>` +
+    `<path d="M820 700 l20 -90 h120 l20 90Z" fill="#d8a85a" stroke="${C.ink}" stroke-width="5"/><path d="M830 610 q70 -70 140 0" stroke="${C.ink}" stroke-width="6" fill="none"/><circle cx="870" cy="600" r="16" fill="#c23b2e" stroke="${C.ink}" stroke-width="4"/><circle cx="910" cy="596" r="16" fill="#e2b33c" stroke="${C.ink}" stroke-width="4"/>` +
+    `<rect x="1020" y="610" width="110" height="90" rx="10" fill="#fffaf0" stroke="${C.ink}" stroke-width="5"/><path d="M1130 630 q34 0 34 22 t-34 24" stroke="${C.ink}" stroke-width="7" fill="none"/><text x="1075" y="644" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="16" fill="${C.ink}">WORLD'S</text><text x="1075" y="664" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="16" fill="${C.ink}">BEST</text><text x="1075" y="684" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="16" fill="${C.rome}">CONSUL</text>${sign ? `<path d="M1040 620 l14 24 l-8 18 l16 22" stroke="${C.ink}" stroke-width="3" fill="none"/>` : ""}</g>` +
+    who + `</g>`;
+};
 const timing = JSON.parse(readFileSync(rel("build/timing.json"), "utf8"));
 const engine = readFileSync(rel("assets/lib/engine.js"), "utf8");
 mkdirSync(rel("compositions/frames/"), { recursive: true });
@@ -31,10 +64,19 @@ for (const n of Object.keys(FRAMES).sort()) {
   const L = lines.map((l, i) => ({ ...l, s: T.lines[i].start, e: T.lines[i].end }));
   // extra bubbles for lines that need one
   let extra = "";
-  L.forEach((l, i) => { if (l.add) { const [x, y, w, tail, size] = l.add; l.b = `a-${i}`; extra += Toon.P.bubble(x, y, w, 100, l.text, { tail, size, id: l.b }); } });
+  BUSED = new Set(L.filter((l) => l.b).map((l) => l.b)); BOVR = {};
+  for (const l of L) if (l.b && /^b/.test(l.b)) BOVR[l.b] = shown(l);
+  L.forEach((l, i) => {
+    if (l.stk) { const [x, y, text, size = 46, rot = -3, bg] = l.stk; const sid = `st-k${i}`; extra += Toon.sticker(x, y, text, { size, rot, id: sid, ...(bg ? { bg } : {}) }); l.at = [...(l.at || []), `${sid}@${l.stkAt ?? 0}`]; }
+    if (l.pip) { const [pid, preset, x, y, label] = l.pip; extra += pipSvg(pid, preset, x, y, label); l.at = [...(l.at || []), pid]; }
+  });
+  L.forEach((l, i) => { if (l.add) { const [x, y, w, tail, size] = l.add; l.b = `a-${i}`; extra += Toon.P.bubble(x, y, w, 100, shown(l), { tail, size, id: l.b }); } });
+  const wel = (META || {})[n]?.welcome;
+  if (wel) extra = welcomeSvg(wel) + extra;
   const reveals = [], moves = [], counters = [];
   const intro = (META || {})[n]?.intro;
   if (intro) reveals.push({ id: intro, t: 0, hideAt: (META[n].lead || 3) - 0.35 });
+  if (wel) reveals.push({ id: "r-welcome", t: intro ? (META[n].lead || 3) - 0.4 : 0, hideAt: L[wel.until].s - 0.25 });
   L.forEach((l, i) => {
     for (const a of l.at || []) {
       const [id, frac] = a.split("@"); const t = frac ? l.s + (l.e - l.s) * parseFloat(frac) : l.s;

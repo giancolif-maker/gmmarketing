@@ -98,7 +98,7 @@
       `<g id="coins">${Array.from({ length: 9 }, (_, i) => P.coin(560 + (i % 3) * 40, 740 - Math.floor(i / 3) * 30, 22)).join("")}</g>` +
       place(HB({ pose: "hold", mouth: "smile", brows: "happy", prop: P.scroll(60, 200, 80, 50) }), 360, 1040, 1.2, { id: "hannibal" }) +
       sticker(560, 200, "DEBT: PAID EARLY", { size: 60, rot: -3, bg: "#3c7a3a", id: "st-paid" }) +
-      `<g id="flaccus-pip"><circle cx="1500" cy="300" r="110" fill="#efe6d2" stroke="${C.ink}" stroke-width="8"/><clipPath id="fp53"><circle cx="1500" cy="300" r="104"/></clipPath><g clip-path="url(#fp53)">${place(CAST.flaccus({ pose: "cross", brows: "angry", mouth: "flat", eyes: "dot" }), 1500, 530, 0.95)}</g>${P.bubble(1100, 440, 360, 110, "…That's suspicious.", { tail: "br", size: 38 })}</g>` +
+      `<g id="flaccus-pip"><circle cx="1500" cy="300" r="110" fill="#efe6d2" stroke="${C.ink}" stroke-width="8"/><clipPath id="fp53"><circle cx="1500" cy="300" r="104"/></clipPath><g clip-path="url(#fp53)">${place(CAST.flaccus({ pose: "cross", brows: "angry", mouth: "flat", eyes: "dot" }), 1500, 530, 0.95)}</g>${P.bubble(1100, 440, 360, 110, "…That's suspicious.", { tail: "br", size: 38, id: "fp-pipb" })}</g>` +
       `<g id="exile" data-layout-allow-overlap="true">${Toon.map(g.MED, { id: "map53", regions: [reg("italy", C.rome), reg("sicily", C.rome), reg("spainS", C.rome), reg("africa", C.carth)] })}<path d="${route}" stroke="${C.carth}" stroke-width="14" fill="none" stroke-dasharray="22 14" stroke-linecap="round"/><text x="1500" y="300" class="t-label" font-size="40">EXILE</text>${sticker(560, 160, "183 BC", { size: 70, rot: -3, bg: C.ink })}</g>` +
       Toon.elCounter(1) + H.grain();
   };

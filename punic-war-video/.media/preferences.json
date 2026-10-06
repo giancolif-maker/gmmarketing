@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "youtube",
+      "confirmed_in": [
+        "punic-war-video"
+      ],
+      "updated_at": "2026-10-06T14:40:24.423Z"
+    },
+    "aspect": {
+      "value": "1920x1080",
+      "confirmed_in": [
+        "punic-war-video"
+      ],
+      "updated_at": "2026-10-06T14:40:24.488Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "punic-war-video"
+      ],
+      "updated_at": "2026-10-06T14:40:24.544Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "punic-war-video"
+      ],
+      "updated_at": "2026-10-06T14:40:24.596Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "punic-war-video"
+      ],
+      "updated_at": "2026-10-06T14:40:24.654Z"
+    }
+  },
+  "sightings": {}
+}

@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 const ROOT = new URL("../", import.meta.url);
 const rel = (p) => new URL(p, ROOT);
-for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js"])
+for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js", "assets/lib/scenes-c.js", "assets/lib/scenes-d.js", "assets/lib/scenes-e.js"])
   if (existsSync(rel(f))) await import(rel(f).href);
 const { Toon, Scenes } = globalThis;
 

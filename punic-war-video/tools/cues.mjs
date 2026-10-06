@@ -1,3 +1,5 @@
+import { FRAMES_A34, META_A34, VOICES_A34 } from "./cues-act34.mjs";
+import { FRAMES_A2, META_A2, VOICES_A2 } from "./cues-act2.mjs";
 // Act 1 cue sheet: every spoken line, who says it, and what it triggers on screen.
 // line: { who, text, b?: existing bubble id, add?: [x, y, w, tail, size] new bubble,
 //         el?: speaker element id (bobs while talking), keep?: true, at?: [ids revealed at line start],
@@ -11,6 +13,8 @@ export const VOICES = {
   CARTH: ["am_eric", 1.1], HASDRUBAL: ["am_adam", 1.01], SPY: ["am_eric", 1.26], TRIBESMAN: ["am_liam", 1.1],
 };
 const N = (text, x = {}) => ({ who: "NARRATOR", text, ...x });
+
+export const META = {};
 
 export const FRAMES = {
   "01": [
@@ -177,3 +181,9 @@ export const FRAMES = {
     { who: "HANNIBAL", text: "Not even close.", b: "b-close", el: "surus", keep: true, at: ["endcard"], sfx: [["sting", 1.0]] },
   ],
 };
+Object.assign(VOICES, VOICES_A2);
+Object.assign(META, META_A2);
+Object.assign(FRAMES, FRAMES_A2);
+Object.assign(VOICES, VOICES_A34);
+Object.assign(META, META_A34);
+Object.assign(FRAMES, FRAMES_A34);

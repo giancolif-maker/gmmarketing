@@ -4,10 +4,10 @@
 // Run after tools/tts.py. Usage: node tools/build-frames.mjs
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-import { FRAMES } from "./cues.mjs";
+import { FRAMES, META } from "./cues.mjs";
 const ROOT = new URL("../", import.meta.url);
 const rel = (p) => new URL(p, ROOT);
-for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js"]) await import(rel(f).href);
+for (const f of ["assets/maps/med.js", "assets/lib/geo.js", "assets/lib/grain.js", "assets/lib/toon.js", "assets/lib/scenes-a.js", "assets/lib/scenes-b.js", "assets/lib/scenes-c.js", "assets/lib/scenes-d.js", "assets/lib/scenes-e.js"]) await import(rel(f).href);
 const { Toon, Scenes } = globalThis;
 const timing = JSON.parse(readFileSync(rel("build/timing.json"), "utf8"));
 const engine = readFileSync(rel("assets/lib/engine.js"), "utf8");
@@ -32,7 +32,9 @@ for (const n of Object.keys(FRAMES).sort()) {
   // extra bubbles for lines that need one
   let extra = "";
   L.forEach((l, i) => { if (l.add) { const [x, y, w, tail, size] = l.add; l.b = `a-${i}`; extra += Toon.P.bubble(x, y, w, 100, l.text, { tail, size, id: l.b }); } });
-  const reveals = [];
+  const reveals = [], moves = [], counters = [];
+  const intro = (META || {})[n]?.intro;
+  if (intro) reveals.push({ id: intro, t: 0, hideAt: (META[n].lead || 3) - 0.35 });
   L.forEach((l, i) => {
     for (const a of l.at || []) {
       const [id, frac] = a.split("@"); const t = frac ? l.s + (l.e - l.s) * parseFloat(frac) : l.s;
@@ -50,8 +52,12 @@ for (const n of Object.keys(FRAMES).sort()) {
       sfxTrack.push({ name: l.b.startsWith("st-") ? "slam" : "pop", t: cursor + Math.max(0, l.s - 0.06), vol: l.b.startsWith("st-") ? 0.5 : 0.25 });
     }
     for (const [name, off] of l.sfx || []) sfxTrack.push({ name, t: cursor + l.s + off, vol: 0.55 });
+    const at = (frac) => +(l.s + (l.e - l.s) * frac).toFixed(3);
+    for (const [id, frac, v, d] of l.move || []) moves.push({ id, t: at(frac), d: d ?? 1, ...v });
+    for (const [id, frac, from, to] of l.count || []) counters.push({ id, t: at(frac), from, to });
+    for (const id of l.hide || []) moves.push({ id, t: l.s, d: 0.25, o: 0 });
   });
-  const CUE = { frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {} };
+  const CUE = { frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {}, moves, counters };
 
   const svg = prefixIds(`<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><style>${Toon.STYLE}</style><g id="cam">${Scenes[n]()}${extra}</g></svg>`, P);
   const id = `f${n}`;

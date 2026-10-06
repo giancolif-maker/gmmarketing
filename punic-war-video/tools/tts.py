@@ -25,6 +25,8 @@ def trim(a, thr=0.004):
     return a[s:e]
 
 lines = json.load(open(os.path.join(ROOT, "build/lines.json")))
+meta_p = os.path.join(ROOT, "build/meta.json")
+META = json.load(open(meta_p)) if os.path.exists(meta_p) else {}
 cache = os.path.join(ROOT, "build/vo-cache"); os.makedirs(cache, exist_ok=True)
 k = None
 audio = {}
@@ -40,7 +42,7 @@ for l in lines:
 timing = {}
 for f in sorted({l["frame"] for l in lines}):
     fl = [l for l in lines if l["frame"] == f]
-    t, segs, prev = LEAD, [], None
+    t, segs, prev = META.get(f, {}).get("lead", LEAD), [], None
     for l in fl:
         if prev is not None: t += SWITCH if prev != l["who"] else GAP
         d = len(audio[(f, l["idx"])]) / SR

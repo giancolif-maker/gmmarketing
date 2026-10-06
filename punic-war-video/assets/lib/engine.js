@@ -29,10 +29,11 @@ function buildFrame(gsap, document, P, CUE) {
     tl.set(el, { opacity: 1 }, 0);
     paths.forEach((p) => { const L = p.getTotalLength(); const dash = p.getAttribute("stroke-dasharray"); if (dash) { tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t); return; } tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t); });
   };
+  const counted = new Set();
   const fmt = (v, tpl) => (tpl.startsWith("~") ? "~" : "") + Math.round(v).toLocaleString("en-US");
   const count = (el, t, from, to, d = 1.6) => {
     const txt = el.querySelectorAll("text")[1] || el.querySelector("text"); const tpl = txt.textContent; const o = { v: from };
-    txt.textContent = fmt(from, tpl);
+    if (!counted.has(txt)) { counted.add(txt); txt.textContent = fmt(from, tpl); }
     tl.to(o, { v: to, duration: d, ease: "power2.out", onUpdate: () => { txt.textContent = fmt(o.v, tpl); } }, t);
   };
 
@@ -84,6 +85,9 @@ function buildFrame(gsap, document, P, CUE) {
   const co = $("coins"); if (co) Array.from(co.children).forEach((c) => org(c, "50% 100%"));
   const fi = $("fires"); if (fi) Array.from(fi.children).forEach((c) => org(c, "50% 100%"));
 
+  const moveBase = new Map();
+  for (const m of CUE.moves || []) { const el = $(m.id); if (el && !moveBase.has(el)) { org(el, "50% 50%"); moveBase.set(el, base(el)); } }
+
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
@@ -99,6 +103,15 @@ function buildFrame(gsap, document, P, CUE) {
   }
   // Boxes 0–4 on the scoreboard pop one by one during the first line (frame 01)
   for (let i = 0; i < 5; i++) { const b = $("box-" + i); if (b && CUE.lines[0]) pop(b, CUE.lines[0].s + 1.0 + i * 0.75); }
+
+  // ---------- 1b. scripted moves (relative to the element's natural pose) and counter changes ----------
+  for (const m of CUE.moves || []) {
+    const el = $(m.id); if (!el) continue; const b = moveBase.get(el); const v = { duration: m.d, ease: m.ease || "power2.inOut" };
+    if (m.dx != null) v.x = b.x + m.dx; if (m.dy != null) v.y = b.y + m.dy; if (m.dr != null) v.rotation = b.r + m.dr;
+    if (m.ds != null) { v.scaleX = b.sx * m.ds; v.scaleY = b.sy * m.ds; } if (m.o != null) v.opacity = m.o;
+    tl.to(el, v, m.t);
+  }
+  for (const c of CUE.counters || []) { const el = $(c.id); if (el) count(el, c.t, c.from, c.to, c.d || 1.4); }
 
   // ---------- 2. talking: the speaker squashes gently while their line plays ----------
   for (const l of CUE.lines) {

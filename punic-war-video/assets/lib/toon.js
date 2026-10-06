@@ -176,6 +176,17 @@
     gaul: (x = {}) => char({ body: "#5f8f4a", hat: "gaul", moustache: true, hairCol: "#c9862f", brows: "angry", mouth: "grin", legs: "#6b4a2a", ...x }),
     kid: (x = {}) => char({ body: "#e8a33d", hat: "hair", kid: true, brows: "happy", mouth: "smile", ...x }),
     spy: (x = {}) => char({ body: C.rome, hat: "roman", beard: true, beardCol: "#2a1a10", brows: "smug", mouth: "smirk", ...x }),
+    sempronius: (x = {}) => char({ body: C.rome, armor: C.bronze, hat: "roman", crest: C.gold, brows: "angry", cape: C.romeDk, ...x }),
+    flaminius: (x = {}) => char({ body: C.rome, armor: C.bronze, hat: "roman", crest: "#3f7fd0", brows: "smug", mouth: "smile", cape: C.romeDk, ...x }),
+    fabius: (x = {}) => char({ body: C.white, toga: true, togaStripe: C.rome, hat: "bald", hairCol: "#e8e8e8", beard: true, beardCol: "#e8e8e8", brows: "neutral", mouth: "flat", eyes: "closed", ...x }),
+    maharbal: (x = {}) => char({ body: "#e9e2cf", hat: "curly", hairCol: "#1a120c", beard: true, beardCol: "#1a120c", brows: "angry", skin: "#8a5634", legs: "#6b4024", cape: C.carth, spear: true, ...x }),
+    archimedes: (x = {}) => char({ body: "#4f7fb5", hat: "bald", hairCol: "#f0f0f0", beard: true, beardCol: "#f0f0f0", brows: "surprised", eyes: "wide", ...x }),
+    romanMother: (x = {}) => char({ body: "#c76a8a", hat: "curly", hairCol: "#5a3a22", brows: "angry", mouth: "open", ...x }),
+    publiusAdult: (x = {}) => char({ body: C.rome, armor: C.bronze, hat: "hair", hairCol: "#7a4a24", brows: "smug", mouth: "smirk", cape: C.rome, ...x }),
+    masinissa: (x = {}) => char({ body: C.white, trim: C.gold, hat: "curly", hairCol: "#120c08", brows: "angry", mouth: "grin", skin: "#7a4a2c", legs: "#5e3820", cape: "#2f7d5a", spear: true, ...x }),
+    cato: (x = {}) => char({ body: C.white, toga: true, togaStripe: C.rome, hat: "bald", hairCol: "#bbb", brows: "furious", mouth: "frown", ...x }),
+    sailor: (x = {}) => char({ body: "#3d6fa3", hat: "hair", hairCol: "#3a2618", brows: "surprised", eyes: "wide", mouth: "open", ...x }),
+    numidian: (x = {}) => char({ body: "#e9e2cf", hat: "curly", hairCol: "#1a120c", brows: "angry", skin: "#8a5634", legs: "#6b4024", spear: true, ...x }),
     mercenary: (x = {}) => char({ body: "#a0693a", hat: "gaul", hairCol: "#3b2b1e", moustache: true, brows: "furious", mouth: "shout", legs: "#5a3a20", ...x }),
   };
 
@@ -293,8 +304,18 @@
   const elCounter = (n, { id = "el-counter", x = 1690, y = 40 } = {}) =>
     `<g id="${id}" transform="translate(${x} ${y})"><rect x="0" y="0" width="200" height="96" rx="22" fill="${C.ink}" opacity=".88"/><g transform="translate(14 8) scale(.26)">${elephant({ blanket: C.carth, brows: "neutral" })}</g><text x="182" y="66" text-anchor="end" font-family="Fredoka" font-weight="700" font-size="52" fill="#fffaf0" class="el-num">${n}</text></g>`;
 
+  // Consul counter badge (top-left HUD): consuls killed by Hannibal
+  const consulCounter = (n, { id = "consul-counter", x = 30, y = 40 } = {}) =>
+    `<g id="${id}" transform="translate(${x} ${y})"><rect x="0" y="0" width="330" height="96" rx="22" fill="${C.ink}" opacity=".88"/><g transform="translate(14 12) scale(.36)">${hat("roman", {})}</g><text x="96" y="58" font-family="Fredoka" font-weight="600" font-size="27" fill="#c9b38f">CONSULS LOST</text><text x="312" y="66" text-anchor="end" font-family="Fredoka" font-weight="700" font-size="44" fill="#ff8f86" class="cc-num">${n}</text></g>`;
+  // Battle-diagram unit: a solid block with an ink border
+  const unit = (x, y, w, h, col, { id = "", rot = 0 } = {}) => `<rect${id ? ` id="${id}"` : ""} x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${col}" stroke="${C.ink}" stroke-width="5" transform="rotate(${rot} ${x + w / 2} ${y + h / 2})"/>`;
+  // Black stat card after a battle: rows of [label, carthage, rome]
+  const statCard = (title, rows, { id = "stat" } = {}) =>
+    `<g id="${id}"><rect width="1920" height="1080" fill="#141012"/>${P.emblemCarth(300, 230, 1.3)}${P.emblemRome(1620, 230, 1.3)}<text x="960" y="250" text-anchor="middle" class="t-title" font-size="72">${title}</text>` +
+    rows.map(([label, a, b], i) => `<text x="960" y="${440 + i * 220}" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="30" fill="#c9b38f">${label}</text><text x="560" y="${540 + i * 220}" text-anchor="middle" class="t-title" font-size="88">${a}</text><text x="1360" y="${540 + i * 220}" text-anchor="middle" class="t-title" font-size="88" fill="${i ? "#ff8f86" : "#fffaf0"}">${b}</text>`).join("") + `</g>`;
+
   // Paper texture / vignette overlays
   const paperGrain = (id = "grain") => `<filter id="${id}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .15  0 0 0 .08 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>`;
 
-  g.Toon = { C, place, placeEl, char, CAST, elephant, P, map, city, STYLE, say, sticker, elCounter, paperGrain, wrapG, POSES };
+  g.Toon = { C, place, placeEl, char, CAST, elephant, P, map, city, STYLE, say, sticker, elCounter, consulCounter, unit, statCard, paperGrain, wrapG, POSES };
 })(globalThis);

@@ -47,7 +47,7 @@
 **Spine:** a nobody loses a war → Germany collapses → he rises → everyone underestimates him → he keeps getting away with more → Poland → Europe explodes → he makes the biggest mistake of his life.
 
 ## F01 — Hook
-[A hospital ward, November 1918. A bandaged soldier in a bed, eyes covered. Fast flash-forwards, one second each: a rubber stamp slamming; a banner being crossed out; a fuel gauge needle dropping. Then back to the bed.]
+[0:00–0:10, no narration, one hard cut every ~2 seconds: a bandaged soldier in a hospital bed, 1918 → a giant rubber stamp slams down on a treaty → a map of Europe turning dark from the middle out → arrows crashing into Poland → a dark concrete bunker door closing → SNAP back to the hospital bed, silence.]
 
     NARRATOR: In 1918, this man was a nobody. A corporal. He'd just lost a war, he'd temporarily lost his eyesight to poison gas, and he had no job, no money and no plan.
     NARRATOR: Twenty-seven years later, he'd be dead in a bunker under Berlin, and tens of millions of people would be dead with him.
@@ -149,7 +149,7 @@
     NARRATOR: In 1935, Hitler stopped pretending. Britain and France complained, and did nothing.
 
 ## F09 — The form (#1: the Rhineland)
-[A London desk. Two clerks, British and French. A form slides in: "TERRITORIAL DEMAND. Is this your last one? ☑ Yes". A rubber stamp.]
+[A London desk. Two clerks, British and French. A crisp, neatly typed form slides in: "TERRITORIAL DEMAND. Is this your last one? ☑ Yes". A rubber stamp. After the stamp, a small sticker in the corner: "GOT AWAY WITH IT ✓".]
 
     NARRATOR: Then he started taking things, one piece at a time. 1936: troops into the Rhineland, which was supposed to stay free of soldiers.
     HITLER: Last one. Promise.
@@ -158,7 +158,7 @@
 [STAMP: OK]
 
 ## F10 — The form (#2: Austria)
-[Same desk. A new British prime minister, Chamberlain, umbrella. Hitler slides the form over without looking up.]
+[Same desk. A new British prime minister, Chamberlain, umbrella. The form is now coffee-stained, the signature a scribble. Hitler slides it over without looking up. Sticker afterwards: "AGAIN ✓✓".]
 
     NARRATOR: In 1938, he annexed Austria.
     HITLER: (already walking away) Last one. Promise.
@@ -167,7 +167,7 @@
     NARRATOR: Britain's new prime minister, Neville Chamberlain, believed in appeasement: give him a little, and he'll calm down.
 
 ## F11 — The form (#3: Munich)
-[Same desk. Now a big conference table in Munich. A Czech official knocks on the window outside.]
+[A big conference table in Munich. The form is crumpled, torn at one corner, "LAST ONE" scrawled across it in pen. Chamberlain carefully smooths it flat with his hand. A Czech official knocks on the window outside. Sticker afterwards: "AGAIN ✓✓✓".]
 
     NARRATOR: Then he wanted a large part of Czechoslovakia. Britain, France and Italy met him in Munich and handed it over. Czechoslovakia wasn't invited.
     CZECH OFFICIAL: (through the glass) That's my country!
@@ -196,7 +196,7 @@
     NARRATOR: A promise not to attack each other, and a secret extra page: they'd split Poland down the middle.
 
 ## F14 — The form (#4: Poland)
-[Chamberlain's desk. The form arrives. Box ticked: "Is this your last one? ☒ No".]
+[Chamberlain's desk. No form this time: Hitler drops a scrap of napkin. On it, scrawled: "LAST ONE? ☒ NO". Silence. Then the biggest stamp of the episode.]
 
     CHAMBERLAIN: (reading) "Not the last one."
     HITLER: I'm being honest now. Isn't that nice?
@@ -224,8 +224,8 @@
 
     NARRATOR: France had the Maginot Line, a huge wall of forts along the German border. It stopped at the Ardennes forest, because everyone agreed the forest was too thick for tanks.
     FRENCH GENERAL: Tanks cannot get through the Ardennes.
-[A German tank noses out of the trees. KLAUS is driving.]
-    KLAUS: (waving) Sorry. Coming through.
+[A German tank noses out of the trees. A cheerful TANK DRIVER pops out of the hatch.]
+    TANK DRIVER: (waving) Sorry. Coming through.
 [A second tank. A third. A line of them to the horizon.]
     FRENCH GENERAL: …Tanks cannot get through the Ardennes in these numbers.
     NARRATOR: May 1940.
@@ -251,7 +251,7 @@
 
     NARRATOR: France surrendered in six weeks. Hitler made the French sign in the very same railway carriage where Germany had surrendered in 1918.
     HITLER: Same carriage. Same table. I've been waiting twenty-two years for this.
-    KLAUS: Sir, we have a war to run.
+    AIDE: Sir, we have a war to run.
     HITLER: Same chair!
     NARRATOR: One French general escaped to London and announced on the radio that France was still fighting.
     DE GAULLE: I am in charge of France.
@@ -339,7 +339,6 @@
     STALIN: British lies.
     AIDE: And there's a German soldier here who crossed the border river tonight to tell us it starts at dawn.
     STALIN: (pause) …German lies.
-    NARRATOR: That deserter was real.
 
 ## F27 — Dawn
 [June 22nd, 1941, before dawn. A front line from the Baltic to the Black Sea lights up all at once.]
@@ -347,11 +346,11 @@
     NARRATOR: June 22nd, 1941. Nearly four million German and allied soldiers attacked along a front almost three thousand kilometers long. The largest invasion in human history.
     STALIN: (very quietly) I trust nobody.
     NARRATOR: Hitler had just attacked the largest country on Earth. Within six months, he would declare war on the richest one too. Over in America, someone was about to change the sign on the shop.
-[END CARD: "NEXT: The Year the Axis Started Losing"]
+[END CARD: "NEXT: The Year Hitler Started Losing"]
 
 ---
 
-# EPISODE 2 — "The Year the Axis Started Losing" (1941–1943)
+# EPISODE 2 — "The Year Hitler Started Losing" (1941–1943)
 
 **Spine:** in mid-1942 the Axis looks unstoppable, holding land from the Atlantic to the Pacific → three turning points in six months (Midway, El Alamein, Stalingrad) → by late 1943 it is losing on every front.
 
@@ -360,9 +359,9 @@
 
     NARRATOR: Summer, 1942. Germany rules Europe from France almost to Moscow. Japan has taken an empire across the Pacific in six months. The Axis is winning everywhere.
     NARRATOR: One year later, it's losing everywhere. And it all turns on three battles.
-[Three empty boxes appear: TURNING POINT 1, 2, 3.]
+[Three empty boxes appear: TURNING POINT 1, 2, 3. Each one, when it fills later, gets a full-screen slam with a drum hit.]
     NARRATOR: But first: mud.
-[TITLE: WORLD WAR II — "The Year the Axis Started Losing"]
+[TITLE: WORLD WAR II — "The Year Hitler Started Losing"]
 
 ## F02 — Mud, then ice
 [The Eastern Front, autumn 1941. Tanks sinking in mud. KLAUS knee-deep, gauge in hand.]
@@ -618,23 +617,23 @@
     HITLER: What does it say?
     KLAUS: (turning it around) It says "no."
     NARRATOR: The Allies were going to invade France. Hitler's generals thought they knew exactly where. They were wrong.
-[END CARD: "NEXT: The Longest Year of the War"]
+[END CARD: "NEXT: The Year Hitler Lost Everything"]
 
 ---
 
-# EPISODE 3 — "The Longest Year of the War" (1944–1945)
+# EPISODE 3 — "The Year Hitler Lost Everything" (1944–1945)
 
 **Spine:** how do you break into a fortress continent? → D-Day → the race to Germany → Hitler's last gambles fail → the horror is uncovered → Germany falls → Japan won't surrender → the bombs → a piece of paper.
 
 ## F01 — Hook
-[June 4th, 1944. A rainy window in England. Eisenhower reading a weather chart. A pencil and a folded note.]
+[June 4th, 1944. No music. Only rain on a window in England. A weather chart. A pencil. A folded piece of paper. Then, as the narration names the numbers, hard cuts to the scale: soldiers, ships, planes, filling the screen.]
 
     NARRATOR: June 1944. More than a hundred and fifty thousand soldiers, seven thousand ships and boats, and eleven thousand aircraft are ready to attack the most heavily defended coastline in the world.
     NARRATOR: The plan depends on fake tanks, a fake army, and the weather. And the weather is terrible.
     NARRATOR: The man in charge has already written the statement he'll read if it all goes wrong.
 [Close on the note: "Our landings… have failed… If any blame or fault attaches to the attempt it is mine alone."]
     NARRATOR: That note is real. Here's why he never had to read it.
-[TITLE: WORLD WAR II — "The Longest Year of the War"]
+[TITLE: WORLD WAR II — "The Year Hitler Lost Everything"]
 
 ## F02 — The underbelly
 [Italy: mountains, rain, mud. Allied soldiers struggling up a rocky slope. CHURCHILL on a phone.]
@@ -793,13 +792,12 @@
     NARRATOR: He was back as prime minister six years later. He was very stubborn.
 
 ## F18 — I have returned
-[A beach in the Philippines, October 1944. General Douglas MacArthur wading ashore in sunglasses, followed by a photographer, a lighting guy with a reflector, and a man carrying a chair.]
+[A beach in the Philippines, October 1944. General Douglas MacArthur wading ashore in sunglasses. A photographer on the sand.]
 
     NARRATOR: Meanwhile, in the Pacific. General Douglas MacArthur had been forced out of the Philippines in 1942, and promised, "I shall return." In October 1944, he waded ashore.
     MACARTHUR: People of the Philippines, I have returned!
     PHOTOGRAPHER: Chin up, General.
-    LIGHTING GUY: (wading behind him with a reflector) Little to the left.
-    MACARTHUR: (to the camera) I have returned.
+    MACARTHUR: (lifting chin, to the camera) …I have returned.
 
 ## F19 — The Pacific
 [The Pacific map. Island names appear: Saipan, Leyte, Iwo Jima, Okinawa. Then cities in Japan under bombers.]
@@ -865,12 +863,21 @@
 
 ---
 
-## Titles, for YouTube
+## Packaging: titles and thumbnails
 
-| Episode | On-screen title | YouTube title |
+The title and thumbnail must never repeat each other; the thumbnail raises the question the title doesn't answer.
+
+| Episode | YouTube title | Thumbnail |
 | --- | --- | --- |
-| 1 | How Hitler Got Away With It | Everyone Thought Hitler Was Bluffing |
-| 2 | The Year the Axis Started Losing | How the Axis Lost the War in One Year |
-| 3 | The Longest Year of the War | D-Day Almost Failed. Here's What Happened Next. |
+| 1 | Everyone Thought Hitler Was Bluffing | Hitler holding the "LAST ONE, PROMISE" form, the box ticked ☒ NO. Europe turning dark behind him. Text: "HE KEPT GETTING AWAY WITH IT", or no text. |
+| 2 | The Year Hitler Started Losing | Hitler at a map, three giant arrows labeled MIDWAY, AFRICA, STALINGRAD. Klaus's fuel gauge on "0". Text: "3 BATTLES". |
+| 3 | The Year Hitler Lost Everything | Eisenhower holding the failure note, legible, with the invasion fleet behind him. Text: "THIS WAS THE BACKUP PLAN". |
 
-Each title stands on its own and works without having seen the others. Every episode's end card names the next one by its question, not by a part number.
+**After upload, judge each episode by** impressions, click-through rate, retention over the first 30 seconds and average percentage viewed, not by views. Retention data takes 1–2 days to settle.
+
+## Production notes (animation)
+- **Vary the composition constantly:** close-ups, wide maps, split screens, inserts. Never the same framing twice in a row.
+- **Rhythm is story → tension → joke → escalation → visual gag → serious beat → payoff.** It should never become a fact → joke → fact → joke metronome.
+- **Klaus is rationed.** Leave 30–90 seconds between his appearances, so each one lands as "oh no, what does the gauge say?"
+- **No padding to hit 15 minutes.** If an episode is 12:38, that's the length.
+- **Serious sections:** no music, slow map and counter animation, and nothing played for laughs.

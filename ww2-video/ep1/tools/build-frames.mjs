@@ -106,10 +106,18 @@ for (const n of Object.keys(FRAMES).sort()) {
     for (const id of l.hide || []) moves.push({ id, t: l.s, d: 0.25, o: 0 });
     for (const [frac, sc, px, py, d] of l.cam || []) cams.push({ t: at(frac), s: sc, px, py, d: d ?? 0.8 });
   });
+  // full-screen cut-aways: bubbles, name stickers and portraits from the shot underneath leave when one opens or closes
+  const sceneSvg = Scenes[n]();
+  const overlays = new Set([...sceneSvg.matchAll(/<g id="((?:cut|fade)-[^"]+)" data-layout-allow-overlap/g)].map((m) => m[1]));
+  const edges = [...reveals.filter((r) => overlays.has(r.id)).map((r) => r.t), ...moves.filter((m) => overlays.has(m.id) && m.o === 0).map((m) => m.t)];
+  for (const r of reveals) {
+    if (!/^(a-|b-|st-k|pip-)/.test(r.id)) continue;
+    for (const T of edges) if (T - r.t > 0.3 && (r.hideAt == null || r.hideAt > T)) r.hideAt = T;
+  }
   cams.sort((a, b) => a.t - b.t);
   const CUE = { cams, drop: (META || {})[n]?.drop || [], frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {}, moves, counters };
 
-  const svg = prefixIds(`<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><style>${Toon.STYLE}</style><g id="cam">${Scenes[n]()}${extra}</g></svg>`, P);
+  const svg = prefixIds(`<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><style>${Toon.STYLE}</style><g id="cam">${sceneSvg}${extra}</g></svg>`, P);
   const id = `f${n}`;
   writeFileSync(rel(`compositions/frames/${id}.html`), `<!doctype html>
 <html><head><meta charset="UTF-8" /></head><body>

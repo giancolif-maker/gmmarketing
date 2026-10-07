@@ -83,9 +83,9 @@ export const FRAMES = {
   "06": [
     N("In January 1933, a group of old conservative politicians had a plan: make Hitler chancellor, and keep him boxed in.", { at: ["st-date"] }),
     L("CON", "Relax. We've boxed him in.", { add: [300, 450, 420, "bl", 42], el: "con1" }),
-    N("A month later, the parliament building burned, and Hitler used it to suspend civil rights.", { at: ["fade-fire@0.2"], move: [["arm-out", 0.5, { dy: -150 }, 0.6]], sfx: [["boom", 1.0]] }),
+    N("A month later, the parliament building burned, and Hitler used it to suspend civil rights.", { at: ["fade-fire@0.2"], move: [["arm-out", 0.5, { dy: -300 }, 0.6]], sfx: [["boom", 1.0]] }),
     L("CON", "We've… mostly boxed him in.", { add: [300, 450, 440, "bl", 42], el: "con1" }),
-    N("Then parliament voted him the power to make laws on his own, and every other party was banned.", { at: ["st-banned@0.7"], move: [["arm-out", 0.4, { dy: -300 }, 0.6]] }),
+    N("Then parliament voted him the power to make laws on his own, and every other party was banned.", { at: ["st-banned@0.7"], move: [["arm-out", 0.4, { dy: -560 }, 0.6]] }),
     L("CON", "This is a slightly smaller box.", { add: [300, 450, 460, "bl", 42], el: "con1", at: ["pop-small"], cam: [[0, 1.3, 560, 860, 0.5]] }),
     N("In 1934, he had his rivals inside his own party murdered, and when the old president died, he made himself Führer. Total power.", { at: ["cut-rev@0.55"], cam: [[0, 1.0, 960, 540, 0.4]], sfx: [["slam", 3.6]] }),
     L("CON", "We would like to talk about the box.", { add: [1000, 420, 520, "bl", 40], cam: [[0, 1.45, 960, 680, 0.5]] }),
@@ -112,7 +112,7 @@ export const FRAMES = {
   ],
   "09": [
     N("Then he started taking things, one piece at a time. 1936: troops into the Rhineland, which was supposed to stay free of soldiers.", { at: ["st-date", "inr-form@0.4"] }),
-    L("HITLER", "Last one. Promise.", { add: [120, 560, 380, "bl", 44], el: "hitler", cam: [[0, 1.25, 600, 700, 0.5]] }),
+    L("HITLER", "Last one. Promise.", { add: [120, 560, 380, "bl", 44], el: "hitler", cam: [[0, 1.25, 300, 800, 0.5]] }),
     L("CLERKUK", "Hm. Did he fill in the form?", { add: [560, 470, 460, "bl", 40], el: "uk", cam: [[0, 1.0, 960, 540, 0.5]] }),
     L("CLERKFR", "He filled in the form.", { add: [880, 330, 440, "br", 40], el: "frc", keep: true, at: ["st-ok@0.9"], sfx: [["slam", 1.4]] }),
   ],
@@ -148,7 +148,7 @@ export const FRAMES = {
     L("CHAMBERLAIN", "\"Not the last one.\"", { add: [880, 470, 420, "br", 44], el: "cham", cam: [[0, 1.35, 960, 640, 0.5]] }),
     L("HITLER", "I'm being honest now. Isn't that nice?", { add: [300, 480, 500, "bl", 40], el: "hitler", cam: [[0, 1.0, 960, 540, 0.4]] }),
     N("On September 1st, 1939, Germany invaded Poland. Two days later, Britain and France declared war. Two weeks after that, the Soviet Union invaded Poland from the east.",
-      { at: ["st-war", "fade-inv@0.12", "arr-1@0.16", "arr-2@0.22", "arr-3@0.28", "arr-4@0.8"], sfx: [["slam", 0], ["boom", 0.4]] }),
+      { at: ["st-war", "fade-inv@0.3", "arr-1@0.16", "arr-2@0.22", "arr-3@0.28", "arr-4@0.8"], sfx: [["slam", 0], ["boom", 0.4]] }),
     L("STALIN", "As agreed.", { add: [1430, 120, 280, "br", 46], pip: ["pip-st", "stalin", 1720, 300, ""] }),
     N("Poland fell in five weeks, and would suffer under both occupations for the entire war.", { hide: ["pip-st"] }),
     N("In 1940, Stalin's secret police murdered around twenty-two thousand Polish prisoners, many of them officers, in the Katyn forest and other sites, and blamed it on the Germans for fifty years.", { at: ["fade-katyn"] }),
@@ -221,7 +221,7 @@ export const FRAMES = {
       { at: [...Array.from({ length: 9 }, (_, i) => `pop-u${i}@${(0.02 + i * 0.045).toFixed(3)}`), "fade-tube@0.66"], count: [["cnt-blitz", 0.3, 0, 40000]] }),
   ],
   "23": [
-    N("The United States was neutral, and most Americans wanted to stay out of it. President Franklin Roosevelt wanted to help Britain anyway.", { cam: [[0, 1.15, 960, 300, 3]], stk: [1500, 520, "FRANKLIN D. ROOSEVELT", 36, 3] }),
+    N("The United States was neutral, and most Americans wanted to stay out of it. President Franklin Roosevelt wanted to help Britain anyway.", { cam: [[0, 1.15, 960, 300, 3]], stk: [1500, 660, "FRANKLIN D. ROOSEVELT", 36, 3] }),
     L("FDR", "Welcome! We're neutral. Cash only, and you carry it home yourself.", { add: [800, 330, 580, "br", 38], el: "fdr", cam: [[0, 1.0, 960, 540, 0.4]] }),
     L("CHURCHILL", "We're out of cash.", { add: [480, 500, 380, "bl", 44], el: "church" }),
     L("FDR", "Oh. Then… borrow it?", { add: [940, 340, 440, "br", 42], el: "fdr" }),
@@ -232,7 +232,7 @@ export const FRAMES = {
     N("It was called Lend-Lease: American weapons, food and fuel, now, with the bill later.", { at: ["pop-sign2"], sfx: [["ding", 0]], cam: [[0, 1.3, 960, 200, 0.5]] }),
   ],
   "24": [
-    L("MUSSOLINI", "Enzo! \"VICTORY IN GREECE!\"", { add: [1100, 120, 460, "br", 40], pip: ["pip-mu", "mussolini", 1720, 330, ""], at: ["pop-b1@0.4"] }),
+    L("MUSSOLINI", "Enzo! \"VICTORY IN GREECE!\"", { add: [1380, 80, 420, "br", 40], pip: ["pip-mu", "mussolini", 1720, 330, ""], at: ["pop-b1@0.4"] }),
     N("In 1940, Italy invaded Greece. Greece pushed the Italians back into Albania.", { at: ["st-date", "arr-gr@0.2"], hide: ["pip-mu"], cam: [[0, 1.5, 1180, 520, 1]] }),
     L("ENZO", "Pending.", { add: [1350, 560, 260, "br", 46], at: ["st-pend"], cam: [[0, 1.0, 960, 540, 0.4]] }),
     N("Italy also attacked the British in Egypt, who counterattacked and captured more than a hundred thousand Italian soldiers.", { cam: [[0.1, 1.4, 1500, 900, 1]] }),
@@ -258,7 +258,7 @@ export const FRAMES = {
     L("AIDESU", "A warning from the British.", { add: [1120, 520, 460, "br", 40], el: "aide", at: ["pop-l1"] }),
     L("STALIN", "British lies.", { add: [730, 440, 300, "bl", 46], el: "stalin" }),
     L("AIDESU", "And there's a German soldier here who crossed the border river tonight to tell us it starts at dawn.", { add: [980, 380, 620, "br", 36], el: "aide", at: ["pop-l2", "pop-deserter@0.5"] }),
-    L("STALIN", "German lies.", { add: [730, 440, 300, "bl", 46], el: "stalin", keep: true, cam: [[0.1, 1.5, 760, 720, 0.6]] }),
+    L("STALIN", "German lies.", { add: [620, 440, 300, "bl", 46], el: "stalin", keep: true, cam: [[0.1, 1.3, 960, 700, 0.6]] }),
   ],
   "27": [
     N("June 22nd, 1941. Nearly four million German and allied soldiers attacked along a front almost three thousand kilometers long. The largest invasion in human history.",

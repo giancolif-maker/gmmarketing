@@ -48,6 +48,8 @@ function buildFrame(gsap, document, P, CUE) {
   const slam = (el, t) => { const b = base(el); tl.fromTo(el, { opacity: 0, scaleX: b.sx * 2.4, scaleY: b.sy * 2.4, rotation: b.r - 8 }, { opacity: 1, scaleX: b.sx, scaleY: b.sy, rotation: b.r, duration: 0.28, ease: "power3.in" }, t); tl.to(cam, { x: 10, y: -6, duration: 0.05, yoyo: true, repeat: 3, ease: "none" }, t + 0.28); };
   const rise = (el, t, dy = 40, d = 0.5) => { const b = base(el); tl.fromTo(el, { opacity: 0, y: b.y + dy }, { opacity: 1, y: b.y, duration: d, ease: "power3.out" }, t); };
   const slideX = (el, t, dx, d = 0.7, ease = "power3.out") => { const b = base(el); tl.fromTo(el, { opacity: 1, x: b.x + dx }, { x: b.x, duration: d, ease }, t); };
+  // hidden until t, then slides in from an offset (no opacity in the tween, so seeking backwards never flashes it)
+  const enter = (el, t, axis, off, d, ease) => { const b = base(el); tl.set(el, { opacity: 0, [axis]: b[axis] + off }, 0); tl.set(el, { opacity: 1 }, t); tl.fromTo(el, { [axis]: b[axis] + off }, { [axis]: b[axis], duration: d, ease, immediateRender: false }, t); };
   const slideY = (el, t, dy, d = 0.7, ease = "power3.out") => { const b = base(el); tl.fromTo(el, { opacity: 1, y: b.y + dy }, { y: b.y, duration: d, ease }, t); };
   const fade = (el, t, d = 0.4) => tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
   const hide = (el, t, d = 0.22) => tl.to(el, { opacity: 0, duration: d, ease: "power1.in" }, t);
@@ -127,9 +129,9 @@ function buildFrame(gsap, document, P, CUE) {
     else if (r.id.startsWith("arr-")) draw(el, r.t, 0.9);
     else if (r.id.startsWith("fade-")) fade(el, r.t, 0.6);
     else if (r.id.startsWith("pop-")) pop(el, r.t);
-    else if (r.id.startsWith("inl-")) slideX(el, r.t, -1400, 0.6, "power3.out");
-    else if (r.id.startsWith("inr-")) slideX(el, r.t, 1400, 0.6, "power3.out");
-    else if (r.id.startsWith("drop-")) slideY(el, r.t, -900, 0.55, "bounce.out");
+    else if (r.id.startsWith("inl-")) enter(el, r.t, "x", -1400, 0.6, "power3.out");
+    else if (r.id.startsWith("inr-")) enter(el, r.t, "x", 1400, 0.6, "power3.out");
+    else if (r.id.startsWith("drop-")) enter(el, r.t, "y", -900, 0.55, "bounce.out");
     else if (DRAW.has(r.id)) draw(el, r.t);
     else if (r.id.startsWith("st-") || r.id === "score") slam(el, r.t);
     else if (/^(b-|b\d|a-|offscreen|flaccus-pip|surus-label|ptr|aah)/.test(r.id)) pop(el, r.t);
@@ -177,7 +179,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"cams":[{"t":0.4,"s":1.15,"px":760,"py":560,"d":6},{"t":14.307,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"27","D":30.562,"lines":[{"s":0.4,"e":14.067,"el":null},{"s":14.307,"e":15.939,"el":null},{"s":16.179,"e":27.962,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"arr-front","t":1.083,"hideAt":null},{"id":"arr-1","t":4.5,"hideAt":null},{"id":"arr-2","t":5.32,"hideAt":null},{"id":"arr-3","t":6.14,"hideAt":null},{"id":"arr-4","t":6.96,"hideAt":null},{"id":"cut-stalin","t":14.307,"hideAt":null},{"id":"a-1","t":14.247,"hideAt":null},{"id":"endcard","t":25.605,"hideAt":null}],"counts":{},"moves":[{"id":"cut-stalin","t":16.179,"d":0.25,"o":0}],"counters":[]};
+  const CUE = {"cams":[{"t":0.4,"s":1.15,"px":760,"py":560,"d":6},{"t":14.307,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"27","D":30.562,"lines":[{"s":0.4,"e":14.067,"el":null},{"s":14.307,"e":15.939,"el":null},{"s":16.179,"e":27.962,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"arr-front","t":1.083,"hideAt":null},{"id":"arr-1","t":4.5,"hideAt":null},{"id":"arr-2","t":5.32,"hideAt":null},{"id":"arr-3","t":6.14,"hideAt":null},{"id":"arr-4","t":6.96,"hideAt":null},{"id":"cut-stalin","t":14.307,"hideAt":null},{"id":"a-1","t":14.247,"hideAt":16.179},{"id":"endcard","t":25.605,"hideAt":null}],"counts":{},"moves":[{"id":"cut-stalin","t":16.179,"d":0.25,"o":0}],"counters":[]};
   window.__timelines["f27"] = buildFrame(gsap, document, "f27-", CUE);
 })();
 </script>

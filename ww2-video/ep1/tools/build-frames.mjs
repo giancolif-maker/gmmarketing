@@ -110,9 +110,12 @@ for (const n of Object.keys(FRAMES).sort()) {
   const sceneSvg = Scenes[n]();
   const overlays = new Set([...sceneSvg.matchAll(/<g id="((?:cut|fade)-[^"]+)" data-layout-allow-overlap/g)].map((m) => m[1]));
   const edges = [...reveals.filter((r) => overlays.has(r.id)).map((r) => r.t), ...moves.filter((m) => overlays.has(m.id) && m.o === 0).map((m) => m.t)];
+  const opens = reveals.filter((r) => overlays.has(r.id)).map((r) => r.t);
   for (const r of reveals) {
-    if (!/^(a-|b-|st-k|pip-)/.test(r.id)) continue;
-    for (const T of edges) if (T - r.t > 0.3 && (r.hideAt == null || r.hideAt > T)) r.hideAt = T;
+    // the place/date tag belongs to the shot underneath: it leaves when a cutaway opens over it
+    const list = /^(a-|b-|st-k|pip-)/.test(r.id) ? edges : r.id === "st-date" ? opens : null;
+    if (!list) continue;
+    for (const T of list) if (T - r.t > 0.3 && (r.hideAt == null || r.hideAt > T)) r.hideAt = T;
   }
   cams.sort((a, b) => a.t - b.t);
   const CUE = { cams, drop: (META || {})[n]?.drop || [], frame: n, D, lines: L.map((l) => ({ s: l.s, e: l.e, el: l.el || null })), reveals, counts: COUNTS[n] || {}, moves, counters };

@@ -5,7 +5,7 @@
   const VIEWS = {
     europe: { center: [16, 51.5], scale: 1750 }, west: { center: [5, 49.5], scale: 3300 },
     uk: { center: [-3.2, 54.3], scale: 4300 }, med: { center: [16, 37.5], scale: 2000 },
-    east: { center: [33, 52], scale: 2000 },
+    east: { center: [33, 52], scale: 2000 }, horn: { center: [28, 23], scale: 1350 },
   };
   const merc = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * rad) / 2));
   function project([lon, lat], view = "europe") {
@@ -21,7 +21,7 @@
     Coventry: [-1.51, 52.41], Liverpool: [-2.98, 53.41], Glasgow: [-4.25, 55.86], Belfast: [-5.93, 54.6],
     Birmingham: [-1.9, 52.48], Plymouth: [-4.14, 50.38], Bristol: [-2.59, 51.45], Hull: [-0.34, 53.74],
     Cairo: [31.24, 30.04], Tobruk: [23.96, 32.08], Benghazi: [20.07, 32.12], Brest: [23.7, 52.1],
-    Riga: [24.1, 56.95], Minsk: [27.56, 53.9], Odessa: [30.72, 46.48], BugRiver: [23.6, 51.5],
+    Riga: [24.1, 56.95], Katyn: [31.7, 54.77], Smolensk: [32.05, 54.78], "Addis Ababa": [38.74, 9.03], Asmara: [38.93, 15.32], Mogadishu: [45.32, 2.05], Minsk: [27.56, 53.9], Odessa: [30.72, 46.48], BugRiver: [23.6, 51.5],
   };
   const at = (name, view = "europe") => project(PLACES[name], view);
   function smoothPath(pts) {

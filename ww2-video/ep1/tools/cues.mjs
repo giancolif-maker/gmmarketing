@@ -20,21 +20,21 @@ const N = (text, x = {}) => ({ who: "NARRATOR", text, ...x });
 const L = (who, text, x = {}) => ({ who, text, ...x });
 
 export const META = {
-  "01": { lead: 10.6, reveals: [["cut-m2", 2.0, 4.0], ["cut-m3", 4.0, 6.0], ["cut-m4", 6.0, 8.0], ["cut-m5", 8.0, 10.0]], sfx: [["slam", 2.0, 0.7], ["boom", 4.0, 0.6], ["rumble", 6.0, 0.6], ["crash", 8.1, 0.6]], tail: 2.4 },
+  "01": { lead: 6.4, reveals: [["cut-m2", 1.0, 2.2], ["cut-m4", 2.2, 3.4], ["cut-m3", 3.4, 4.6], ["cut-m5", 4.6, 5.8]], sfx: [["slam", 1.0, 0.7], ["boom", 2.2, 0.6], ["rumble", 3.4, 0.6], ["crash", 4.7, 0.6]], tail: 2.4 },
   "09": { tail: 2.2, reveals: [["st-got", -1.6]] },
   "10": { tail: 2.0, reveals: [["st-got", -1.5]] },
   "11": { tail: 2.0, reveals: [["st-got", -1.5]] },
-  "12": { lead: 1.2, tail: 1.6 },
+  "12": { lead: 3.0, tail: 1.6, reveals: [["fade-glass", 0, 2.6]] },
   "14": { lead: 1.4, reveals: [["drop-napkin", 0.15]], sfx: [["whoosh", 0.1, 0.4]] },
   "19": { drop: ["pop-banx"] },
   "22": { lead: 1.2, tail: 1.6 },
-  "25": { cams: [{ t: 0, s: 1.6, px: 900, py: 340, d: 0.01 }] },
-  "27": { tail: 2.6, cams: [{ t: 0, s: 1.5, px: 700, py: 560, d: 0.01 }] },
+  "25": { cams: [{ t: 0, s: 2.2, px: 800, py: 300, d: 0.01 }] },
+  "27": { tail: 3.6, reveals: [["endcard", -3.2]], cams: [{ t: 0, s: 1.5, px: 700, py: 560, d: 0.01 }] },
 };
 
 export const FRAMES = {
   "01": [
-    N("In 1918, this man was a nobody. A corporal. He'd just lost a war, he'd temporarily lost his eyesight to poison gas, and he had no job, no money and no plan.", { at: ["st-date"], cam: [[0, 1.25, 720, 690, 6]] }),
+    N("In 1918, this man was a nobody. A corporal. He'd just lost a war, he'd temporarily lost his eyesight to poison gas, and he had no job, no money and no plan.", { at: ["st-date"], cam: [[0.3, 1.25, 720, 690, 5]] }),
     // the hook pays off its own montage: the bunker, then the dark map, then SNAP back to the bed
     N("Twenty-seven years later, he'd be dead in a bunker under Berlin, and tens of millions of people would be dead with him.", { at: ["cut-m5", "cut-m3@0.52"], move: [["cut-m5", 0.52, { o: 0 }, 0.01]], sfx: [["slam", 0]] }),
     N("So how does a nobody do that?", { move: [["cut-m3", 0, { o: 0 }, 0.01]], cam: [[0, 1.0, 960, 540, 0.05]] }),
@@ -66,7 +66,7 @@ export const FRAMES = {
     L("HITLER", "No!", { add: [930, 270, 200, "bl", 60], el: "hitler" }),
     L("SAUSAGE", "The… treaty?", { add: [860, 560, 320, "br", 44], el: "sausage" }),
     L("HITLER", "Closer!", { add: [930, 270, 260, "bl", 56], el: "hitler" }),
-    L("SAUSAGE", "I just came for the sausage.", { add: [760, 540, 420, "br", 40], el: "sausage", cam: [[0, 1.4, 1180, 760, 0.4]] }),
+    L("SAUSAGE", "I just came for the sausage.", { add: [1190, 420, 420, "bl", 40], el: "sausage", cam: [[0, 1.4, 1180, 760, 0.4]] }),
     N("He blamed Jews, communists and the treaty for everything. In 1923 he tried to seize power, failed, and went to prison. There, he wrote a book.", { at: ["fade-cell@0.55"], cam: [[0, 1.0, 960, 540, 0.05]] }),
     L("GUARD", "What's the book about?", { add: [1020, 500, 440, "br", 42] }),
     L("HITLER", "Everything I'm going to do.", { add: [520, 500, 480, "bl", 40] }),
@@ -89,7 +89,7 @@ export const FRAMES = {
     L("CON", "We've… mostly boxed him in.", { add: [300, 450, 440, "bl", 42], el: "con1" }),
     N("Then parliament voted him the power to make laws on his own, and every other party was banned.", { at: ["st-banned@0.7"], move: [["arm-out", 0.4, { dy: -560 }, 0.6]] }),
     L("CON", "This is a slightly smaller box.", { add: [300, 450, 460, "bl", 42], el: "con1", at: ["pop-small"], cam: [[0, 1.3, 560, 860, 0.5]] }),
-    N("In 1934, he had his rivals inside his own party murdered, and when the old president died, he made himself Führer. Total power.", { at: ["cut-rev@0.55"], cam: [[0, 1.0, 960, 540, 0.05]], sfx: [["slam", 3.6]] }),
+    N("In 1934, he had his rivals inside his own party murdered, and when the old president died, he made himself Führer. Total power.", { at: ["cut-rev@0.55"], cam: [[0, 1.0, 960, 540, 0.05], [0.55, 1.3, 960, 580, 0.05]], sfx: [["slam", 3.6]] }),
     L("CON", "We would like to talk about the box.", { add: [1000, 420, 520, "bl", 40], cam: [[0, 1.45, 960, 680, 0.5]] }),
     L("SON", "What's on the other channel?", { add: [480, 560, 460, "bl", 40], at: ["cut-radio"], cam: [[0, 1.0, 960, 540, 0.05]] }),
     L("FATHER", "…Also Hitler.", { add: [1000, 500, 380, "br", 46], keep: true }),
@@ -100,7 +100,7 @@ export const FRAMES = {
     L("MUSSOLINI", "Enzo! Print a banner! \"VICTORY IN ETHIOPIA!\"", { add: [960, 20, 540, "br", 38], el: "muss", cam: [[0, 1.0, 960, 540, 0.05]] }),
     L("ENZO", "We haven't invaded Ethiopia.", { add: [360, 520, 440, "br", 40], el: "enzo" }),
     L("MUSSOLINI", "That's why I need it early.", { add: [980, 20, 520, "br", 40], el: "muss" }),
-    N("Italy invaded Ethiopia in 1935, using poison gas on soldiers and civilians. The League of Nations, built to stop exactly this, barely did anything.", { at: ["fade-gas"] }),
+    N("Italy invaded Ethiopia in 1935, using poison gas on soldiers and civilians. The League of Nations, built to stop exactly this, barely did anything.", { at: ["fade-gas", "arr-et1@0.12", "arr-et2@0.2", "pop-league@0.62"] }),
     L("ENZO", "Victory in Ethiopia.", { add: [360, 520, 420, "br", 40], el: "enzo", hide: ["fade-gas"], at: ["pop-ban@0.3"], keep: true }),
   ],
   "08": [
@@ -135,8 +135,8 @@ export const FRAMES = {
   ],
   "12": [
     N("On the night of November 9th, 1938, Nazi mobs attacked Jewish communities across Germany and Austria. Synagogues were burned. Jewish homes and shops were smashed. Hundreds of people were killed or died afterward, and about thirty thousand Jewish men were sent to concentration camps.",
-      { at: Array.from({ length: 15 }, (_, i) => `pop-c${i}@${(0.05 + i * 0.035).toFixed(3)}`), count: [["cnt-arrest", 0.72, 0, 30000]] }),
-    N("It was called Kristallnacht, for the broken glass. Around the world, most governments condemned it, and still refused to take in more Jewish refugees.", { at: ["fade-glass"] }),
+      { at: Array.from({ length: 15 }, (_, i) => `pop-c${i}@${(0.05 + i * 0.035).toFixed(3)}`).concat(["cnt-arrest@0.72"]), count: [["cnt-arrest", 0.72, 30000, 30000]] }),
+    N("It was called Kristallnacht, for the broken glass. Around the world, most governments condemned it, and still refused to take in more Jewish refugees.", { at: ["pop-refuge@0.45"] }),
   ],
   "13": [
     N("Next: Poland. But next door was the Soviet Union, run by Joseph Stalin. Hitler hated communists. Stalin hated fascists. So they made a deal.", { at: ["st-date", "pop-doc@0.85"], stk: [520, 300, "JOSEPH STALIN", 40, -3] }),
@@ -153,14 +153,14 @@ export const FRAMES = {
       { at: ["st-war", "fade-inv@0.3", "arr-1@0.16", "arr-2@0.22", "arr-3@0.28", "arr-4@0.8"], sfx: [["slam", 0], ["boom", 0.4]] }),
     L("STALIN", "As agreed.", { add: [1430, 120, 280, "br", 46], pip: ["pip-st", "stalin", 1720, 300, ""] }),
     N("Poland fell in five weeks, and would suffer under both occupations for the entire war.", { hide: ["pip-st"] }),
-    N("In 1940, Stalin's secret police murdered around twenty-two thousand Polish prisoners, many of them officers, in the Katyn forest and other sites, and blamed it on the Germans for fifty years.", { at: ["fade-katyn"] }),
+    N("In 1940, Stalin's secret police murdered around twenty-two thousand Polish prisoners, many of them officers, in the Katyn forest and other sites, and blamed it on the Germans for fifty years.", { at: ["fade-katyn", "pop-kpin@0.3"] }),
   ],
   "15": [
     N("And then Britain and France… waited. For seven months. Newspapers called it the Phoney War.", { stk: [960, 160, "THE PHONEY WAR", 54, -2] }),
     L("SOLDIERUK", "Got any threes?", { add: [500, 520, 360, "bl", 44], el: "uk" }),
     L("SOLDIERFR", "Go fish.", { add: [1120, 520, 280, "br", 46], el: "frs", at: ["cut-cal2@0.6"] }),
     L("SOLDIERUK", "Got any fours?", { add: [500, 520, 360, "bl", 44], el: "uk", at: ["cut-cal3", "pop-tourn@0.2"] }),
-    N("Meanwhile, Stalin invaded Finland, expecting a two-week war. The Finns, on skis, held out for more than three months, and more than a hundred thousand Soviet soldiers died.", { at: ["fade-fin"] }),
+    N("Meanwhile, Stalin invaded Finland, expecting a two-week war. The Finns, on skis, held out for more than three months, and more than a hundred thousand Soviet soldiers died.", { at: ["fade-fin", "inr-sov@0.3"], move: [["fin-skiers", 0.05, { dx: 260 }, 6]] }),
     L("HITLER", "Their army is weak.", { add: [560, 470, 400, "bl", 44], at: ["cut-notes"] }),
     L("KLAUS", "Sir, are you sure that's the lesson?", { add: [840, 470, 500, "br", 40] }),
     L("HITLER", "Write it down.", { add: [560, 470, 340, "bl", 46], keep: true }),
@@ -183,15 +183,15 @@ export const FRAMES = {
     L("CAPTAIN1", "Room for six hundred!", { add: [1460, 210, 420, "bl", 42], at: ["pop-boat1"], sfx: [["splash", 0]] }),
     L("CAPTAIN2", "Room for two hundred!", { add: [1010, 320, 420, "bl", 42], at: ["pop-boat2"], sfx: [["splash", 0]] }),
     L("FISHER", "Room for six! Mind the nets!", { add: [560, 400, 440, "bl", 40], at: ["pop-boat3"], sfx: [["splash", 0]] }),
-    L("BOATLADY", "Room for four, and there are sandwiches!", { add: [100, 440, 520, "bl", 38], at: ["pop-boat4"], sfx: [["splash", 0]], keep: true }),
-    N("In nine days, about three hundred and thirty-eight thousand soldiers were rescued. They left their equipment behind. They were alive.", { stk: [1300, 960, "338,000 RESCUED", 50, -2], cam: [[0, 1.0, 960, 540, 1]] }),
+    L("BOATLADY", "Room for four, and there are sandwiches!", { add: [60, 260, 470, "bl", 38], at: ["pop-boat4"], sfx: [["splash", 0]], keep: true }),
+    N("In nine days, about three hundred and thirty-eight thousand soldiers were rescued. They left their equipment behind. They were alive.", { stk: [1300, 960, "338,000 RESCUED", 50, -2], hide: ["a-10"], move: [["pop-boat1", 0.25, { dx: -700 }, 5], ["pop-boat2", 0.3, { dx: -800 }, 5], ["pop-boat3", 0.35, { dx: -900 }, 5], ["pop-boat4", 0.4, { dx: -700 }, 5]] }),
   ],
   "18": [
     N("France surrendered in six weeks. Hitler made the French sign in the very same railway carriage where Germany had surrendered in 1918.", { at: ["st-date"] }),
     L("HITLER", "Same carriage. Same table. I've been waiting twenty-two years for this.", { add: [720, 470, 600, "bl", 38], el: "hitler" }),
     L("AIDE", "Sir, we have a war to run.", { add: [840, 300, 440, "br", 42], el: "aide" }),
     L("HITLER", "Same chair!", { add: [720, 480, 300, "bl", 50], el: "hitler", keep: true, cam: [[0, 1.4, 760, 760, 0.3]] }),
-    N("One French general escaped to London and announced on the radio that France was still fighting.", { at: ["cut-london@0.15"], cam: [[0, 1.0, 960, 540, 0.05]], stk: [700, 300, "CHARLES DE GAULLE", 40, -3] }),
+    N("One French general escaped to London and announced on the radio that France was still fighting.", { at: ["cut-london@0.15"], cam: [[0, 1.0, 960, 540, 0.05]], stk: [700, 300, "CHARLES DE GAULLE", 40, -3], stkAt: 0.25 }),
     L("DEGAULLE", "I am in charge of France.", { add: [660, 260, 460, "bl", 42] }),
     L("OFFICIALUK", "You're in London.", { add: [980, 520, 380, "br", 42] }),
     L("DEGAULLE", "I am in charge of France, from London.", { add: [660, 250, 560, "bl", 40], keep: true }),
@@ -220,7 +220,7 @@ export const FRAMES = {
   ],
   "22": [
     N("Instead, Germany bombed Britain's cities, night after night, for eight months. More than forty thousand civilians were killed. Families slept in Underground stations. And Britain did not surrender.",
-      { at: [...Array.from({ length: 9 }, (_, i) => `pop-u${i}@${(0.02 + i * 0.045).toFixed(3)}`), "fade-tube@0.66"], count: [["cnt-blitz", 0.3, 0, 40000]] }),
+      { at: [...Array.from({ length: 9 }, (_, i) => `pop-u${i}@${(0.02 + i * 0.045).toFixed(3)}`), "fade-tube@0.66", "cnt-blitz@0.3"], count: [["cnt-blitz", 0.3, 40000, 40000]] }),
   ],
   "23": [
     N("The United States was neutral, and most Americans wanted to stay out of it. President Franklin Roosevelt wanted to help Britain anyway.", { cam: [[0, 1.15, 960, 300, 3]], stk: [1500, 660, "FRANKLIN D. ROOSEVELT", 36, 3] }),
@@ -231,11 +231,11 @@ export const FRAMES = {
     L("FDR", "Borrow them!", { add: [1000, 340, 380, "br", 46], el: "fdr" }),
     L("CHURCHILL", "And when do we give them back?", { add: [440, 490, 480, "bl", 40], el: "church" }),
     L("FDR", "Let's not think about that right now.", { add: [860, 330, 520, "br", 40], el: "fdr", keep: true }),
-    N("It was called Lend-Lease: American weapons, food and fuel, now, with the bill later.", { at: ["pop-sign2"], sfx: [["ding", 0]], cam: [[0, 1.3, 960, 200, 0.5]] }),
+    N("It was called Lend-Lease: American weapons, food and fuel, now, with the bill later.", { at: ["pop-sign2"], hide: ["st-k0"], sfx: [["ding", 0]], cam: [[0, 1.3, 960, 200, 0.5]] }),
   ],
   "24": [
     L("MUSSOLINI", "Enzo! \"VICTORY IN GREECE!\"", { add: [1380, 80, 420, "br", 40], pip: ["pip-mu", "mussolini", 1720, 330, ""], at: ["pop-b1@0.4"] }),
-    N("In 1940, Italy invaded Greece. Greece pushed the Italians back into Albania.", { at: ["st-date", "arr-gr@0.2"], hide: ["pip-mu"], cam: [[0, 1.5, 1180, 520, 1]] }),
+    N("In 1940, Italy invaded Greece. Greece pushed the Italians back into Albania.", { at: ["st-date", "arr-gr@0.2"], hide: ["pip-mu", "a-0"], cam: [[0, 1.25, 1180, 430, 1]] }),
     L("ENZO", "Pending.", { add: [1350, 560, 260, "br", 46], at: ["st-pend"], cam: [[0, 1.0, 960, 540, 0.05]] }),
     N("Italy also attacked the British in Egypt, who counterattacked and captured more than a hundred thousand Italian soldiers.", { cam: [[0.1, 1.4, 1500, 900, 1]] }),
     L("ENZO", "\"HELP IN GREECE.\"", { add: [1300, 560, 320, "br", 44], at: ["pop-b3"], hide: ["st-pend"], cam: [[0, 1.0, 960, 540, 0.05]] }),
@@ -266,6 +266,6 @@ export const FRAMES = {
     N("June 22nd, 1941. Nearly four million German and allied soldiers attacked along a front almost three thousand kilometers long. The largest invasion in human history.",
       { at: ["st-date", "arr-front@0.05", "arr-1@0.3", "arr-2@0.36", "arr-3@0.42", "arr-4@0.48"], sfx: [["boom", 0.2], ["rumble", 2]], cam: [[0.04, 1.0, 960, 540, 6]] }),
     L("STALIN", "I trust nobody.", { add: [930, 360, 340, "bl", 44], at: ["cut-stalin"], cam: [[0, 1.0, 960, 540, 0.05]] }),
-    N("Hitler had just attacked the largest country on Earth. Within six months, he would declare war on the richest one too. Over in America, someone was about to change the sign on the shop.", { hide: ["cut-stalin"], at: ["endcard@0.8"] }),
+    N("Hitler had just attacked the largest country on Earth. Within six months, he would declare war on the richest one too. Over in America, someone was about to change the sign on the shop.", { hide: ["cut-stalin"], at: ["cut-shop@0.6"], move: [["sign-tilt", 0.86, { dr: -9 }, 0.5]], sfx: [["whoosh", 0.86]] }),
   ],
 };

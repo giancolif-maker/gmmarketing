@@ -97,7 +97,7 @@ function buildFrame(gsap, document, P, CUE) {
     dagger: (el, t) => { fade(el, t + 0.8, 0.08); const h = $("hasdrubal"); if (h) { const b = base(h); tl.to(h, { rotation: b.r + 85, duration: 0.45, ease: "power2.in" }, t + 0.9); } },
     smoke: (el, t) => { fade(el, t, 0.8); tl.to(el, { y: "-=60", duration: D - t, ease: "none" }, t); },
     saguntine: (el, t) => { fade(el, t, 0.2); const h = $("saguntine-happy"); if (h) hide(h, t, 0.2); },
-    endcard: (el, t) => slideY(el, t, 260, 0.6, "back.out(1.6)"),
+    endcard: (el, t) => fade(el, t, 0.5),
     "el-counter": (el, t) => pop(el, t + 0.6),
     "sicily-ring": (el, t) => { pop(el, t); },
     board: (el, t) => slideY(el, t, -500, 0.6, "back.out(1.3)"),
@@ -186,7 +186,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"cams":[{"t":8.522,"s":1.3,"px":560,"py":650,"d":0.5},{"t":9.927,"s":1.3,"px":1480,"py":330,"d":0.4},{"t":10.506,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"13","D":19.311,"lines":[{"s":0.4,"e":8.322,"el":null},{"s":8.522,"e":9.727,"el":"stalin"},{"s":9.927,"e":10.306,"el":null},{"s":10.506,"e":12.489,"el":"stalin"},{"s":12.689,"e":13.734,"el":null},{"s":13.934,"e":18.511,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"pop-doc","t":7.134,"hideAt":null},{"id":"st-k0","t":0.4,"hideAt":13.934},{"id":"a-1","t":8.462,"hideAt":10.146},{"id":"a-2","t":9.866999999999999,"hideAt":12.329},{"id":"a-3","t":10.446,"hideAt":13.574},{"id":"a-4","t":12.629,"hideAt":13.934},{"id":"fade-secret","t":13.934,"hideAt":null},{"id":"fade-split","t":16.451,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"cams":[{"t":8.522,"s":1.3,"px":560,"py":650,"d":0.5},{"t":9.927,"s":1.3,"px":1480,"py":330,"d":0.4},{"t":10.506,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"13","D":19.311,"lines":[{"s":0.4,"e":8.322,"el":null},{"s":8.522,"e":9.727,"el":"stalin"},{"s":9.927,"e":10.306,"el":null},{"s":10.506,"e":12.489,"el":"stalin"},{"s":12.689,"e":13.734,"el":null},{"s":13.934,"e":18.511,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":13.934},{"id":"pop-doc","t":7.134,"hideAt":null},{"id":"st-k0","t":0.4,"hideAt":13.934},{"id":"a-1","t":8.462,"hideAt":10.146},{"id":"a-2","t":9.866999999999999,"hideAt":12.329},{"id":"a-3","t":10.446,"hideAt":13.574},{"id":"a-4","t":12.629,"hideAt":13.934},{"id":"fade-secret","t":13.934,"hideAt":null},{"id":"fade-split","t":16.451,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f13"] = buildFrame(gsap, document, "f13-", CUE);
 })();
 </script>

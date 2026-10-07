@@ -17,7 +17,7 @@ const GROUPS = {
   se: ["752"], dk: ["208"], benl: ["056", "528", "442"], ch: ["756"], gr: ["300"], al: ["008"],
   yu: ["191", "070", "688", "499", "807", "705", "-99"], ro: ["642"], hu: ["348"], bg: ["100"],
   tr: ["792"], ie: ["372"], baltic: ["440", "428", "233"], eg: ["818"], ly: ["434"], tn: ["788"],
-  dz: ["012"], ma: ["504"],
+  dz: ["012"], ma: ["504"], et: ["231"], er: ["232"], so: ["706"], sd: ["729", "728"], sa: ["682"],
 };
 const polysOf = (f) => (f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates);
 const meanLon = (poly) => { const r = poly[0]; return r.reduce((a, p) => a + p[0], 0) / r.length; };
@@ -38,6 +38,7 @@ const VIEWS = {
   uk: { center: [-3.2, 54.3], scale: 4300 },
   med: { center: [16, 37.5], scale: 2000 },
   east: { center: [33, 52], scale: 2000 },
+  horn: { center: [28, 23], scale: 1350 },
 };
 const out = {};
 for (const [name, v] of Object.entries(VIEWS)) {

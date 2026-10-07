@@ -3,7 +3,7 @@ Run after synth-audio.py and before build-frames.mjs. Fades over 1.2 s, back in 
 import json, os, numpy as np, soundfile as sf
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # frame → line indices told straight (None = the whole frame)
-STRAIGHT = {"06": [10], "12": None, "14": [4, 5], "22": None}
+STRAIGHT = {"06": [10], "07": [4], "12": None, "14": [4, 5], "22": None}
 T = json.load(open(os.path.join(ROOT, "build/timing.json")))
 p = os.path.join(ROOT, "assets/audio/music/bed.wav")
 a, sr = sf.read(p)

@@ -68,7 +68,7 @@ function buildFrame(gsap, document, P, CUE) {
     dagger: (el, t) => { fade(el, t + 0.8, 0.08); const h = $("hasdrubal"); if (h) { const b = base(h); tl.to(h, { rotation: b.r + 85, duration: 0.45, ease: "power2.in" }, t + 0.9); } },
     smoke: (el, t) => { fade(el, t, 0.8); tl.to(el, { y: "-=60", duration: D - t, ease: "none" }, t); },
     saguntine: (el, t) => { fade(el, t, 0.2); const h = $("saguntine-happy"); if (h) hide(h, t, 0.2); },
-    endcard: (el, t) => slideY(el, t, 260, 0.6, "back.out(1.6)"),
+    endcard: (el, t) => fade(el, t, 0.5),
     "el-counter": (el, t) => pop(el, t + 0.6),
     "sicily-ring": (el, t) => { pop(el, t); },
     board: (el, t) => slideY(el, t, -500, 0.6, "back.out(1.3)"),

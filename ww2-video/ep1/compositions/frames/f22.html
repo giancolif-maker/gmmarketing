@@ -125,7 +125,7 @@ function buildFrame(gsap, document, P, CUE) {
     dagger: (el, t) => { fade(el, t + 0.8, 0.08); const h = $("hasdrubal"); if (h) { const b = base(h); tl.to(h, { rotation: b.r + 85, duration: 0.45, ease: "power2.in" }, t + 0.9); } },
     smoke: (el, t) => { fade(el, t, 0.8); tl.to(el, { y: "-=60", duration: D - t, ease: "none" }, t); },
     saguntine: (el, t) => { fade(el, t, 0.2); const h = $("saguntine-happy"); if (h) hide(h, t, 0.2); },
-    endcard: (el, t) => slideY(el, t, 260, 0.6, "back.out(1.6)"),
+    endcard: (el, t) => fade(el, t, 0.5),
     "el-counter": (el, t) => pop(el, t + 0.6),
     "sicily-ring": (el, t) => { pop(el, t); },
     board: (el, t) => slideY(el, t, -500, 0.6, "back.out(1.3)"),
@@ -214,7 +214,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"cams":[],"drop":[],"frame":"22","D":12.578,"lines":[{"s":1.2,"e":10.978,"el":null}],"reveals":[{"id":"pop-u0","t":1.396,"hideAt":null},{"id":"pop-u1","t":1.836,"hideAt":null},{"id":"pop-u2","t":2.276,"hideAt":null},{"id":"pop-u3","t":2.716,"hideAt":null},{"id":"pop-u4","t":3.156,"hideAt":null},{"id":"pop-u5","t":3.596,"hideAt":null},{"id":"pop-u6","t":4.036,"hideAt":null},{"id":"pop-u7","t":4.476,"hideAt":null},{"id":"pop-u8","t":4.916,"hideAt":null},{"id":"fade-tube","t":7.653,"hideAt":null}],"counts":{},"moves":[],"counters":[{"id":"cnt-blitz","t":4.133,"from":0,"to":40000}]};
+  const CUE = {"cams":[],"drop":[],"frame":"22","D":12.578,"lines":[{"s":1.2,"e":10.978,"el":null}],"reveals":[{"id":"pop-u0","t":1.396,"hideAt":null},{"id":"pop-u1","t":1.836,"hideAt":null},{"id":"pop-u2","t":2.276,"hideAt":null},{"id":"pop-u3","t":2.716,"hideAt":null},{"id":"pop-u4","t":3.156,"hideAt":null},{"id":"pop-u5","t":3.596,"hideAt":null},{"id":"pop-u6","t":4.036,"hideAt":null},{"id":"pop-u7","t":4.476,"hideAt":null},{"id":"pop-u8","t":4.916,"hideAt":null},{"id":"fade-tube","t":7.653,"hideAt":null},{"id":"cnt-blitz","t":4.133,"hideAt":null}],"counts":{},"moves":[],"counters":[{"id":"cnt-blitz","t":4.133,"from":40000,"to":40000}]};
   window.__timelines["f22"] = buildFrame(gsap, document, "f22-", CUE);
 })();
 </script>

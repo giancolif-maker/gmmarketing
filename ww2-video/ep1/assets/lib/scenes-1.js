@@ -53,7 +53,9 @@
     const poland = H.map("europe", { de: K.fieldgrey, pl: "#d9d2c0", ussr: "#b04a3a" }) + H.arrow([[13.4, 52.5], [17.5, 52.5], [20.5, 52.2]]) + H.arrow([[14.5, 50.2], [18, 50.2], [20.8, 51.2]]) + H.arrow([[30, 53], [26.5, 52.8], [23.6, 52.4]], "europe", { col: "#b04a3a" }) + H.city("Warsaw");
     const bunker = `<rect width="1920" height="1080" fill="#3b3d42"/>${Array.from({ length: 7 }, (_, i) => `<path d="M0 ${150 * i + 60} H1920" stroke="#2e3034" stroke-width="10"/>`).join("")}<rect x="560" y="140" width="800" height="940" fill="#26282c" stroke="${ink}" stroke-width="10"/><rect x="600" y="180" width="560" height="900" fill="#55585e" stroke="${ink}" stroke-width="8"/>${[260, 520, 780].map((y) => `<rect x="610" y="${y}" width="540" height="22" fill="#44474c"/>`).join("")}<circle cx="1110" cy="640" r="34" fill="#8a8d92" stroke="${ink}" stroke-width="6"/>` + H.vignette(0.85);
     return H.defs() + ward +
-      H.cut("cut-m2", stamp) + H.cut("cut-m3", dark) + H.cut("cut-m4", poland) + H.cut("cut-m5", bunker) +
+      // each montage shot carries its year, so the flash-forward reads without narration
+      H.cut("cut-m2", stamp + sticker(960, 990, "1919", { size: 72, rot: -2, bg: ink })) + H.cut("cut-m3", dark + sticker(960, 990, "1942", { size: 72, rot: -2, bg: ink })) +
+      H.cut("cut-m4", poland + sticker(960, 990, "1939", { size: 72, rot: -2, bg: ink })) + H.cut("cut-m5", bunker + sticker(960, 990, "1945", { size: 72, rot: -2, bg: "#7a1d12" })) +
       H.title("WORLD WAR II", "How Hitler Got Away With It") + H.grain();
   };
 
@@ -121,7 +123,7 @@
       // the reversal: Hitler holding the box, conservatives inside it
       `<g id="cut-rev" data-layout-allow-overlap="true">${H.room("#cfc6b5", "#8e7a5e")}${place(CAST.hitler({ pose: "hold", mouth: "grin", brows: "smug" }), 960, 1040, 1.5)}<g transform="translate(960 830)">${P.box(0, 0, 360, 230, { flaps: true })}</g>${[880, 960, 1040].map((x, i) => `<g transform="translate(${x} 640)"><circle r="34" fill="${C.skin}" stroke="${ink}" stroke-width="5"/><rect x="-34" y="-86" width="68" height="60" rx="4" fill="#1c1c22" stroke="${ink}" stroke-width="4"/><path d="M-12 8 h24" stroke="${ink}" stroke-width="4"/><circle cx="-11" cy="-4" r="4" fill="${ink}"/><circle cx="11" cy="-4" r="4" fill="${ink}"/></g>`).join("")}${sticker(960, 170, "FÜHRER, 1934", { size: 54, rot: -2, bg: ink })}</g>` +
       `<g id="cut-radio" data-layout-allow-overlap="true">${H.room("#d9c3a0", "#8a6a48")}${H.table(700, 700, 520, "#7a5432")}${P.radio(960, 640, 1.4)}${place(WW.CAST.kid({ mouth: "open" }), 520, 1040, 1.15)}${place(CAST.civilian({ pose: "reach", brows: "neutral", mouth: "flat" }), 1380, 1040, 1.4, { flip: true })}</g>` +
-      `<g id="fade-laws" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#1f2128"/>${["JOBS", "CITIZENSHIP", "RIGHTS"].map((w, i) => `<g transform="translate(${480 + i * 480} 540)"><rect x="-200" y="-90" width="400" height="180" rx="12" fill="#fffaf0" stroke="#444" stroke-width="6"/><text y="20" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="52" fill="${ink}">${w}</text><path d="M-170 -60 L170 60" stroke="#9a2a22" stroke-width="12"/></g>`).join("")}</g>` +
+      `<g id="fade-laws" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#1f2128"/><text x="960" y="330" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="56" fill="#e9e2cf">GERMANY&#8217;S JEWS, 1933&#8211;1935</text>${["JOBS", "CITIZENSHIP", "RIGHTS"].map((w, i) => `<g transform="translate(${480 + i * 480} 540)"><rect x="-200" y="-90" width="400" height="180" rx="12" fill="#fffaf0" stroke="#444" stroke-width="6"/><text y="20" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="52" fill="${ink}">${w}</text><path d="M-170 -60 L170 60" stroke="#9a2a22" stroke-width="12"/></g>`).join("")}</g>` +
       H.date(260, 120, "1933", "st-date") + H.grain();
   };
 
@@ -135,7 +137,11 @@
     `<g id="press"><rect x="200" y="620" width="380" height="300" rx="12" fill="#6a6d72" stroke="${ink}" stroke-width="7"/><circle cx="300" cy="700" r="56" fill="#8a8d92" stroke="${ink}" stroke-width="6"/><circle cx="480" cy="700" r="56" fill="#8a8d92" stroke="${ink}" stroke-width="6"/><rect x="230" y="800" width="320" height="70" fill="#fffaf0" stroke="${ink}" stroke-width="5"/></g>` +
     place(CAST.enzo({ pose: "hold" }), 760, 1040, 1.35, { id: "enzo", flip: true }) +
     P.banner(960, 230, 900, "VICTORY IN ETHIOPIA", { id: "pop-ban", size: 62 }) +
-    `<g id="fade-gas" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#2d3a2f"/><text x="960" y="470" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="74" fill="#e9e2cf">ETHIOPIA, 1935</text><text x="960" y="580" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="44" fill="#c9c2b0">poison gas on soldiers and civilians</text></g>` +
+    `<g id="fade-gas" data-layout-allow-overlap="true">${H.map("horn", { it: "#4f7a4a", er: "#7f9a6a", so: "#7f9a6a", ly: "#7f9a6a", et: "#d9cfb4" }, { sea: "#22313f", land: "#8f8670" })}` +
+      `${H.arrow([[38.9, 15.3], [39.2, 12.5], [38.9, 10]], "horn", { id: "arr-et1", col: "#3f6a3a", w: 20 })}${H.arrow([[45.3, 2.5], [43.5, 6.5], [40.2, 8.8]], "horn", { id: "arr-et2", col: "#3f6a3a", w: 20 })}` +
+      `${H.city("Addis Ababa", "horn", { dy: 44 })}${sticker(520, 150, "ETHIOPIA, 1935", { size: 56, rot: -2, bg: ink })}` +
+      `<g transform="translate(560 930)"><rect x="-380" y="-60" width="760" height="120" rx="16" fill="#151820" stroke="#555" stroke-width="5"/><text y="16" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="38" fill="#e9e2cf">poison gas on soldiers and civilians</text></g>` +
+      `<g id="pop-league">${sticker(1460, 170, "LEAGUE OF NATIONS: WEAK SANCTIONS", { size: 38, rot: 2, bg: "#55585e" })}</g><!--/gas--></g>` +
     H.date(260, 120, "ROME", "st-date") + H.grain();
 
   // F08 — Tractors
@@ -183,6 +189,7 @@
     const counter = (x, y, label, id) => `<g id="${id}" transform="translate(${x} ${y})"><rect x="-210" y="-70" width="420" height="140" rx="16" fill="#151820" stroke="#555" stroke-width="5"/><text x="0" y="-22" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="28" fill="#c9c2b0">${label}</text><text x="0" y="44" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="58" fill="#fffaf0">0</text></g>`;
     return H.defs() + H.map("west", { de: "#4a4f58", at: "#4a4f58" }, { sea: "#141a24", land: "#2c313a" }) + dots +
       counter(1620, 640, "JEWISH MEN ARRESTED", "cnt-arrest") +
+      `<g id="pop-refuge">${sticker(960, 160, "MOST COUNTRIES: NO MORE JEWISH REFUGEES", { size: 44, rot: -1, bg: ink })}</g>` +
       `<g id="fade-glass" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#101218"/><text x="960" y="520" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="96" fill="#e9e2cf">KRISTALLNACHT</text><text x="960" y="610" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="40" fill="#9a958a">9–10 NOVEMBER 1938</text></g>` +
       H.vignette(0.7) + H.grain();
   };
@@ -204,7 +211,9 @@
       `<g id="drop-napkin">${P.form(960, 640, 0.9, { wear: 3 })}</g>`,
       P.stamp(960, 600, 1.9, "WAR", "#8a1a12", { id: "st-war", rot: -10 }) +
       `<g id="fade-inv" data-layout-allow-overlap="true">${H.map("europe", { de: K.fieldgrey, pl: "#d9d2c0", ussr: "#b04a3a", fr: "#6d8bb0", uk: "#a08b5b" })}${H.arrow([[13.4, 52.5], [17.5, 52.5], [20.7, 52.2]], "europe", { id: "arr-1" })}${H.arrow([[18.6, 54.4], [19.8, 53.4], [20.9, 52.5]], "europe", { id: "arr-2" })}${H.arrow([[15, 50.3], [18.6, 50.4], [20.6, 51.5]], "europe", { id: "arr-3" })}${H.arrow([[30, 53.4], [26.5, 52.8], [23.8, 52.3]], "europe", { id: "arr-4", col: "#b04a3a" })}${H.city("Warsaw")}${sticker(560, 960, "1 SEPT 1939", { size: 48, rot: -2, bg: ink })}</g>` +
-      `<g id="fade-katyn" data-layout-allow-overlap="true"><rect width="1920" height="1080" fill="#14171c"/>${Array.from({ length: 30 }, (_, i) => `<path d="M${80 + i * 62} 1080 L${92 + i * 62} ${620 - (i % 5) * 40} L${104 + i * 62} 1080Z" fill="#1f2a22"/>`).join("")}<text x="960" y="380" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="84" fill="#e9e2cf">KATYN, 1940</text><text x="960" y="470" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="40" fill="#9a958a">about 22,000 Polish prisoners murdered</text></g>`,
+      `<g id="fade-katyn" data-layout-allow-overlap="true">${H.map("east", { ussr: "#4a3434", pl: "#3c3c3c", de: "#2c2c2c", baltic: "#3a3a3a", ro: "#333" }, { sea: "#141a24", land: "#3a3833" })}` +
+        `<g id="pop-kpin">${(() => { const [x, y] = Geo.at("Katyn", "east"); return `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="16" fill="#e9e2cf" stroke="${ink}" stroke-width="5"/><text x="${x.toFixed(0)}" y="${(y - 34).toFixed(0)}" text-anchor="middle" class="t-map" font-size="40">Katyn forest</text>`; })()}</g>` +
+        `${sticker(400, 150, "KATYN, 1940", { size: 56, rot: -2, bg: ink })}<g transform="translate(1340 930)"><rect x="-440" y="-60" width="880" height="120" rx="16" fill="#151820" stroke="#555" stroke-width="5"/><text y="16" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="38" fill="#e9e2cf">about 22,000 Polish prisoners murdered</text></g></g>`,
       "", "");
 
   g.WWH = H;

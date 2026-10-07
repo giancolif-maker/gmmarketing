@@ -145,10 +145,10 @@ function buildFrame(gsap, document, P, CUE) {
   const helmet = $("helmet"); if (helmet) tl.to(helmet, { y: "+=14", rotation: 6, duration: 0.9, yoyo: true, repeat: reps(0.9, D), ease: "sine.inOut" }, 0);
   const ring = $("sicily-ring"); if (ring) tl.to(ring, { rotation: 360, duration: D, ease: "none" }, 0);
   const army = $("army") || $("column"); if (army) tl.to(army, { x: "+=40", duration: D, ease: "none" }, 0);
-  // camera: scripted punch-ins/moves (scale s centred on px,py), else a slow push on everything
+  // camera: scripted moves only (scale s centred on px,py); every move needs a reason, otherwise the shot holds
   if ((CUE.cams || []).length) {
     tl.set(cam, { scale: 1, x: 0, y: 0 }, 0);
     for (const c of CUE.cams) tl.to(cam, { scale: c.s, x: (960 - c.px) * c.s - (960 - c.px), y: (540 - c.py) * c.s - (540 - c.py), duration: c.d, ease: c.d < 0.15 ? "none" : "power2.inOut" }, c.t);
-  } else tl.fromTo(cam, { scale: 1 }, { scale: 1.035, duration: D, ease: "none" }, 0);
+  } else tl.set(cam, { scale: 1, x: 0, y: 0 }, 0); // no scripted move: hold still (serious beats stay static)
   return tl;
 }

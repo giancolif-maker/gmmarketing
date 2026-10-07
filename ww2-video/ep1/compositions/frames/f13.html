@@ -174,16 +174,16 @@ function buildFrame(gsap, document, P, CUE) {
   const helmet = $("helmet"); if (helmet) tl.to(helmet, { y: "+=14", rotation: 6, duration: 0.9, yoyo: true, repeat: reps(0.9, D), ease: "sine.inOut" }, 0);
   const ring = $("sicily-ring"); if (ring) tl.to(ring, { rotation: 360, duration: D, ease: "none" }, 0);
   const army = $("army") || $("column"); if (army) tl.to(army, { x: "+=40", duration: D, ease: "none" }, 0);
-  // camera: scripted punch-ins/moves (scale s centred on px,py), else a slow push on everything
+  // camera: scripted moves only (scale s centred on px,py); every move needs a reason, otherwise the shot holds
   if ((CUE.cams || []).length) {
     tl.set(cam, { scale: 1, x: 0, y: 0 }, 0);
     for (const c of CUE.cams) tl.to(cam, { scale: c.s, x: (960 - c.px) * c.s - (960 - c.px), y: (540 - c.py) * c.s - (540 - c.py), duration: c.d, ease: c.d < 0.15 ? "none" : "power2.inOut" }, c.t);
-  } else tl.fromTo(cam, { scale: 1 }, { scale: 1.035, duration: D, ease: "none" }, 0);
+  } else tl.set(cam, { scale: 1, x: 0, y: 0 }, 0); // no scripted move: hold still (serious beats stay static)
   return tl;
 }
 
 (function () {
-  const CUE = {"cams":[{"t":11.068,"s":1.3,"px":560,"py":650,"d":0.5},{"t":12.94,"s":1.3,"px":1480,"py":330,"d":0.4},{"t":13.764,"s":1.3,"px":560,"py":650,"d":0.4},{"t":15.324,"s":1,"px":960,"py":540,"d":0.4}],"drop":[],"frame":"13","D":23.193,"lines":[{"s":0.4,"e":10.828,"el":null},{"s":11.068,"e":12.7,"el":"stalin"},{"s":12.94,"e":13.524,"el":null},{"s":13.764,"e":15.084,"el":"stalin"},{"s":15.324,"e":16.13,"el":null},{"s":16.37,"e":22.393,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"pop-doc","t":9.264,"hideAt":null},{"id":"st-k0","t":0.4,"hideAt":16.37},{"id":"a-1","t":11.008,"hideAt":13.404},{"id":"a-2","t":12.879999999999999,"hideAt":14.964},{"id":"a-3","t":13.703999999999999,"hideAt":16.01},{"id":"a-4","t":15.264,"hideAt":16.37},{"id":"fade-secret","t":16.37,"hideAt":null},{"id":"fade-split","t":19.683,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"cams":[{"t":11.068,"s":1.3,"px":560,"py":650,"d":0.5},{"t":12.94,"s":1.3,"px":1480,"py":330,"d":0.4},{"t":13.764,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"13","D":23.193,"lines":[{"s":0.4,"e":10.828,"el":null},{"s":11.068,"e":12.7,"el":"stalin"},{"s":12.94,"e":13.524,"el":null},{"s":13.764,"e":15.084,"el":"stalin"},{"s":15.324,"e":16.13,"el":null},{"s":16.37,"e":22.393,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"pop-doc","t":9.264,"hideAt":null},{"id":"st-k0","t":0.4,"hideAt":16.37},{"id":"a-1","t":11.008,"hideAt":13.404},{"id":"a-2","t":12.879999999999999,"hideAt":14.964},{"id":"a-3","t":13.703999999999999,"hideAt":16.01},{"id":"a-4","t":15.264,"hideAt":16.37},{"id":"fade-secret","t":16.37,"hideAt":null},{"id":"fade-split","t":19.683,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f13"] = buildFrame(gsap, document, "f13-", CUE);
 })();
 </script>

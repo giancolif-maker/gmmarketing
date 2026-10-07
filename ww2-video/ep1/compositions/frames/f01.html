@@ -170,16 +170,16 @@ function buildFrame(gsap, document, P, CUE) {
   const helmet = $("helmet"); if (helmet) tl.to(helmet, { y: "+=14", rotation: 6, duration: 0.9, yoyo: true, repeat: reps(0.9, D), ease: "sine.inOut" }, 0);
   const ring = $("sicily-ring"); if (ring) tl.to(ring, { rotation: 360, duration: D, ease: "none" }, 0);
   const army = $("army") || $("column"); if (army) tl.to(army, { x: "+=40", duration: D, ease: "none" }, 0);
-  // camera: scripted punch-ins/moves (scale s centred on px,py), else a slow push on everything
+  // camera: scripted moves only (scale s centred on px,py); every move needs a reason, otherwise the shot holds
   if ((CUE.cams || []).length) {
     tl.set(cam, { scale: 1, x: 0, y: 0 }, 0);
     for (const c of CUE.cams) tl.to(cam, { scale: c.s, x: (960 - c.px) * c.s - (960 - c.px), y: (540 - c.py) * c.s - (540 - c.py), duration: c.d, ease: c.d < 0.15 ? "none" : "power2.inOut" }, c.t);
-  } else tl.fromTo(cam, { scale: 1 }, { scale: 1.035, duration: D, ease: "none" }, 0);
+  } else tl.set(cam, { scale: 1, x: 0, y: 0 }, 0); // no scripted move: hold still (serious beats stay static)
   return tl;
 }
 
 (function () {
-  const CUE = {"cams":[{"t":10.6,"s":1.25,"px":720,"py":690,"d":6},{"t":30.225,"s":1,"px":960,"py":540,"d":0.6},{"t":32.468,"s":1.4,"px":760,"py":660,"d":0.4},{"t":35.119,"s":1,"px":960,"py":540,"d":0.3}],"drop":[],"frame":"01","D":39.732,"lines":[{"s":10.6,"e":22.545,"el":null},{"s":22.705,"e":30.065,"el":null},{"s":30.225,"e":32.228,"el":null},{"s":32.468,"e":34.879,"el":null},{"s":35.119,"e":37.332,"el":null}],"reveals":[{"id":"cut-m2","t":2,"hideAt":4},{"id":"cut-m3","t":4,"hideAt":6},{"id":"cut-m4","t":6,"hideAt":8},{"id":"cut-m5","t":8,"hideAt":10},{"id":"st-date","t":10.6,"hideAt":null},{"id":"a-3","t":32.408,"hideAt":null},{"id":"title","t":36.779,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"cams":[{"t":10.6,"s":1.25,"px":720,"py":690,"d":6},{"t":30.225,"s":1,"px":960,"py":540,"d":0.05},{"t":32.468,"s":1.4,"px":760,"py":660,"d":0.4},{"t":35.119,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"01","D":39.732,"lines":[{"s":10.6,"e":22.545,"el":null},{"s":22.705,"e":30.065,"el":null},{"s":30.225,"e":32.228,"el":null},{"s":32.468,"e":34.879,"el":null},{"s":35.119,"e":37.332,"el":null}],"reveals":[{"id":"cut-m2","t":2,"hideAt":4},{"id":"cut-m3","t":4,"hideAt":6},{"id":"cut-m4","t":6,"hideAt":8},{"id":"cut-m5","t":8,"hideAt":10},{"id":"st-date","t":10.6,"hideAt":null},{"id":"a-3","t":32.408,"hideAt":null},{"id":"title","t":36.779,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
   window.__timelines["f01"] = buildFrame(gsap, document, "f01-", CUE);
 })();
 </script>

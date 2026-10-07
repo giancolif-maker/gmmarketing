@@ -197,16 +197,16 @@ function buildFrame(gsap, document, P, CUE) {
   const helmet = $("helmet"); if (helmet) tl.to(helmet, { y: "+=14", rotation: 6, duration: 0.9, yoyo: true, repeat: reps(0.9, D), ease: "sine.inOut" }, 0);
   const ring = $("sicily-ring"); if (ring) tl.to(ring, { rotation: 360, duration: D, ease: "none" }, 0);
   const army = $("army") || $("column"); if (army) tl.to(army, { x: "+=40", duration: D, ease: "none" }, 0);
-  // camera: scripted punch-ins/moves (scale s centred on px,py), else a slow push on everything
+  // camera: scripted moves only (scale s centred on px,py); every move needs a reason, otherwise the shot holds
   if ((CUE.cams || []).length) {
     tl.set(cam, { scale: 1, x: 0, y: 0 }, 0);
     for (const c of CUE.cams) tl.to(cam, { scale: c.s, x: (960 - c.px) * c.s - (960 - c.px), y: (540 - c.py) * c.s - (540 - c.py), duration: c.d, ease: c.d < 0.15 ? "none" : "power2.inOut" }, c.t);
-  } else tl.fromTo(cam, { scale: 1 }, { scale: 1.035, duration: D, ease: "none" }, 0);
+  } else tl.set(cam, { scale: 1, x: 0, y: 0 }, 0); // no scripted move: hold still (serious beats stay static)
   return tl;
 }
 
 (function () {
-  const CUE = {"cams":[{"t":26.201,"s":1.3,"px":560,"py":860,"d":0.5},{"t":28.575,"s":1,"px":960,"py":540,"d":0.4},{"t":38.798,"s":1.45,"px":960,"py":680,"d":0.5},{"t":41.019,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"06","D":50.788,"lines":[{"s":0.4,"e":9.851,"el":null},{"s":10.091,"e":11.956,"el":"con1"},{"s":12.196,"e":17.827,"el":null},{"s":18.067,"e":19.898,"el":"con1"},{"s":20.138,"e":25.961,"el":null},{"s":26.201,"e":28.335,"el":"con1"},{"s":28.575,"e":38.558,"el":null},{"s":38.798,"e":40.779,"el":null},{"s":41.019,"e":42.377,"el":null},{"s":42.617,"e":43.732,"el":null},{"s":43.972,"e":49.988,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"a-1","t":10.030999999999999,"hideAt":13.322},{"id":"fade-fire","t":13.322,"hideAt":null},{"id":"a-3","t":18.007,"hideAt":25.841},{"id":"st-banned","t":24.214,"hideAt":null},{"id":"pop-small","t":26.201,"hideAt":null},{"id":"a-5","t":26.141000000000002,"hideAt":34.066},{"id":"cut-rev","t":34.066,"hideAt":null},{"id":"a-7","t":38.738,"hideAt":41.019},{"id":"cut-radio","t":41.019,"hideAt":null},{"id":"a-8","t":40.958999999999996,"hideAt":43.612},{"id":"a-9","t":42.556999999999995,"hideAt":43.972},{"id":"fade-laws","t":43.972,"hideAt":null}],"counts":{},"moves":[{"id":"arm-out","t":15.012,"d":0.6,"dy":-300},{"id":"arm-out","t":22.467,"d":0.6,"dy":-560}],"counters":[]};
+  const CUE = {"cams":[{"t":26.201,"s":1.3,"px":560,"py":860,"d":0.5},{"t":28.575,"s":1,"px":960,"py":540,"d":0.05},{"t":38.798,"s":1.45,"px":960,"py":680,"d":0.5},{"t":41.019,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"06","D":50.788,"lines":[{"s":0.4,"e":9.851,"el":null},{"s":10.091,"e":11.956,"el":"con1"},{"s":12.196,"e":17.827,"el":null},{"s":18.067,"e":19.898,"el":"con1"},{"s":20.138,"e":25.961,"el":null},{"s":26.201,"e":28.335,"el":"con1"},{"s":28.575,"e":38.558,"el":null},{"s":38.798,"e":40.779,"el":null},{"s":41.019,"e":42.377,"el":null},{"s":42.617,"e":43.732,"el":null},{"s":43.972,"e":49.988,"el":null}],"reveals":[{"id":"st-date","t":0.4,"hideAt":null},{"id":"a-1","t":10.030999999999999,"hideAt":13.322},{"id":"fade-fire","t":13.322,"hideAt":null},{"id":"a-3","t":18.007,"hideAt":25.841},{"id":"st-banned","t":24.214,"hideAt":null},{"id":"pop-small","t":26.201,"hideAt":null},{"id":"a-5","t":26.141000000000002,"hideAt":34.066},{"id":"cut-rev","t":34.066,"hideAt":null},{"id":"a-7","t":38.738,"hideAt":41.019},{"id":"cut-radio","t":41.019,"hideAt":null},{"id":"a-8","t":40.958999999999996,"hideAt":43.612},{"id":"a-9","t":42.556999999999995,"hideAt":43.972},{"id":"fade-laws","t":43.972,"hideAt":null}],"counts":{},"moves":[{"id":"arm-out","t":15.012,"d":0.6,"dy":-300},{"id":"arm-out","t":22.467,"d":0.6,"dy":-560}],"counters":[]};
   window.__timelines["f06"] = buildFrame(gsap, document, "f06-", CUE);
 })();
 </script>

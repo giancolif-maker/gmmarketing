@@ -120,7 +120,19 @@
     CONSERVATIVE: (from inside the box) We would like to talk about the box.
     NARRATOR: And one by one, laws stripped Germany's Jews of their jobs, their citizenship and their rights.
 
-## F07 — Mussolini's printer
+## F07 — The radio
+[A German living room. A cheap little radio on the table. A family listening. Joseph Goebbels in a studio.]
+
+    NARRATOR: The regime's propaganda minister, Joseph Goebbels, had a plan to get Hitler into every home: a cheap radio, the "People's Receiver", that millions of families could afford. It was built so it struggled to pick up foreign stations.
+    SON: Can we listen to something else?
+    FATHER: (turning the dial) Here's the news.
+    RADIO: Hitler is great.
+    FATHER: (turning the dial) Here's the music.
+    RADIO: (singing) Hitler is great!
+    SON: What's on the other channel?
+    FATHER: (pause) …Also Hitler.
+
+## F08 — Mussolini's printer
 [A Rome balcony. Mussolini posing. Below, ENZO at a printing press.]
 
     NARRATOR: Hitler had a role model: Benito Mussolini, dictator of Italy since 1922, who wanted a new Roman Empire, and above all, wanted it to look good.
@@ -130,7 +142,18 @@
     NARRATOR: Italy invaded Ethiopia in 1935, using poison gas on soldiers and civilians. The League of Nations, created to stop exactly this, imposed some weak sanctions, and left out oil.
     ENZO: (hanging it) …Victory in Ethiopia.
 
-## F08 — The form (#1: the Rhineland)
+## F09 — Tractors
+[A German factory. Workers bolt a gun turret onto a vehicle labeled "AGRICULTURAL TRACTOR". KLAUS, a young quartermaster with a clipboard, is introduced.]
+
+    NARRATOR: The treaty banned Germany from having tanks or an air force. So in secret, it built them anyway. Germany's first tanks were officially called "agricultural tractors."
+    NARRATOR: This is Klaus. Klaus is in charge of supplies. Klaus reads the reports. Klaus is the only person in this story who reads the reports.
+    KLAUS: Sir. This tractor has a cannon.
+    OFFICER: It's for farming.
+    KLAUS: Farming what?
+    OFFICER: (pause) …France.
+    NARRATOR: In 1935, Hitler stopped hiding it, announced a new air force, and brought back conscription. Britain and France complained, and did nothing.
+
+## F10 — The form (#1: the Rhineland)
 [A London desk. Two clerks, British and French. A form slides in: "TERRITORIAL DEMAND. Is this your last one? ☑ Yes". A rubber stamp.]
 
     NARRATOR: Now Hitler started taking things back, one piece at a time. In 1936 he sent troops into the Rhineland, a part of Germany that was supposed to stay free of soldiers.
@@ -139,7 +162,7 @@
     FRENCH CLERK: He filled in the form.
 [STAMP: OK]
 
-## F09 — The form (#2: Austria)
+## F11 — The form (#2: Austria)
 [Same desk. A new British prime minister, Chamberlain, umbrella. Hitler slides the form over without looking up.]
 
     NARRATOR: In 1938, he annexed Austria.
@@ -148,7 +171,7 @@
 [STAMP: APPEASED]
     NARRATOR: Britain's prime minister, Neville Chamberlain, had a policy: give him a little, and he'll calm down. It was called appeasement.
 
-## F10 — The form (#3: Munich)
+## F12 — The form (#3: Munich)
 [Same desk. Now a big conference table in Munich. A Czech official knocks on the window outside.]
 
     NARRATOR: Then Hitler wanted the Sudetenland, a large part of Czechoslovakia. Britain, France and Italy met him in Munich and agreed to hand it over. Czechoslovakia wasn't invited.
@@ -160,13 +183,13 @@
     CHAMBERLAIN: (searching the form) I don't see that on here.
     HITLER: That one didn't need a form.
 
-## F11 — Kristallnacht (straight)
+## F13 — Kristallnacht (straight)
 [A map of Germany and Austria. City after city lights up. On-screen counters climb: synagogues, shops, men arrested. No music.]
 
     NARRATOR: On the night of November 9th, 1938, Nazi mobs attacked Jewish communities across Germany and Austria. Synagogues were burned. Jewish homes and shops were smashed. Hundreds of people were killed or died afterward, and about thirty thousand Jewish men were sent to concentration camps.
     NARRATOR: It was called Kristallnacht, for the broken glass. Around the world, most governments condemned it, and still refused to take in more Jewish refugees.
 
-## F12 — The worst friendship
+## F14 — The worst friendship
 [Stalin's office in Moscow. Hitler on a video-call-style screen. Both holding pens over the same document.]
 
     NARRATOR: Hitler's next target was Poland. But next door to Poland was the Soviet Union, run by Joseph Stalin. Hitler hated communists. Stalin hated fascists.
@@ -177,7 +200,7 @@
 [They sign. Each crosses his fingers behind his back.]
     NARRATOR: August 1939: a pact not to attack each other, with a secret extra page. They'd split Poland down the middle.
 
-## F13 — The form (#4: Poland)
+## F15 — The form (#4: Poland)
 [Chamberlain's desk. The form arrives. Box ticked: "Is this your last one? ☒ No".]
 
     CHAMBERLAIN: (reading) "Not the last one."
@@ -186,8 +209,9 @@
     NARRATOR: On September 1st, 1939, Germany invaded Poland. Two days later, Britain and France declared war. Two weeks after that, the Soviet Union invaded Poland from the east.
     STALIN: As agreed.
     NARRATOR: Poland fell in five weeks, and would suffer under both occupations for the entire war.
+    NARRATOR: In 1940, the Soviet secret police murdered around twenty-two thousand captured Polish officers and other prisoners in the Katyn forest and elsewhere, and spent the next fifty years blaming the Germans.
 
-## F14 — Waiting
+## F16 — Waiting
 [A trench in France. A British soldier and a French soldier playing cards. A tumbleweed. Then, inset: Finland in deep snow.]
 
     NARRATOR: And then Britain and France… waited. For seven months. Newspapers called it the Phoney War.
@@ -199,7 +223,7 @@
     KLAUS: Sir, are you sure that's the lesson?
     HITLER: Write it down.
 
-## F15 — Around the wall
+## F17 — Around the wall
 [The Maginot Line: a huge grey wall of forts on the French border. To its north, a thick forest labeled ARDENNES.]
 
     NARRATOR: France had built the Maginot Line, a wall of forts along the German border. It was very strong. It also stopped where the Ardennes forest began, because everyone agreed the forest was too thick for tanks.
@@ -210,17 +234,23 @@
     FRENCH GENERAL: …Tanks cannot get through the Ardennes in these numbers.
     NARRATOR: In May 1940, Germany's main attack went straight through the forest, and around the end of the wall.
 
-## F16 — Dunkirk
+## F18 — Dunkirk
 [A beach. An enormous crowd of soldiers. Then the sea fills with boats: destroyers, ferries, fishing boats, Thames pleasure cruisers, lifeboats.]
 
-    NARRATOR: The German tanks raced to the sea and trapped the British army, and many French soldiers, at Dunkirk. So Britain sent everything that floated.
+    NARRATOR: The German tanks raced to the sea and trapped the British army, and many French soldiers, at Dunkirk. Then, for about three days, the German tanks stopped.
+    KLAUS: Sir, they're escaping by sea.
+    HITLER: Göring says the air force can finish them off.
+    KLAUS: From the air, sir? An entire army?
+    HITLER: He promised.
+    NARRATOR: The air force could not finish them off. Remember that promise. It comes back.
+    NARRATOR: Britain sent everything that floated.
     DESTROYER CAPTAIN: Room for six hundred!
     FERRY CAPTAIN: Room for two hundred!
     FISHERMAN: Room for six! Mind the nets!
     PLEASURE BOAT OWNER: Room for four, and there are sandwiches!
     NARRATOR: In nine days, about three hundred and thirty-eight thousand soldiers were rescued. They left their equipment behind. They were alive.
 
-## F17 — The railway carriage
+## F19 — The railway carriage
 [A railway carriage in a forest clearing. Hitler sits down, smug. A French tall general sneaks onto a boat to London.]
 
     NARRATOR: France surrendered six weeks after the attack began. Hitler made the French sign the surrender in the exact same railway carriage where Germany had surrendered in 1918.
@@ -232,7 +262,7 @@
     BRITISH OFFICIAL: You're in London.
     DE GAULLE: I am in charge of France, from London.
 
-## F18 — Late to the party
+## F20 — Late to the party
 [Mussolini on his balcony, waving a sword. Enzo at the press.]
 
     NARRATOR: Mussolini had watched France collapse and decided to join the winning side, declaring war less than two weeks before France surrendered.
@@ -240,7 +270,18 @@
     ENZO: France already surrendered. To the Germans.
     MUSSOLINI: Then print it fast, before anybody notices.
 
-## F19 — Carrots
+## F21 — Churchill
+[10 Downing Street. Chamberlain carrying a box out. Churchill coming in, carrying a much bigger cigar.]
+
+    NARRATOR: In Britain, a disastrous campaign in Norway had finished off Chamberlain. On the same day Germany attacked France, Winston Churchill became prime minister.
+    NARRATOR: He was sixty-five, he'd been warning about Hitler for years, and almost nobody had listened.
+    CHAMBERLAIN: (passing in the doorway) You were right, Winston.
+    CHURCHILL: Yes.
+    CHAMBERLAIN: You could say "thank you."
+    CHURCHILL: (sitting down) I could.
+    NARRATOR: He offered the British people "nothing but blood, toil, tears and sweat." People found it oddly comforting.
+
+## F22 — Carrots
 [The sky over southern England, summer 1940. Spitfires. German bombers. A radar mast on the coast.]
 
     NARRATOR: Britain was alone, and its new prime minister, Winston Churchill, told it to fight on the beaches and never surrender. To invade, Hitler first needed to control the skies. But Britain had a secret: radar, which spotted German planes long before they arrived.
@@ -250,12 +291,12 @@
     GERMAN COMMANDER: For the night vision.
     NARRATOR: That's real. Britain spread the story that carrots helped pilots see in the dark, to hide the fact that it had radar. Germany lost the Battle of Britain, and the invasion was called off.
 
-## F20 — The Blitz (straight)
+## F23 — The Blitz (straight)
 [A map of Britain. Cities light up as they are bombed: London, Coventry, Liverpool, Glasgow, Belfast. A counter climbs. Families in an Underground station.]
 
     NARRATOR: Instead, Germany bombed Britain's cities, night after night, for eight months. More than forty thousand civilians were killed. Families slept in Underground stations. And Britain did not surrender.
 
-## F21 — The shop
+## F24 — The shop
 [A bright American storefront. Sign: "WE'RE NEUTRAL! (Cash. You carry it.)" Franklin Roosevelt behind the counter.]
 
     NARRATOR: The United States was officially neutral. Most Americans wanted nothing to do with Europe's war. But President Franklin Roosevelt wanted to help Britain survive.
@@ -269,7 +310,7 @@
 [The sign updates: "WE'RE NEUTRAL! (Borrowing available.)"]
     NARRATOR: It was called Lend-Lease: American weapons, food and fuel, now, with the bill later.
 
-## F22 — Banner trouble
+## F25 — Banner trouble
 [A map: an Italian arrow into Greece bends backwards. Enzo at the press, three banners in progress.]
 
     MUSSOLINI: Enzo! "VICTORY IN GREECE!"
@@ -281,7 +322,7 @@
     HITLER: Again?
     MUSSOLINI: Thank you for your help in my victory.
 
-## F23 — The plan
+## F26 — The plan
 [Hitler at a giant map of the Soviet Union. KLAUS beside a fuel gauge, needle at ½.]
 
     NARRATOR: Which brings us to the thing Hitler had wanted all along, the plan from the prison book: conquer the Soviet Union, and take its land for Germany.
@@ -293,7 +334,7 @@
     HITLER: (pointing at his notes) "Their army is weak."
     KLAUS: (quietly) That was Finland, sir.
 
-## F24 — The warnings
+## F27 — The warnings
 [Stalin's office. A stack of letters piling up on his desk.]
 
     NARRATOR: Stalin received dozens of warnings that the attack was coming.
@@ -305,7 +346,7 @@
     STALIN: (pause) …German lies.
     NARRATOR: That deserter was real. He crossed on the night of June 21st, 1941.
 
-## F25 — Dawn
+## F28 — Dawn
 [June 22nd, 1941, before dawn. A front line from the Baltic to the Black Sea lights up all at once.]
 
     NARRATOR: A few hours later, nearly four million German and allied soldiers attacked along a front almost three thousand kilometers long. It was the largest invasion in human history.
@@ -340,14 +381,24 @@
     KLAUS: It froze. The tanks are still in it.
     NARRATOR: The army had no proper winter uniforms. It had planned to be finished before winter. In December, fresh Soviet troops counterattacked outside Moscow and drove the Germans back. The war in the East would not be quick.
 
-## F03 — The Holocaust (straight)
+## F03 — The parade
+[Red Square, Moscow, November 7th, 1941. Snow. Soldiers march past Lenin's tomb, and keep marching, straight out of the city toward the front.]
+
+    NARRATOR: With the Germans a few dozen kilometers away, Stalin did something nobody expected. He stayed in Moscow, and held the usual Revolution Day military parade in Red Square.
+    SOVIET OFFICER: Comrade Stalin, after the parade, where do the troops go?
+    STALIN: (pointing west) That way.
+    SOVIET OFFICER: That's the front.
+    STALIN: Yes. It's very close. Saves time.
+    NARRATOR: Many of the soldiers marched from the parade straight into battle.
+
+## F04 — The Holocaust (straight)
 [A map of Europe. Deportation routes draw themselves as lines converging on Poland. Camp names appear: Auschwitz-Birkenau, Treblinka, Sobibor, Belzec, Chelmno, Majdanek. A document: "Wannsee, 20 January 1942." A counter at the bottom of the screen. No music.]
 
     NARRATOR: Behind the front, Nazi Germany was carrying out the Holocaust.
     NARRATOR: In the occupied Soviet Union, killing squads shot Jewish men, women and children in mass executions, more than a million people by the end of 1942. In January 1942, Nazi officials met at a villa in Wannsee to coordinate what they called the "Final Solution": the murder of every Jew in Europe.
     NARRATOR: From across the continent, Jews were deported by train to death camps in occupied Poland. By 1945, about six million Jews had been murdered, along with millions of others the Nazis persecuted, among them Roma, disabled people, Soviet prisoners of war and Poles.
 
-## F04 — Japan's whiteboard
+## F05 — Japan's whiteboard
 [A Tokyo war room. TOJO at a whiteboard with a marker. YAMAMOTO, the only worried man in the room.]
 
     NARRATOR: On the other side of the world, Japan had been at war in China since 1937, a war that had already cost millions of Chinese lives, including the massacre of civilians and prisoners at Nanjing. Then America stopped selling Japan oil.
@@ -361,10 +412,16 @@
     YAMAMOTO: I have.
     NARRATOR: Admiral Yamamoto had studied in America. He predicted Japan could "run wild" for six months, maybe a year, and after that, he had no confidence at all. Then he planned the attack.
 
-## F05 — Pearl Harbor
+## F06 — Pearl Harbor
 [Sunday morning, Hawaii. A quiet harbor. Planes on the horizon. Then America's shop.]
 
-    NARRATOR: On the morning of December 7th, 1941, Japanese planes attacked the US Pacific Fleet at Pearl Harbor. Eight battleships were damaged or sunk. About two thousand four hundred Americans were killed.
+    NARRATOR: On the morning of December 7th, 1941, Japanese planes attacked the US Pacific Fleet at Pearl Harbor.
+[Earlier that morning: two young radar operators in a hut on a hillside. A huge blip on the screen.]
+    RADAR OPERATOR: Sir, there's a huge group of planes on the radar. Heading this way.
+    DUTY OFFICER: (on the phone) Don't worry about it.
+    NARRATOR: That's a real quote. The officer assumed it was a flight of American bombers due in from California.
+[The harbor. Explosions.]
+    NARRATOR: Eight battleships were damaged or sunk. About two thousand four hundred Americans were killed.
     NARRATOR: But that morning, America's aircraft carriers were out at sea.
 [FDR slowly turns the shop sign: "OPEN FOR WAR".]
     FDR: Yesterday, December 7th, 1941, a date which will live in infamy…
@@ -375,7 +432,7 @@
     HITLER: (pause) …Japan?
     KLAUS: They didn't tell us they were attacking, sir.
 
-## F06 — The factory
+## F07 — The factory
 [The shop sign: "OPEN FOR WAR." The shop expands into a factory, then a factory the size of the screen. Workers, many of them women.]
 
     NARRATOR: America's secret weapon was boring: factories. Car plants started building tanks and bombers. Millions of women took jobs in war industries. By 1944, America was building about ninety-six thousand planes a year.
@@ -386,7 +443,7 @@
     KLAUS: (turning it sideways) It's a very large parking lot, sir. Full of planes.
     NARRATOR: There was a darker side at home. About a hundred and twenty thousand Japanese Americans, most of them US citizens, were forced into internment camps. None was ever convicted of spying. The US government formally apologized in 1988.
 
-## F07 — Six months
+## F08 — Six months
 [Map: Japanese red racing across Asia: Hong Kong, the Philippines, Malaya, Singapore, the Dutch East Indies, Burma.]
 
     NARRATOR: Exactly as Yamamoto predicted, Japan won almost everywhere for six months. Hong Kong. The Philippines. And Singapore, Britain's great fortress in Asia, where some eighty thousand British, Indian and Australian troops surrendered. The largest surrender in British history.
@@ -394,7 +451,17 @@
     TOJO: We're winning!
     YAMAMOTO: (looking at the calendar) …Six months is up.
 
-## F08 — The water trick
+## F09 — The raid
+[An aircraft carrier deck, much too short. A big twin-engine army bomber revving at one end.]
+
+    NARRATOR: America badly needed good news. So in April 1942, sixteen army bombers, planes far too big to land on an aircraft carrier, took off from an aircraft carrier, flew to Japan and bombed Tokyo.
+    PILOT: Colonel, how do we land back on the carrier?
+    DOOLITTLE: We don't.
+    PILOT: Then where do we land?
+    DOOLITTLE: China. Ish.
+    NARRATOR: The crews crash-landed or bailed out over China. The damage was small, but it humiliated Japan's leaders, and pushed them into the big gamble that came next.
+
+## F10 — The water trick
 [A dark room full of codebreakers at Pearl Harbor. A blue ocean map with a tiny island: MIDWAY.]
 
     NARRATOR: In June 1942, Japan planned to destroy the rest of the US Navy near a tiny island called Midway. American codebreakers knew an attack was coming on a target the Japanese called "AF". They needed to know where AF was.
@@ -404,7 +471,17 @@
     NARRATOR: American dive bombers caught the Japanese carriers with their decks full of planes and fuel. In about five minutes, three carriers were burning. By the end of the battle, Japan had lost four. It never took the initiative in the Pacific again.
 [Turning point counter: "1 of 3"]
 
-## F09 — The other codebreakers
+## F11 — The Tokyo Express
+[A jungle island, Guadalcanal. Marines in mud. At night, a line of fast Japanese destroyers in a narrow channel.]
+
+    NARRATOR: Two months after Midway, American Marines landed on Guadalcanal, in the Solomon Islands, to seize an airfield. Both sides poured in men and ships for six months. Japanese destroyers ran supplies in every night, so regularly the Marines gave them a nickname.
+    MARINE: (checking his watch) There's the Tokyo Express.
+    OTHER MARINE: Right on time.
+    MARINE: Every night.
+    OTHER MARINE: Better service than my local bus.
+    NARRATOR: So many ships sank off the island that sailors called the water Iron Bottom Sound. In February 1943, Japan withdrew. It was the first big American victory on land.
+
+## F12 — The other codebreakers
 [An English country house. Huts on the lawn. Inside: people, machines, cups of tea. A U-boat captain at sea.]
 
     NARRATOR: In the Atlantic, German submarines, U-boats, hunted the convoys Britain needed to survive. At a country house called Bletchley Park, codebreakers, including the mathematician Alan Turing, were breaking the German Enigma code.
@@ -414,7 +491,7 @@
     CODEBREAKER: (sipping tea) —he know. Yes.
     NARRATOR: The Battle of the Atlantic lasted the entire war. Thousands of Allied ships were sunk, and around three quarters of all U-boat crewmen died.
 
-## F10 — The desert
+## F13 — The desert
 [North Africa. Sand to the horizon. ROMMEL in goggles. KLAUS holding a jerry can. Gauge at ¼.]
 
     NARRATOR: In North Africa, Erwin Rommel, the "Desert Fox", chased the British back and forth across Libya and into Egypt. The desert war was really about one thing.
@@ -428,12 +505,32 @@
     MUSSOLINI: Enzo! "VICTORY IN AFRICA"!
     ENZO: (handing him a blank banner) Fill it in yourself.
 
-## F11 — Leningrad (straight)
+## F14 — Spam
+[An American cargo ship unloading in a Soviet port: trucks, boots, and crates and crates of tinned meat. Stalin inspecting a can.]
+
+    NARRATOR: America's shop was now supplying the Soviet Union too: hundreds of thousands of trucks, thousands of planes, millions of boots, and a huge amount of tinned food.
+    AIDE: Comrade Stalin, the Americans have sent… meat. In a tin.
+    STALIN: I trust nobody.
+    AIDE: It's called Spam.
+    STALIN: (eating) …I trust Spam.
+    NARRATOR: Years later, the Soviet leader Nikita Khrushchev admitted that without American Spam, the Red Army would have struggled to feed itself.
+
+## F15 — Leningrad (straight)
 [A map: Leningrad cut off between German and Finnish lines. A thin line across a frozen lake. A bread ration card: 125 grams.]
 
     NARRATOR: In the north, Leningrad was besieged for almost nine hundred days. At the worst point, civilians got a hundred and twenty-five grams of bread a day. Around eight hundred thousand civilians died, most of them of starvation. Food came in over a road of ice across Lake Ladoga. The city never surrendered.
 
-## F12 — The name
+## F16 — The handshake
+[Casablanca, January 1943. Roosevelt and Churchill in armchairs. Two French generals, de Gaulle and Giraud, pushed together for photographers.]
+
+    NARRATOR: In January 1943, Roosevelt and Churchill met at Casablanca and announced that the war would end only with the Axis's "unconditional surrender." They also tried to make the two rival leaders of the Free French get along.
+    FDR: Shake hands, gentlemen. For the cameras.
+    DE GAULLE: (shaking hands, not looking) I am in charge of France.
+    GIRAUD: (shaking hands, not looking) I am in charge of France.
+    PHOTOGRAPHER: Sorry, I missed it. Again?
+    NARRATOR: That's real. The photographers missed the handshake, so the two generals had to do it again. Within a year, de Gaulle had pushed Giraud aside.
+
+## F17 — The name
 [A map of southern Russia. KLAUS points at oil fields in the Caucasus. HITLER points at a city on the Volga.]
 
     NARRATOR: In summer 1942, Hitler sent his armies south, for the oil fields of the Caucasus.
@@ -443,8 +540,13 @@
     HITLER: It has his name on it.
     NARRATOR: Stalingrad was an important industrial city on the Volga river. It was also named after Stalin, so neither dictator would let the other have it.
     STALIN: Not one step back.
+    MUSSOLINI: Enzo! "VICTORY IN RUSSIA!"
+    ENZO: We sent an army to Russia?
+    MUSSOLINI: Two hundred thousand men!
+    ENZO: Did we send them coats?
+    NARRATOR: That winter, the Italian army in Russia was smashed on the river Don, and tens of thousands of Italian soldiers never came home.
 
-## F13 — Room by room
+## F18 — Room by room
 [A ruined city. A cross-section of an apartment building, German and Soviet soldiers on different floors.]
 
     NARRATOR: The Germans fought into the city, street by street, house by house, sometimes floor by floor. Soviet troops clung to a strip along the river, with reinforcements ferried across under fire every night.
@@ -454,19 +556,21 @@
     BOTH: (looking at the stairs) …
     NARRATOR: It went on like that for months.
 
-## F14 — The trap
+## F19 — The trap
 [A map: two Soviet arrows punch through the Romanian armies on either side of the city and meet behind it. A ring closes.]
 
     NARRATOR: In November 1942, the Soviets struck the weaker Romanian armies guarding the flanks, broke through, and met behind the city. About three hundred thousand Axis soldiers were trapped.
     KLAUS: Sir, we're surrounded.
     HITLER: The air force will fly in supplies!
+    KLAUS: Sir, that's the Dunkirk promise.
+    HITLER: Göring promised again!
     KLAUS: The army needs about seven hundred and fifty tons a day, sir. The air force can deliver about a hundred.
     HITLER: So… nearly enough.
     KLAUS: (staring at him) It's one seventh, sir.
     NARRATOR: Hitler forbade a breakout. In February 1943, the survivors surrendered. About ninety thousand men went into Soviet captivity. Only around five thousand ever came home. The battle cost the two sides close to two million dead, wounded and captured.
 [Turning point counter: "3 of 3"]
 
-## F15 — Kursk
+## F20 — Kursk
 [Open steppe. Rows of anti-tank ditches and minefields. German tanks, Soviet tanks.]
 
     NARRATOR: In July 1943, Germany tried one last big summer attack in the East, at Kursk, with new heavy tanks. The Soviets knew exactly where it was coming, and had dug belts of minefields and anti-tank defenses one after another.
@@ -477,7 +581,7 @@
     KLAUS: Ours are in the repair shop, sir.
     NARRATOR: Kursk was one of the biggest tank battles in history, and Germany lost. After it, the German army in the East would only go backwards.
 
-## F16 — Enzo gets fired
+## F21 — Enzo gets fired
 [Sicily: Allied landing craft. Rome: Mussolini's balcony, empty. Enzo packing a box.]
 
     NARRATOR: That same month, the Allies landed in Sicily, and Italy had had enough. Mussolini's own council voted against him, and the king had him arrested.
@@ -487,12 +591,17 @@
     MUSSOLINI: Enzo?
     ENZO: (sighing, unpacking the box) …I've been rehired.
 
-## F17 — Warsaw, 1943 (straight)
+## F22 — The firestorm (straight)
+[A night sky over Germany. Bomber streams. A city map of Hamburg glowing red.]
+
+    NARRATOR: Britain and America were bombing Germany too, the British at night and the Americans by day, hitting factories, railways and, more and more, whole cities. In July 1943, raids on Hamburg created a firestorm that killed around thirty-seven thousand people in a week. The bomber crews died in huge numbers as well: more than fifty-five thousand men from Britain's Bomber Command alone.
+
+## F23 — Warsaw, 1943 (straight)
 [A map of Warsaw. The walled ghetto drawn in. Dates. Then smoke.]
 
     NARRATOR: In April 1943, as the Nazis came to deport the last Jews of the Warsaw Ghetto to the death camps, a few hundred young fighters with pistols and homemade bombs rose up. They held out for almost a month. The Germans burned the ghetto to the ground. The uprising became a lasting symbol of resistance.
 
-## F18 — The date
+## F24 — The date
 [Tehran, November 1943. Roosevelt, Churchill and Stalin at a round table. A calendar. KLAUS in Berlin holding the gauge.]
 
     NARRATOR: In November 1943, Roosevelt, Churchill and Stalin finally met in person, in Tehran. Stalin's armies had done most of the fighting and most of the dying. In the end, around twenty-seven million Soviet citizens died in the war. He had one question.
@@ -542,6 +651,7 @@
     SOLDIER: Yes, sir.
     PATTON: I am a fighting general and I command an army of balloons.
     EISENHOWER: The most important balloons in history, George.
+    NARRATOR: Patton was available because, the year before in Sicily, he had slapped two soldiers suffering from battle shock in field hospitals. It caused a scandal, and he was taken off combat command. So the Allies gave their most famous general the most fake army in history, knowing German intelligence would never believe the Allies would leave him out of the invasion.
     NARRATOR: A disastrous raid on the French port of Dieppe in 1942 had taught the Allies never to attack a fortified port head-on. So they would land on open beaches in Normandy, and bring their own harbors, prefabricated in pieces and towed across the sea.
 
 ## F04 — D-Day
@@ -679,14 +789,32 @@
     ATTLEE: And thank you very much for that.
     NARRATOR: He was back as prime minister six years later. He was very stubborn.
 
-## F18 — The Pacific
+## F18 — The second flag
+[Iwo Jima, February 1945. A small group of Marines raising a small flag on a mountaintop. Then another group raising a bigger one. A photographer.]
+
+    NARRATOR: On the island of Iwo Jima, in February 1945, Marines raised an American flag on top of Mount Suribachi. Then they decided it was too small, and sent up a bigger one.
+    MARINE: That flag's too small.
+    OTHER MARINE: It's a flag.
+    MARINE: People should be able to see it from the beach.
+    NARRATOR: A photographer caught the second flag going up. It became one of the most famous photographs ever taken. The battle for the island went on for another month, and three of the six men in that photo were killed there.
+
+## F19 — The Pacific
 [The Pacific map. Island names appear: Saipan, Leyte, Iwo Jima, Okinawa. Then cities in Japan under bombers.]
 
     NARRATOR: The war with Japan wasn't over. American forces had fought from island to island: Saipan, the Philippines, where the battle of Leyte Gulf in 1944 was the largest naval battle in history, then Iwo Jima and Okinawa in 1945.
     NARRATOR: Japan sent kamikaze pilots to crash their planes into American ships. Tens of thousands of Americans, and far more Japanese soldiers and Okinawan civilians, died in those last island battles. American bombers burned Japan's cities. One raid on Tokyo in March 1945 killed around a hundred thousand people.
     NARRATOR: Japan's leaders still would not surrender.
 
-## F19 — Potsdam
+## F20 — I have returned
+[A beach in the Philippines, October 1944. General Douglas MacArthur wading ashore in sunglasses. Photographers on the sand.]
+
+    NARRATOR: In the Philippines, General Douglas MacArthur had been forced out in 1942, and had promised the Filipino people, "I shall return." In October 1944, he waded ashore.
+    MACARTHUR: People of the Philippines, I have returned!
+    PHOTOGRAPHER: Can you do that again? The light was wrong.
+    MACARTHUR: (walking back into the sea) People of the Philippines—
+    NARRATOR: That retake is a joke; it didn't happen. But he really did know exactly how to get a good photo.
+
+## F21 — Potsdam
 [Potsdam, July 1945. Truman, Attlee, Stalin at a round table. Truman leans over to whisper.]
 
     NARRATOR: In July 1945, the Allied leaders met at Potsdam. Truman had just learned that the atomic bomb worked.
@@ -696,20 +824,29 @@
     NARRATOR: Stalin didn't blink because he already knew. Soviet spies had been inside the bomb project for years.
     STALIN: I trust nobody.
 
-## F20 — The bombs (straight)
+## F22 — The bombs (straight)
 [A plain sky. Two dates. Two city names. No sound effects.]
 
     NARRATOR: On August 6th, 1945, the United States dropped an atomic bomb on Hiroshima. Three days later, a second bomb destroyed Nagasaki. By the end of that year, between a hundred and ten thousand and two hundred and ten thousand people had died, most of them civilians.
     NARRATOR: The Soviet Union declared war on Japan and invaded Manchuria. On August 15th, Emperor Hirohito announced on the radio that Japan would surrender. For most Japanese people, it was the first time they had ever heard his voice.
 
-## F21 — A piece of paper
+## F23 — The record
+[The Imperial Palace in Tokyo, the night of August 14th, 1945. Rebel officers running through dark corridors. A small phonograph record hidden in a cupboard.]
+
+    NARRATOR: Even then, the surrender almost didn't happen. The emperor recorded his surrender speech on a record, to be broadcast the next day. That night, a group of army officers tried to stop it. They stormed the palace and searched it for the record.
+    REBEL OFFICER: Find the record!
+    OTHER OFFICER: Which room?
+    REBEL OFFICER: All the rooms!
+    NARRATOR: The palace staff had hidden it among a pile of documents. The rebels never found it, and the coup collapsed by morning.
+
+## F24 — A piece of paper
 [The deck of the USS Missouri, September 2nd, 1945. A table. A document. Then a quick flash: the hospital bed from 1918.]
 
     NARRATOR: On September 2nd, 1945, on the deck of the battleship Missouri in Tokyo Bay, Japan signed the surrender. The Second World War was over.
     NARRATOR: It began with a man furious about a piece of paper. It ended with a piece of paper.
     NARRATOR: Somewhere between seventy and eighty-five million people were dead, around three percent of everyone alive in the world. Most of them were civilians.
 
-## F22 — The sign
+## F25 — The sign
 [America's shop. Truman flips the sign to "CLOSED". A pause. Then a phone rings.]
 
     NARRATOR: Afterwards, Nazi leaders were put on trial at Nuremberg, the United Nations was founded, and Europe was rebuilt.
@@ -718,6 +855,9 @@
     TRUMAN: …It's Stalin.
 [He flips the sign back: "OPEN (Cold War)".]
     NARRATOR: The alliance that won the war lasted about five minutes. But that's another story.
+[Postscript: a quiet German street, 1950. KLAUS in a mechanic's overalls, filling a car at a petrol pump. The gauge reads FULL. He stares at it.]
+    NARRATOR: As for Klaus, he went home and became a mechanic.
+    KLAUS: (to the gauge, quietly) …Where were you?
 [END]
 
 ---

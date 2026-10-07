@@ -623,17 +623,27 @@
 
 # EPISODE 3 — "The Year Hitler Lost Everything" (1944–1945)
 
-**Spine:** how do you break into a fortress continent? → D-Day → the race to Germany → Hitler's last gambles fail → the horror is uncovered → Germany falls → Japan won't surrender → the bombs → a piece of paper.
+**Spine (v2.4, bunker-framed):** Berlin, April 28th, 1945: Hitler has 48 hours left → ten months earlier: how do you break into a fortress continent? → D-Day → the race to Germany → Hitler's last gambles fail → the horror is uncovered → back in the bunker for the last 48 hours → Japan won't surrender → the bombs → a piece of paper.
 
-## F01 — Hook
-[June 4th, 1944. No music. Only rain on a window in England. A weather chart. A pencil. A folded piece of paper. Then, as the narration names the numbers, hard cuts to the scale: soldiers, ships, planes, filling the screen.]
+**The frame:** the episode opens in the bunker, cuts back to June 1944, and returns to the bunker twice (a one-shot check-in after the Bulge, then the full finale). A clock card, "HOURS LEFT", is used only at these bunker moments. Everything in the last 48 hours is told straight, with no jokes from the moment the bunker finale begins until the scene changes to London.
 
-    NARRATOR: June 1944. More than a hundred and fifty thousand soldiers, seven thousand ships and boats, and eleven thousand aircraft are ready to attack the most heavily defended coastline in the world.
-    NARRATOR: The plan depends on fake tanks, a fake army, and the weather. And the weather is terrible.
-    NARRATOR: The man in charge has already written the statement he'll read if it all goes wrong.
-[Close on the note: "Our landings… have failed… If any blame or fault attaches to the attempt it is mine alone."]
-    NARRATOR: That note is real. Here's why he never had to read it.
+## F01 — Hook: 48 hours
+[Berlin, the night of April 28th, 1945. Shelling shakes dust from a concrete ceiling. A map table lit by one bulb, covered in pins for armies that no longer exist. HITLER, stooped, one hand shaking. KLAUS in the doorway, holding a radio message. A card: 48 HOURS LEFT. No music.]
+
+    NARRATOR: Berlin, April 28th, 1945. Fifty feet under the Chancellery garden, Adolf Hitler is moving armies around a map. Most of them no longer exist.
+    NARRATOR: Above him, the Soviet army is fighting street by street toward the bunker. He has about forty-eight hours left.
+    NARRATOR: Ten months earlier, he still controlled almost all of Europe. So how did it fall apart this fast?
+[Hard cut: rain on a window in England, June 1944.]
+    NARRATOR: It started with the weather.
 [TITLE: WORLD WAR II — "The Year Hitler Lost Everything"]
+
+## F01b — The note
+[June 4th, 1944. Rain on a window. A weather chart. A pencil. A folded piece of paper. Then hard cuts to the scale: soldiers, ships, planes, filling the screen.]
+
+    NARRATOR: More than a hundred and fifty thousand soldiers, seven thousand ships and boats, and eleven thousand aircraft are ready to attack the most heavily defended coastline in the world. The plan depends on a fake army, and the weather. And the weather is terrible.
+    NARRATOR: The man in charge, Dwight Eisenhower, has already written the statement he'll read if it all goes wrong.
+[Close on the note: "Our landings… have failed… If any blame or fault attaches to the attempt it is mine alone."]
+    NARRATOR: Here's why he never had to read it.
 
 ## F02 — The underbelly
 [Italy: mountains, rain, mud. Allied soldiers struggling up a rocky slope. CHURCHILL on a phone.]
@@ -731,6 +741,7 @@
     AMERICAN OFFICER: It means "go to hell."
     NARRATOR: Then the skies cleared, Allied planes returned, and the German tanks ran dry, some of them just short of the fuel depots they'd been aiming for.
     KLAUS: (looking at the gauge, then at the camera) …
+[Hard cut: the bunker map table, the single bulb, the same pins. A card: 48 HOURS LEFT. A beat of silence. Cut back.]
 
 ## F12 — One bridge
 [The Rhine river, March 1945. A railway bridge at Remagen, still standing. American soldiers staring at it.]
@@ -764,21 +775,31 @@
 ## F15 — The last banner
 [A lakeside road in northern Italy, April 1945. Then Enzo, alone with his press.]
 
-    NARRATOR: In April 1945, Mussolini tried to flee to Switzerland in a German army coat. Italian partisans recognized him, and shot him.
+    NARRATOR: On April 28th, 1945, the day this episode began, Mussolini was caught trying to flee to Switzerland in a German army coat. Italian partisans recognized him, and shot him.
 [Enzo, alone, prints one last banner and holds it up: "PEACE".]
     ENZO: (looking at it) Huh. A true one.
 
 ## F16 — Berlin
-[Berlin in ruins. Soviet tanks. A bunker. A table with a map of armies that no longer exist.]
+[Berlin in ruins. Soviet tanks. Then the bunker: the map table, the bulb.]
 
-    NARRATOR: By late April, the Soviet army was in Berlin. Hitler was in a bunker underground, moving armies around a map.
+    NARRATOR: Back to the bunker. By late April, the Soviet army had encircled Berlin, and Hitler was still sending orders to armies that no longer existed.
     HITLER: Send the Ninth Army!
     KLAUS: Sir, it's surrounded.
     HITLER: The Twelfth Army, then!
     KLAUS: It's mostly gone, sir.
     HITLER: Then who is defending Berlin?
     KLAUS: Old men and boys, sir. And me.
-    NARRATOR: On April 30th, with Soviet soldiers a few streets away, Hitler killed himself. He never faced a trial. Germany surrendered unconditionally on May 8th, 1945: Victory in Europe Day.
+
+## F16b — The last 48 hours (straight)
+[From here to the end of the scene: no music, no jokes, no character dialogue. The HOURS LEFT card counts down between beats: 48, 40, 24, 0. Slow, static shots: the radio message, a pen, a document, a corridor, a door, the garden exit, a map of Berlin with the Soviet line closing in.]
+
+    NARRATOR: On the night of April 28th, a radio report arrived: Heinrich Himmler, one of his most loyal men, had secretly offered to surrender to the Western Allies. Hitler raged at the betrayal, and had Himmler's liaison officer in the bunker shot.
+    NARRATOR: Just after midnight, he married Eva Braun, his companion of many years, in a small ceremony in the bunker. Then he dictated his last testament. To the very end, he blamed the Jews for the war he had started.
+    NARRATOR: On April 29th, news reached the bunker that Mussolini was dead, and his body had been hung up in a square in Milan. Hitler ordered that his own body be burned.
+    NARRATOR: On the afternoon of April 30th, with Soviet soldiers a few streets away, Hitler and Eva Braun killed themselves. Their bodies were carried up to the garden and burned. He never faced a trial.
+    NARRATOR: The next day, Joseph Goebbels and his wife Magda had their six children poisoned in the bunker, then killed themselves.
+    NARRATOR: On May 2nd, Berlin surrendered. Germany surrendered unconditionally on May 8th, 1945: Victory in Europe Day.
+[The HOURS LEFT card reads 0, then fades. Hard cut to London crowds: the next scene.]
 
 ## F17 — The election
 [London, May 1945. Huge crowds. Then July: a ballot box. Churchill packing a box. A polite, quiet man at the door.]
@@ -871,7 +892,7 @@ The title and thumbnail must never repeat each other; the thumbnail raises the q
 | --- | --- | --- |
 | 1 | Everyone Thought Hitler Was Bluffing | Hitler holding the "LAST ONE, PROMISE" form, the box ticked ☒ NO. Europe turning dark behind him. Text: "HE KEPT GETTING AWAY WITH IT", or no text. |
 | 2 | The Year Hitler Started Losing | Hitler at a map, three giant arrows labeled MIDWAY, AFRICA, STALINGRAD. Klaus's fuel gauge on "0". Text: "3 BATTLES". |
-| 3 | The Year Hitler Lost Everything | Eisenhower holding the failure note, legible, with the invasion fleet behind him. Text: "THIS WAS THE BACKUP PLAN". |
+| 3 | The Year Hitler Lost Everything | Option A: Eisenhower holding the failure note, legible, with the invasion fleet behind him. Text: "THIS WAS THE BACKUP PLAN". Option B (bunker frame): Hitler at the map table under one bulb, pins for armies that no longer exist. Text: "48 HOURS LEFT". |
 
 **After upload, judge each episode by** impressions, click-through rate, retention over the first 30 seconds and average percentage viewed, not by views. Retention data takes 1–2 days to settle.
 

@@ -35,8 +35,9 @@ export const META = {
 export const FRAMES = {
   "01": [
     N("In 1918, this man was a nobody. A corporal. He'd just lost a war, he'd temporarily lost his eyesight to poison gas, and he had no job, no money and no plan.", { at: ["st-date"], cam: [[0, 1.25, 720, 690, 6]] }),
-    N("Twenty-seven years later, he'd be dead in a bunker under Berlin, and tens of millions of people would be dead with him."),
-    N("So how does a nobody do that?", { cam: [[0, 1.0, 960, 540, 0.05]] }),
+    // the hook pays off its own montage: the bunker, then the dark map, then SNAP back to the bed
+    N("Twenty-seven years later, he'd be dead in a bunker under Berlin, and tens of millions of people would be dead with him.", { at: ["cut-m5", "cut-m3@0.52"], move: [["cut-m5", 0.52, { o: 0 }, 0.01]], sfx: [["slam", 0]] }),
+    N("So how does a nobody do that?", { move: [["cut-m3", 0, { o: 0 }, 0.01]], cam: [[0, 1.0, 960, 540, 0.05]] }),
     L("HITLER", "Germany didn't lose. Somebody… made us lose.", { add: [600, 440, 560, "bl", 40], cam: [[0, 1.4, 760, 660, 0.4]] }),
     N("Short answer: everybody let him.", { at: ["title@0.75"], cam: [[0, 1.0, 960, 540, 0.05]], sfx: [["sting", 1.6]] }),
   ],

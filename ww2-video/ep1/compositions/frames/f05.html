@@ -162,7 +162,10 @@ function buildFrame(gsap, document, P, CUE) {
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
-    const el = $(r.id); if (!el || revealed.has(r.id)) continue; revealed.add(r.id);
+    const el = $(r.id); if (!el) continue;
+    // a cutaway can come back later in the frame (the hook re-uses its montage shots)
+    if (revealed.has(r.id)) { if (r.id.startsWith("cut-")) { tl.set(el, { opacity: 1 }, r.t); if (r.hideAt != null) tl.set(el, { opacity: 0 }, r.hideAt); } continue; }
+    revealed.add(r.id);
     if (CUSTOM[r.id]) CUSTOM[r.id](el, r.t);
     else if (r.id.startsWith("cut-")) { tl.set(el, { opacity: 0 }, 0); tl.set(el, { opacity: 1 }, r.t); }
     else if (r.id.startsWith("arr-")) draw(el, r.t, 0.9);

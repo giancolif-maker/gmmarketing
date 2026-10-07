@@ -123,7 +123,10 @@ function buildFrame(gsap, document, P, CUE) {
   // ---------- 1. reveals ----------
   const revealed = new Set();
   for (const r of CUE.reveals) {
-    const el = $(r.id); if (!el || revealed.has(r.id)) continue; revealed.add(r.id);
+    const el = $(r.id); if (!el) continue;
+    // a cutaway can come back later in the frame (the hook re-uses its montage shots)
+    if (revealed.has(r.id)) { if (r.id.startsWith("cut-")) { tl.set(el, { opacity: 1 }, r.t); if (r.hideAt != null) tl.set(el, { opacity: 0 }, r.hideAt); } continue; }
+    revealed.add(r.id);
     if (CUSTOM[r.id]) CUSTOM[r.id](el, r.t);
     else if (r.id.startsWith("cut-")) { tl.set(el, { opacity: 0 }, 0); tl.set(el, { opacity: 1 }, r.t); }
     else if (r.id.startsWith("arr-")) draw(el, r.t, 0.9);
@@ -179,7 +182,7 @@ function buildFrame(gsap, document, P, CUE) {
 }
 
 (function () {
-  const CUE = {"cams":[{"t":10.6,"s":1.25,"px":720,"py":690,"d":6},{"t":30.225,"s":1,"px":960,"py":540,"d":0.05},{"t":32.468,"s":1.4,"px":760,"py":660,"d":0.4},{"t":35.119,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"01","D":39.732,"lines":[{"s":10.6,"e":22.545,"el":null},{"s":22.705,"e":30.065,"el":null},{"s":30.225,"e":32.228,"el":null},{"s":32.468,"e":34.879,"el":null},{"s":35.119,"e":37.332,"el":null}],"reveals":[{"id":"cut-m2","t":2,"hideAt":4},{"id":"cut-m3","t":4,"hideAt":6},{"id":"cut-m4","t":6,"hideAt":8},{"id":"cut-m5","t":8,"hideAt":10},{"id":"st-date","t":10.6,"hideAt":null},{"id":"a-3","t":32.408,"hideAt":null},{"id":"title","t":36.779,"hideAt":null}],"counts":{},"moves":[],"counters":[]};
+  const CUE = {"cams":[{"t":10.6,"s":1.25,"px":720,"py":690,"d":6},{"t":30.225,"s":1,"px":960,"py":540,"d":0.05},{"t":32.468,"s":1.4,"px":760,"py":660,"d":0.4},{"t":35.119,"s":1,"px":960,"py":540,"d":0.05}],"drop":[],"frame":"01","D":39.732,"lines":[{"s":10.6,"e":22.545,"el":null},{"s":22.705,"e":30.065,"el":null},{"s":30.225,"e":32.228,"el":null},{"s":32.468,"e":34.879,"el":null},{"s":35.119,"e":37.332,"el":null}],"reveals":[{"id":"cut-m2","t":2,"hideAt":4},{"id":"cut-m3","t":4,"hideAt":6},{"id":"cut-m4","t":6,"hideAt":8},{"id":"cut-m5","t":8,"hideAt":10},{"id":"st-date","t":10.6,"hideAt":null},{"id":"cut-m5","t":22.705,"hideAt":null},{"id":"cut-m3","t":26.532,"hideAt":null},{"id":"a-3","t":32.408,"hideAt":null},{"id":"title","t":36.779,"hideAt":null}],"counts":{},"moves":[{"id":"cut-m5","t":26.532,"d":0.01,"o":0},{"id":"cut-m3","t":30.225,"d":0.01,"o":0}],"counters":[]};
   window.__timelines["f01"] = buildFrame(gsap, document, "f01-", CUE);
 })();
 </script>

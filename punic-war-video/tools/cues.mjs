@@ -198,3 +198,11 @@ Object.assign(FRAMES, FRAMES_A2);
 Object.assign(VOICES, VOICES_A34);
 Object.assign(META, META_A34);
 Object.assign(FRAMES, FRAMES_A34);
+
+// 15-minute cut (YouTube): whole scenes dropped and a few lines trimmed. Nothing is re-voiced —
+// the remaining lines keep their cached takes. Remove an entry here to restore that material.
+export const CUT = ["07", "08", "14", "18", "19", "33", "35", "36", "37", "41", "42", "45", "54"];
+export const DROP = { "10": [5], "22": [4], "39": [2], "43": [4, 5], "53": [5] };
+for (const k of CUT) delete FRAMES[k];
+for (const [k, ix] of Object.entries(DROP)) for (const i of [...ix].sort((a, b) => b - a)) FRAMES[k].splice(i, 1);
+

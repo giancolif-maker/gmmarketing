@@ -49,7 +49,7 @@ export const FRAMES_A34 = {
   ],
   "39": [
     N("Rome went back to Fabius's plan: never fight Hannibal. Fight everyone near Hannibal. In 211, Rome besieged Capua. And to pull them away, Hannibal marched right up to Rome itself.", { at: ["camp@0.8", "hannibal@0.8"] }),
-    { who: "MOTHER", text: "Eat your vegetables, or Hannibal's going to get you!", add: [860, 120, 540, "br", 38], el: "mother", at: ["mother", "kid"] },
+    { who: "MOTHER", text: "Eat your vegetables, or Hannibal's going to get you!", add: [860, 120, 540, "br", 38], el: "mother", at: ["mother", "kid", "st-portas@0.7"] },
     N("\"Hannibal ad portas!\" Hannibal is at the gates! Roman parents scared kids with that for centuries!", { at: ["st-portas@0.1"] }),
     N("But Rome did not move a single soldier from Capua. Instead, says Livy, they auctioned off the land Hannibal was camped on. And somebody bought it. At full price.", { at: ["sale@0.6"] }),
     { who: "HANNIBAL", text: "They sold my tent?", add: [560, 520, 360, "bl", 42], el: "hannibal" },

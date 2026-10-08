@@ -1,0 +1,16 @@
+{
+ "s1": {
+  "name": "last-one-promise",
+  "tail": 2.4,
+  "endSlam": "st-war"
+ },
+ "s2": {
+  "name": "the-coffee",
+  "tail": 1.9
+ },
+ "s3": {
+  "name": "the-tractor",
+  "tail": 3.2,
+  "endSlam": "st-tank"
+ }
+}

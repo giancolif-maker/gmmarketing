@@ -1,0 +1,254 @@
+[
+ {
+  "frame": "s1",
+  "idx": 0,
+  "who": "NARRATOR",
+  "text": "How many times can one man say \"last one\"?",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 1,
+  "who": "NARRATOR",
+  "text": "1936. The Rhineland.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 2,
+  "who": "HITLER",
+  "text": "Last one. Promise.",
+  "voice": "am_adam",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s1",
+  "idx": 3,
+  "who": "NARRATOR",
+  "text": "1938. Austria.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 4,
+  "who": "HITLER",
+  "text": "Last one. Promise.",
+  "voice": "am_adam",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s1",
+  "idx": 5,
+  "who": "HITLER",
+  "text": "Look, I've written \"last one\" in pen.",
+  "voice": "am_adam",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s1",
+  "idx": 6,
+  "who": "CHAMBERLAIN",
+  "text": "In pen! Splendid!",
+  "voice": "bm_fable",
+  "speed": 1.05,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 7,
+  "who": "NARRATOR",
+  "text": "Then, Prague.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 8,
+  "who": "HITLER",
+  "text": "That one didn't need a form.",
+  "voice": "am_adam",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s1",
+  "idx": 9,
+  "who": "NARRATOR",
+  "text": "Then, Poland.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s1",
+  "idx": 10,
+  "who": "HITLER",
+  "text": "I'm being honest now. Isn't that nice?",
+  "voice": "am_adam",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 0,
+  "who": "NARRATOR",
+  "text": "In 1923, your coffee got more expensive while you drank it.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s2",
+  "idx": 1,
+  "who": "CUSTOMER",
+  "text": "One coffee, please.",
+  "voice": "am_michael",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 2,
+  "who": "WAITER",
+  "text": "Five thousand marks.",
+  "voice": "am_eric",
+  "speed": 1,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 3,
+  "who": "WAITER",
+  "text": "That'll be eight thousand.",
+  "voice": "am_eric",
+  "speed": 1,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 4,
+  "who": "CUSTOMER",
+  "text": "Eight?!",
+  "voice": "am_michael",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 5,
+  "who": "WAITER",
+  "text": "Ten thousand, nine hundred and fifty-three.",
+  "voice": "am_eric",
+  "speed": 1,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s2",
+  "idx": 6,
+  "who": "NARRATOR",
+  "text": "The government was printing money to pay its bills. Wages came in wheelbarrows.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s2",
+  "idx": 7,
+  "who": "NARRATOR",
+  "text": "Banknotes were cheaper than kite paper.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s2",
+  "idx": 8,
+  "who": "NARRATOR",
+  "text": "One dollar cost four point two trillion marks.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s2",
+  "idx": 9,
+  "who": "CUSTOMER",
+  "text": "I was drinking it!",
+  "voice": "am_michael",
+  "speed": 1.12,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s3",
+  "idx": 0,
+  "who": "NARRATOR",
+  "text": "The treaty banned German tanks. So Germany built… tractors.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s3",
+  "idx": 1,
+  "who": "NARRATOR",
+  "text": "Very big tractors. With very thick armor.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s3",
+  "idx": 2,
+  "who": "NARRATOR",
+  "text": "This is Klaus. Klaus handles supplies. Klaus reads the reports.",
+  "voice": "bm_george",
+  "speed": 1,
+  "lang": "en-gb"
+ },
+ {
+  "frame": "s3",
+  "idx": 3,
+  "who": "KLAUS",
+  "text": "Sir. This tractor has a cannon.",
+  "voice": "am_puck",
+  "speed": 1.1,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s3",
+  "idx": 4,
+  "who": "OFFICER",
+  "text": "It's for farming.",
+  "voice": "am_fenrir",
+  "speed": 1.02,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s3",
+  "idx": 5,
+  "who": "KLAUS",
+  "text": "Farming what?",
+  "voice": "am_puck",
+  "speed": 1.1,
+  "lang": "en-us"
+ },
+ {
+  "frame": "s3",
+  "idx": 6,
+  "who": "OFFICER",
+  "text": "…France.",
+  "voice": "am_fenrir",
+  "speed": 1.02,
+  "lang": "en-us"
+ }
+]

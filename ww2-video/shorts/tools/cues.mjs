@@ -30,7 +30,7 @@ export const FRAMES = {
     L("CHAMBERLAIN", "In pen! Splendid!", { shot: "c1", el: "c1cham", at: ["st-c1ok@0.35"] }),
     N("Then, Prague.", { shot: "c2", at: ["st-c2tag"], hud: [[0.3, "4"]] }),
     L("HITLER", "That one didn't need a form.", { shot: "h4", el: "h4hit", cam: [[0.5, 1.2, 540, 700, 0.5]] }),
-    N("Then, Poland.", { shot: "f4", at: ["drop-f4nap"], sfx: [["whoosh", 0]], hud: [[0.5, "NO"]] }),
+    N("And then... Poland.", { shot: "f4", at: ["drop-f4nap"], sfx: [["whoosh", 0]], hud: [[0.5, "NO"]] }),
     L("HITLER", "I'm being honest now. Isn't that nice?", { shot: "h5", el: "h5hit", cam: [[0.45, 1.3, 540, 640, 0.6]] }),
   ],
   s2: [

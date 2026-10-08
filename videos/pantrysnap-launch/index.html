@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Pantry Snap — Launch</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Manrope"; font-weight: 500; src: url("assets/fonts/manrope-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Manrope"; font-weight: 700; src: url("assets/fonts/manrope-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Manrope"; font-weight: 800; src: url("assets/fonts/manrope-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "DM Serif Display"; font-weight: 400; src: url("assets/fonts/dm-serif-display-latin-400-normal.woff2") format("woff2"); }
+      :root {
+        --bg: oklch(0.985 0.012 94);
+        --ink: oklch(0.19 0.035 145);
+        --primary: oklch(0.48 0.14 144);
+        --primary-fg: oklch(0.99 0.008 95);
+        --secondary: oklch(0.92 0.07 91);
+        --accent: oklch(0.89 0.12 72);
+        --muted: oklch(0.47 0.026 145);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Manrope", sans-serif; color: var(--ink); }
+      .clip { position: absolute; inset: 0; }
+      .ground { background: var(--bg); }
+      .ground.dark { background: var(--ink); }
+      .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      .serif { font-family: "DM Serif Display", serif; font-weight: 400; }
+      .kicker { font-size: 30px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary); }
+      .big { font-size: 128px; line-height: 1.02; letter-spacing: -0.01em; }
+      .mid { font-size: 88px; line-height: 1.05; }
+      .sub { font-size: 40px; font-weight: 500; color: var(--muted); margin-top: 28px; }
+      .blob { position: absolute; border-radius: 50%; filter: blur(2px); }
+
+      /* S1 hook */
+      #s1 .line { display: block; }
+      #s1 .em { color: var(--primary); font-style: italic; }
+
+      /* S2 reveal */
+      #s2-icon { width: 260px; height: 260px; border-radius: 60px; box-shadow: 0 30px 80px oklch(0.19 0.035 145 / 0.25); display: block; }
+      #s2-name { font-size: 150px; margin-top: 40px; }
+
+      /* Step scenes: text left, phone right */
+      .split { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 140px; gap: 120px; }
+      .copy { flex: 1; }
+      .copy .step { font-size: 30px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--primary); display: block; }
+      .copy h2 { font-size: 92px; line-height: 1.04; margin-top: 22px; }
+      .copy p { font-size: 36px; font-weight: 500; color: var(--muted); margin-top: 30px; line-height: 1.4; max-width: 760px; }
+      .phone { width: 520px; height: 900px; border-radius: 72px; background: var(--ink); padding: 22px; box-shadow: 0 40px 100px oklch(0.19 0.035 145 / 0.3); flex: none; }
+      .screen { width: 100%; height: 100%; border-radius: 52px; background: var(--bg); overflow: hidden; padding: 70px 36px 36px; position: relative; }
+      .screen h3 { font-size: 46px; line-height: 1.1; }
+      .screen .hint { font-size: 22px; color: var(--muted); font-weight: 500; margin-top: 10px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+      .chip { display: block; padding: 14px 24px; border-radius: 999px; background: var(--secondary); font-size: 26px; font-weight: 700; }
+      .chip.on { background: var(--primary); color: var(--primary-fg); }
+      .btn { position: absolute; left: 36px; right: 36px; bottom: 40px; height: 92px; border-radius: 28px; background: var(--primary); color: var(--primary-fg); font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+      .photo { width: 100%; height: 300px; border-radius: 28px; background: var(--accent); margin-top: 28px; display: flex; align-items: center; justify-content: center; font-size: 90px; position: relative; overflow: hidden; }
+      .flash { position: absolute; inset: 0; background: white; opacity: 0; }
+      .recipe-img { width: 100%; height: 330px; object-fit: cover; border-radius: 28px; display: block; margin-top: 26px; }
+      .check { display: flex; align-items: center; gap: 14px; font-size: 25px; font-weight: 700; margin-top: 18px; }
+      .check i { font-style: normal; width: 38px; height: 38px; border-radius: 50%; background: var(--primary); color: var(--primary-fg); display: flex; align-items: center; justify-content: center; font-size: 22px; flex: none; }
+
+      /* CTA */
+      #s6 .center { color: var(--primary-fg); }
+      #s6-icon { width: 180px; height: 180px; border-radius: 44px; display: block; }
+      #s6-name { font-size: 120px; margin-top: 30px; }
+      #s6-tag { font-size: 44px; font-weight: 500; margin-top: 18px; color: var(--secondary); }
+      #s6-cta { margin-top: 56px; padding: 26px 64px; border-radius: 999px; background: var(--accent); color: var(--ink); font-size: 38px; font-weight: 800; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="31">
+
+      <!-- S1: hook -->
+      <section id="s1" class="clip ground" data-start="0" data-duration="4.2" data-track-index="0">
+        <div class="center">
+          <span class="line serif big" id="s1-a">It's 6pm.</span>
+          <span class="line serif big" id="s1-b">Fridge full. <span class="em">Nothing to eat?</span></span>
+        </div>
+      </section>
+
+      <!-- S2: product reveal -->
+      <section id="s2" class="clip ground" data-start="4.2" data-duration="4.8" data-track-index="0">
+        <div class="blob" id="s2-blob1" style="width:700px;height:700px;left:-160px;top:-220px;background:var(--secondary);"></div>
+        <div class="blob" id="s2-blob2" style="width:560px;height:560px;right:-120px;bottom:-200px;background:var(--accent);opacity:.55;"></div>
+        <div class="center">
+          <img id="s2-icon" src="assets/pantry-snap-app-icon.png" alt="Pantry Snap icon" />
+          <div id="s2-name" class="serif">Pantry Snap</div>
+          <div class="sub" id="s2-sub">Snap what you've got. We'll figure out the rest.</div>
+        </div>
+      </section>
+
+      <!-- S3: snap or type -->
+      <section id="s3" class="clip ground" data-start="9" data-duration="6" data-track-index="0">
+        <div class="split">
+          <div class="copy" id="s3-copy">
+            <span class="step">Step 1</span>
+            <h2 class="serif">Snap your fridge.<span style="display:block;color:var(--primary)">Or just type it.</span></h2>
+            <p>Photos or a quick list — same smart pipeline. No ingredients detected? Typing is always one tap away.</p>
+          </div>
+          <div class="phone" id="s3-phone">
+            <div class="screen">
+              <h3 class="serif">What do you have?</h3>
+              <div class="hint">Show us what you've got</div>
+              <div class="photo" id="s3-photo">🥬🍋🥚<div class="flash" id="s3-flash"></div></div>
+              <div class="chips" id="s3-chips">
+                <span class="chip">Chicken thighs</span><span class="chip">Lemon</span><span class="chip">Garlic</span>
+                <span class="chip">Spinach</span><span class="chip">Eggs</span><span class="chip">Rice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S4: constraints -->
+      <section id="s4" class="clip ground" data-start="15" data-duration="5.5" data-track-index="0">
+        <div class="split">
+          <div class="copy" id="s4-copy">
+            <span class="step">Step 2</span>
+            <h2 class="serif">Tell it how<span style="display:block;color:var(--primary)">tonight looks.</span></h2>
+            <p>Time, servings, diet, high protein, spicy, kid-friendly — pick what matters.</p>
+          </div>
+          <div class="phone" id="s4-phone">
+            <div class="screen">
+              <h3 class="serif">Quick constraints</h3>
+              <div class="hint">Edit anything before we cook up ideas</div>
+              <div class="chips" id="s4-chips">
+                <span class="chip">⏱ 30 min</span><span class="chip">🍽 2 servings</span><span class="chip">💪 High protein</span>
+                <span class="chip">🌶 Spicy</span><span class="chip">🧒 Kid-friendly</span><span class="chip">🥗 Vegetarian</span>
+                <span class="chip">🍝 Italian</span><span class="chip">🌮 Mexican</span>
+              </div>
+              <div class="btn" id="s4-btn">What can I make?</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S5: verified recipes -->
+      <section id="s5" class="clip ground" data-start="20.5" data-duration="5.7" data-track-index="0">
+        <div class="split">
+          <div class="copy" id="s5-copy">
+            <span class="step">Step 3</span>
+            <h2 class="serif">Recipes you can<span style="display:block;color:var(--primary)">actually make.</span></h2>
+            <p>Every recipe is checked against your list, your clock and your diet — before you see it.</p>
+          </div>
+          <div class="phone" id="s5-phone">
+            <div class="screen">
+              <h3 class="serif">What you can make</h3>
+              <img class="recipe-img" id="s5-img" src="assets/lemon-chicken.jpg" alt="Lemon garlic chicken" />
+              <div style="font-size:34px;font-weight:800;margin-top:22px" id="s5-title">Lemon garlic chicken</div>
+              <div id="s5-checks">
+                <div class="check"><i>✓</i>Uses only what you have</div>
+                <div class="check"><i>✓</i>25 min — checked step by step</div>
+                <div class="check"><i>✓</i>Serves 2 · high protein</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S6: CTA -->
+      <section id="s6" class="clip ground dark" data-start="26.2" data-duration="4.8" data-track-index="0">
+        <div class="center" id="s6-inner">
+          <img id="s6-icon" src="assets/pantry-snap-app-icon.png" alt="Pantry Snap icon" />
+          <div id="s6-name" class="serif">Pantry Snap</div>
+          <div id="s6-tag">Dinner, from what you already have.</div>
+          <span id="s6-cta">Try it free — now live</span>
+        </div>
+      </section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out";
+
+      // S1
+      tl.fromTo("#s1-a", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 0.2);
+      tl.fromTo("#s1-b", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 1.3);
+      tl.to("#s1 .center", { opacity: 0, scale: 0.96, duration: 0.4, ease: "power2.in" }, 3.8);
+
+      // S2
+      tl.fromTo("#s2-blob1", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: E }, 4.2);
+      tl.fromTo("#s2-blob2", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 0.55, duration: 1.2, ease: E }, 4.35);
+      tl.fromTo("#s2-icon", { scale: 0.4, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.9, ease: "back.out(1.7)" }, 4.4);
+      tl.fromTo("#s2-name", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 5.0);
+      tl.fromTo("#s2-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 5.6);
+      tl.to("#s2 .center", { opacity: 0, y: -30, duration: 0.4, ease: "power2.in" }, 8.6);
+
+      // Step scene helper
+      function stepIn(id, t) {
+        tl.fromTo(`#${id}-copy`, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.7, ease: E }, t);
+        tl.fromTo(`#${id}-phone`, { opacity: 0, y: 120 }, { opacity: 1, y: 0, duration: 0.8, ease: E }, t + 0.1);
+      }
+      function stepOut(id, t) {
+        tl.to(`#${id} .split`, { opacity: 0, duration: 0.35, ease: "power2.in" }, t);
+      }
+
+      // S3
+      stepIn("s3", 9.0);
+      tl.fromTo("#s3-photo", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: E }, 10.0);
+      tl.fromTo("#s3-flash", { opacity: 0.9 }, { opacity: 0, duration: 0.5 }, 10.6);
+      tl.fromTo("#s3-chips .chip", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.28 }, 11.2);
+      stepOut("s3", 14.65);
+
+      // S4
+      stepIn("s4", 15.0);
+      tl.fromTo("#s4-chips .chip", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: E, stagger: 0.08 }, 15.8);
+      ["1", "2", "3", "5"].forEach((n, i) => {
+        tl.to(`#s4-chips .chip:nth-child(${n})`, { backgroundColor: "oklch(0.48 0.14 144)", color: "oklch(0.99 0.008 95)", scale: 1.06, duration: 0.25, ease: "back.out(2)" }, 16.9 + i * 0.4);
+      });
+      tl.fromTo("#s4-btn", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 18.6);
+      tl.to("#s4-btn", { scale: 0.95, duration: 0.12, yoyo: true, repeat: 1 }, 19.5);
+      stepOut("s4", 20.15);
+
+      // S5
+      stepIn("s5", 20.5);
+      tl.fromTo("#s5-img", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.8, ease: E }, 21.2);
+      tl.fromTo("#s5-title", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 21.8);
+      tl.fromTo("#s5-checks .check", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, ease: E, stagger: 0.55 }, 22.5);
+      stepOut("s5", 25.85);
+
+      // S6
+      tl.fromTo("#s6-icon", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)" }, 26.4);
+      tl.fromTo("#s6-name", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 26.9);
+      tl.fromTo("#s6-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 27.4);
+      tl.fromTo("#s6-cta", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 28.1);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

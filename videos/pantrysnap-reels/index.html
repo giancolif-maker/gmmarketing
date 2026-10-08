@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Pantry Snap — Launch</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Manrope"; font-weight: 500; src: url("assets/fonts/manrope-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Manrope"; font-weight: 700; src: url("assets/fonts/manrope-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Manrope"; font-weight: 800; src: url("assets/fonts/manrope-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "DM Serif Display"; font-weight: 400; src: url("assets/fonts/dm-serif-display-latin-400-normal.woff2") format("woff2"); }
+      :root {
+        --bg: #fbf8ee; --ink: #10230f; --green: #2f7a35; --lime: #b9e05a;
+        --cream: #f2e3a6; --amber: #f8c66a; --tomato: #e8452c;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Manrope", sans-serif; color: var(--ink); }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      .serif { font-family: "DM Serif Display", serif; font-weight: 400; }
+      .heavy { font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; }
+      .abs { position: absolute; display: block; }
+
+      /* S1 rapid word cuts */
+      .word { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 250px; line-height: 0.9; padding: 0 60px; text-align: center; }
+      .w-inner { display: block; }
+
+      /* S2 viewfinder explosion */
+      .emo { position: absolute; left: 490px; top: 910px; width: 100px; height: 100px; font-size: 100px; line-height: 100px; text-align: center; display: block; }
+      .bracket { position: absolute; width: 170px; height: 170px; border-color: var(--lime); border-style: solid; border-width: 0; display: block; }
+      #vf { position: absolute; left: 140px; top: 560px; width: 800px; height: 800px; }
+      #b1 { left: 0; top: 0; border-top-width: 26px; border-left-width: 26px; border-top-left-radius: 60px; }
+      #b2 { right: 0; top: 0; border-top-width: 26px; border-right-width: 26px; border-top-right-radius: 60px; }
+      #b3 { left: 0; bottom: 0; border-bottom-width: 26px; border-left-width: 26px; border-bottom-left-radius: 60px; }
+      #b4 { right: 0; bottom: 0; border-bottom-width: 26px; border-right-width: 26px; border-bottom-right-radius: 60px; }
+      #snap-word { font-size: 270px; color: var(--bg); }
+      #flash { background: white; opacity: 0; }
+
+      /* S3 logo */
+      .ray { position: absolute; left: 540px; top: 960px; width: 2000px; height: 90px; margin-top: -45px; transform-origin: 0 50%; display: block; }
+      #logo-icon { width: 300px; height: 300px; border-radius: 72px; display: block; box-shadow: 0 40px 120px rgba(0,0,0,.45); }
+      #logo-name { font-size: 150px; color: var(--bg); margin-top: 30px; line-height: 1; display: flex; }
+      #logo-name span { display: block; }
+      #logo-tag { font-size: 44px; max-width: 880px; line-height: 1.3; font-weight: 700; color: var(--lime); margin-top: 18px; }
+
+      /* Marquees */
+      .marquee { position: absolute; left: 0; white-space: nowrap; font-size: 220px; line-height: 1; display: block; }
+      .outline { color: transparent; -webkit-text-stroke: 3px rgba(16,35,15,.14); }
+      .outline-light { color: transparent; -webkit-text-stroke: 3px rgba(251,248,238,.12); }
+
+      /* Phone */
+      .stage { position: absolute; inset: 0; perspective: 1800px; }
+      .phone { position: absolute; left: 280px; top: 830px; width: 520px; height: 900px; border-radius: 72px; background: var(--ink); padding: 22px; box-shadow: 0 60px 140px rgba(16,35,15,.45); }
+      .screen { width: 100%; height: 100%; border-radius: 52px; background: var(--bg); overflow: hidden; padding: 70px 34px 34px; position: relative; }
+      .screen h3 { font-size: 48px; line-height: 1.05; }
+      .photo { width: 100%; height: 340px; border-radius: 30px; background: var(--amber); margin-top: 26px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 96px; letter-spacing: 10px; }
+      .scan { position: absolute; left: 0; right: 0; top: 0; height: 8px; background: var(--lime); box-shadow: 0 0 40px 12px rgba(185,224,90,.8); display: block; }
+      .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+      .chip { display: block; padding: 14px 24px; border-radius: 999px; background: var(--cream); font-size: 27px; font-weight: 800; }
+      .copy { position: absolute; left: 90px; top: 170px; width: 900px; display: flex; flex-direction: column; }
+      .tag { display: block; font-size: 32px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--green); }
+      .copy h2 { font-size: 130px; line-height: .95; margin-top: 18px; }
+      .copy h2 span { display: block; }
+
+      /* S5 constraints */
+      .pill { position: absolute; display: block; padding: 26px 46px; border-radius: 999px; font-size: 54px; font-weight: 800; white-space: nowrap; box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+      #big30 { font-size: 460px; line-height: .8; color: var(--lime); }
+      #big30-sub { font-size: 70px; color: var(--bg); margin-top: 20px; }
+
+      /* S6 recipe */
+      #recipe-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+      #recipe-shade { background: linear-gradient(0deg, rgba(16,35,15,.95) 0%, rgba(16,35,15,.75) 42%, rgba(16,35,15,0) 70%); }
+      .stamp { display: flex; align-items: center; gap: 24px; font-size: 52px; font-weight: 800; color: var(--bg); margin-top: 26px; }
+      .stamp i { font-style: normal; width: 76px; height: 76px; border-radius: 50%; background: var(--lime); color: var(--ink); display: flex; align-items: center; justify-content: center; font-size: 46px; flex: none; }
+      #r-title { font-size: 120px; color: var(--bg); line-height: .95; margin-bottom: 30px; }
+
+      /* CTA */
+      #cta-icon { width: 200px; height: 200px; border-radius: 50px; display: block; }
+      #cta-name { font-size: 150px; color: var(--bg); line-height: 1; margin-top: 24px; }
+      #cta-line { font-size: 46px; max-width: 900px; font-weight: 700; color: var(--cream); margin-top: 14px; }
+      #cta-btn { margin-top: 50px; padding: 30px 74px; border-radius: 999px; background: var(--lime); color: var(--ink); font-size: 46px; font-weight: 800; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="25">
+
+      <!-- S1: rapid kinetic word cuts, motion from frame 0 -->
+      <section id="s1" class="clip" data-start="0" data-duration="2.6" data-track-index="0">
+        <div class="fill" id="s1-bg" style="background:var(--ink)"></div>
+        <div class="word heavy clip" id="w1" data-start="0" data-duration="0.48" data-track-index="1"><span class="w-inner" style="color:var(--lime)">6PM.</span></div>
+        <div class="word heavy clip" id="w2" data-start="0.48" data-duration="0.48" data-track-index="1"><span class="w-inner" style="font-size:210px">FRIDGE</span></div>
+        <div class="word heavy clip" id="w3" data-start="0.96" data-duration="0.48" data-track-index="1"><span class="w-inner" style="color:var(--bg)">FULL.</span></div>
+        <div class="word heavy clip" id="w4" data-start="1.44" data-duration="0.48" data-track-index="1"><span class="w-inner">NO<span style="display:block">IDEAS</span></span></div>
+        <div class="word serif clip" id="w5" data-start="1.92" data-duration="0.68" data-track-index="1" style="font-size:200px"><span class="w-inner" style="color:var(--lime);font-style:italic">Sound familiar?</span></div>
+      </section>
+
+      <!-- S2: ingredient explosion → viewfinder → SNAP -->
+      <section id="s2" class="clip" data-start="2.6" data-duration="3.2" data-track-index="0">
+        <div class="fill" style="background:var(--green)"></div>
+        <div id="emos" data-layout-ignore></div>
+        <div id="vf">
+          <span class="bracket" id="b1"></span><span class="bracket" id="b2"></span>
+          <span class="bracket" id="b3"></span><span class="bracket" id="b4"></span>
+        </div>
+        <div class="center"><div id="snap-word" class="heavy">SNAP.</div></div>
+        <div class="fill" id="flash"></div>
+      </section>
+
+      <!-- S3: logo burst -->
+      <section id="s3" class="clip" data-start="5.8" data-duration="3.2" data-track-index="0">
+        <div class="fill" style="background:var(--ink)"></div>
+        <div id="rays"></div>
+        <div class="center">
+          <img id="logo-icon" src="assets/pantry-snap-app-icon.png" alt="Pantry Snap icon" />
+          <div id="logo-name" class="serif"></div>
+          <div id="logo-tag">Snap what you've got. We'll figure out the rest.</div>
+        </div>
+      </section>
+
+      <!-- S4: phone scan -->
+      <section id="s4" class="clip" data-start="9" data-duration="4.2" data-track-index="0">
+        <div class="fill" style="background:var(--bg)"></div>
+        <span data-layout-ignore class="marquee heavy outline" id="m4a" style="top:640px">SNAP IT · TYPE IT · SNAP IT · TYPE IT · SNAP IT · TYPE IT ·</span>
+        <span data-layout-ignore class="marquee heavy outline" id="m4b" style="top:1720px">FRIDGE · PANTRY · COUNTER · FRIDGE · PANTRY · COUNTER ·</span>
+        <div class="copy" id="s4-copy">
+          <span class="tag">Step 1</span>
+          <h2 class="serif"><span id="s4-h1">Snap it.</span><span id="s4-h2" style="color:var(--green)">Or type it.</span></h2>
+        </div>
+        <div class="stage">
+          <div class="phone" id="s4-phone">
+            <div class="screen">
+              <h3 class="serif">What do you have?</h3>
+              <div class="photo" id="s4-photo">🥬🍋🥚🍗<span class="scan" id="s4-scan"></span></div>
+              <div class="chips" id="s4-chips">
+                <span class="chip">Chicken</span><span class="chip">Lemon</span><span class="chip">Garlic</span>
+                <span class="chip">Spinach</span><span class="chip">Eggs</span><span class="chip">Rice</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S5: constraints rain -->
+      <section id="s5" class="clip" data-start="13.2" data-duration="3.6" data-track-index="0">
+        <div class="fill" style="background:var(--ink)"></div>
+        <div class="center" id="s5-center">
+          <div id="big30" class="heavy">30</div>
+          <div id="big30-sub" class="serif">minutes. Sorted.</div>
+        </div>
+        <div id="pills">
+          <span class="pill" style="left:70px;top:220px;background:var(--lime)">⏱ 30 min</span>
+          <span class="pill" style="left:520px;top:380px;background:var(--amber)">🍽 2 servings</span>
+          <span class="pill" style="left:60px;top:1350px;background:var(--cream)">💪 High protein</span>
+          <span class="pill" style="left:640px;top:1500px;background:var(--tomato);color:var(--bg)">🌶 Spicy</span>
+          <span class="pill" style="left:420px;top:150px;background:var(--bg)">🧒 Kid-friendly</span>
+          <span class="pill" style="left:200px;top:1660px;background:var(--lime)">🥗 Veggie</span>
+        </div>
+      </section>
+
+      <!-- S6: verified recipe punch-in -->
+      <section id="s6" class="clip" data-start="16.8" data-duration="4.4" data-track-index="0">
+        <img id="recipe-img" src="assets/lemon-chicken.jpg" alt="Lemon garlic chicken" />
+        <div class="fill" id="recipe-shade"></div>
+        <div class="copy" style="top:auto;bottom:150px">
+          <span class="tag" style="color:var(--lime)">Step 3 · Verified</span>
+          <div id="r-title" class="serif" style="margin-top:18px">Lemon garlic chicken</div>
+          <div class="stamp"><i>✓</i>Only what you have</div>
+          <div class="stamp"><i>✓</i>25 min, step by step</div>
+          <div class="stamp"><i>✓</i>Fits your diet</div>
+        </div>
+      </section>
+
+      <!-- S7: CTA -->
+      <section id="s7" class="clip" data-start="21.2" data-duration="3.8" data-track-index="0">
+        <div class="fill" style="background:var(--ink)"></div>
+        <span data-layout-ignore data-layout-ignore class="marquee heavy outline-light" id="m7a" style="top:160px">DINNER · SORTED · DINNER · SORTED · DINNER · SORTED ·</span>
+        <span data-layout-ignore data-layout-ignore class="marquee heavy outline-light" id="m7b" style="top:1540px">NO WASTE · NO STRESS · NO WASTE · NO STRESS ·</span>
+        <div class="center">
+          <img id="cta-icon" src="assets/pantry-snap-app-icon.png" alt="Pantry Snap icon" />
+          <div id="cta-name" class="serif">Pantry Snap</div>
+          <div id="cta-line">Dinner, from what you already have.</div>
+          <span id="cta-btn">Try it free — now live</span>
+        </div>
+      </section>
+    </div>
+    <script>
+      // Build deterministic decorative nodes
+      const EMO = ["🥕","🍋","🥚","🍅","🧄","🥬","🍗","🧀","🌶️","🥑","🍄","🧅","🥔","🍞","🫑","🥦","🍝","🐟"];
+      let seed = 7;
+      const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      const emoWrap = document.getElementById("emos");
+      const emoData = EMO.map((e, i) => {
+        const s = document.createElement("span");
+        s.className = "emo"; s.setAttribute("data-layout-ignore", ""); s.textContent = e; emoWrap.appendChild(s);
+        const a = (i / EMO.length) * Math.PI * 2 + rnd() * 0.4;
+        const r = 520 + rnd() * 300;
+        return { el: s, x: Math.cos(a) * r * 0.7, y: Math.sin(a) * r * 1.3, rot: (rnd() - 0.5) * 360, sc: 0.9 + rnd() * 1.2 };
+      });
+      const rays = document.getElementById("rays");
+      const RAYC = ["#2f7a35", "#b9e05a"];
+      for (let i = 0; i < 16; i++) {
+        const r = document.createElement("span");
+        r.className = "ray";
+        r.style.background = RAYC[i % 2];
+        r.style.opacity = i % 2 ? 0.18 : 0.35;
+        r.dataset.a = (i * 360) / 16;
+        rays.appendChild(r);
+      }
+      const nameEl = document.getElementById("logo-name");
+      "Pantry Snap".split("").forEach((c) => {
+        const s = document.createElement("span");
+        s.textContent = c === " " ? " " : c;
+        nameEl.appendChild(s);
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      const E = "power4.out";
+
+      // ── S1: word cuts (each ~0.45s), slam + shake, bg color flips
+      const BG = ["#10230f", "#b9e05a", "#2f7a35", "#f8c66a", "#10230f"];
+      const words = ["#w1", "#w2", "#w3", "#w4", "#w5"];
+      words.forEach((w, i) => {
+        const t = i * 0.48;
+        tl.set("#s1-bg", { backgroundColor: BG[i] }, t);
+        tl.fromTo(`${w} .w-inner`, { scale: i % 2 ? 0.4 : 2.4, rotation: i % 2 ? -8 : 6 }, { scale: 1, rotation: 0, duration: 0.28, ease: E }, t);
+        tl.to(`${w} .w-inner`, { x: 14, duration: 0.03, yoyo: true, repeat: 3 }, t + 0.26);
+        tl.to(`${w} .w-inner`, { scale: 1.06, duration: 0.2, ease: "none" }, t + 0.32);
+      });
+
+      // ── S2: explosion out of center, freeze in orbit, suck into viewfinder, SNAP
+      const T2 = 2.6;
+      emoData.forEach((d, i) => {
+        tl.fromTo(d.el, { x: 0, y: 0, scale: 0, rotation: 0 }, { x: d.x, y: d.y, scale: d.sc, rotation: d.rot, duration: 0.7, ease: "expo.out" }, T2 + i * 0.015);
+        tl.to(d.el, { x: d.x * 1.05, y: d.y * 1.05, rotation: d.rot + 25, duration: 0.6, ease: "none" }, T2 + 0.72);
+        tl.to(d.el, { x: 0, y: 0, scale: 0.2, rotation: d.rot + 200, duration: 0.45, ease: "power3.in" }, T2 + 1.32 + i * 0.008);
+      });
+      tl.fromTo("#vf", { scale: 2.2, opacity: 0, rotation: 20 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.55, ease: "expo.out" }, T2 + 0.9);
+      tl.to("#vf", { scale: 0.62, duration: 0.3, ease: "power3.in" }, T2 + 1.5);
+      tl.to("#flash", { opacity: 1, duration: 0.06 }, T2 + 1.8);
+      tl.set("#emos", { opacity: 0 }, T2 + 1.85);
+      tl.to("#flash", { opacity: 0, duration: 0.5, ease: "power2.out" }, T2 + 1.88);
+      tl.fromTo("#snap-word", { scale: 3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: E }, T2 + 1.85);
+      tl.to("#snap-word", { x: -18, duration: 0.03, yoyo: true, repeat: 5 }, T2 + 2.18);
+      tl.to("#vf", { scale: 1.15, duration: 0.9, ease: "power2.out" }, T2 + 1.85);
+      tl.to(["#snap-word", "#vf"], { scale: 6, opacity: 0, duration: 0.35, ease: "power3.in" }, T2 + 2.85);
+
+      // ── S3: rays burst, icon spin-in, letter cascade
+      const T3 = 5.8;
+      document.querySelectorAll(".ray").forEach((r) => {
+        tl.fromTo(r, { rotation: +r.dataset.a, scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, T3);
+        tl.to(r, { rotation: +r.dataset.a + 30, duration: 3.2, ease: "none" }, T3);
+      });
+      tl.fromTo("#logo-icon", { scale: 0, rotation: -200 }, { scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.6)" }, T3);
+      tl.fromTo("#logo-name span", { y: 160, opacity: 0, rotation: 12 }, { y: 0, opacity: 1, rotation: 0, duration: 0.5, ease: "back.out(2)", stagger: 0.04 }, T3 + 0.45);
+      tl.fromTo("#logo-tag", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, T3 + 1.2);
+      tl.to("#s3 .center", { scale: 1.05, duration: 2.4, ease: "none" }, T3 + 0.8);
+      tl.to("#s3 .center", { y: -2000, duration: 0.35, ease: "power3.in" }, T3 + 2.85);
+
+      // ── S4: whip-in phone in 3D, scan line, chips pop, marquees
+      const T4 = 9.0;
+      tl.fromTo("#m4a", { x: 0 }, { x: -900, duration: 4.2, ease: "none" }, T4);
+      tl.fromTo("#m4b", { x: -900 }, { x: 0, duration: 4.2, ease: "none" }, T4);
+      tl.fromTo("#s4-phone", { y: 1300, rotationY: -35, rotationX: 25 }, { y: 0, rotationY: -14, rotationX: 6, duration: 0.6, ease: E }, T4);
+      tl.to("#s4-phone", { rotationY: 8, rotationX: -2, duration: 3.4, ease: "sine.inOut" }, T4 + 0.6);
+      tl.fromTo("#s4-h1", { x: -700, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: E }, T4 + 0.15);
+      tl.fromTo("#s4-h2", { x: -700, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: E }, T4 + 0.4);
+      tl.fromTo("#s4-copy .tag", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T4 + 0.1);
+      tl.fromTo("#s4-scan", { y: 0 }, { y: 332, duration: 0.55, ease: "sine.inOut", yoyo: true, repeat: 2 }, T4 + 0.6);
+      tl.fromTo("#s4-chips .chip", { opacity: 0, scale: 0, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(3)", stagger: 0.14 }, T4 + 1.2);
+      tl.to("#s4 .stage, #s4-copy", { x: -2000, duration: 0.35, ease: "power3.in" }, T4 + 3.85);
+
+      // ── S5: giant 30 counts, pills rain + bounce
+      const T5 = 13.2;
+      const cnt = { v: 0 };
+      tl.fromTo(cnt, { v: 0 }, { v: 30, duration: 0.7, ease: "power2.out", onUpdate: () => { document.getElementById("big30").textContent = Math.round(cnt.v); } }, T5);
+      tl.fromTo("#big30", { scale: 0.3 }, { scale: 1, duration: 0.7, ease: E }, T5);
+      tl.fromTo("#big30-sub", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, T5 + 0.6);
+      tl.fromTo("#pills .pill", { y: -2200, rotation: (i) => (i % 2 ? 25 : -25) }, { y: 0, rotation: (i) => (i % 2 ? -6 : 5), duration: 0.6, ease: "bounce.out", stagger: 0.12 }, T5 + 0.5);
+      tl.to("#s5-center", { scale: 1.08, duration: 2.6, ease: "none" }, T5 + 0.7);
+      tl.to("#pills .pill", { y: 2200, duration: 0.35, ease: "power3.in", stagger: 0.02 }, T5 + 3.2);
+      tl.to("#s5-center", { scale: 0, opacity: 0, duration: 0.3, ease: "power3.in" }, T5 + 3.3);
+
+      // ── S6: punch-in on dish, stamps slam
+      const T6 = 16.8;
+      tl.fromTo("#recipe-img", { scale: 1.6 }, { scale: 1.08, duration: 0.6, ease: "expo.out" }, T6);
+      tl.to("#recipe-img", { scale: 1.0, y: -40, duration: 3.8, ease: "none" }, T6 + 0.6);
+      tl.fromTo("#s6 .tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, T6 + 0.3);
+      tl.fromTo("#r-title", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.5, ease: E }, T6 + 0.4);
+      document.querySelectorAll("#s6 .stamp").forEach((s, i) => {
+        const t = T6 + 1.1 + i * 0.5;
+        tl.fromTo(s, { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power4.out", transformOrigin: "left center" }, t);
+        tl.to(s, { x: 10, duration: 0.03, yoyo: true, repeat: 3 }, t + 0.24);
+      });
+      tl.to("#s6 .copy", { opacity: 0, x: -200, duration: 0.3, ease: "power3.in" }, T6 + 4.05);
+      tl.to("#recipe-img", { scale: 2.4, opacity: 0, duration: 0.35, ease: "power3.in" }, T6 + 4.05);
+
+      // ── S7: CTA
+      const T7 = 21.2;
+      tl.fromTo("#m7a", { x: 0 }, { x: -800, duration: 3.8, ease: "none" }, T7);
+      tl.fromTo("#m7b", { x: -800 }, { x: 0, duration: 3.8, ease: "none" }, T7);
+      tl.fromTo("#cta-icon", { scale: 0, rotation: 180 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.8)" }, T7);
+      tl.fromTo("#cta-name", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: E }, T7 + 0.3);
+      tl.fromTo("#cta-line", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, T7 + 0.7);
+      tl.fromTo("#cta-btn", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.5)" }, T7 + 1.1);
+      tl.to("#cta-btn", { scale: 1.07, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 3 }, T7 + 1.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

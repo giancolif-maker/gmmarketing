@@ -3,21 +3,23 @@
 import { chromium } from "playwright";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path"; import { spawn } from "node:child_process";
 const ROOT = path.dirname(new URL(import.meta.url).pathname), FPS = 30;
-const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURIComponent(q.url.split("?")[0])); fs.readFile(f, (e, d) => { if (e) { r.statusCode = 404; return r.end(); } r.setHeader("content-type", f.endsWith(".html") ? "text/html" : f.endsWith(".png") ? "image/png" : "font/ttf"); r.end(d); }); }).listen(0);
+const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURIComponent(q.url.split("?")[0])); fs.readFile(f, (e, d) => { if (e) { r.statusCode = 404; return r.end(); } r.setHeader("content-type", f.endsWith(".html") ? "text/html" : f.endsWith(".png") ? "image/png" : f.endsWith(".js") ? "text/javascript" : f.endsWith(".mp3") ? "audio/mpeg" : "font/ttf"); r.end(d); }); }).listen(0);
 const port = srv.address().port;
-const timing = JSON.parse(fs.readFileSync(path.join(ROOT, "build/timing.json"))), mouth = JSON.parse(fs.readFileSync(path.join(ROOT, "build/mouth.json")));
+const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
+const PAGE = arg("--page", "scene.html"), BD = arg("--build", "build"), VW = +arg("--w", 1920), VH = +arg("--h", 1080);
+const timing = JSON.parse(fs.readFileSync(path.join(ROOT, BD, "timing.json"))), mouth = JSON.parse(fs.readFileSync(path.join(ROOT, BD, "mouth.json")));
 const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" }).catch(() => chromium.launch());
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+const page = await browser.newPage({ viewport: { width: VW, height: VH } });
 page.on("pageerror", e => console.error("PAGE", e.message));
-await page.goto(`http://127.0.0.1:${port}/scene.html`); await page.evaluate(() => document.fonts.ready);
+await page.goto(`http://127.0.0.1:${port}/${PAGE}`); await page.evaluate(() => document.fonts.ready);
 await page.evaluate(([a, b]) => window.init(a, b), [timing, mouth]);
 const si = process.argv.indexOf("--still");
 if (si > 0) {
-  fs.mkdirSync(path.join(ROOT, "build/stills"), { recursive: true });
-  for (const t of process.argv[si + 1].split(",").map(Number)) { await page.evaluate(t => window.renderAt(t), t); await page.screenshot({ path: path.join(ROOT, `build/stills/t${t.toFixed(2)}.png`) }); }
+  fs.mkdirSync(path.join(ROOT, BD, "stills"), { recursive: true });
+  for (const t of process.argv[si + 1].split(",").map(Number)) { await page.evaluate(t => window.renderAt(t), t); await page.screenshot({ path: path.join(ROOT, BD, "stills", `t${t.toFixed(2)}.png`) }); }
 } else {
   const n = Math.round(timing.duration * FPS);
-  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", path.join(ROOT, "build/silent.mp4")], { stdio: ["pipe", "inherit", "inherit"] });
+  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", String(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", path.join(ROOT, BD, "silent.mp4")], { stdio: ["pipe", "inherit", "inherit"] });
   for (let i = 0; i < n; i++) {
     await page.evaluate(t => window.renderAt(t), i / FPS);
     const buf = await page.screenshot({ type: "jpeg", quality: 93 });

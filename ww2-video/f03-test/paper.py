@@ -1,6 +1,7 @@
 """Bakes build/paper.png: aged paper (pigment blotches, grain, fibres, foxing, vignette), multiplied over every frame."""
 import numpy as np, subprocess, os
-W, H = 1920, 1080; r = np.random.default_rng(7)
+import sys
+W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (1920, 1080); OUT = sys.argv[3] if len(sys.argv) > 3 else "build/paper.png"; r = np.random.default_rng(7)
 def noise(scale):
     g = r.random((H // scale + 2, W // scale + 2))
     ys, xs = np.linspace(0, H / scale, H), np.linspace(0, W / scale, W)
@@ -25,6 +26,6 @@ for _ in range(14):  # foxing spots
 d = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2)
 img *= (1 - .38 * np.clip(d - .55, 0, 1) ** 1.6)[..., None]
 img = (np.clip(img, 0, 1) * 255).astype(np.uint8)
-os.makedirs("build", exist_ok=True)
-subprocess.run(["ffmpeg", "-y", "-v", "quiet", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-i", "-", "build/paper.png"], input=img.tobytes(), check=True)
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
+subprocess.run(["ffmpeg", "-y", "-v", "quiet", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-i", "-", OUT], input=img.tobytes(), check=True)
 print("paper ok")

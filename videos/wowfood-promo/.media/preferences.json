@@ -35,6 +35,13 @@
         "wowfood-promo"
       ],
       "updated_at": "2026-10-09T18:20:13.225Z"
+    },
+    "style_preset.product-launch-video": {
+      "value": "broadside",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:22:46.024Z"
     }
   },
   "sightings": {}

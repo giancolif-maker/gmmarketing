@@ -1,0 +1,42 @@
+{
+  "schema": "hyperframes.capture.icons.v1",
+  "headline": {
+    "file": "assets/favicon.ico",
+    "source": "assets/icon-icon-192x192.ico",
+    "rank": 0,
+    "shape": "unknown",
+    "reason": "no bare-mark candidate among 3 icon(s); used the best-ranked unknown"
+  },
+  "icons": [
+    {
+      "file": "assets/icon-icon-192x192.ico",
+      "url": "https://static.parastorage.com/client/pfavico.ico",
+      "rel": "icon",
+      "sizes": "192x192",
+      "type": "image/x-icon",
+      "rank": 0,
+      "shape": "unknown",
+      "shapeReason": "image format could not be decoded for inspection"
+    },
+    {
+      "file": "assets/icon-apple-touch-icon-unsized.ico",
+      "url": "https://static.parastorage.com/client/pfavico.ico",
+      "rel": "apple-touch-icon",
+      "sizes": null,
+      "type": "image/x-icon",
+      "rank": 1,
+      "shape": "unknown",
+      "shapeReason": "image format could not be decoded for inspection"
+    },
+    {
+      "file": "assets/icon-shortcut-icon-unsized.ico",
+      "url": "https://static.parastorage.com/client/pfavico.ico",
+      "rel": "shortcut icon",
+      "sizes": null,
+      "type": "image/x-icon",
+      "rank": 2,
+      "shape": "unknown",
+      "shapeReason": "image format could not be decoded for inspection"
+    }
+  ]
+}

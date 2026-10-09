@@ -1,0 +1,131 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "helvetica-w01-bold",
+      "fontSize": "50px",
+      "fontWeight": "400",
+      "lineHeight": "70px",
+      "letterSpacing": "normal",
+      "color": "#000000",
+      "sampleText": "WHERE TO BUY"
+    },
+    {
+      "role": "label",
+      "fontFamily": "montserrat",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "color": "#E7D8C3",
+      "sampleText": "MENU"
+    },
+    {
+      "role": "body",
+      "fontFamily": "helvetica-w01-roman",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "19.6px",
+      "letterSpacing": "normal",
+      "color": "#000000",
+      "sampleText": "info@wowfoodusa.com"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Arial",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "color": "#0000EE",
+      "sampleText": ""
+    }
+  ],
+  "spacing": {
+    "observed": [
+      2,
+      3,
+      10,
+      14,
+      18,
+      21,
+      32,
+      35,
+      37
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "4px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(0, 0, 0, 0.1) 0px 6px 12px 0px",
+      "count": 1
+    }
+  ],
+  "buttons": [
+    {
+      "label": "EN",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "24px",
+      "border": "0px solid rgb(217, 217, 217)",
+      "boxShadow": "rgba(0, 0, 0, 0.1) 0px 6px 12px 0px",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "height": "45px"
+    },
+    {
+      "label": "MENU",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#000000",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "height": "40px"
+    },
+    {
+      "label": "CLICK HERE",
+      "background": "#CE5909",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#0000EE",
+      "padding": "0px",
+      "borderRadius": "4px",
+      "border": "0px solid rgb(0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "height": "47px"
+    }
+  ],
+  "cards": [],
+  "nav": {
+    "label": "navigation",
+    "background": "transparent",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#000000",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "0px none rgb(0, 0, 0)",
+    "boxShadow": "none",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "height": "179px"
+  },
+  "chips": [],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [],
+  "glass": []
+}

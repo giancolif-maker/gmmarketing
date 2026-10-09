@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+              <defs><filter x="-3" y="-3" width="52" height="29" filterUnits="userSpaceOnUse" id="comp-m76fskvt-shadow_comp-m76fskvt" color-interpolation-filters="sRGB">
+    <feComponentTransfer result="srcRGB"></feComponentTransfer>
+    <feGaussianBlur stdDeviation="1" in="SourceAlpha"></feGaussianBlur>
+<feOffset dx="1" dy="1"></feOffset>
+<feColorMatrix type="matrix" values="0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0.28 0"></feColorMatrix>
+<feMerge>
+    <feMergeNode></feMergeNode>
+    <feMergeNode in="SourceGraphic"></feMergeNode>
+</feMerge>
+    <feComponentTransfer></feComponentTransfer>
+</filter></defs>
+              <g filter="url(#comp-m76fskvt-shadow_comp-m76fskvt)">
+                  <svg preserveAspectRatio="none" data-bbox="19.999 55.498 159.999 89.002" viewBox="19.999 55.498 159.999 89.002" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-label="">
+    <g>
+        <path d="M167.501 144.5a12.474 12.474 0 0 1-8.619-3.437L100 84.342l-58.883 56.721c-5 4.742-12.915 4.553-17.671-.434-4.761-4.985-4.566-12.873.435-17.62l67.5-64.071c4.824-4.586 12.412-4.586 17.236 0l67.5 64.071c5 4.747 5.195 12.634.435 17.62a12.461 12.461 0 0 1-9.051 3.871z"></path>
+    </g>
+</svg>
+
+              </g>
+          </svg>

@@ -1,0 +1,172 @@
+{
+  "files": [
+    {
+      "file": "fa-brands-400.ttf",
+      "family": "Font Awesome 6 Brands",
+      "rawFamily": "Font Awesome 6 Brands Regular",
+      "subfamily": "Regular",
+      "postscript": "FontAwesome6Brands-Regular",
+      "weight": 400,
+      "style": "normal",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "fa-brands-400.woff2",
+      "family": "Font Awesome 6 Brands",
+      "rawFamily": "Font Awesome 6 Brands Regular",
+      "subfamily": "Regular",
+      "postscript": "FontAwesome6Brands-Regular",
+      "weight": 400,
+      "style": "normal",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "fa-solid-900.ttf",
+      "family": "Font Awesome 6 Free Solid",
+      "rawFamily": "Font Awesome 6 Free Solid",
+      "subfamily": "Solid",
+      "postscript": "FontAwesome6Free-Solid",
+      "weight": 900,
+      "style": "normal",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "fa-solid-900.woff2",
+      "family": "Font Awesome 6 Free Solid",
+      "rawFamily": "Font Awesome 6 Free Solid",
+      "subfamily": "Solid",
+      "postscript": "FontAwesome6Free-Solid",
+      "weight": 900,
+      "style": "normal",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Bold Italic",
+      "postscript": "Poppins-BoldItalic",
+      "weight": 700,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiDyp8kv8JHgFVrJJLmy15VFteOYktMqlap.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Bold Italic",
+      "postscript": "Poppins-BoldItalic",
+      "weight": 700,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiDyp8kv8JHgFVrJJLmy15VGdeOYktMqlap.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Bold Italic",
+      "postscript": "Poppins-BoldItalic",
+      "weight": 700,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiGyp8kv8JHgFVrJJLucHtAOvWDSA.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Italic",
+      "postscript": "Poppins-Italic",
+      "weight": 400,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiGyp8kv8JHgFVrJJLucXtAOvWDSHFF.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Italic",
+      "postscript": "Poppins-Italic",
+      "weight": 400,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    },
+    {
+      "file": "pxiGyp8kv8JHgFVrJJLufntAOvWDSHFF.woff2",
+      "family": "Poppins",
+      "rawFamily": "Poppins",
+      "subfamily": "Italic",
+      "postscript": "Poppins-Italic",
+      "weight": 400,
+      "style": "italic",
+      "variationAxes": [],
+      "identified": true,
+      "isIcon": false
+    }
+  ],
+  "families": [
+    {
+      "family": "Font Awesome 6 Brands",
+      "weights": [
+        400
+      ],
+      "variable": false,
+      "fileCount": 2,
+      "files": [
+        "fa-brands-400.ttf",
+        "fa-brands-400.woff2"
+      ]
+    },
+    {
+      "family": "Font Awesome 6 Free Solid",
+      "weights": [
+        900
+      ],
+      "variable": false,
+      "fileCount": 2,
+      "files": [
+        "fa-solid-900.ttf",
+        "fa-solid-900.woff2"
+      ]
+    },
+    {
+      "family": "Poppins",
+      "weights": [
+        400,
+        700
+      ],
+      "variable": false,
+      "fileCount": 6,
+      "files": [
+        "pxiDyp8kv8JHgFVrJJLmy15VF9eOYktMqg.woff2",
+        "pxiDyp8kv8JHgFVrJJLmy15VFteOYktMqlap.woff2",
+        "pxiDyp8kv8JHgFVrJJLmy15VGdeOYktMqlap.woff2",
+        "pxiGyp8kv8JHgFVrJJLucHtAOvWDSA.woff2",
+        "pxiGyp8kv8JHgFVrJJLucXtAOvWDSHFF.woff2",
+        "pxiGyp8kv8JHgFVrJJLufntAOvWDSHFF.woff2"
+      ]
+    }
+  ],
+  "unidentified": [],
+  "meta": {
+    "generatedAt": "2026-10-09T18:21:17.983Z",
+    "tool": "fontkit"
+  }
+}

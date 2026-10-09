@@ -15,7 +15,7 @@ adaptations: 1920x1080 (same frames re-laid out after the 9:16 master is approve
 - voiceover: ""
 - duration: 3.5s
 - transition_in: cut
-- status: outline
+- status: built
 - src: compositions/frames/01-craving.html
 - type: hook
 - persuasion: Pain validation
@@ -32,7 +32,7 @@ keyMessage: you're hungry right now.
 - voiceover: ""
 - duration: 5.5s
 - transition_in: zoom-through
-- status: outline
+- status: built
 - src: compositions/frames/02-meet.html
 - type: product_intro
 - persuasion: Show-don't-tell proof
@@ -49,7 +49,7 @@ keyMessage: it's a mini pizza, and it looks incredible.
 - voiceover: ""
 - duration: 6s
 - transition_in: crossfade
-- status: outline
+- status: built
 - src: compositions/frames/03-four-minutes.html
 - type: feature_showcase
 - persuasion: Friction reduction
@@ -67,7 +67,7 @@ keyMessage: freezer to golden in 4 minutes.
 - voiceover: ""
 - duration: 6.5s
 - transition_in: push-slide UP
-- status: outline
+- status: built
 - src: compositions/frames/04-flavors.html
 - type: benefit_highlight
 - persuasion: Value stacking
@@ -84,7 +84,7 @@ keyMessage: five best-selling flavors.
 - voiceover: ""
 - duration: 4s
 - transition_in: zoom-through
-- status: outline
+- status: built
 - src: compositions/frames/05-wow.html
 - type: branding
 - persuasion: Brand recall
@@ -101,7 +101,7 @@ keyMessage: WOW! — frozen to golden in 4 minutes.
 - voiceover: ""
 - duration: 4.5s
 - transition_in: crossfade
-- status: outline
+- status: built
 - src: compositions/frames/06-find-a-store.html
 - type: cta
 - persuasion: Friction reduction

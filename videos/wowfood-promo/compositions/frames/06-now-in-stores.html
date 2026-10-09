@@ -1,0 +1,45 @@
+<template id="06-now-in-stores-template">
+<div id="root" data-composition-id="06-now-in-stores" data-start="0" data-duration="4.5" data-width="1920" data-height="1080">
+<style>
+@font-face{font-family:'Cormorant 06';font-weight:700;src:url("assets/fonts/cormorant-700.ttf") format('truetype');}
+@font-face{font-family:'Montserrat 06';font-weight:500;src:url("assets/fonts/montserrat-500.ttf") format('truetype');}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;}
+.n06-bg{position:absolute;inset:0;background:#050404;}
+.n06-stage{position:absolute;inset:0;container-type:size;}
+.n06-logo{position:absolute;left:38%;width:24%;top:12%;filter:drop-shadow(0 0 1cqw #ff7a2a);}
+.n06-head{position:absolute;left:0;right:0;top:44%;margin:0;text-align:center;font-family:'Cormorant 06',serif;font-weight:700;font-size:8cqw;line-height:.9;letter-spacing:-0.03em;color:#E7D8C3;text-shadow:0 0 2cqw rgba(255,138,61,.55);}
+.n06-url,.n06-handle{position:absolute;left:0;right:0;margin:0;text-align:center;font-family:'Montserrat 06',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.14em;}
+.n06-url{top:70%;font-size:1.5cqw;color:#bfb3a3;}
+.n06-handle{top:77%;font-size:1.4cqw;color:#CE5909;letter-spacing:.1em;text-transform:none;}
+.n06-sweep{position:absolute;top:36%;height:28%;left:0;width:18%;background:linear-gradient(90deg,rgba(255,138,61,0),rgba(255,180,120,.45),rgba(255,138,61,0));mix-blend-mode:screen;opacity:0;}
+.n06-vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 45%,#000 100%);pointer-events:none;}
+</style>
+<div id="n06-bg" class="clip n06-bg" data-start="0" data-duration="4.5" data-track-index="0"></div>
+<div id="n06-stage" class="clip n06-stage" data-start="0" data-duration="4.5" data-track-index="1">
+  <img id="n06-logo" class="n06-logo" src="assets/logo-wow-wordmark.png" alt="WOW!">
+  <p id="n06-head" class="n06-head">now in stores.</p>
+  <div id="n06-sweep" class="n06-sweep"></div>
+  <p id="n06-url" class="n06-url">find yours at wowfoodusa.com</p>
+  <p id="n06-handle" class="n06-handle">@wowsfihas</p>
+  <div class="n06-vig"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+  // Scene 1: logo already glowing; headline blur-in with glow bloom
+  tl.fromTo("#n06-logo",{filter:"drop-shadow(0 0 1cqw #ff7a2a) brightness(1)"},{filter:"drop-shadow(0 0 1.6cqw #ff8a3d) brightness(1.1)",duration:1.2,ease:"sine.inOut"},0);
+  tl.fromTo("#n06-head",{opacity:0,scale:0.95,filter:"blur(24px)",textShadow:"0 0 0cqw rgba(255,138,61,0)"},{opacity:1,scale:1,filter:"blur(0px)",textShadow:"0 0 2cqw rgba(255,138,61,0.55)",duration:1.0,ease:"power3.out"},0.15);
+  // Scene 2: one light sweep, then URL + handle
+  tl.fromTo("#n06-sweep",{xPercent:-120,opacity:0},{xPercent:620,opacity:1,duration:0.8,ease:"power2.inOut"},1.2);
+  tl.set("#n06-sweep",{opacity:0},2.0);
+  tl.fromTo("#n06-url",{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out"},1.8);
+  tl.fromTo("#n06-handle",{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out"},2.1);
+  // Scene 3: very slow push-in across the shot to the end
+  tl.fromTo("#n06-stage",{scale:1},{scale:1.05,duration:4.5,ease:"none"},0);
+  window.__timelines["06-now-in-stores"] = tl;
+})();
+</script>
+</div>
+</template>

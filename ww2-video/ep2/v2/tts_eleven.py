@@ -13,6 +13,7 @@ Usage:  python3 tts_eleven.py --voices          list the account's voices (to fi
 """
 import hashlib, json, os, re, subprocess, sys, time, urllib.request
 import numpy as np
+from directions import D as DIR, NARRATOR as NARR_TAG, STRAIGHT as STRAIGHT_TAG
 
 HERE = os.path.dirname(os.path.abspath(__file__)); B = os.path.join(HERE, "build")
 SR, FPS, MODEL = 44100, 30, "eleven_v3"
@@ -29,6 +30,7 @@ CASTING = {  # who: (preferred voice name, standing direction tag)
     "HITLER": ("Callum", "[petulant, vain, quick to shout]"), "KLAUS": ("Liam", "[nervous, polite, painfully honest]"),
     "STALIN": ("Daniel", "[slow, flat, menacing calm]"), "MUSSOLINI": ("Charlie", "[pompous, theatrical]"),
     "ENZO": ("Will", "[tired, sarcastic]"), "CHURCHILL": ("Brian", "[gruff, grumbling]"), "FDR": ("Eric", "[confident, warm]"),
+    "SOVOFF": ("Roger", ""), "RADAR": ("Will", ""), "DUTY": ("Brian", ""), "PILOTUS": ("Will", ""), "DOOLITTLE": ("Eric", ""), "CODEBREAKERUS": ("Chris", ""), "UBOAT": ("Daniel", ""), "CODEBREAKERUK": ("George", ""), "ROMMEL": ("Brian", ""), "AIDESU": ("Roger", ""), "GERSOLDIER": ("Callum", ""), "SOVSOLDIER": ("Roger", ""), "CHUIKOV": ("Bill", ""), "PILOT": ("Charlie", ""),
     "TOJO": ("Bill", "[brisk, overconfident]"), "YAMAMOTO": ("Chris", "[quiet, worried]"),
 }
 FALLBACK = ["Roger", "Eric", "Chris", "Will", "Bill", "Brian", "Liam", "Charlie", "Daniel", "Callum"]
@@ -57,11 +59,9 @@ def clean(t):
     return re.sub(r"\s+", " ", t).strip()
 
 def direct(l):
-    if l["frame"] in STRAIGHT: return "[calm, sombre, measured]"
-    base = CASTING.get(l["who"], ("", ""))[1]
-    for pat, tag in TAGS:
-        if re.search(pat, l["text"]): return f"{base} {tag}".strip()
-    return base
+    if l["frame"] in STRAIGHT: return STRAIGHT_TAG
+    if l["who"] == "NARRATOR": return NARR_TAG
+    return DIR.get(l["gi"], CASTING.get(l["who"], ("", ""))[1])
 
 def synth(text, vid):
     k = hashlib.sha1(f"{MODEL}|{vid}|{text}".encode()).hexdigest()[:16]
@@ -69,7 +69,7 @@ def synth(text, vid):
     if not os.path.exists(p):
         for a in range(5):
             try:
-                mp3 = api(f"/v1/text-to-speech/{vid}?output_format=mp3_44100_128", {"text": text, "model_id": MODEL, "voice_settings": {"stability": 0.5}}, "audio/mpeg"); break
+                mp3 = api(f"/v1/text-to-speech/{vid}?output_format=mp3_44100_128", {"text": text, "model_id": MODEL, "voice_settings": {"stability": 0.5 if text.startswith(STRAIGHT_TAG) else 0.0}}, "audio/mpeg"); break
             except Exception as e:
                 if a == 4: raise
                 print("  retry:", e); time.sleep(3 * 2 ** a)
@@ -84,6 +84,7 @@ def main():
         for n, v in sorted(voices().items()): print(f"{n:30s} {v}")
         return
     lines = json.load(open(os.path.join(HERE, "../build/lines.json")))
+    for i, l in enumerate(lines): l["gi"] = i
     only = sys.argv[sys.argv.index("--only") + 1].split(",") if "--only" in sys.argv else None
     have = voices(); fb = [have[n] for n in FALLBACK if n in have] or list(have.values())
     vid = {}
@@ -97,7 +98,7 @@ def main():
         fl = [l for l in lines if l["frame"] == f]; takes = []
         for l in fl:
             print(f"  {f} {l['who']}: {l['text'][:60]}")
-            takes.append(synth(f"{direct(l)} {clean(l['text'])}".strip(), vid[l["who"]]))
+            tag = re.match(r"(\[[^\]]*\])", direct(l)); takes.append(synth(f"{tag.group(1) if tag else ''} {clean(l['text'])}".strip(), vid[l["who"]]))
         t, segs, prev = LEAD, [], None
         for l, a in zip(fl, takes):
             if prev: t += SWITCH if prev != l["who"] else GAP

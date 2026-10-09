@@ -28,7 +28,7 @@
     <div id="fm07-bg" class="fm07-bg clip" data-start="0" data-duration="3.5" data-track-index="0">
       <div id="fm07-cam" class="fm07-cam">
         <img id="fm07-cold" class="fm07-photo fm07-cold" src="assets/og-image.jpg" alt="" />
-        <img id="fm07-warm" class="fm07-photo fm07-warm" src="assets/og-image.jpg" alt="" />
+        <div id="fm07-warm" class="fm07-photo fm07-warm" style="background:url('assets/og-image.jpg') center/cover no-repeat"></div>
         <div class="fm07-vignette"></div>
         <div id="fm07-s1" class="fm07-steam" style="left:640px;top:560px"></div>
         <div id="fm07-s2" class="fm07-steam" style="left:830px;top:600px"></div>
@@ -86,7 +86,7 @@
           tl.fromTo(id, { y: 120, opacity: 0, scaleY: 0.5 }, { y: -420, opacity: 0.9, scaleY: 1.4, duration: 1.2, ease: "power4.out" }, 2.22 + i * 0.07);
         });
         tl.fromTo("#fm07-stamp", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "expo.out" }, 2.5);
-        tl.fromTo("#fm07-stamp", { letterSpacing: "0.08em" }, { letterSpacing: "0.14em", duration: 0.7, ease: "power2.out", immediateRender: false }, 2.8);
+        tl.fromTo("#fm07-stamp", { scale: 1 }, { scale: 1.06, duration: 0.7, ease: "power2.out", immediateRender: false }, 2.8);
 
         window.__timelines = window.__timelines || {};
         window.__timelines["07-four-minutes"] = tl;

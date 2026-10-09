@@ -6,6 +6,7 @@
     #g03-bg { position: absolute; inset: 0; background: #000000; }
     #g03-cam { position: absolute; inset: 0; overflow: hidden; }
     .g03-photo { position: absolute; left: -384px; top: -216px; width: 2688px; height: 1512px; object-fit: cover; object-position: 50% 55%; }
+    .g03-tint { background: url("assets/hero-combo.jpg") 50% 55% / cover no-repeat; }
     #g03-red { mix-blend-mode: screen; filter: sepia(1) saturate(8) hue-rotate(-45deg); opacity: 0; }
     #g03-cyan { mix-blend-mode: screen; filter: sepia(1) saturate(8) hue-rotate(150deg); opacity: 0; }
     #g03-dim { position: absolute; inset: 0; background: linear-gradient(20deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.1) 100%); }
@@ -18,8 +19,8 @@
   <div id="g03-bg" class="clip" data-start="0" data-duration="2" data-track-index="0"></div>
   <div id="g03-cam" class="clip" data-start="0" data-duration="2" data-track-index="1">
     <img id="g03-base" class="g03-photo" src="assets/hero-combo.jpg" alt="">
-    <img id="g03-red" class="g03-photo" src="assets/hero-combo.jpg" alt="">
-    <img id="g03-cyan" class="g03-photo" src="assets/hero-combo.jpg" alt="">
+    <div id="g03-red" class="g03-photo g03-tint"></div>
+    <div id="g03-cyan" class="g03-photo g03-tint"></div>
     <div id="g03-dim"></div>
     <div id="g03-rgb"></div>
     <div id="g03-sheen"></div>
@@ -46,12 +47,11 @@
       // Scene 2: slow push continues
       tl.fromTo("#g03-cam", { scale: 1.0 }, { scale: 1.06, duration: 1.65, ease: "none", immediateRender: false }, 0.35);
       tl.fromTo("#g03-line", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "expo.out" }, 0.35);
-      tl.fromTo("#g03-word", { opacity: 0, scale: 1.35, y: 30, filter: "blur(14px)" }, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power4.out", transformOrigin: "0% 100%" }, 0.42);
+      tl.fromTo("#g03-word", { opacity: 0, scale: 1.35, x: -10, y: 30, filter: "blur(14px)" }, { opacity: 1, scale: 1, x: 0, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power4.out", transformOrigin: "0% 100%" }, 0.42);
       // hit jitter on the word: red/cyan text-shadow snap back clean
-      tl.fromTo("#g03-word", { x: -10 }, { x: 0, duration: 0.18, ease: "expo.out" }, 0.42);
-      tl.fromTo("#g03-word", { letterSpacing: "-0.04em" }, { letterSpacing: "-0.02em", duration: 1.2, ease: "power2.out" }, 0.8);
+      tl.fromTo("#g03-type", { scale: 1 }, { scale: 1.04, duration: 1.2, ease: "power2.out", transformOrigin: "0% 100%" }, 0.8);
       // glow breath / secondary micro-beats so something changes every ~0.5s
-      tl.fromTo("#g03-line", { width: 720 }, { width: 980, duration: 0.6, ease: "power4.inOut" }, 1.1);
+      tl.fromTo("#g03-line", { scaleX: 1 }, { scaleX: 1.36, duration: 0.6, ease: "power4.inOut", immediateRender: false }, 1.1);
       tl.set("#g03-rgb", { opacity: 0.5, x: 10 }, 1.5);
       tl.set("#g03-rgb", { opacity: 0, x: 0 }, 1.56);
       tl.set("#g03-rgb", { opacity: 0, x: 0 }, 2.0);

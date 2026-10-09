@@ -1,0 +1,139 @@
+<template>
+  <div id="root" data-composition-id="09-flavor-grid" data-width="1920" data-height="1080" data-duration="4.5">
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-800.ttf"); }
+      @font-face { font-family: "Montserrat"; font-weight: 500; src: url("assets/fonts/montserrat-500.ttf"); }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      #fg09-bg { position: absolute; inset: 0; background: #000000; overflow: hidden; }
+      #fg09-grid {
+        position: absolute; left: -120px; top: -120px; width: 2160px; height: 1320px;
+        background-image:
+          linear-gradient(#282726 1px, transparent 1px),
+          linear-gradient(90deg, #282726 1px, transparent 1px);
+        background-size: 120px 120px;
+      }
+      #fg09-glow {
+        position: absolute; left: 560px; top: 140px; width: 800px; height: 640px; border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(206,89,9,0.22), rgba(206,89,9,0));
+      }
+      #fg09-label {
+        position: absolute; left: 150px; top: 120px;
+        font-family: "Montserrat"; font-weight: 800; font-size: 30px; letter-spacing: 0.16em;
+        color: #CE5909; text-transform: uppercase;
+      }
+      #fg09-rule { position: absolute; left: 150px; top: 172px; width: 1620px; height: 1px; background: #282726; transform-origin: left center; }
+      #fg09-row { position: absolute; left: 150px; top: 290px; width: 1620px; height: 470px; }
+      .fg09-card {
+        position: absolute; top: 0; width: 300px; height: 470px;
+        border: 2px solid #CE5909; background: #1A1918; overflow: hidden;
+      }
+      .fg09-fill { position: absolute; inset: 0; background: #CE5909; opacity: 0; }
+      .fg09-photo {
+        position: absolute; left: 14px; top: 14px; width: 268px; height: 268px;
+        background-size: 320% auto; background-repeat: no-repeat;
+      }
+      .fg09-icon { position: absolute; left: 22px; top: 304px; width: 44px; height: 44px; }
+      .fg09-icon path, .fg09-icon circle { fill: none; stroke: #CE5909; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .fg09-name {
+        position: absolute; left: 22px; right: 10px; top: 372px;
+        font-family: "Montserrat"; font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: 0.01em;
+        color: #E7D8C3; text-transform: uppercase; white-space: nowrap;
+      }
+      .fg09-num {
+        position: absolute; right: 18px; top: 312px;
+        font-family: "Montserrat"; font-weight: 500; font-size: 20px; letter-spacing: 0.14em; color: #504B48;
+      }
+      #fg09-c5 .fg09-name { font-size: 30px; }
+      #fg09-c4 .fg09-name { font-size: 30px; }
+    </style>
+
+    <div id="fg09-bg" class="clip" data-start="0" data-duration="4.5" data-track-index="0">
+      <div id="fg09-grid"></div>
+      <div id="fg09-glow"></div>
+    </div>
+
+    <div id="fg09-label" class="clip" data-start="0" data-duration="4.5" data-track-index="1">5 Best-Sellers</div>
+    <div id="fg09-rule" class="clip" data-start="0" data-duration="4.5" data-track-index="2"></div>
+
+    <div id="fg09-row" class="clip" data-start="0" data-duration="4.5" data-track-index="3">
+      <div class="fg09-card" id="fg09-c1" style="left:0px">
+        <div class="fg09-fill"></div>
+        <div class="fg09-photo" style="background-image:url('assets/hero-combo.jpg');background-position:8% 30%"></div>
+        <svg class="fg09-icon" viewBox="0 0 44 44"><path d="M6 20h32M8 20c0-8 6-13 14-13s14 5 14 13M6 26h32M8 32h28c0 3-2 5-5 5H13c-3 0-5-2-5-5z"/></svg>
+        <div class="fg09-num">01</div>
+        <div class="fg09-name">Beef</div>
+      </div>
+      <div class="fg09-card" id="fg09-c2" style="left:330px">
+        <div class="fg09-fill"></div>
+        <div class="fg09-photo" style="background-image:url('assets/og-image.jpg');background-position:30% 60%"></div>
+        <svg class="fg09-icon" viewBox="0 0 44 44"><path d="M6 14c6-4 10 4 16 0s10-4 16 0M6 22c6-4 10 4 16 0s10-4 16 0M6 30c6-4 10 4 16 0s10-4 16 0"/></svg>
+        <div class="fg09-num">02</div>
+        <div class="fg09-name">Bacon</div>
+      </div>
+      <div class="fg09-card" id="fg09-c3" style="left:660px">
+        <div class="fg09-fill"></div>
+        <div class="fg09-photo" style="background-image:url('assets/hero-combo.jpg');background-position:52% 70%"></div>
+        <svg class="fg09-icon" viewBox="0 0 44 44"><path d="M5 34L38 10v24z"/><circle cx="26" cy="26" r="3"/><circle cx="32" cy="20" r="2"/></svg>
+        <div class="fg09-num">03</div>
+        <div class="fg09-name">Cheese</div>
+      </div>
+      <div class="fg09-card" id="fg09-c4" style="left:990px">
+        <div class="fg09-fill"></div>
+        <div class="fg09-photo" style="background-image:url('assets/og-image.jpg');background-position:75% 25%"></div>
+        <svg class="fg09-icon" viewBox="0 0 44 44"><circle cx="22" cy="22" r="16"/><path d="M22 6v32M6 22h32"/></svg>
+        <div class="fg09-num">04</div>
+        <div class="fg09-name">Neapolitan</div>
+      </div>
+      <div class="fg09-card" id="fg09-c5" style="left:1320px">
+        <div class="fg09-fill"></div>
+        <div class="fg09-photo" style="background-image:url('assets/hero-combo.jpg');background-position:94% 45%"></div>
+        <svg class="fg09-icon" viewBox="0 0 44 44"><path d="M22 36c-8-6-12-12-12-18a12 12 0 0 1 24 0c0 6-4 12-12 18z"/><path d="M22 14v10"/></svg>
+        <div class="fg09-num">05</div>
+        <div class="fg09-name">Marguerita</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+        var R = '[data-composition-id="09-flavor-grid"] ';
+        function q(s) { return document.querySelector(R + s); }
+
+        // Scene 1: dynamic grid drift + label snap
+        tl.fromTo(q('#fg09-grid'), { x: 0, y: 0 }, { x: -60, y: -120, duration: 4.5, ease: 'none' }, 0);
+        tl.fromTo(q('#fg09-glow'), { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0);
+        tl.fromTo(q('#fg09-label'), { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: 'power4.out' }, 0.05);
+        tl.fromTo(q('#fg09-rule'), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.15);
+
+        // Scene 2: five cards snap into slots, one every ~0.55s
+        var ids = ['#fg09-c1', '#fg09-c2', '#fg09-c3', '#fg09-c4', '#fg09-c5'];
+        ids.forEach(function (id, i) {
+          var t = 0.5 + i * 0.55;
+          var card = q(id);
+          tl.fromTo(card, { y: 140, scale: 0.86, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: 'expo.out' }, t);
+          tl.fromTo(card.querySelector('.fg09-photo'), { scale: 1.35 }, { scale: 1, duration: 0.6, ease: 'power4.out' }, t);
+          tl.fromTo(card.querySelector('.fg09-icon'), { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.35, ease: 'back.out(2.5)' }, t + 0.12);
+          tl.fromTo(card.querySelector('.fg09-name'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power4.out' }, t + 0.16);
+          // landing tick
+          tl.fromTo(card, { rotation: 0 }, { rotation: i % 2 ? 1.2 : -1.2, duration: 0.06, ease: 'power2.out', immediateRender: false }, t + 0.3);
+          tl.to(card, { rotation: 0, duration: 0.14, ease: 'power2.out' }, t + 0.36);
+        });
+
+        // Scene 3: MARGUERITA flips orange, row holds
+        var hero = q('#fg09-c5');
+        tl.fromTo(hero, { rotationY: 0 }, { rotationY: 180, duration: 0.2, ease: 'power4.in', immediateRender: false }, 3.55);
+        tl.set(hero.querySelector('.fg09-fill'), { opacity: 1 }, 3.65);
+        tl.set(hero.querySelector('.fg09-name'), { color: '#000000' }, 3.65);
+        tl.set(hero.querySelector('.fg09-num'), { color: 'rgba(17,17,17,0.55)' }, 3.65);
+        tl.set(hero.querySelector('.fg09-icon'), { opacity: 0 }, 3.65);
+        tl.fromTo(hero, { rotationY: -180 }, { rotationY: 0, duration: 0.3, ease: 'expo.out', immediateRender: false }, 3.75);
+        tl.fromTo(hero, { scale: 1 }, { scale: 1.06, duration: 0.5, ease: 'expo.out', immediateRender: false }, 3.75);
+        tl.fromTo(q('#fg09-row'), { scale: 1 }, { scale: 1.02, duration: 0.95, ease: 'power2.out' }, 3.55);
+
+        window.__timelines['09-flavor-grid'] = tl;
+      })();
+    </script>
+  </div>
+</template>

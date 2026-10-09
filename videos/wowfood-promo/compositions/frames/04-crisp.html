@@ -7,10 +7,11 @@
       #c04-stage { position: absolute; inset: 0; overflow: hidden; }
       .c04-shot { position: absolute; inset: 0; overflow: hidden; }
       .c04-shot img { position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; object-fit: cover; object-position: 38% 55%; }
+      .c04-copy { position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; background: url("assets/og-image.jpg") 38% 55% / cover no-repeat; transform: scale(1.2); }
       #c04-red { mix-blend-mode: screen; opacity: 0; }
-      #c04-red img { filter: sepia(1) saturate(8) hue-rotate(-40deg) brightness(0.7); }
+      #c04-red .c04-copy { filter: sepia(1) saturate(8) hue-rotate(-40deg) brightness(0.7); }
       #c04-cyan { mix-blend-mode: screen; opacity: 0; }
-      #c04-cyan img { filter: sepia(1) saturate(8) hue-rotate(150deg) brightness(0.7); }
+      #c04-cyan .c04-copy { filter: sepia(1) saturate(8) hue-rotate(150deg) brightness(0.7); }
       #c04-dim { position: absolute; inset: 0; background: linear-gradient(200deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.35) 100%); }
       #c04-fx { position: absolute; top: 0; bottom: 0; left: 0; width: 60%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); mix-blend-mode: screen; }
       #c04-rgb { position: absolute; inset: 0; opacity: 0; background: linear-gradient(90deg, rgba(239,68,68,0.35), transparent, rgba(34,211,238,0.35)); }
@@ -20,9 +21,9 @@
     </style>
     <div id="c04-bg" class="clip" data-start="0" data-duration="1.2" data-track-index="0"></div>
     <div id="c04-stage" class="clip" data-start="0" data-duration="1.2" data-track-index="1">
-      <div id="c04-red" class="c04-shot"><img src="assets/og-image.jpg" alt=""></div>
+      <div id="c04-red" class="c04-shot"><div class="c04-copy"></div></div>
       <div id="c04-main" class="c04-shot"><img id="c04-img" src="assets/og-image.jpg" alt="beef sfiha macro"></div>
-      <div id="c04-cyan" class="c04-shot"><img src="assets/og-image.jpg" alt=""></div>
+      <div id="c04-cyan" class="c04-shot"><div class="c04-copy"></div></div>
       <div id="c04-dim"></div>
       <div id="c04-fx"></div>
       <div id="c04-rgb"></div>
@@ -48,11 +49,10 @@
         // Scene 2: macro crop drifts sideways underneath
         tl.fromTo("#c04-img", { scale: 1.18, x: 40 }, { scale: 1.24, x: -110, duration: 1.2, ease: "none" }, 0);
         // "crisp." snaps in upper-right
-        tl.fromTo("#c04-word span:first-child", { x: 120, opacity: 0, skewX: -12 }, { x: 0, opacity: 1, skewX: 0, duration: 0.32, ease: "expo.out" }, 0.3);
-        tl.fromTo("#c04-word", { textShadow: "-14px 0 rgba(239,68,68,0.9), 14px 0 rgba(34,211,238,0.9)" }, { textShadow: "0px 0 rgba(239,68,68,0), 0px 0 rgba(34,211,238,0)", duration: 0.28, ease: "power4.out" }, 0.3);
+        tl.fromTo("#c04-word span:first-child", { x: 120, opacity: 0, skewX: -12, textShadow: "-14px 0 rgba(239,68,68,0.9), 14px 0 rgba(34,211,238,0.9)" }, { x: 0, opacity: 1, skewX: 0, textShadow: "0px 0 rgba(239,68,68,0), 0px 0 rgba(34,211,238,0)", duration: 0.32, ease: "expo.out" }, 0.3);
         tl.fromTo("#c04-dot", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, ease: "back.out(3)" }, 0.55);
         tl.fromTo("#c04-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power4.out" }, 0.7);
-        tl.fromTo("#c04-word", { letterSpacing: "-0.02em" }, { letterSpacing: "-0.05em", duration: 0.6, ease: "power2.out" }, 0.6);
+        tl.fromTo("#c04-word", { scale: 1.04 }, { scale: 1, duration: 0.6, ease: "power2.out", transformOrigin: "100% 0%" }, 0.6);
         window.__timelines["04-crisp"] = tl;
       })();
     </script>

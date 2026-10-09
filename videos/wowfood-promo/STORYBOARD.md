@@ -25,7 +25,7 @@ style: fast SaaS-launch motion graphics — a cut every 1–3s, slams, glitch/RG
 - voiceover: ""
 - duration: 1.2s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-hungry.html
 - type: hook
 - persuasion: Show-don't-tell proof
@@ -48,7 +48,7 @@ keyMessage: HUNGRY? slams onto an orange ground, shake on impact
 - voiceover: ""
 - duration: 1.2s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/02-now.html
 - type: hook
 - persuasion: Show-don't-tell proof
@@ -71,7 +71,7 @@ keyMessage: "4PM." then "NOW." thrown through on black with shutter blur
 - voiceover: ""
 - duration: 2.0s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/03-golden.html
 - type: product_intro
 - persuasion: Show-don't-tell proof
@@ -94,7 +94,7 @@ keyMessage: macro photo punch-in with RGB split; "golden." slams in
 - voiceover: ""
 - duration: 1.2s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/04-crisp.html
 - type: product_intro
 - persuasion: Show-don't-tell proof
@@ -117,7 +117,7 @@ keyMessage: second macro crop; "crisp." with an RGB-split wipe
 - voiceover: ""
 - duration: 2.0s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/05-introducing.html
 - type: branding
 - persuasion: Show-don't-tell proof
@@ -140,7 +140,7 @@ keyMessage: white flash, then INTRODUCING letters explode and reassemble on blac
 - voiceover: ""
 - duration: 2.4s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/06-logo.html
 - type: branding
 - persuasion: Show-don't-tell proof
@@ -162,7 +162,7 @@ keyMessage: the real WOW! logo locks up over a glowing grid with a light leak
 - voiceover: ""
 - duration: 3.5s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/07-four-minutes.html
 - type: feature_showcase
 - persuasion: Show-don't-tell proof
@@ -186,7 +186,7 @@ keyMessage: ring timer races 4:00 → 0:00 while the tray goes cold to gold; chi
 - voiceover: ""
 - duration: 1.5s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/08-freezer-golden.html
 - type: feature_showcase
 - persuasion: Show-don't-tell proof
@@ -208,7 +208,7 @@ keyMessage: "freezer" → "golden." word swap on orange
 - voiceover: ""
 - duration: 4.5s
 - transition_in: push-slide UP
-- status: outline
+- status: animated
 - src: compositions/frames/09-flavor-grid.html
 - type: benefit_highlight
 - persuasion: Show-don't-tell proof
@@ -231,7 +231,7 @@ keyMessage: five flavor cards snap into a grid one by one: photo, icon, name
 - voiceover: ""
 - duration: 2.5s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/10-whip-flavors.html
 - type: benefit_highlight
 - persuasion: Show-don't-tell proof
@@ -253,7 +253,7 @@ keyMessage: rapid whip-pan run through five flavor close-ups
 - voiceover: ""
 - duration: 3.0s
 - transition_in: push-slide LEFT
-- status: outline
+- status: animated
 - src: compositions/frames/11-stats.html
 - type: social_proof
 - persuasion: Show-don't-tell proof
@@ -277,7 +277,7 @@ keyMessage: three stat cards slam in: 5 best-sellers · 4 minutes · 1 freezer
 - voiceover: ""
 - duration: 4.5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/12-cta.html
 - type: cta
 - persuasion: Show-don't-tell proof

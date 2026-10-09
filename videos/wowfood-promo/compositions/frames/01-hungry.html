@@ -1,0 +1,47 @@
+<template>
+  <div id="root" data-composition-id="01-hungry" data-width="1920" data-height="1080" data-duration="1.2">
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-800.ttf") format("truetype"); }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      #h01-bg { position: absolute; inset: 0; background: #CE5909; }
+      #h01-stage { position: absolute; inset: 0; }
+      #h01-word { position: absolute; left: 0; right: 0; top: 330px; height: 300px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 300px; line-height: 1;
+        letter-spacing: -0.04em; color: #000000; white-space: nowrap; transform-origin: 50% 50%; }
+      .h01-br { position: absolute; width: 90px; height: 90px; border-color: #000000; border-style: solid; border-width: 0; }
+      #h01-tl { left: 210px; top: 280px; border-top-width: 3px; border-left-width: 3px; }
+      #h01-tr { right: 210px; top: 280px; border-top-width: 3px; border-right-width: 3px; }
+      #h01-bl { left: 210px; top: 590px; border-bottom-width: 3px; border-left-width: 3px; }
+      #h01-brr { right: 210px; top: 590px; border-bottom-width: 3px; border-right-width: 3px; }
+    </style>
+    <div id="h01-bg" class="clip" data-start="0" data-duration="1.2" data-track-index="0"></div>
+    <div id="h01-stage" class="clip" data-start="0" data-duration="1.2" data-track-index="1">
+      <div id="h01-word">HUNGRY?</div>
+      <div id="h01-tl" class="h01-br"></div>
+      <div id="h01-tr" class="h01-br"></div>
+      <div id="h01-bl" class="h01-br"></div>
+      <div id="h01-brr" class="h01-br"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var F = 1 / 30, LAND = 0.26;
+        var tl = gsap.timeline({ paused: true });
+        // Scene 1: headline-slam — huge scale-down, expo.out, then 3-frame stage shake
+        tl.fromTo("#h01-word", { scale: 3.2, opacity: 0 }, { scale: 1, opacity: 1, duration: LAND, ease: "expo.out" }, 0);
+        tl.to("#h01-stage", { x: 14, y: -8, duration: F, ease: "power2.out" }, LAND);
+        tl.to("#h01-stage", { x: -10, y: 6, duration: F, ease: "power2.out" }, LAND + F);
+        tl.to("#h01-stage", { x: 0, y: 0, duration: F, ease: "power2.out" }, LAND + 2 * F);
+        // Scene 2: hairline brackets snap to corners, word micro-drifts 1.0 -> 1.04
+        var br = [["#h01-tl", -60, -60], ["#h01-tr", 60, -60], ["#h01-bl", -60, 60], ["#h01-brr", 60, 60]];
+        br.forEach(function (b, i) {
+          tl.fromTo(b[0], { x: b[1], y: b[2], opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.22, ease: "power4.out" }, 0.32 + i * 0.04);
+        });
+        tl.fromTo("#h01-word", { scale: 1 }, { scale: 1.04, duration: 0.9 - 3 * F, ease: "power1.out", immediateRender: false }, LAND + 3 * F + 0.01);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["01-hungry"] = tl;
+      })();
+    </script>
+  </div>
+</template>

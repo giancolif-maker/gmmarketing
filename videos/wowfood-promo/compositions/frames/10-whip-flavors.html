@@ -1,0 +1,61 @@
+<template>
+  <div id="root" data-composition-id="10-whip-flavors" data-width="1920" data-height="1080" data-duration="2.5">
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-800.ttf") format("truetype"); }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      .wf10-bg { position: absolute; inset: 0; background: #000000; }
+      .wf10-cam { position: absolute; inset: 0; overflow: hidden; }
+      .wf10-strip { position: absolute; top: 0; left: 0; width: 9600px; height: 1080px; filter: url("#wf10-blur"); }
+      .wf10-panel { position: absolute; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #1A1918; }
+      .wf10-panel img { position: absolute; display: block; }
+      .wf10-shade { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.6) 100%); }
+      .wf10-name { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 230px; line-height: 1; letter-spacing: -0.02em; color: #E7D8C3; text-transform: uppercase; text-shadow: 0 8px 40px rgba(0,0,0,0.55); }
+      .wf10-name.wf10-long { font-size: 190px; top: 350px; }
+      .wf10-rule { position: absolute; left: 924px; top: 600px; width: 72px; height: 6px; background: #CE5909; }
+    </style>
+    <div id="wf10-bg" class="wf10-bg clip" data-start="0" data-duration="2.5" data-track-index="0"></div>
+    <div id="wf10-cam" class="wf10-cam clip" data-start="0" data-duration="2.5" data-track-index="1" data-layout-allow-overflow>
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <defs><filter id="wf10-blur" x="-20%" y="-10%" width="140%" height="120%"><feGaussianBlur id="wf10-blurnode" in="SourceGraphic" stdDeviation="0 0"/></filter></defs>
+      </svg>
+      <div id="wf10-strip" class="wf10-strip" data-layout-allow-overflow>
+        <div class="wf10-panel" style="left:0px"><img id="wf10-img0" src="assets/hero-combo.jpg" alt="" style="width:2600px;height:2600px;left:-300px;top:-700px"><div class="wf10-shade"></div><div id="wf10-n0" class="wf10-name">BEEF</div><div id="wf10-r0" class="wf10-rule"></div></div>
+        <div class="wf10-panel" style="left:1920px"><img id="wf10-img1" src="assets/og-image.jpg" alt="" style="width:2400px;height:2400px;left:-200px;top:-300px"><div class="wf10-shade"></div><div id="wf10-n1" class="wf10-name">BACON</div><div id="wf10-r1" class="wf10-rule"></div></div>
+        <div class="wf10-panel" style="left:3840px"><img id="wf10-img2" src="assets/hero-combo.jpg" alt="" style="width:2800px;height:2800px;left:-1100px;top:-1300px"><div class="wf10-shade"></div><div id="wf10-n2" class="wf10-name">CHEESE</div><div id="wf10-r2" class="wf10-rule"></div></div>
+        <div class="wf10-panel" style="left:5760px"><img id="wf10-img3" src="assets/og-image.jpg" alt="" style="width:2700px;height:2700px;left:-900px;top:-1400px"><div class="wf10-shade"></div><div id="wf10-n3" class="wf10-name wf10-long">NEAPOLITAN</div><div id="wf10-r3" class="wf10-rule"></div></div>
+        <div class="wf10-panel" style="left:7680px"><img id="wf10-img4" src="assets/hero-combo.jpg" alt="" style="width:2300px;height:2300px;left:-50px;top:-1000px"><div class="wf10-shade"></div><div id="wf10-n4" class="wf10-name wf10-long">MARGUERITA</div><div id="wf10-r4" class="wf10-rule"></div></div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var blurNode = document.getElementById("wf10-blurnode");
+        var blur = { v: 0 };
+        function writeBlur() { blurNode.setAttribute("stdDeviation", blur.v.toFixed(2) + " 0"); }
+        writeBlur();
+        var tl = gsap.timeline({ paused: true });
+        var LEG = 0.2, PEAK = 16;
+        var legStarts = [0.36, 0.84, 1.32, 1.8];
+        // strip whips left one frame-width per leg
+        legStarts.forEach(function (t, i) {
+          tl.fromTo("#wf10-strip", { x: -1920 * i }, { x: -1920 * (i + 1), duration: LEG, ease: "power4.inOut", immediateRender: i === 0 }, t);
+          tl.to(blur, { v: PEAK, duration: LEG / 2, ease: "power3.in", onUpdate: writeBlur }, t);
+          tl.to(blur, { v: 0, duration: LEG / 2, ease: "power3.out", onUpdate: writeBlur }, t + LEG / 2);
+        });
+        // name slams land as each crop catches
+        arrive = [0.02, 0.5, 0.98, 1.46, 1.94];
+        for (var i = 0; i < 5; i++) {
+          tl.fromTo("#wf10-n" + i, { scale: 1.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "expo.out" }, arrive[i]);
+          tl.fromTo("#wf10-r" + i, { scaleX: 0 }, { scaleX: 1, duration: 0.22, ease: "power4.out" }, arrive[i] + 0.08);
+          tl.fromTo("#wf10-img" + i, { scale: 1.12 }, { scale: 1, duration: 0.5, ease: "power4.out" }, Math.max(0, arrive[i] - 0.1));
+        }
+        // last one settles: gentle push on final crop
+        tl.to("#wf10-img4", { scale: 1.05, duration: 0.5, ease: "power2.out" }, 2.0);
+        tl.to("#wf10-n4", { scale: 1.04, duration: 0.5, ease: "power2.out" }, 2.0);
+        tl.seek(0);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["10-whip-flavors"] = tl;
+      })();
+    </script>
+  </div>
+</template>

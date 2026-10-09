@@ -1,0 +1,60 @@
+<template>
+  <div id="root" data-composition-id="05-introducing" data-width="1920" data-height="1080" data-duration="2">
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-800.ttf") format("truetype"); }
+      #root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+      #f05-bg { position: absolute; inset: 0; background: #000000; }
+      #f05-grid { position: absolute; inset: 0; opacity: 0;
+        background-image: linear-gradient(rgba(231,216,195,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(231,216,195,0.14) 1px, transparent 1px);
+        background-size: 72px 72px; background-position: center center; }
+      #f05-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 900px; display: flex; align-items: center; justify-content: center; }
+      #f05-word { display: flex; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 150px; letter-spacing: 0.14em; color: #E7D8C3; line-height: 1; white-space: nowrap; margin-left: 0.14em; }
+      .f05-glyph { display: inline-block; transform-origin: 50% 55%; }
+      #f05-bar { position: absolute; left: 860px; top: 560px; width: 200px; height: 8px; background: #CE5909; transform-origin: 50% 50%; }
+      #f05-flash { position: absolute; inset: 0; background: #FFFFFF; }
+    </style>
+    <div id="f05-bg" class="clip" data-start="0" data-duration="2" data-track-index="0"></div>
+    <div id="f05-grid" class="clip" data-start="0" data-duration="2" data-track-index="1"></div>
+    <div id="f05-content" class="clip" data-start="0" data-duration="2" data-track-index="2">
+      <div id="f05-stage"><div id="f05-word" aria-label="INTRODUCING"></div></div>
+      <div id="f05-bar"></div>
+    </div>
+    <div id="f05-flash" class="clip" data-start="0" data-duration="2" data-track-index="3"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var word = document.getElementById("f05-word");
+        "INTRODUCING".split("").forEach(function (c, i) {
+          var s = document.createElement("span");
+          s.className = "f05-glyph"; s.id = "f05-glyph-" + i; s.textContent = c;
+          word.appendChild(s);
+        });
+        var glyphs = Array.prototype.slice.call(word.querySelectorAll(".f05-glyph"));
+        // fixed-seed scatter table from char-slam-explode (wild spread, px on 1920x1080)
+        var T = [[-0.9,-0.038,0.677],[0.61,0.716,-0.967],[0.418,0.575,0.822],[-0.76,-0.451,0.944],[-0.621,0.579,-0.215],[0.714,0.437,-0.824],[0.577,0.567,0.464],[0.902,0.346,0.016],[-0.526,0.743,-0.275],[-0.571,-0.353,0.954],[-0.666,0.61,-0.075]];
+        var tl = gsap.timeline({ paused: true });
+        // Scene 1: white flash drops to black
+        tl.fromTo("#f05-flash", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "expo.out" }, 0);
+        // Scene 2: scattered glyphs explode outward from the flash, drift, then slam home
+        glyphs.forEach(function (g, i) {
+          var v = T[i];
+          tl.fromTo(g, { x: v[0] * 120, y: v[1] * 90, rotation: v[2] * 10, scale: 0.6, opacity: 0 },
+            { x: v[0] * 330, y: v[1] * 210, rotation: v[2] * 22, scale: 0.82, opacity: 1, duration: 0.3, ease: "power4.out" }, 0.05);
+        });
+        tl.to(glyphs, { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.32, ease: "back.out(2.2)", stagger: { amount: 0.08, from: "center" } }, 0.38);
+        // landing shake ~0.7s
+        tl.to("#f05-stage", { x: 12, y: -6, duration: 1 / 30, ease: "power2.out" }, 0.72);
+        tl.to("#f05-stage", { x: -8, y: 4, duration: 1 / 30, ease: "power2.out" });
+        tl.to("#f05-stage", { x: 0, y: 0, duration: 1 / 30, ease: "power2.out" });
+        // grid pulses once behind the slam
+        tl.fromTo("#f05-grid", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.18, ease: "expo.out" }, 0.7);
+        tl.to("#f05-grid", { opacity: 0.25, duration: 0.6, ease: "power2.out" }, 0.9);
+        // accent stub bar snaps in under the word, then a slow push for life
+        tl.fromTo("#f05-bar", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "expo.out" }, 1.05);
+        tl.fromTo("#f05-word", { scale: 1 }, { scale: 1.04, duration: 1.1, ease: "none" }, 0.9);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["05-introducing"] = tl;
+      })();
+    </script>
+  </div>
+</template>

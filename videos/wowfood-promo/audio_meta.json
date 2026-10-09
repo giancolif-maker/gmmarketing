@@ -1,5 +1,10 @@
 {
- "bgm": null,
+ "bgm": {
+  "path": "assets/bgm/track.wav",
+  "source": "host",
+  "volume": 0.6,
+  "duration_s": 30.0
+ },
  "bgm_pending": false,
  "voices": [],
  "sfx": [

@@ -20,6 +20,9 @@ LEAD, GAP, SWITCH, TAIL = 0.35, 0.14, 0.22, 0.8
 STRAIGHT = {"04", "14", "22", "23"}  # Holocaust, Leningrad, Hamburg, Warsaw: no comic direction, slower, plain
 
 # Voice names are matched against the account's voice list (--voices); fill in IDs once the key works.
+STOCK = {"George": "JBFqnCBsd6RMkjVDRZzb", "Callum": "N2lVS1w4EtoT3dr4eOWO", "Liam": "TX3LPaxmHKxFdv7VOQHJ", "Daniel": "onwK4e9ZLuTAKqWW03F9",
+         "Charlie": "IKne3meq5aSn9XLyUdCD", "Brian": "nPczCjzI2devNBz1zQrb", "Eric": "cjVigY5qzO86Huf0OWal", "Chris": "iP95p4xoKVk53GoZ742B",
+         "Will": "bIHbv24MWmeRgasZH58o", "Bill": "pqHfZKP75CvOlQylNhV4", "Roger": "CwhRBWXzGAHq8TQ4Fs17"}  # ElevenLabs premade voices
 VOICE_IDS = {}
 CASTING = {  # who: (preferred voice name, standing direction tag)
     "NARRATOR": ("George", "[warm, dry, gently amused British documentary narrator]"),
@@ -44,6 +47,8 @@ def api(path, body=None, accept="application/json"):
     return urllib.request.urlopen(req, timeout=180).read()
 
 def voices():
+    try: return {v["name"].split(" - ")[0]: v["voice_id"] for v in json.loads(api("/v1/voices"))["voices"]} | STOCK
+    except Exception: return dict(STOCK)  # key without voices_read
     return {v["name"].split(" - ")[0]: v["voice_id"] for v in json.loads(api("/v1/voices"))["voices"]}
 
 def clean(t):

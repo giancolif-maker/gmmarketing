@@ -1,113 +1,119 @@
 ---
-format: 1080x1920
+format: 1920x1080
 duration: 30s
 message: "Frozen to golden in 4 minutes"
-arc: Craving → Meet the sfiha → 4-minute bake → Flavors → Brand → Find a store
-audience: snack-hungry Instagram/TikTok viewers in the US, many who have never had a sfiha
+arc: Tease → Macro hero → Introducing → The 4-minute feature → Flavor flythrough → Now in stores
+audience: snack-hungry US viewers on YouTube, Instagram and TikTok; many have never had a sfiha
 mode: collaborative
-music: upbeat playful latin-pop groove, bright percussion, confident and fun
-adaptations: 1920x1080 (same frames re-laid out after the 9:16 master is approved)
+music: cinematic product-launch trailer, deep pulsing bass, rising synth swell, big percussive hits, modern and premium
+adaptations: 1080x1920 (same frames re-framed after the 16:9 master is approved)
+style: cinematic dark launch — near-black stage, orange key light and rim glow, slow dolly/push camera, shallow depth of field, light sweeps, drifting embers and steam, whoosh + impact sound design
 ---
 
-## Frame 1 — The craving
+## Frame 1 — The tease
 
-- scene: Bold lowercase type hits on the beat over ink-black — "4pm." → "starving." → "like, now." — the last word shakes
+- scene: Total black. A low hum. One ember drifts up through the frame. Three short lines fade up one at a time, centered, small and glowing — "every snack" · "has been" · "waiting for this."
 - voiceover: ""
-- duration: 3.5s
+- duration: 4s
 - transition_in: cut
-- status: built
-- src: compositions/frames/01-craving.html
+- status: outline
+- src: compositions/frames/01-tease.html
 - type: hook
-- persuasion: Pain validation
-- beat: urgency
-- blueprint: kinetic-type-beats — escalating statement beats onto a spring-pop payoff
+- persuasion: Curiosity gap
+- beat: intrigue
+- blueprint: kinetic-type-beats — a statement built across quiet full-screen beats
 - asset_candidates:
+- sfx: low sub hum swell
 
-narrativeRole: name the feeling every viewer has had, in under 4 seconds, with sound off.
-keyMessage: you're hungry right now.
+narrativeRole: the classic launch-trailer tease — withhold the product, build anticipation.
+keyMessage: something worth waiting for is coming.
 
-## Frame 2 — Meet the sfiha
+## Frame 2 — Macro hero
 
-- scene: Open tight on one golden cheese sfiha filling the screen, steam rising; one decelerating pull-back reveals the whole tray; "meet the sfiha." then "brazil's mini pizza." land beside it
+- scene: Out of the dark, an extreme close-up of golden crust and melted cheese; the camera dollies slowly sideways across the tray with a shallow-focus blur at the edges; a warm light sweep glides across the cheese; steam curls; three words land one per hit — "golden." "crisp." "irresistible."
 - voiceover: ""
 - duration: 5.5s
-- transition_in: zoom-through
-- status: built
-- src: compositions/frames/02-meet.html
+- transition_in: blur-crossfade
+- status: outline
+- src: compositions/frames/02-macro.html
 - type: product_intro
-- persuasion: Show-don't-tell proof
-- beat: curiosity → desire
-- blueprint: zoom-out-workspace-reveal — macro detail re-scoped into the whole tray
-- asset_candidates: assets/hero-combo.jpg — full-res hero: tray of golden sfihas (cheese, beef, bacon/onion, tomato), warm close-up; assets/og-image.jpg — square tray shot with steam
+- persuasion: Sensory desire
+- beat: desire + awe
+- blueprint: camera-journey — cursorless cinematic flight across one continuous surface (DoF, light sweep)
+- asset_candidates: assets/hero-combo.jpg — full-res hero: tray of golden sfihas, warm close-up, shallow depth; assets/og-image.jpg — square tray shot with steam
+- sfx: whoosh on each word
 
-narrativeRole: introduce the product to people who have never seen one.
-keyMessage: it's a mini pizza, and it looks incredible.
+narrativeRole: make the viewer hungry before they know the name.
+keyMessage: this looks incredible.
 
-## Frame 3 — Four minutes
+## Frame 3 — Introducing
 
-- scene: A giant oven timer reads 4:00 and races down to 0:00; behind it the word swaps "frozen" → "golden" as the photo warms from cold blue to toasted orange; a ding lands at zero
+- scene: Smash cut to black on a bass hit. "introducing" in small tracked caps; then the real WOW! wordmark is revealed by a horizontal light sweep, edges glowing orange, embers rising; "mini pizzas · sfihas" settles under it
+- voiceover: ""
+- duration: 4s
+- transition_in: cut
+- status: outline
+- src: compositions/frames/03-introducing.html
+- type: branding
+- persuasion: Brand reveal
+- beat: anticipation → payoff
+- blueprint: logo-assemble-lockup — wordmark revealed whole on a cleared stage by a light sweep
+- asset_candidates: assets/logo-wow-wordmark.png — real WOW! wordmark, transparent, orange + brown clover
+- sfx: bass impact + shimmer
+
+narrativeRole: the name lands at peak anticipation.
+keyMessage: WOW!
+
+## Frame 4 — Four minutes
+
+- scene: A thin glowing orange ring draws itself around a giant "4:00" that counts down to "0:00"; behind it the tray slowly pushes in and warms from cold steel blue to toasted gold; steam blooms at zero with a clean ding; the line "from freezer to golden." settles below
 - voiceover: ""
 - duration: 6s
-- transition_in: crossfade
-- status: built
-- src: compositions/frames/03-four-minutes.html
+- transition_in: zoom-through
+- status: outline
+- src: compositions/frames/04-four-minutes.html
 - type: feature_showcase
 - persuasion: Friction reduction
 - beat: ease + excitement
-- blueprint: dataviz-countup — one hero number counting, pushed into
-- asset_candidates: assets/og-image.jpg — tray of sfihas with steam (warms from cold to golden)
-- sfx: oven ding at 0:00
+- blueprint: dataviz-countup — one hero number/ring count, pushed into
+- asset_candidates: assets/og-image.jpg — tray of sfihas with steam (graded cold → golden)
+- sfx: ticking under the count, ding at 0:00
 
-narrativeRole: the core promise from the site — "ready to bake in just 4 minutes."
+narrativeRole: the site's core promise — "ready to bake in just 4 minutes" — shown as the product's headline feature.
 keyMessage: freezer to golden in 4 minutes.
 
-## Frame 4 — Pick your flavor
+## Frame 5 — Flavor flythrough
 
-- scene: Five flavor cards cascade into a vertical stack, each with the site's line-art sfiha icon and a cropped photo — beef, bacon, cheese, neapolitan, marguerita — the last one lands with a pop
+- scene: The camera flies forward through five floating flavor panels in depth — each a cropped photo with its name in glowing caps (BEEF · BACON · CHEESE · NEAPOLITAN · MARGUERITA); each one rushes past with motion blur on a beat; the last holds center
 - voiceover: ""
-- duration: 6.5s
-- transition_in: push-slide UP
-- status: built
-- src: compositions/frames/04-flavors.html
+- duration: 6s
+- transition_in: zoom-through
+- status: outline
+- src: compositions/frames/05-flavors.html
 - type: benefit_highlight
 - persuasion: Value stacking
 - beat: excitement
-- blueprint: grid-card-assemble — staggered cascade into a vertical list
-- asset_candidates: assets/svg-31e0594a.svg — line-art sfiha icon (beef); assets/svg-540e57a6.svg — line-art sfiha icon (bacon); assets/svg-681eea7e.svg — line-art sfiha icon (cheese); assets/svg-6cb1bc04.svg — line-art sfiha icon (neapolitan); assets/svg-762cf8ec.svg — line-art sfiha icon (marguerita); assets/hero-combo.jpg — hero tray (cropped per flavor)
+- blueprint: camera-journey — forward flight through stations in 3D depth
+- asset_candidates: assets/hero-combo.jpg — hero tray (cropped per flavor); assets/og-image.jpg — square tray (cropped per flavor)
+- sfx: whoosh per panel
 
-narrativeRole: show there's one for everyone — the site's five best sellers.
+narrativeRole: show the range — the site's five best sellers.
 keyMessage: five best-selling flavors.
 
-## Frame 5 — WOW!
+## Frame 6 — Now in stores
 
-- scene: The orange field clears and the real WOW! wordmark spring-blooms at center; "frozen to golden in 4 minutes." settles beneath
-- voiceover: ""
-- duration: 4s
-- transition_in: zoom-through
-- status: built
-- src: compositions/frames/05-wow.html
-- type: branding
-- persuasion: Brand recall
-- beat: triumph
-- blueprint: logo-assemble-lockup — wordmark spring-bloomed whole on a cleared stage
-- asset_candidates: assets/logo-wow-wordmark.png — real WOW! wordmark, transparent, orange + brown clover
-
-narrativeRole: lock the name to the feeling.
-keyMessage: WOW! — frozen to golden in 4 minutes.
-
-## Frame 6 — Find a store
-
-- scene: Clean end card — "find a store" in big lowercase, then @wowsfihas and wowfoodusa.com slide up; the wordmark stays small at top; still hold
+- scene: Back to black; the WOW! wordmark glows top-center; "now in stores." fades up large; a light sweep passes; "find yours at wowfoodusa.com" and @wowsfihas settle below; slow push-in to the end
 - voiceover: ""
 - duration: 4.5s
-- transition_in: crossfade
-- status: built
-- src: compositions/frames/06-find-a-store.html
+- transition_in: blur-crossfade
+- status: outline
+- src: compositions/frames/06-now-in-stores.html
 - type: cta
 - persuasion: Friction reduction
 - beat: urgency-to-act
-- blueprint: titlecard-reveal — one restrained slide-up, then a still hold
+- blueprint: titlecard-reveal — one restrained reveal, then a held end card
 - asset_candidates: assets/logo-wow-wordmark.png — real WOW! wordmark
+- sfx: final low hit
 
-narrativeRole: tell them exactly where to go next.
-keyMessage: find a store · @wowsfihas.
+narrativeRole: tell them exactly where to go.
+keyMessage: now in stores — wowfoodusa.com.

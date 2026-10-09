@@ -3,11 +3,11 @@ workflow: product-launch-video
 flow: automation
 storyboard: yes
 message: "Frozen to golden in 4 minutes"
-destination: instagram-reels
-aspect: 1080x1920
+destination: youtube
+aspect: 1920x1080
 language: en
 length: 30s
-angle: "4-minute craving"
+angle: "cinematic launch trailer — 4-minute promise"
 ---
 
 ## Intent
@@ -19,7 +19,7 @@ Story: a craving hits → the oven timer counts down 4 minutes → the best-sell
 ## Customizations
 
 - No voiceover: upbeat music bed + bold kinetic text.
-- Deliver two versions: 9:16 primary (Reels/TikTok) and a 16:9 adaptation (YouTube/site), same scenes and music.
+- Cinematic SaaS-style launch trailer (user, after v1 sketches). Deliver the 16:9 master, then a 9:16 re-frame.
 - End card: WOW Food logo + "Find a store" + @wowsfihas (no phone/email).
 
 ## Notes

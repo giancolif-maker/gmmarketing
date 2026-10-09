@@ -16,7 +16,7 @@ style: cinematic dark launch — near-black stage, orange key light and rim glow
 - voiceover: ""
 - duration: 4s
 - transition_in: cut
-- status: outline
+- status: built
 - src: compositions/frames/01-tease.html
 - type: hook
 - persuasion: Curiosity gap
@@ -34,7 +34,7 @@ keyMessage: something worth waiting for is coming.
 - voiceover: ""
 - duration: 5.5s
 - transition_in: blur-crossfade
-- status: outline
+- status: built
 - src: compositions/frames/02-macro.html
 - type: product_intro
 - persuasion: Sensory desire
@@ -52,7 +52,7 @@ keyMessage: this looks incredible.
 - voiceover: ""
 - duration: 4s
 - transition_in: cut
-- status: outline
+- status: built
 - src: compositions/frames/03-introducing.html
 - type: branding
 - persuasion: Brand reveal
@@ -70,7 +70,7 @@ keyMessage: WOW!
 - voiceover: ""
 - duration: 6s
 - transition_in: zoom-through
-- status: outline
+- status: built
 - src: compositions/frames/04-four-minutes.html
 - type: feature_showcase
 - persuasion: Friction reduction
@@ -88,7 +88,7 @@ keyMessage: freezer to golden in 4 minutes.
 - voiceover: ""
 - duration: 6s
 - transition_in: zoom-through
-- status: outline
+- status: built
 - src: compositions/frames/05-flavors.html
 - type: benefit_highlight
 - persuasion: Value stacking
@@ -106,7 +106,7 @@ keyMessage: five best-selling flavors.
 - voiceover: ""
 - duration: 4.5s
 - transition_in: blur-crossfade
-- status: outline
+- status: built
 - src: compositions/frames/06-now-in-stores.html
 - type: cta
 - persuasion: Friction reduction

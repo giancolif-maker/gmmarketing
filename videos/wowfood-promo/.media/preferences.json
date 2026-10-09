@@ -2,18 +2,18 @@
   "version": 1,
   "preferences": {
     "destination": {
-      "value": "instagram-reels",
+      "value": "youtube",
       "confirmed_in": [
         "wowfood-promo"
       ],
-      "updated_at": "2026-10-09T18:20:12.825Z"
+      "updated_at": "2026-10-09T18:51:57.537Z"
     },
     "aspect": {
-      "value": "1080x1920",
+      "value": "1920x1080",
       "confirmed_in": [
         "wowfood-promo"
       ],
-      "updated_at": "2026-10-09T18:20:12.878Z"
+      "updated_at": "2026-10-09T18:51:57.451Z"
     },
     "language": {
       "value": "en",

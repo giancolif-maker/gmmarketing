@@ -1,136 +1,141 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WOW Food — 4-Minute Craving · storyboard v1</title>
+<title>WOW Food — Launch Trailer · storyboard v2</title>
 <style>
 @font-face { font-family: Cormorant; src: url(assets/fonts/cormorant-700.ttf); font-weight: 700; }
 @font-face { font-family: Montserrat; src: url(assets/fonts/montserrat-500.ttf); font-weight: 500; }
 @font-face { font-family: Montserrat; src: url(assets/fonts/montserrat-800.ttf); font-weight: 800; }
-:root { --ink: #000; --ink2: #1A1918; --orange: #CE5909; --cream: #E7D8C3; --brown: #843906; --hint: #504B48; }
+:root { --orange: #CE5909; --glow: #ff8a3d; --cream: #E7D8C3; --brown: #843906; }
 * { box-sizing: border-box; }
-body { margin: 0; background: #141210; color: var(--cream); font-family: Montserrat, system-ui, sans-serif; padding: 32px 16px 64px; }
-header { max-width: 1200px; margin: 0 auto 28px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: baseline; }
+body { margin: 0; background: #0b0a09; color: var(--cream); font-family: Montserrat, system-ui, sans-serif; padding: 32px 16px 64px; }
+header { max-width: 1240px; margin: 0 auto 28px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: baseline; }
 h1 { font-family: Cormorant, Georgia, serif; font-size: 44px; margin: 0; color: var(--orange); letter-spacing: -.02em; }
 .dek { color: #bfb3a3; font-size: 15px; flex: 1 1 320px; }
 .tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid #504B48; padding: 6px 10px; }
-.grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px 22px; }
+.grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px 22px; }
 .cell { container-type: inline-size; }
-.frame { aspect-ratio: 9 / 16; position: relative; overflow: hidden; background: var(--ink); border: 1px solid #282726; }
-.frame * { position: absolute; margin: 0; }
-.big { font-family: Cormorant, Georgia, serif; font-weight: 700; letter-spacing: -.04em; line-height: .88; text-transform: lowercase; }
-.lab { font-family: Montserrat, sans-serif; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
-.photo { background: #3a2a1c; border: 1.5px dashed #c48a5a; display: flex; align-items: center; justify-content: center; color: #e2b48a; font-size: 4cqw; text-align: center; padding: 3cqw; }
-.photo img { position: static; width: 100%; height: 100%; object-fit: cover; }
+.frame { aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #050404; border: 1px solid #262220; }
+.frame > * { position: absolute; margin: 0; }
+.vig { inset: 0; background: radial-gradient(ellipse at 50% 55%, transparent 35%, #000 92%); pointer-events: none; }
+.big { font-family: Cormorant, Georgia, serif; font-weight: 700; letter-spacing: -.03em; line-height: .9; text-transform: lowercase; }
+.lab { font-family: Montserrat, sans-serif; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; }
+.glow { color: #ffe7cf; text-shadow: 0 0 1.2cqw var(--glow), 0 0 4cqw #ce590988; }
+.ph { object-fit: cover; }
+.sweep { top: -10%; height: 120%; width: 14cqw; background: linear-gradient(90deg, transparent, #ffd2a866, transparent); transform: skewX(-18deg); mix-blend-mode: screen; }
+.ember { width: .6cqw; height: .6cqw; border-radius: 50%; background: var(--glow); box-shadow: 0 0 1.4cqw var(--glow); }
 .meta { display: flex; justify-content: space-between; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #bfb3a3; margin: 10px 0 6px; }
 .note { font-size: 13px; line-height: 1.45; color: #d9cfc2; margin: 0 0 8px; }
 .chip { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); border: 1px solid var(--orange); padding: 3px 8px; }
-.ghost { opacity: .35; }
-.seams { aspect-ratio: auto; padding: 18px; background: var(--ink2); border: 1px solid #282726; font-size: 13px; line-height: 1.9; }
+.box { padding: 18px; background: #141210; border: 1px solid #262220; font-size: 13px; line-height: 1.9; }
 .sw { display: inline-block; width: 18px; height: 18px; vertical-align: -4px; margin-right: 6px; border: 1px solid #504B48; }
+.dim { opacity: .3; }
 </style></head>
 <body>
 <header>
-  <h1>WOW! — the 4-minute craving · v1</h1>
-  <div class="dek">Hunger hits → meet the sfiha → freezer to golden in 4 minutes → five flavors → WOW! → find a store. No voiceover; it reads with sound off.</div>
-  <div class="tag">1080×1920 · 30s · 6 beats</div>
+  <h1>WOW! — launch trailer · v2</h1>
+  <div class="dek">Cinematic, tech-launch style: dark stage, orange light, slow camera, light sweeps, embers. Tease → macro hero → introducing → 4 minutes → flavor flythrough → now in stores.</div>
+  <div class="tag">1920×1080 · 30s · 6 beats</div>
 </header>
 <main class="grid">
 
 <section class="cell" id="frame-01">
   <div class="frame">
-    <p class="lab" style="top:8cqw;left:8cqw;font-size:4cqw;color:var(--hint)">3:47 pm</p>
-    <p class="big ghost" style="top:52cqw;left:8cqw;font-size:22cqw;color:var(--cream)">4pm.</p>
-    <p class="big ghost" style="top:76cqw;left:8cqw;font-size:22cqw;color:var(--cream)">starving.</p>
-    <p class="big" style="top:104cqw;left:8cqw;font-size:30cqw;color:var(--orange);transform:rotate(-3deg)">like,<br>now.</p>
+    <div class="ember" style="left:62%;top:58%"></div><div class="ember" style="left:66%;top:40%;opacity:.5;transform:scale(.6)"></div>
+    <p class="big glow" style="left:0;right:0;top:42%;text-align:center;font-size:5.4cqw"><span class="dim">every snack has been</span><br>waiting for this.</p>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>01 · The craving</span><span>01 · 0–3.5s</span></div>
-  <p class="note"><b>Words hit one per beat.</b> Each word slams in full-size on its own beat; the last ("like, now.") is orange, tilted, and shakes. Ends on a hard push into the next frame.</p>
-  <span class="chip">→ zoom-through</span>
+  <div class="meta"><span>01 · The tease</span><span>01 · 0–4s</span></div>
+  <p class="note"><b>Black, a hum, one ember rising.</b> Three small glowing lines fade up one at a time at center; nothing else. Cuts to the photo on a soft blur.</p>
+  <span class="chip">→ blur-crossfade</span>
 </section>
 
 <section class="cell" id="frame-02">
-  <div class="frame" style="background:var(--ink2)">
-    <div class="photo" style="inset:0"><img src="capture/assets/hero-combo.jpg" alt="" style="object-position:30% 50%"></div>
-    <p class="big" style="left:7cqw;bottom:42cqw;font-size:17cqw;color:var(--cream);text-shadow:0 .6cqw 3cqw #000a">meet the<br>sfiha.</p>
-    <p class="lab" style="left:7cqw;bottom:30cqw;font-size:4.2cqw;color:var(--orange);background:#000c;padding:2cqw 3cqw">brazil's mini pizza</p>
+  <div class="frame">
+    <img class="ph" src="capture/assets/hero-combo.jpg" alt="" style="left:-20%;top:-35%;width:150%;height:170%;object-position:40% 55%">
+    <div style="inset:0;backdrop-filter:blur(.0px);background:linear-gradient(90deg,#000c,transparent 22%,transparent 78%,#000c)"></div>
+    <div class="sweep" style="left:46%"></div>
+    <p class="big glow" style="right:6cqw;bottom:9cqw;font-size:7cqw">irresistible.</p>
+    <p class="big dim" style="right:6cqw;bottom:17.5cqw;font-size:4cqw;color:var(--cream)">golden. crisp.</p>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>02 · Meet the sfiha</span><span>02 · 3.5–9s</span></div>
-  <p class="note"><b>Opens tight on one cheese sfiha, then pulls back.</b> One slow pull-back reveals the whole tray; the title builds in the lower third as the zoom settles. Steam drifts up.</p>
-  <span class="chip">→ crossfade</span>
+  <div class="meta"><span>02 · Macro hero</span><span>02 · 4–9.5s</span></div>
+  <p class="note"><b>The camera glides sideways over the crust and cheese.</b> Soft-focus edges, steam curling, one warm light sweep across the cheese; "golden." "crisp." "irresistible." land one per hit, bottom right.</p>
+  <span class="chip">→ cut on bass hit</span>
 </section>
 
 <section class="cell" id="frame-03">
   <div class="frame">
-    <div class="photo" style="left:0;right:0;top:0;height:62%;filter:saturate(.25) hue-rotate(170deg) brightness(.8)"><img src="capture/assets/og-image.jpg" alt=""></div>
-    <p class="big" style="left:0;right:0;top:46cqw;text-align:center;font-size:42cqw;color:var(--cream);font-family:Montserrat;font-weight:800;letter-spacing:-.05em">4:00</p>
-    <p class="big" style="left:0;right:0;bottom:30cqw;text-align:center;font-size:20cqw;color:#9fb6c6">frozen</p>
-    <p class="big" style="left:0;right:0;bottom:12cqw;text-align:center;font-size:20cqw;color:var(--orange)">→ golden.</p>
+    <p class="lab" style="left:0;right:0;top:27%;text-align:center;font-size:1.5cqw;color:#bfb3a3">introducing</p>
+    <img src="capture/assets/logo-wow-wordmark.png" alt="WOW!" style="left:22%;width:56%;top:31%;filter:drop-shadow(0 0 1.6cqw #ff7a2a)">
+    <div class="sweep" style="left:58%;opacity:.8"></div>
+    <div class="ember" style="left:30%;top:78%"></div><div class="ember" style="left:71%;top:70%;transform:scale(.7)"></div>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>03 · Four minutes</span><span>03 · 9–15s</span></div>
-  <p class="note"><b>The timer races 4:00 → 0:00.</b> The photo warms from icy blue to toasted orange as it counts; "frozen" flips to "golden" and a ding lands on 0:00.</p>
-  <span class="chip">→ push-slide up</span>
+  <div class="meta"><span>03 · Introducing</span><span>03 · 9.5–13.5s</span></div>
+  <p class="note"><b>Smash cut to black on a bass hit.</b> "introducing" fades in tracked wide, then a horizontal light sweep wipes the real WOW! logo into view, edges glowing, embers rising past it.</p>
+  <span class="chip">→ zoom-through</span>
 </section>
 
 <section class="cell" id="frame-04">
-  <div class="frame" style="background:var(--cream)">
-    <p class="big" style="top:9cqw;left:7cqw;font-size:14cqw;color:var(--ink)">pick your<br>flavor.</p>
-    <div style="left:7cqw;right:7cqw;top:46cqw;display:grid;gap:3cqw;position:absolute">
-      <div style="position:relative;height:19cqw;background:var(--ink);display:flex;align-items:center;gap:4cqw;padding:0 4cqw"><img src="capture/assets/svgs/svg-31e0594a.svg" style="position:static;width:12cqw;filter:invert(1) sepia(1) saturate(4) hue-rotate(-20deg)"><span class="big" style="position:static;font-size:10cqw;color:var(--cream)">beef</span></div>
-      <div style="position:relative;height:19cqw;background:var(--ink);display:flex;align-items:center;gap:4cqw;padding:0 4cqw"><img src="capture/assets/svgs/svg-540e57a6.svg" style="position:static;width:12cqw;filter:invert(1) sepia(1) saturate(4) hue-rotate(-20deg)"><span class="big" style="position:static;font-size:10cqw;color:var(--cream)">bacon</span></div>
-      <div style="position:relative;height:19cqw;background:var(--ink);display:flex;align-items:center;gap:4cqw;padding:0 4cqw"><img src="capture/assets/svgs/svg-681eea7e.svg" style="position:static;width:12cqw;filter:invert(1) sepia(1) saturate(4) hue-rotate(-20deg)"><span class="big" style="position:static;font-size:10cqw;color:var(--cream)">cheese</span></div>
-      <div style="position:relative;height:19cqw;background:var(--ink);display:flex;align-items:center;gap:4cqw;padding:0 4cqw"><img src="capture/assets/svgs/svg-6cb1bc04.svg" style="position:static;width:12cqw;filter:invert(1) sepia(1) saturate(4) hue-rotate(-20deg)"><span class="big" style="position:static;font-size:10cqw;color:var(--cream)">neapolitan</span></div>
-      <div style="position:relative;height:19cqw;background:var(--orange);display:flex;align-items:center;gap:4cqw;padding:0 4cqw"><img src="capture/assets/svgs/svg-762cf8ec.svg" style="position:static;width:12cqw;filter:brightness(0)"><span class="big" style="position:static;font-size:10cqw;color:var(--ink)">marguerita</span></div>
-    </div>
+  <div class="frame">
+    <img class="ph" src="capture/assets/og-image.jpg" alt="" style="inset:0;width:100%;height:100%;filter:brightness(.45) saturate(.9);object-position:50% 60%">
+    <div style="left:50%;top:44%;width:30cqw;height:30cqw;transform:translate(-50%,-50%);border-radius:50%;border:.5cqw solid #ce590955;box-shadow:0 0 3cqw #ce590966"></div>
+    <div style="left:50%;top:44%;width:30cqw;height:30cqw;transform:translate(-50%,-50%) rotate(-90deg);border-radius:50%;border:.5cqw solid transparent;border-top-color:var(--glow);border-right-color:var(--glow);filter:drop-shadow(0 0 1cqw var(--glow))"></div>
+    <p class="glow" style="left:0;right:0;top:35%;text-align:center;font-family:Montserrat;font-weight:800;font-size:9cqw;letter-spacing:-.04em">2:41</p>
+    <p class="big" style="left:0;right:0;bottom:8cqw;text-align:center;font-size:4cqw;color:var(--cream)">from freezer to golden.</p>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>04 · Pick your flavor</span><span>04 · 15–21.5s</span></div>
-  <p class="note"><b>Five flavor bars cascade in from below, one per beat.</b> Each shows the site's sfiha icon, and a photo crop flashes behind its name; the last bar (marguerita) lands orange with a pop.</p>
+  <div class="meta"><span>04 · Four minutes</span><span>04 · 13.5–19.5s</span></div>
+  <p class="note"><b>A glowing ring counts 4:00 → 0:00</b> (shown mid-count). The tray slowly pushes in behind it, warming from steel blue to gold; steam blooms and a ding lands on 0:00, then the line settles in.</p>
   <span class="chip">→ zoom-through</span>
 </section>
 
 <section class="cell" id="frame-05">
-  <div class="frame" style="background:var(--orange)">
-    <img src="capture/assets/logo-wow-wordmark.png" alt="WOW! mini pizzas · sfihas" style="left:4cqw;right:4cqw;top:52cqw;width:92cqw;filter:brightness(0) invert(.92) sepia(.2)">
-    <p class="big" style="left:0;right:0;bottom:36cqw;text-align:center;font-size:9.5cqw;color:var(--ink)">frozen to golden<br>in 4 minutes.</p>
+  <div class="frame" style="perspective:60cqw">
+    <div style="left:8%;top:20%;width:22%;height:58%;overflow:hidden;transform:rotateY(38deg);opacity:.45;filter:blur(.25cqw)"><img class="ph" src="capture/assets/hero-combo.jpg" style="width:340%;height:100%;object-position:5% 50%"></div>
+    <div style="left:70%;top:20%;width:22%;height:58%;overflow:hidden;transform:rotateY(-38deg);opacity:.45;filter:blur(.25cqw)"><img class="ph" src="capture/assets/og-image.jpg" style="width:300%;height:100%;object-position:90% 50%"></div>
+    <div style="left:33%;top:14%;width:34%;height:70%;overflow:hidden;border:1px solid #ce590988;box-shadow:0 0 3cqw #ce590955"><img class="ph" src="capture/assets/hero-combo.jpg" style="width:260%;height:100%;object-position:60% 70%"></div>
+    <p class="lab glow" style="left:0;right:0;bottom:8%;text-align:center;font-size:2.4cqw">bacon</p>
+    <p class="lab dim" style="left:9%;bottom:12%;font-size:1.3cqw">beef</p><p class="lab dim" style="right:9%;bottom:12%;font-size:1.3cqw">cheese</p>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>05 · WOW!</span><span>05 · 21.5–25.5s</span></div>
-  <p class="note"><b>The real wordmark springs in whole.</b> On a full orange field the WOW! logo blooms from small with one overshoot (shown cream on orange); the line settles in beneath a beat later.</p>
-  <span class="chip">→ crossfade</span>
+  <div class="meta"><span>05 · Flavor flythrough</span><span>05 · 19.5–25.5s</span></div>
+  <p class="note"><b>The camera flies forward through five floating panels.</b> Each one (beef, bacon, cheese, neapolitan, marguerita) rushes past on a beat with motion blur and its name glowing; marguerita holds center last.</p>
+  <span class="chip">→ blur-crossfade</span>
 </section>
 
 <section class="cell" id="frame-06">
   <div class="frame">
-    <img src="capture/assets/logo-wow-wordmark.png" alt="WOW!" style="left:25cqw;top:12cqw;width:50cqw">
-    <p class="big" style="left:0;right:0;top:66cqw;text-align:center;font-size:26cqw;color:var(--cream)">find a<br>store.</p>
-    <p class="lab" style="left:0;right:0;bottom:44cqw;text-align:center;font-size:5.5cqw;color:var(--orange)">@wowsfihas</p>
-    <p class="lab" style="left:0;right:0;bottom:34cqw;text-align:center;font-size:4cqw;color:#bfb3a3">wowfoodusa.com</p>
+    <img src="capture/assets/logo-wow-wordmark.png" alt="WOW!" style="left:38%;width:24%;top:12%;filter:drop-shadow(0 0 1cqw #ff7a2a)">
+    <p class="big glow" style="left:0;right:0;top:44%;text-align:center;font-size:8cqw">now in stores.</p>
+    <p class="lab" style="left:0;right:0;top:70%;text-align:center;font-size:1.5cqw;color:#bfb3a3">find yours at wowfoodusa.com</p>
+    <p class="lab" style="left:0;right:0;top:77%;text-align:center;font-size:1.4cqw;color:var(--orange)">@wowsfihas</p>
+    <div class="sweep" style="left:30%;opacity:.5"></div>
+    <div class="vig"></div>
   </div>
-  <div class="meta"><span>06 · Find a store</span><span>06 · 25.5–30s</span></div>
-  <p class="note"><b>One slide-up, then stillness.</b> "find a store." rises in; the handle and URL follow; the logo sits small at top. Holds still to the end (bottom 25% left clear for app buttons).</p>
+  <div class="meta"><span>06 · Now in stores</span><span>06 · 25.5–30s</span></div>
+  <p class="note"><b>One reveal, then a held end card.</b> "now in stores." fades up glowing, a last light sweep crosses it, then the URL and handle settle; a slow push-in to the final low hit.</p>
   <span class="chip">end</span>
 </section>
 
-<section class="cell">
-  <div class="seams">
-    <b style="color:var(--orange)">Seam map</b><br>
-    01 → 02 &nbsp;zoom-through (type punches into the photo)<br>
-    02 → 03 &nbsp;crossfade (same tray, cooled to frozen blue)<br>
-    03 → 04 &nbsp;push-slide up (timer's ding pushes the list up)<br>
-    04 → 05 &nbsp;zoom-through (orange marguerita bar fills the screen)<br>
-    05 → 06 &nbsp;crossfade (logo shrinks to the top of the end card)
-  </div>
-</section>
+<section class="cell"><div class="box">
+  <b style="color:var(--orange)">Seam map</b><br>
+  01 → 02 &nbsp;blur-crossfade (black dissolves into the macro)<br>
+  02 → 03 &nbsp;hard cut on the bass hit<br>
+  03 → 04 &nbsp;zoom-through (push through the logo into the timer)<br>
+  04 → 05 &nbsp;zoom-through (fly forward into the flavor tunnel)<br>
+  05 → 06 &nbsp;blur-crossfade (tunnel resolves to the end card)
+</div></section>
 
-<section class="cell">
-  <div class="seams">
-    <b style="color:var(--orange)">Tokens</b><br>
-    <span class="sw" style="background:#000"></span>ink-black #000000<br>
-    <span class="sw" style="background:#CE5909"></span>fire-orange #CE5909 (brand)<br>
-    <span class="sw" style="background:#E7D8C3"></span>cream #E7D8C3 (brand)<br>
-    <span class="sw" style="background:#843906"></span>brown #843906 (brand)<br>
-    <span style="font-family:Cormorant;font-size:22px">Cormorant Garamond 700</span>: display, lowercase<br>
-    <span style="font-family:Montserrat;font-weight:800">Montserrat 800</span> (timer) · 500 (labels, tracked caps)<br>
-    Bans: no rounded cards, no shadows, no fake logo, no stock food photos
-  </div>
-</section>
+<section class="cell"><div class="box">
+  <b style="color:var(--orange)">Tokens</b><br>
+  <span class="sw" style="background:#050404"></span>stage black #050404 · vignette to #000<br>
+  <span class="sw" style="background:#CE5909"></span>fire-orange #CE5909 (brand) · glow #FF8A3D<br>
+  <span class="sw" style="background:#E7D8C3"></span>cream #E7D8C3 (brand)<br>
+  <span style="font-family:Cormorant;font-size:22px">Cormorant Garamond 700</span>: display, lowercase<br>
+  <span style="font-family:Montserrat;font-weight:800">Montserrat 800</span> timer · 500 wide-tracked caps<br>
+  Light: one orange key light, rim glow, screen-blend sweeps · Bans: no flat poster fills, no stock photos, no fake logo
+</div></section>
 
 </main>
 </body></html>

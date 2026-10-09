@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "instagram-reels",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:20:12.825Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:20:12.878Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:20:13.111Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:20:13.175Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "wowfood-promo"
+      ],
+      "updated_at": "2026-10-09T18:20:13.225Z"
+    }
+  },
+  "sightings": {}
+}

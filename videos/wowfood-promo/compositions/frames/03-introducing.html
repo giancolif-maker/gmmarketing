@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="03-introducing" data-width="1920" data-height="1080" data-start="0" data-duration="4">
+<div id="root" data-composition-id="03-introducing" data-width="1920" data-height="1080" data-start="0" data-duration="4.4">
   <style>
     @font-face { font-family: '03-introducing-Montserrat'; src: url("assets/fonts/montserrat-500.ttf"); font-weight: 500; }
     @font-face { font-family: '03-introducing-Montserrat'; src: url("assets/fonts/montserrat-800.ttf"); font-weight: 800; }
@@ -19,14 +19,13 @@
     .introducing-vig { inset: 0; background: radial-gradient(ellipse at 50% 55%, transparent 35%, #000 92%); pointer-events: none; }
   </style>
 
-  <div id="introducing03-bg" class="clip" data-start="0" data-duration="4" data-track-index="0"></div>
+  <div id="introducing03-bg" class="clip" data-start="0" data-duration="4.4" data-track-index="0"></div>
 
-  <div class="clip introducing-cam" id="introducing03-cam" data-start="0" data-duration="4" data-track-index="1">
+  <div class="clip introducing-cam" id="introducing03-cam" data-start="0" data-duration="4.4" data-track-index="1">
     <p class="introducing-kicker">introducing</p>
     <div class="introducing-bloom"></div>
     <div class="introducing-logo-wrap"><img class="introducing-logo" src="assets/logo-wow-wordmark.png" alt="WOW!"></div>
     <div class="introducing-sweep"><div class="introducing-sweep-inner"></div></div>
-    <p class="introducing-sub">mini pizzas · sfihas</p>
     <div class="introducing-ember" style="left:30%;top:78%"></div>
     <div class="introducing-ember" style="left:71%;top:70%"></div>
     <div class="introducing-ember" style="left:42%;top:84%"></div>
@@ -53,7 +52,6 @@
       tl.fromTo(q('.introducing-logo-wrap'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power2.inOut' }, 0.85);
       tl.fromTo(q('.introducing-logo'), { scale: 1.08, filter: 'drop-shadow(0 0 0cqw #ff7a2a)' }, { scale: 1, filter: 'drop-shadow(0 0 1.6cqw #ff7a2a)', duration: 1.5, ease: 'power3.out' }, 0.9);
       tl.fromTo(q('.introducing-bloom'), { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, 1.3);
-      tl.fromTo(q('.introducing-sub'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 2.0);
 
       // Embers rise across the shot (deterministic)
       root.querySelectorAll('.introducing-ember').forEach(function (el, i) {

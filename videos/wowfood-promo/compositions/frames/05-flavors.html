@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="05-flavors" data-width="1920" data-height="1080" data-duration="6">
+<div id="root" data-composition-id="05-flavors" data-width="1920" data-height="1080" data-duration="6.6">
   <style>
     @font-face { font-family: "Montserrat"; font-weight: 800; src: url("assets/fonts/montserrat-800.ttf") format("truetype"); }
     @font-face { font-family: "Montserrat"; font-weight: 500; src: url("assets/fonts/montserrat-500.ttf") format("truetype"); }
@@ -7,13 +7,14 @@
     .f05-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #1A1918 0%, #050404 55%, #000 100%); }
     .f05-stage { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 44%; }
     .f05-world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-style: preserve-3d; }
-    .f05-panel { position: absolute; left: 680px; top: 160px; width: 560px; height: 620px; transform-style: preserve-3d; }
+    .f05-panel { position: absolute; left: 600px; top: 90px; width: 720px; height: 720px; transform-style: preserve-3d; }
     .f05-photo { position: absolute; inset: 0; background-repeat: no-repeat; border: 1px solid rgba(206,89,9,0.55); box-shadow: 0 0 60px rgba(206,89,9,0.33); }
-    .f05-name { position: absolute; left: -200px; right: -200px; top: 650px; text-align: center; font-family: "Montserrat"; font-weight: 800; font-size: 46px; letter-spacing: 0.32em; text-transform: uppercase; color: #E7D8C3; }
+    .f05-name { position: absolute; left: -200px; right: -200px; top: 742px; text-align: center; font-family: "Montserrat"; font-weight: 800; font-size: 50px; letter-spacing: 0.32em; text-transform: uppercase; color: #E7D8C3; }
     .f05-vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
   </style>
-  <div id="05-flavors-bg" class="clip f05-bg" data-start="0" data-duration="6" data-track-index="0"></div>
-  <div id="05-flavors-stage" class="clip f05-stage" data-start="0" data-duration="6" data-track-index="1">
+  <div id="f05-bg" class="clip f05-bg" data-start="0" data-duration="6.6" data-track-index="0"></div>
+  <div id="f05-vig" class="clip f05-vig" data-start="0" data-duration="6.6" data-track-index="1"></div>
+  <div id="f05-stage" class="clip f05-stage" data-start="0" data-duration="6.6" data-track-index="2">
     <div id="f05-world" class="f05-world" data-layout-allow-overflow>
       <div class="f05-panel" id="f05-p0"><div class="f05-photo" style="background-image:url('assets/hero-combo.jpg');background-size:260%;background-position:8% 40%"></div><div class="f05-name">Beef</div></div>
       <div class="f05-panel" id="f05-p1"><div class="f05-photo" style="background-image:url('assets/og-image.jpg');background-size:240%;background-position:85% 30%"></div><div class="f05-name">Bacon</div></div>
@@ -22,16 +23,15 @@
       <div class="f05-panel" id="f05-p4"><div class="f05-photo" style="background-image:url('assets/hero-combo.jpg');background-size:220%;background-position:92% 20%"></div><div class="f05-name">Marguerita</div></div>
     </div>
   </div>
-  <div id="05-flavors-vig" class="clip f05-vig" data-start="0" data-duration="6" data-track-index="2"></div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
     (function () {
       // panel layout in world space: z spacing 1500, alternating sides, angled toward center
       var P = [
-        { x: -520, z: -600,  ry: 24 },
-        { x:  520, z: -2100, ry: -24 },
-        { x: -480, z: -3600, ry: 22 },
-        { x:  480, z: -5100, ry: -22 },
+        { x: -380, z: -600,  ry: 24 },
+        { x:  380, z: -2100, ry: -24 },
+        { x: -360, z: -3600, ry: 22 },
+        { x:  360, z: -5100, ry: -22 },
         { x:    0, z: -6600, ry: 0 }
       ];
       var root = document.querySelector('[data-composition-id="05-flavors"]');
@@ -54,8 +54,8 @@
           // name glows while the panel is in its passing window
           var lit = clamp(1 - Math.abs(az + 150) / 650, 0, 1);
           if (i === 4) lit = clamp((az + 900) / 900, 0, 1);
-          names[i].style.color = lit > 0.05 ? '#FFE9D6' : '#504B48';
-          names[i].style.opacity = (0.25 + 0.75 * lit).toFixed(3);
+          names[i].style.color = lit > 0.05 ? '#FFE9D6' : '#9A9089';
+          names[i].style.opacity = (0.5 + 0.5 * lit).toFixed(3);
           names[i].style.textShadow = '0 0 ' + (8 + 30 * lit).toFixed(1) + 'px rgba(255,138,61,' + (0.9 * lit).toFixed(3) + '), 0 0 ' + (60 * lit).toFixed(1) + 'px rgba(206,89,9,' + (0.8 * lit).toFixed(3) + ')';
         }
       }

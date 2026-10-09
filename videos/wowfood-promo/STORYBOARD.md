@@ -25,14 +25,14 @@ style: cinematic dark launch — near-black stage, orange key light and rim glow
 - voiceover: ""
 - duration: 4s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/01-tease.html
 - type: hook
 - persuasion: Curiosity gap
 - beat: intrigue
 - blueprint: kinetic-type-beats
 - asset_candidates:
-- sfx: low sub hum swell
+- sfx: riser
 - focal: none (typography-only)
 - roles: none
 
@@ -50,14 +50,14 @@ keyMessage: something worth waiting for is coming.
 - voiceover: ""
 - duration: 5.5s
 - transition_in: blur-crossfade
-- status: built
+- status: animated
 - src: compositions/frames/02-macro.html
 - type: product_intro
 - persuasion: Sensory desire
 - beat: desire + awe
 - blueprint: camera-journey
 - asset_candidates: assets/hero-combo.jpg — full-res hero: tray of golden sfihas, warm close-up, shallow depth; assets/og-image.jpg — square tray shot with steam
-- sfx: whoosh on each word
+- sfx: whoosh-cinematic
 - focal: assets/hero-combo.jpg
 - roles: hero-combo = background (full-bleed macro, dim edges) · og-image = supporting (optional second plate for depth)
 
@@ -75,14 +75,14 @@ keyMessage: this looks incredible.
 - voiceover: ""
 - duration: 4s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/03-introducing.html
 - type: branding
 - persuasion: Brand reveal
 - beat: anticipation → payoff
 - blueprint: logo-assemble-lockup
 - asset_candidates: assets/logo-wow-wordmark.png — real WOW! wordmark, transparent, orange + brown clover
-- sfx: bass impact + shimmer
+- sfx: impact-bass-1, sparkle
 - focal: assets/logo-wow-wordmark.png
 - roles: logo-wow-wordmark = cutout (centered hero)
 
@@ -100,14 +100,14 @@ keyMessage: WOW!
 - voiceover: ""
 - duration: 6s
 - transition_in: zoom-through
-- status: built
+- status: animated
 - src: compositions/frames/04-four-minutes.html
 - type: feature_showcase
 - persuasion: Friction reduction
 - beat: ease + excitement
 - blueprint: dataviz-countup
 - asset_candidates: assets/og-image.jpg — tray of sfihas with steam (graded cold → golden)
-- sfx: ticking under the count, ding at 0:00
+- sfx: chime
 - focal: assets/og-image.jpg
 - roles: og-image = background (full-bleed, dim ~45%, graded cold→warm)
 
@@ -125,14 +125,14 @@ keyMessage: freezer to golden in 4 minutes.
 - voiceover: ""
 - duration: 6s
 - transition_in: zoom-through
-- status: built
+- status: animated
 - src: compositions/frames/05-flavors.html
 - type: benefit_highlight
 - persuasion: Value stacking
 - beat: excitement
 - blueprint: camera-journey
 - asset_candidates: assets/hero-combo.jpg — hero tray (cropped per flavor); assets/og-image.jpg — square tray (cropped per flavor)
-- sfx: whoosh per panel
+- sfx: whoosh-short
 - focal: assets/hero-combo.jpg
 - roles: hero-combo = supporting (cropped panels) · og-image = supporting (cropped panels)
 
@@ -150,14 +150,14 @@ keyMessage: five best-selling flavors.
 - voiceover: ""
 - duration: 4.5s
 - transition_in: blur-crossfade
-- status: built
+- status: animated
 - src: compositions/frames/06-now-in-stores.html
 - type: cta
 - persuasion: Friction reduction
 - beat: urgency-to-act
 - blueprint: titlecard-reveal
 - asset_candidates: assets/logo-wow-wordmark.png — real WOW! wordmark
-- sfx: final low hit
+- sfx: impact-bass-2
 - focal: assets/logo-wow-wordmark.png
 - roles: logo-wow-wordmark = supporting (small, top-center)
 

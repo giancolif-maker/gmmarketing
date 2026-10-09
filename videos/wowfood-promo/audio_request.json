@@ -1,11 +1,44 @@
 {
-  "provider": "auto",
-  "speed": "1.0",
-  "lines": [],
+  "lines": [
+    {
+      "id": "01",
+      "sfx": [
+        "riser"
+      ]
+    },
+    {
+      "id": "02",
+      "sfx": [
+        "whoosh-cinematic"
+      ]
+    },
+    {
+      "id": "03",
+      "sfx": [
+        "impact-bass-1",
+        "sparkle"
+      ]
+    },
+    {
+      "id": "04",
+      "sfx": [
+        "chime"
+      ]
+    },
+    {
+      "id": "05",
+      "sfx": [
+        "whoosh-short"
+      ]
+    },
+    {
+      "id": "06",
+      "sfx": [
+        "impact-bass-2"
+      ]
+    }
+  ],
   "bgm": {
-    "mode": "retrieve",
-    "query": "upbeat playful latin-pop groove, bright percussion, confident and fun",
-    "blob": "Frozen to golden in 4 minutes",
-    "arc": "Craving → Meet the sfiha → 4-minute bake → Flavors → Brand → Find a store"
+    "mode": "none"
   }
 }
